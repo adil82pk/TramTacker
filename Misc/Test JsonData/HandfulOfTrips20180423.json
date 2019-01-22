@@ -1,0 +1,1646 @@
+[
+    {
+        "hastusTripId": 62770458,
+        "block": "gh02- 27 This is wrong",
+        "displayCode": "61",
+        "startTimepoint": "ebtn",
+        "startTime": "00:00:00",
+        "endTimepoint": "scj1",
+        "endTime": "00:06:00",
+        "headwayNextSeconds": 0,
+        "nextDisplayCode": "61",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 3074,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:00:00",
+                "hastusStopId": "1135",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "1134",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "1133",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1132",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1131",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1130",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1129",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "1128",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "1127",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1126",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1125",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "1124",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68139916,
+        "block": "es04- 80 This is wrong",
+        "displayCode": "82",
+        "startTimepoint": "fcry",
+        "startTime": "00:00:00",
+        "endTimepoint": "mpnd",
+        "endTime": "00:23:00",
+        "headwayNextSeconds": 120,
+        "nextDisplayCode": "82",
+        "direction": "UP",
+        "vehicleType": "z",
+        "distanceMetres": 8998,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:00:00",
+                "hastusStopId": "4364",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:00:00",
+                "hastusStopId": "4363",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "4362",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "4361",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "4360",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "4359",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "4358",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "4357",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "4356",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:08:00",
+                "hastusStopId": "4355",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "4354",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "4353",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "4352",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "4351",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "4350",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:13:00",
+                "hastusStopId": "4349",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:14:00",
+                "hastusStopId": "4348",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1346",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1345",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1344",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "1343",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "1342",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "1341",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "1340",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "1339",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "1338",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "1337",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "4336",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "4335",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:21:00",
+                "hastusStopId": "4334",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:22:00",
+                "hastusStopId": "4333",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:23:00",
+                "hastusStopId": "2294",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:23:00",
+                "hastusStopId": "mpn1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68134422,
+        "block": "sb06- 33 This is wrong",
+        "displayCode": "94",
+        "startTimepoint": "stkb",
+        "startTime": "00:01:00",
+        "endTimepoint": "wcct",
+        "endTime": "00:19:00",
+        "headwayNextSeconds": 120,
+        "nextDisplayCode": "94",
+        "direction": "DOWN",
+        "vehicleType": "e1",
+        "distanceMetres": 6554,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "stk1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1544",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1543",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1541",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1540",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "1539",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1538",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1537",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "1536",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "1535",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "1534",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:13:00",
+                "hastusStopId": "1533",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1532",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1531",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "1707",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "whc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "3357",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "3356",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68134913,
+        "block": "kw05- 15 This is wrong",
+        "displayCode": "48",
+        "startTimepoint": "viha",
+        "startTime": "00:01:00",
+        "endTimepoint": "nbal",
+        "endTime": "00:38:00",
+        "headwayNextSeconds": 120,
+        "nextDisplayCode": "48",
+        "direction": "DOWN",
+        "vehicleType": "a",
+        "distanceMetres": 14130,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "3396",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "3397",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "3398",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "3399",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "3400",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "3401",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:08:00",
+                "hastusStopId": "3403",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "3405",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "3406",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "3408",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:14:00",
+                "hastusStopId": "3409",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "fls1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "3609",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "3610",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "3611",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "3613",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "3614",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "2915",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "2917",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "2918",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "2919",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "2920",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:21:00",
+                "hastusStopId": "2921",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:22:00",
+                "hastusStopId": "2922",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:23:00",
+                "hastusStopId": "2923",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:24:00",
+                "hastusStopId": "2876",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:25:00",
+                "hastusStopId": "2877",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:26:00",
+                "hastusStopId": "2878",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:26:00",
+                "hastusStopId": "kwd1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:27:00",
+                "hastusStopId": "2731",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:27:00",
+                "hastusStopId": "2732",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:27:00",
+                "hastusStopId": "2733",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:28:00",
+                "hastusStopId": "2879",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:28:00",
+                "hastusStopId": "2880",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:29:00",
+                "hastusStopId": "2881",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:30:00",
+                "hastusStopId": "2882",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:30:00",
+                "hastusStopId": "2883",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:31:00",
+                "hastusStopId": "2884",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:32:00",
+                "hastusStopId": "2885",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:32:00",
+                "hastusStopId": "2886",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:33:00",
+                "hastusStopId": "2887",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:35:00",
+                "hastusStopId": "2888",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:35:00",
+                "hastusStopId": "2889",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:36:00",
+                "hastusStopId": "2890",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:36:00",
+                "hastusStopId": "2891",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:37:00",
+                "hastusStopId": "2892",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:37:00",
+                "hastusStopId": "2893",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:37:00",
+                "hastusStopId": "2894",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:38:00",
+                "hastusStopId": "2895",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:38:00",
+                "hastusStopId": "9004",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68136074,
+        "block": "cw07- 33 This is wrong",
+        "displayCode": "70",
+        "startTimepoint": "dodr",
+        "startTime": "00:01:00",
+        "endTimepoint": "wprk",
+        "endTime": "00:46:00",
+        "headwayNextSeconds": 120,
+        "nextDisplayCode": "76",
+        "direction": "DOWN",
+        "vehicleType": "a",
+        "distanceMetres": 16847,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "3594",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "3595",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "3596",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "3597",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "3598",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:08:00",
+                "hastusStopId": "3599",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "3600",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "3601",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "3602",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:14:00",
+                "hastusStopId": "3603",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "3604",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "3605",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "3606",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "fle1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "3622",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "3623",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:21:00",
+                "hastusStopId": "3624",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:22:00",
+                "hastusStopId": "3625",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:23:00",
+                "hastusStopId": "3627",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:24:00",
+                "hastusStopId": "2761",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:24:00",
+                "hastusStopId": "2762",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:25:00",
+                "hastusStopId": "2763",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:25:00",
+                "hastusStopId": "2764",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:26:00",
+                "hastusStopId": "2765",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:27:00",
+                "hastusStopId": "2766",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:27:00",
+                "hastusStopId": "2767",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:27:00",
+                "hastusStopId": "2768",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:28:00",
+                "hastusStopId": "2769",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:29:00",
+                "hastusStopId": "2770",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:29:00",
+                "hastusStopId": "2771",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:30:00",
+                "hastusStopId": "2929",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:31:00",
+                "hastusStopId": "2930",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:31:00",
+                "hastusStopId": "2931",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:32:00",
+                "hastusStopId": "2932",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:32:00",
+                "hastusStopId": "2933",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:33:00",
+                "hastusStopId": "2934",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:33:00",
+                "hastusStopId": "2935",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:33:00",
+                "hastusStopId": "2936",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:34:00",
+                "hastusStopId": "2937",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:35:00",
+                "hastusStopId": "2938",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:35:00",
+                "hastusStopId": "2939",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:35:00",
+                "hastusStopId": "cwd1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:36:00",
+                "hastusStopId": "2940",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:36:00",
+                "hastusStopId": "2773",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:37:00",
+                "hastusStopId": "2774",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:38:00",
+                "hastusStopId": "2775",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:38:00",
+                "hastusStopId": "2776",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:39:00",
+                "hastusStopId": "2778",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:39:00",
+                "hastusStopId": "2779",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:40:00",
+                "hastusStopId": "2780",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:40:00",
+                "hastusStopId": "2781",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:40:00",
+                "hastusStopId": "2782",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:41:00",
+                "hastusStopId": "2783",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:42:00",
+                "hastusStopId": "2784",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:42:00",
+                "hastusStopId": "2785",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:43:00",
+                "hastusStopId": "2786",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:43:00",
+                "hastusStopId": "2787",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:44:00",
+                "hastusStopId": "2788",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:44:00",
+                "hastusStopId": "2789",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:45:00",
+                "hastusStopId": "2790",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:45:00",
+                "hastusStopId": "2791",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:45:00",
+                "hastusStopId": "2792",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:46:00",
+                "hastusStopId": "9008",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68137388,
+        "block": "es04- 32 This is wrong",
+        "displayCode": "81",
+        "startTimepoint": "awst",
+        "startTime": "00:01:00",
+        "endTimepoint": "esdp",
+        "endTime": "00:20:00",
+        "headwayNextSeconds": 120,
+        "nextDisplayCode": "81",
+        "direction": "UP",
+        "vehicleType": "b",
+        "distanceMetres": 9396,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "1320",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1319",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1318",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "1317",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1316",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1315",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "1314",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1313",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1312",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:08:00",
+                "hastusStopId": "1311",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "1310",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "1309",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "1308",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "1306",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "1305",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "1304",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "1303",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "1302",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:13:00",
+                "hastusStopId": "1301",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:13:00",
+                "hastusStopId": "1300",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:14:00",
+                "hastusStopId": "1299",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:14:00",
+                "hastusStopId": "1298",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1297",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "1296",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "1295",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "1294",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "1292",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "1291",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "1290",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "1289",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "1288",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68138979,
+        "block": "es04- 13 This is wrong",
+        "displayCode": "58",
+        "startTimepoint": "trak",
+        "startTime": "00:01:00",
+        "endTimepoint": "wcob",
+        "endTime": "00:54:00",
+        "headwayNextSeconds": 180,
+        "nextDisplayCode": "60",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 18208,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "tra1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "1577",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1576",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1575",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1574",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1573",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "1572",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1571",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1570",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "1569",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1568",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1567",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:08:00",
+                "hastusStopId": "1566",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "1565",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "1564",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "too1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "1563",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "1562",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:13:00",
+                "hastusStopId": "1561",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:14:00",
+                "hastusStopId": "1022",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "1021",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "3051",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:17:00",
+                "hastusStopId": "3052",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "3053",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "3054",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:21:00",
+                "hastusStopId": "3055",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:23:00",
+                "hastusStopId": "3057",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:24:00",
+                "hastusStopId": "3058",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:25:00",
+                "hastusStopId": "3059",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:26:00",
+                "hastusStopId": "3060",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:26:00",
+                "hastusStopId": "3061",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:28:00",
+                "hastusStopId": "3062",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:29:00",
+                "hastusStopId": "3063",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:30:00",
+                "hastusStopId": "3064",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:31:00",
+                "hastusStopId": "3065",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:32:00",
+                "hastusStopId": "3066",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:33:00",
+                "hastusStopId": "3067",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:33:00",
+                "hastusStopId": "3068",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:34:00",
+                "hastusStopId": "3069",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:35:00",
+                "hastusStopId": "3070",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:36:00",
+                "hastusStopId": "3071",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:37:00",
+                "hastusStopId": "3072",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:39:00",
+                "hastusStopId": "3074",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:39:00",
+                "hastusStopId": "abf1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:40:00",
+                "hastusStopId": "2252",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:41:00",
+                "hastusStopId": "2253",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:41:00",
+                "hastusStopId": "2254",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:42:00",
+                "hastusStopId": "2255",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:43:00",
+                "hastusStopId": "2256",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:44:00",
+                "hastusStopId": "2257",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:44:00",
+                "hastusStopId": "2259",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:45:00",
+                "hastusStopId": "2260",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:45:00",
+                "hastusStopId": "2261",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:45:00",
+                "hastusStopId": "2262",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:46:00",
+                "hastusStopId": "2263",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:47:00",
+                "hastusStopId": "2264",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:48:00",
+                "hastusStopId": "2265",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:48:00",
+                "hastusStopId": "2266",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:49:00",
+                "hastusStopId": "2267",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:50:00",
+                "hastusStopId": "2268",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:51:00",
+                "hastusStopId": "2269",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:51:00",
+                "hastusStopId": "2270",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:52:00",
+                "hastusStopId": "2271",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:52:00",
+                "hastusStopId": "2272",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:53:00",
+                "hastusStopId": "2273",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:53:00",
+                "hastusStopId": "2274",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:54:00",
+                "hastusStopId": "9005",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 68171360,
+        "block": "br03- 50 This is wrong",
+        "displayCode": "1",
+        "startTimepoint": "smbh",
+        "startTime": "00:01:00",
+        "endTimepoint": "ecob",
+        "endTime": "00:43:00",
+        "headwayNextSeconds": 120,
+        "nextDisplayCode": "22",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 13292,
+        "isPublic": true,
+        "operationalDay": "2018-04-23T00:00:00",
+        "stops": [
+            {
+                "passingTime": "00:01:00",
+                "hastusStopId": "1242",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1241",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:02:00",
+                "hastusStopId": "1240",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1239",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:03:00",
+                "hastusStopId": "1238",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:04:00",
+                "hastusStopId": "1237",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1236",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:05:00",
+                "hastusStopId": "1235",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:06:00",
+                "hastusStopId": "1234",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1233",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:07:00",
+                "hastusStopId": "1232",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:08:00",
+                "hastusStopId": "1230",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:09:00",
+                "hastusStopId": "1229",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:10:00",
+                "hastusStopId": "1228",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:11:00",
+                "hastusStopId": "1227",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:12:00",
+                "hastusStopId": "art1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:13:00",
+                "hastusStopId": "3114",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:15:00",
+                "hastusStopId": "3113",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:16:00",
+                "hastusStopId": "3111",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:18:00",
+                "hastusStopId": "3110",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:19:00",
+                "hastusStopId": "los1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:20:00",
+                "hastusStopId": "3108",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:22:00",
+                "hastusStopId": "3107",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:23:00",
+                "hastusStopId": "3104",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:24:00",
+                "hastusStopId": "3103",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTime": "00:26:00",
+                "hastusStopId": "3101",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    }
+]
