@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.Processor", "YarraTrams.Havm2TramTracker.Processor\YarraTrams.Havm2TramTracker.Processor.csproj", "{047ED2BC-3499-45C1-9B0E-2AD64083BC4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.Tests", "YarraTrams.Havm2TramTracker.Tests\YarraTrams.Havm2TramTracker.Tests.csproj", "{937818EC-0899-49C3-A036-55C851FA1343}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.Models", "YarraTrams.Havm2TramTracker.Models\YarraTrams.Havm2TramTracker.Models.csproj", "{FE22FA30-B89F-4BD1-84C6-9B4F60F99B8E}"
 EndProject
 Global
