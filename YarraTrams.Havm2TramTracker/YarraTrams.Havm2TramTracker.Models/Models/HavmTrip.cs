@@ -23,5 +23,6 @@ namespace YarraTrams.Havm2TramTracker.Models
         public bool IsPublic { get; set; }
         public DateTime OperationalDay { get; set; }
         public List<Models.HavmTripStop> Stops { get; set; }
+        //Todo: Create ToSQL that returns and string (and does transformations).
     }
 }

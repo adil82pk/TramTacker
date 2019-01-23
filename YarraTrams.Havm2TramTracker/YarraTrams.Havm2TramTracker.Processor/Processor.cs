@@ -23,7 +23,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public static List<Models.HavmTrip> CopyJsonToTrips(string jsonString)
         {
             List<Models.HavmTrip> trips = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.HavmTrip>>(jsonString);
-
+            //Todo: investigate using automapper instead of Newtsonsoft
+            //Todo: do this manually so we can get more granular errors? e.g. The KTDS datamap.
             return trips;
         }
 
@@ -66,21 +67,22 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
             foreach (HavmTrip trip in trips)
             {
-                tripDataTable.AddT_Temp_TripsRow(TripID: trip.HastusTripId //Todo: Create all transformations
-                                                , RunNo: trip.DisplayCode
-                                                , RouteNo:          1
-                                                , FirstTP:          trip.StartTimepoint
-                                                , FirstTime:        (int)trip.StartTime.TotalSeconds
-                                                , EndTP:            trip.EndTimepoint
-                                                , EndTime:          (int)trip.EndTime.TotalSeconds
-                                                , AtLayoverTime:    Transformations.GetAtLayovertime(trip)
-                                                , NextRouteNo:      1
-                                                , UpDirection:      Transformations.GetUpDirection(trip)
-                                                , LowFloor:         false
-                                                , TripDistance:     500
-                                                , PublicTrip:       true
-                                                , DayOfWeek:           1
-                                                );
+                tripDataTable.AddT_Temp_TripsRow(
+                    TripID: trip.HastusTripId, //Todo: Create all transformations
+                    RunNo: trip.DisplayCode,
+                    RouteNo:          1,
+                    FirstTP:          trip.StartTimepoint,
+                    FirstTime:        (int)trip.StartTime.TotalSeconds,
+                    EndTP:            trip.EndTimepoint,
+                    EndTime:          (int)trip.EndTime.TotalSeconds,
+                    AtLayoverTime:Transformations.GetAtLayovertime(trip),
+                    NextRouteNo:      1,
+                    UpDirection:      Transformations.GetUpDirection(trip),
+                    LowFloor:         false,
+                    TripDistance:     500,
+                    PublicTrip:       true,
+                    DayOfWeek:        1
+                );
             }
 
             return tripDataTable;
@@ -110,6 +112,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
         private static void SaveTripDataToDatabase(string tableName,DataTable tripData)
         {
+            //Dynmaically create SQL here, instead of bulkcopy. Makes error handling easier.
+            
             // connect to SQL
             using (SqlConnection connection =
                     new SqlConnection(Properties.Settings.Default.TramTrackerDB))

@@ -39,7 +39,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
 
             // assert
             Assert.IsTrue(trips.Count == tripsDT.Rows.Count, "Number of records in DataTable ({1:d}) doesn't match number of records in Trip class list ({0:d}).", trips.Count, tripsDT.Rows.Count);
-
+            //Todo: check more stuff. Everything!
             Assert.IsTrue(trips[0].HastusTripId == tripsDT[0].TripID, "TripId field in DataTable ({1}) doesn't match HastusTripId from Trip class ({0}).", trips[0].HastusTripId, tripsDT[0].TripID);
         }
 
@@ -135,13 +135,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
 
             // assert
             Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).",1, trips.Count);
-
+            //Todo: check more stuff
             Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count-1].HastusStopId == "1124", "We expected the HastusStopId on the final stop of the first trip to be '1124' but it appears to be '{0}' instead.", trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
         }
-
+        //Todo Test for malformed AND extra fields (to be ignored) and missing fields.
         [TestMethod]
         public void TestAtLayoverTransformation()
-        {
+        {//Todo: split that in to 5
             var headwayMapping = new Dictionary<int, short>
             {
                 { -1, 0 },          //Negatives go to zero

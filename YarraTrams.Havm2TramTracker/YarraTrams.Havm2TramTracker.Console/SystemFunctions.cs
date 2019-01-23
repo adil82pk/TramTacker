@@ -8,32 +8,24 @@ namespace YarraTrams.Havm2TramTracker.Console
     {
         private static void UploadJsonFileToMemoryAndPrintToConsole()
         {
-
             if (UploadJsonFileToMemory(out List<HavmTrip> trips))
             {
-
                 PrintTripToConsole(trips);
 
                 System.Console.WriteLine("Complete, press <enter> to continue.");
                 System.Console.ReadLine();
             }
-
-
         }
 
         private static void UploadJsonFileToMemoryAndSaveToT_Temp_Trips()
         {
-
             if (UploadJsonFileToMemory(out List<HavmTrip> trips))
             {
-
                 Processor.Processor.SaveTripsToT_Temp_Trips(trips);
                 
                 System.Console.WriteLine("Complete, press <enter> to continue.");
                 System.Console.ReadLine();
             }
-
-
         }
 
         private static bool UploadJsonFileToMemory(out List<HavmTrip> trips)

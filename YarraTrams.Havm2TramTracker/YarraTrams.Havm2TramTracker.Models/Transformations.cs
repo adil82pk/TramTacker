@@ -17,22 +17,24 @@ namespace YarraTrams.Havm2TramTracker.Models
 
             if (AtLayovertimeDec >= short.MaxValue)
             {
-                #if !DEBUG
+#if !DEBUG
                 //Todo: Log warning, but not when unit testing
-                #endif
+#endif
                 AtLayovertimeShort = short.MaxValue;
             }
             else if (AtLayovertimeDec <= 0)
             {
-                #if !DEBUG
+#if !DEBUG
                 //Todo: Log warning, but not when unit testing
-                #endif
+#endif
                 AtLayovertimeShort = 0;
             }
             else
+            {
                 AtLayovertimeShort = (short)Math.Round(AtLayovertimeDec, MidpointRounding.AwayFromZero);
+            }
 
-            return (AtLayovertimeShort);
+            return AtLayovertimeShort;
         }
 
         public static bool GetUpDirection(HavmTrip trip)
@@ -40,13 +42,22 @@ namespace YarraTrams.Havm2TramTracker.Models
             if (!(trip.Direction == null))
             {
                 if (trip.Direction.Trim().ToUpper() == "UP")
+                {
                     return true;
+                }
                 else if (trip.Direction.Trim().ToUpper() == "DOWN")
+                {
                     return false;
+                }
                 else
+                {
                     throw new FormatException($"Unexpected trip direction on trip with HASTUS Id {trip.HastusTripId}. Expecting \"UP\" or \"DOWN\" but got \"{trip.Direction}\".");
+                }
             }
-            else throw new FormatException($"Unexpected trip direction on trip with HASTUS Id {trip.HastusTripId}. Expecting \"UP\" or \"DOWN\" but got null.");
+            else
+            {
+                throw new FormatException($"Unexpected trip direction on trip with HASTUS Id {trip.HastusTripId}. Expecting \"UP\" or \"DOWN\" but got null.");
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             ServicesToRun = new ServiceBase[]
             {
                 new Service1() 
-                //Todo: Find another time-based YT Windows service to model from.
+                //Todo: Find another time-based YT Windows service to model from. AVMIS pulling in HAVM2 data.
                 //Todo: Add logging project and enums, et. al.
             };
             ServiceBase.Run(ServicesToRun);
