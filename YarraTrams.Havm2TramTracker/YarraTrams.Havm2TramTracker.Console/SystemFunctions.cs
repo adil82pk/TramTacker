@@ -65,6 +65,37 @@ namespace YarraTrams.Havm2TramTracker.Console
             //Printing to the screen took 00:23:12.8448444. Irrelevant.
         }
 
+        private static void CallHavm2ApiAndSaveToT_Temp_Trips()
+        {
+            string message = "";
+            var clock = new Stopwatch();
+
+            clock.Start();
+            var jsonstring = Processor.Processor.GetDataFromHavm2();
+            clock.Stop();
+
+            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+
+            clock.Reset();
+            clock.Start();
+            var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
+            clock.Stop();
+
+
+            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+
+            clock.Reset();
+            clock.Start();
+            Processor.Processor.SaveTripsToT_Temp_Trips(trips);
+            clock.Stop();
+
+            message = message + $"\nSaving to T_Temp_Trips took {clock.Elapsed}.";
+
+            System.Console.WriteLine(message);
+            System.Console.WriteLine("Complete, press <enter> to continue.");
+            System.Console.ReadLine();
+        }
+
         private static bool UploadJsonFileToMemory(out List<HavmTrip> trips)
         {
             System.Console.WriteLine("Enter full path to a JSON file containing valid HAVM2 TramTRACKER data:");
