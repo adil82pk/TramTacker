@@ -9,6 +9,44 @@ namespace YarraTrams.Havm2TramTracker.Tests
     [TestClass]
     public class Havm2TramTrackerTransformationTests
     {
+        #region RunNo
+        [TestMethod]
+        public void TestRunNoTransformationWithNormalDepot()
+        {
+            // arrange
+            const string block = "db21";
+            const string expectedResult = "D";
+            var trip = new Models.HavmTrip
+            {
+                Block = block //Ignoring all other properties
+            };
+
+            // act
+            var RunNo = Models.Transformations.GetRunNumber(trip);
+
+            // assert
+            Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
+        }
+
+        [TestMethod]
+        public void TestRunNoTransformationWithCamberwellDepot()
+        {
+            // arrange
+            const string block = "cw07";
+            const string expectedResult = "V";
+            var trip = new Models.HavmTrip
+            {
+                Block = block //Ignoring all other properties
+            };
+
+            // act
+            var RunNo = Models.Transformations.GetRunNumber(trip);
+
+            // assert
+            Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
+        }
+
+        #endregion
 
         #region AtLayover
         [TestMethod]
@@ -156,16 +194,113 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 var UpDirection = Models.Transformations.GetUpDirection(trip);
                 success = false;
             }
-            #pragma warning disable CS0168 // Variable is declared but never used
             catch (FormatException ex)
-            #pragma warning restore CS0168 // Variable is declared but never used
             {
+                var message = ex.Message;
                 success = true; //we are expecting an exception when we pass invalid input
             }
 
             // assert
             Assert.IsTrue(success, "Expecting a FormatException when passing invalid input. Didn't encounter such an exception.");
         }
+        #endregion
+
+        #region LowFloor
+        [TestMethod]
+        public void TestLowFloorTransformationWithLowFloorGroup()
+        {
+            // arrange
+            const string vehicleGroup = "c";
+            var trip = new Models.HavmTrip
+            {
+                VehicleType = vehicleGroup //Ignoring all other properties
+            };
+
+            // act
+            var LowFloor = Models.Transformations.GetLowFloor(trip);
+
+            // assert
+            Assert.IsTrue(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
+
+        }
+
+        [TestMethod]
+        public void TestLowFloorTransformationWithNonLowFloorGroup()
+        {
+            // arrange
+            const string vehicleGroup = "w";
+            var trip = new Models.HavmTrip
+            {
+                VehicleType = vehicleGroup //Ignoring all other properties
+            };
+
+            // act
+            var LowFloor = Models.Transformations.GetLowFloor(trip);
+
+            // assert
+            Assert.IsFalse(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
+
+        }
+
+        [TestMethod]
+        public void TestLowFloorTransformationWithUnknownGroup()
+        {
+            // arrange
+            const string vehicleGroup = "NotKnown";
+            var trip = new Models.HavmTrip
+            {
+                VehicleType = vehicleGroup //Ignoring all other properties
+            };
+
+            // act
+            var LowFloor = Models.Transformations.GetLowFloor(trip);
+
+            // assert
+            Assert.IsFalse(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
+
+        }
+        #endregion
+
+        #region TripDistance
+        [TestMethod]
+        public void TestTripDistanceTransformation()
+        {
+            // arrange
+            int distanceMetres = 3123;
+            decimal expectedResult = 3.123m;
+            var trip = new Models.HavmTrip
+            {
+                DistanceMetres = distanceMetres //Ignoring all other properties
+            };
+
+            // act
+            var TripDistance = Models.Transformations.GetTripDistance(trip);
+
+            // assert
+            Assert.IsTrue(Decimal.Equals(TripDistance, expectedResult), "Expecting value {0} from input of {1} but got {2} instead.", expectedResult, distanceMetres, TripDistance);
+        }
+
+        #endregion
+
+        #region DayOfWeek
+        [TestMethod]
+        public void TestDayOfWeekTransformationWithValidDay()
+        {
+            // arrange
+            DateTime operationalDay = new DateTime(2019, 1, 1);
+            const byte expectedResult = 4;
+            var trip = new Models.HavmTrip
+            {
+                OperationalDay = operationalDay //Ignoring all other properties
+            };
+
+            // act
+            var DayOfWeek = Models.Transformations.GetDayOfWeek(trip);
+
+            // assert
+            Assert.IsTrue(DayOfWeek == expectedResult, "Expecting value {0} from input of {1:dddd, MMMM d, yyyy} but got {2} instead.", expectedResult, operationalDay, DayOfWeek);
+        }
+
         #endregion
     }
 }

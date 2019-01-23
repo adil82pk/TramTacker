@@ -70,20 +70,20 @@ namespace YarraTrams.Havm2TramTracker.Processor
             foreach (HavmTrip trip in trips)
             {
                 tripDataTable.AddT_Temp_TripsRow(
-                    TripID: trip.HastusTripId, //Todo: Create all transformations
-                    RunNo: trip.DisplayCode,
+                    TripID:           trip.HastusTripId,
+                    RunNo:            Transformations.GetRunNumber(trip),
                     RouteNo:          1,
                     FirstTP:          trip.StartTimepoint,
                     FirstTime:        (int)trip.StartTime.TotalSeconds,
                     EndTP:            trip.EndTimepoint,
                     EndTime:          (int)trip.EndTime.TotalSeconds,
-                    AtLayoverTime:Transformations.GetAtLayovertime(trip),
+                    AtLayoverTime:    Transformations.GetAtLayovertime(trip),
                     NextRouteNo:      1,
                     UpDirection:      Transformations.GetUpDirection(trip),
-                    LowFloor:         false,
-                    TripDistance:     500,
-                    PublicTrip:       true,
-                    DayOfWeek:        1
+                    LowFloor:         Transformations.GetLowFloor(trip),
+                    TripDistance:     Transformations.GetTripDistance(trip),
+                    PublicTrip:       trip.IsPublic, //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+                    DayOfWeek:        Transformations.GetDayOfWeek(trip)
                 );
             }
 
