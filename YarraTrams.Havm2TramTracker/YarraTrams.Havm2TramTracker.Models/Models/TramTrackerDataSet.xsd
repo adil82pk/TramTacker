@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TramTrackerDataSet" targetNamespace="http://tempuri.org/TramTrackerDataSet.xsd" xmlns:mstns="http://tempuri.org/TramTrackerDataSet.xsd" xmlns="http://tempuri.org/TramTrackerDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="TramTrackerConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="TramTrackerConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.YarraTrams.Havm2TramTracker.Models.Properties.Settings.GlobalReference.Default.TramTrackerConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TramTrackerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TramTrackerDataSet" msprop:Generator_UserDSName="TramTrackerDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="T_Temp_Trips" msprop:Generator_TableClassName="T_Temp_TripsDataTable" msprop:Generator_TableVarName="tableT_Temp_Trips" msprop:Generator_RowChangedName="T_Temp_TripsRowChanged" msprop:Generator_TablePropName="T_Temp_Trips" msprop:Generator_RowDeletingName="T_Temp_TripsRowDeleting" msprop:Generator_RowChangingName="T_Temp_TripsRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_TripsRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_TripsRowDeleted" msprop:Generator_RowClassName="T_Temp_TripsRow" msprop:Generator_UserTableName="T_Temp_Trips" msprop:Generator_RowEvArgName="T_Temp_TripsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TripID" msprop:Generator_ColumnVarNameInTable="columnTripID" msprop:Generator_ColumnPropNameInRow="TripID" msprop:Generator_ColumnPropNameInTable="TripIDColumn" msprop:Generator_UserColumnName="TripID" type="xs:int" minOccurs="0" />
+              <xs:element name="RunNo" msprop:Generator_ColumnVarNameInTable="columnRunNo" msprop:Generator_ColumnPropNameInRow="RunNo" msprop:Generator_ColumnPropNameInTable="RunNoColumn" msprop:Generator_UserColumnName="RunNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RouteNo" msprop:Generator_ColumnVarNameInTable="columnRouteNo" msprop:Generator_ColumnPropNameInRow="RouteNo" msprop:Generator_ColumnPropNameInTable="RouteNoColumn" msprop:Generator_UserColumnName="RouteNo" type="xs:short" />
+              <xs:element name="FirstTP" msprop:Generator_ColumnVarNameInTable="columnFirstTP" msprop:Generator_ColumnPropNameInRow="FirstTP" msprop:Generator_ColumnPropNameInTable="FirstTPColumn" msprop:Generator_UserColumnName="FirstTP">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="FirstTime" msprop:Generator_ColumnVarNameInTable="columnFirstTime" msprop:Generator_ColumnPropNameInRow="FirstTime" msprop:Generator_ColumnPropNameInTable="FirstTimeColumn" msprop:Generator_UserColumnName="FirstTime" type="xs:int" />
+              <xs:element name="EndTP" msprop:Generator_ColumnVarNameInTable="columnEndTP" msprop:Generator_ColumnPropNameInRow="EndTP" msprop:Generator_ColumnPropNameInTable="EndTPColumn" msprop:Generator_UserColumnName="EndTP">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="4" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EndTime" msprop:Generator_ColumnVarNameInTable="columnEndTime" msprop:Generator_ColumnPropNameInRow="EndTime" msprop:Generator_ColumnPropNameInTable="EndTimeColumn" msprop:Generator_UserColumnName="EndTime" type="xs:int" />
+              <xs:element name="AtLayoverTime" msprop:Generator_ColumnVarNameInTable="columnAtLayoverTime" msprop:Generator_ColumnPropNameInRow="AtLayoverTime" msprop:Generator_ColumnPropNameInTable="AtLayoverTimeColumn" msprop:Generator_UserColumnName="AtLayoverTime" type="xs:short" />
+              <xs:element name="NextRouteNo" msprop:Generator_ColumnVarNameInTable="columnNextRouteNo" msprop:Generator_ColumnPropNameInRow="NextRouteNo" msprop:Generator_ColumnPropNameInTable="NextRouteNoColumn" msprop:Generator_UserColumnName="NextRouteNo" type="xs:short" minOccurs="0" />
+              <xs:element name="UpDirection" msprop:Generator_ColumnVarNameInTable="columnUpDirection" msprop:Generator_ColumnPropNameInRow="UpDirection" msprop:Generator_ColumnPropNameInTable="UpDirectionColumn" msprop:Generator_UserColumnName="UpDirection" type="xs:boolean" />
+              <xs:element name="LowFloor" msprop:Generator_ColumnVarNameInTable="columnLowFloor" msprop:Generator_ColumnPropNameInRow="LowFloor" msprop:Generator_ColumnPropNameInTable="LowFloorColumn" msprop:Generator_UserColumnName="LowFloor" type="xs:boolean" />
+              <xs:element name="TripDistance" msprop:Generator_ColumnVarNameInTable="columnTripDistance" msprop:Generator_ColumnPropNameInRow="TripDistance" msprop:Generator_ColumnPropNameInTable="TripDistanceColumn" msprop:Generator_UserColumnName="TripDistance" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PublicTrip" msprop:Generator_ColumnVarNameInTable="columnPublicTrip" msprop:Generator_ColumnPropNameInRow="PublicTrip" msprop:Generator_ColumnPropNameInTable="PublicTripColumn" msprop:Generator_UserColumnName="PublicTrip" type="xs:boolean" />
+              <xs:element name="DayOfWeek" msprop:Generator_ColumnVarNameInTable="columnDayOfWeek" msprop:Generator_ColumnPropNameInRow="DayOfWeek" msprop:Generator_ColumnPropNameInTable="DayOfWeekColumn" msprop:Generator_UserColumnName="DayOfWeek" type="xs:unsignedByte" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="T_Temp_Schedules" msprop:Generator_TableClassName="T_Temp_SchedulesDataTable" msprop:Generator_TableVarName="tableT_Temp_Schedules" msprop:Generator_RowChangedName="T_Temp_SchedulesRowChanged" msprop:Generator_TablePropName="T_Temp_Schedules" msprop:Generator_RowDeletingName="T_Temp_SchedulesRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesRowDeleted" msprop:Generator_RowClassName="T_Temp_SchedulesRow" msprop:Generator_UserTableName="T_Temp_Schedules" msprop:Generator_RowEvArgName="T_Temp_SchedulesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ScheduleID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnScheduleID" msprop:Generator_ColumnPropNameInRow="ScheduleID" msprop:Generator_ColumnPropNameInTable="ScheduleIDColumn" msprop:Generator_UserColumnName="ScheduleID" type="xs:int" />
+              <xs:element name="TripID" msprop:Generator_ColumnVarNameInTable="columnTripID" msprop:Generator_ColumnPropNameInRow="TripID" msprop:Generator_ColumnPropNameInTable="TripIDColumn" msprop:Generator_UserColumnName="TripID" type="xs:int" />
+              <xs:element name="RunNo" msprop:Generator_ColumnVarNameInTable="columnRunNo" msprop:Generator_ColumnPropNameInRow="RunNo" msprop:Generator_ColumnPropNameInTable="RunNoColumn" msprop:Generator_UserColumnName="RunNo">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StopID" msprop:Generator_ColumnVarNameInTable="columnStopID" msprop:Generator_ColumnPropNameInRow="StopID" msprop:Generator_ColumnPropNameInTable="StopIDColumn" msprop:Generator_UserColumnName="StopID">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RouteNo" msprop:Generator_ColumnVarNameInTable="columnRouteNo" msprop:Generator_ColumnPropNameInRow="RouteNo" msprop:Generator_ColumnPropNameInTable="RouteNoColumn" msprop:Generator_UserColumnName="RouteNo" type="xs:short" />
+              <xs:element name="OPRTimePoint" msprop:Generator_ColumnVarNameInTable="columnOPRTimePoint" msprop:Generator_ColumnPropNameInRow="OPRTimePoint" msprop:Generator_ColumnPropNameInTable="OPRTimePointColumn" msprop:Generator_UserColumnName="OPRTimePoint" type="xs:boolean" />
+              <xs:element name="Time" msprop:Generator_ColumnVarNameInTable="columnTime" msprop:Generator_ColumnPropNameInRow="Time" msprop:Generator_ColumnPropNameInTable="TimeColumn" msprop:Generator_UserColumnName="Time" type="xs:int" />
+              <xs:element name="DayOfWeek" msprop:Generator_ColumnVarNameInTable="columnDayOfWeek" msprop:Generator_ColumnPropNameInRow="DayOfWeek" msprop:Generator_ColumnPropNameInTable="DayOfWeekColumn" msprop:Generator_UserColumnName="DayOfWeek" type="xs:unsignedByte" />
+              <xs:element name="LowFloor" msprop:Generator_ColumnVarNameInTable="columnLowFloor" msprop:Generator_ColumnPropNameInRow="LowFloor" msprop:Generator_ColumnPropNameInTable="LowFloorColumn" msprop:Generator_UserColumnName="LowFloor" type="xs:boolean" />
+              <xs:element name="PublicTrip" msprop:Generator_ColumnVarNameInTable="columnPublicTrip" msprop:Generator_ColumnPropNameInRow="PublicTrip" msprop:Generator_ColumnPropNameInTable="PublicTripColumn" msprop:Generator_UserColumnName="PublicTrip" type="xs:boolean" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="T_Temp_SchedulesMaster" msprop:Generator_TableClassName="T_Temp_SchedulesMasterDataTable" msprop:Generator_TableVarName="tableT_Temp_SchedulesMaster" msprop:Generator_RowChangedName="T_Temp_SchedulesMasterRowChanged" msprop:Generator_TablePropName="T_Temp_SchedulesMaster" msprop:Generator_RowDeletingName="T_Temp_SchedulesMasterRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesMasterRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesMasterRowDeleted" msprop:Generator_RowClassName="T_Temp_SchedulesMasterRow" msprop:Generator_UserTableName="T_Temp_SchedulesMaster" msprop:Generator_RowEvArgName="T_Temp_SchedulesMasterRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TramClass" msprop:Generator_ColumnVarNameInTable="columnTramClass" msprop:Generator_ColumnPropNameInRow="TramClass" msprop:Generator_ColumnPropNameInTable="TramClassColumn" msprop:Generator_UserColumnName="TramClass" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="HeadboardNo" msprop:Generator_ColumnVarNameInTable="columnHeadboardNo" msprop:Generator_ColumnPropNameInRow="HeadboardNo" msprop:Generator_ColumnPropNameInTable="HeadboardNoColumn" msprop:Generator_UserColumnName="HeadboardNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RouteNo" msprop:Generator_ColumnVarNameInTable="columnRouteNo" msprop:Generator_ColumnPropNameInRow="RouteNo" msprop:Generator_ColumnPropNameInTable="RouteNoColumn" msprop:Generator_UserColumnName="RouteNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RunNo" msprop:Generator_ColumnVarNameInTable="columnRunNo" msprop:Generator_ColumnPropNameInRow="RunNo" msprop:Generator_ColumnPropNameInTable="RunNoColumn" msprop:Generator_UserColumnName="RunNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StartDate" msprop:Generator_ColumnVarNameInTable="columnStartDate" msprop:Generator_ColumnPropNameInRow="StartDate" msprop:Generator_ColumnPropNameInTable="StartDateColumn" msprop:Generator_UserColumnName="StartDate" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TripNo" msprop:Generator_ColumnVarNameInTable="columnTripNo" msprop:Generator_ColumnPropNameInRow="TripNo" msprop:Generator_ColumnPropNameInTable="TripNoColumn" msprop:Generator_UserColumnName="TripNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PublicTrip" msprop:Generator_ColumnVarNameInTable="columnPublicTrip" msprop:Generator_ColumnPropNameInRow="PublicTrip" msprop:Generator_ColumnPropNameInTable="PublicTripColumn" msprop:Generator_UserColumnName="PublicTrip" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="T_Temp_SchedulesDetails" msprop:Generator_TableClassName="T_Temp_SchedulesDetailsDataTable" msprop:Generator_TableVarName="tableT_Temp_SchedulesDetails" msprop:Generator_RowChangedName="T_Temp_SchedulesDetailsRowChanged" msprop:Generator_TablePropName="T_Temp_SchedulesDetails" msprop:Generator_RowDeletingName="T_Temp_SchedulesDetailsRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesDetailsRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesDetailsRowDeleted" msprop:Generator_RowClassName="T_Temp_SchedulesDetailsRow" msprop:Generator_UserTableName="T_Temp_SchedulesDetails" msprop:Generator_RowEvArgName="T_Temp_SchedulesDetailsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ArrivalTime" msprop:Generator_ColumnVarNameInTable="columnArrivalTime" msprop:Generator_ColumnPropNameInRow="ArrivalTime" msprop:Generator_ColumnPropNameInTable="ArrivalTimeColumn" msprop:Generator_UserColumnName="ArrivalTime" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="StopID" msprop:Generator_ColumnVarNameInTable="columnStopID" msprop:Generator_ColumnPropNameInRow="StopID" msprop:Generator_ColumnPropNameInTable="StopIDColumn" msprop:Generator_UserColumnName="StopID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TripID" msprop:Generator_ColumnVarNameInTable="columnTripID" msprop:Generator_ColumnPropNameInRow="TripID" msprop:Generator_ColumnPropNameInTable="TripIDColumn" msprop:Generator_UserColumnName="TripID" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RunNo" msprop:Generator_ColumnVarNameInTable="columnRunNo" msprop:Generator_ColumnPropNameInRow="RunNo" msprop:Generator_ColumnPropNameInTable="RunNoColumn" msprop:Generator_UserColumnName="RunNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OPRTimePoint" msprop:Generator_ColumnVarNameInTable="columnOPRTimePoint" msprop:Generator_ColumnPropNameInRow="OPRTimePoint" msprop:Generator_ColumnPropNameInTable="OPRTimePointColumn" msprop:Generator_UserColumnName="OPRTimePoint" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:T_Temp_Trips" />
+      <xs:field xpath="mstns:RunNo" />
+      <xs:field xpath="mstns:RouteNo" />
+      <xs:field xpath="mstns:FirstTime" />
+      <xs:field xpath="mstns:DayOfWeek" />
+    </xs:unique>
+    <xs:unique name="T_Temp_Schedules_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:T_Temp_Schedules" />
+      <xs:field xpath="mstns:TripID" />
+      <xs:field xpath="mstns:RunNo" />
+      <xs:field xpath="mstns:StopID" />
+      <xs:field xpath="mstns:RouteNo" />
+      <xs:field xpath="mstns:Time" />
+      <xs:field xpath="mstns:DayOfWeek" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
