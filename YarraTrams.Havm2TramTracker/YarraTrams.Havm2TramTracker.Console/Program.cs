@@ -28,9 +28,10 @@ namespace YarraTrams.Havm2TramTracker.Console
                 MainMenu.Title = "Main Menu";
                 MainMenu.AddCommand("Upload JSON file to memory and print to console", () => UploadJsonFileToMemoryAndPrintToConsole());
                 MainMenu.AddCommand("Upload JSON file to T_Temp_Trips database table", () => UploadJsonFileToMemoryAndSaveToT_Temp_Trips());
+                MainMenu.AddCommand("Call HAVM2 API and print to console", () => CallHavm2ApiAndPrintToConsole());
                 MainMenu.AddCommand("Exit", () => Exit());
             }
-
+            //Todo: Reorder these options to they make sense.
             MainMenu.Show();
         }
 

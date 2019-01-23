@@ -7,6 +7,8 @@ using YarraTrams.Havm2TramTracker.Models;
 using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Data;
+using System.Net;
+using System.Net.Http;
 
 [assembly: InternalsVisibleTo("YarraTrams.Havm2TramTracker.Tests")]
 namespace YarraTrams.Havm2TramTracker.Processor
@@ -135,6 +137,30 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 connection.Close();
             }
         }
+        #endregion
+
+        #region HTTP
+
+        public static string GetDataFromHavm2()
+        {
+            //Todo: Move this routine to a new class.
+            string uri = Properties.Settings.Default.Havm2TramTrackerAPI; //Todo: make sure this picks up the latest config when running as a windows service.
+            int timeoutInSeconds = Properties.Settings.Default.Havm2TramTrackerTimeoutSeconds;
+
+            //Todo: Log here
+
+            //Todo: Check code in:
+            //https://bitbucket.org/ytavmis/attributiondataproviderservice/src/master/YarraTrams.ADPS/YarraTrams.ADPS.Services/OdmApiHttpClient.cs
+            //https://bitbucket.org/ytavmis/attributiondataproviderservice/src/a50e66391b09e57ba7c71fa43fa0cfb3299fb64f/YarraTrams.ADPS/YarraTrams.ADPS.Services/OdmApiIntegrationService.cs?at=master#OdmApiIntegrationService.cs-180
+            
+            var httpClient = new HttpClient();
+            httpClient.Timeout = TimeSpan.FromSeconds(timeoutInSeconds);
+
+            var response = httpClient.GetStringAsync(uri).Result;
+
+            return response;
+        }
+
         #endregion
     }
 }

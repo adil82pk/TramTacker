@@ -35,5 +35,29 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 this["TramTrackerDB"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/tramtracker")]
+        public string Havm2TramTrackerAPI {
+            get {
+                return ((string)(this["Havm2TramTrackerAPI"]));
+            }
+            set {
+                this["Havm2TramTrackerAPI"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int Havm2TramTrackerTimeoutSeconds {
+            get {
+                return ((int)(this["Havm2TramTrackerTimeoutSeconds"]));
+            }
+            set {
+                this["Havm2TramTrackerTimeoutSeconds"] = value;
+            }
+        }
     }
 }
