@@ -35,7 +35,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             var clock = new Stopwatch();
 
             clock.Start();
-            var jsonstring = Processor.Processor.GetDataFromHavm2();
+            var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
             message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
@@ -71,7 +71,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             var clock = new Stopwatch();
 
             clock.Start();
-            var jsonstring = Processor.Processor.GetDataFromHavm2();
+            var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
             message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";

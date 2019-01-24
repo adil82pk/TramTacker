@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ApiService.cs" />
+    <Compile Include="Helpers\ApiHttpClient.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
