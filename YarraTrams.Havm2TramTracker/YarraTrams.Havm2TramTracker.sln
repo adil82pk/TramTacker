@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.Models", "YarraTrams.Havm2TramTracker.Models\YarraTrams.Havm2TramTracker.Models.csproj", "{FE22FA30-B89F-4BD1-84C6-9B4F60F99B8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.Logger", "YarraTrams.Havm2TramTracker.Logger\YarraTrams.Havm2TramTracker.Logger.csproj", "{87010305-28A2-44E4-8675-7B02FD5862E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FE22FA30-B89F-4BD1-84C6-9B4F60F99B8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE22FA30-B89F-4BD1-84C6-9B4F60F99B8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE22FA30-B89F-4BD1-84C6-9B4F60F99B8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87010305-28A2-44E4-8675-7B02FD5862E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87010305-28A2-44E4-8675-7B02FD5862E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87010305-28A2-44E4-8675-7B02FD5862E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87010305-28A2-44E4-8675-7B02FD5862E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
