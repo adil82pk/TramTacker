@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YarraTrams.Havm2TramTracker.Logger;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
@@ -79,6 +80,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             var vehicleGroupsWithLowFloor = Properties.Settings.Default.VehicleGroupsWithLowFloor;
             var vehicleGroupsWithoutLowFloor = Properties.Settings.Default.VehicleGroupsWithoutLowFloor;
             //Todo: Change vehicle type to vehicle group on Trip.
+            //Todo: Make sure comparison is case-insensitive
             if (vehicleGroupsWithLowFloor.Contains(trip.VehicleType))
             {
                 return true;
@@ -89,7 +91,11 @@ namespace YarraTrams.Havm2TramTracker.Models
             }
             else //We have an vehicle group that we're not aware of!
             {
-                //Todo: Log unknown vehicle warning
+//#if !DEBUG
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.UNKNOWN_VEHICLE_ENCOUNTERED
+                    , $"Unknown vehicle \"{trip.VehicleType}\"."
+                    , trip.ToString());
+//#endif
                 return false;
             }
         }

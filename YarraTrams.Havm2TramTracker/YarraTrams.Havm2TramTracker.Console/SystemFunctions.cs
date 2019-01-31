@@ -35,7 +35,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             var clock = new Stopwatch();
 
             clock.Start();
-            var jsonstring = Processor.Processor.GetDataFromHavm2();
+            var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
             message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
@@ -71,7 +71,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             var clock = new Stopwatch();
 
             clock.Start();
-            var jsonstring = Processor.Processor.GetDataFromHavm2();
+            var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
             message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
@@ -122,24 +122,8 @@ namespace YarraTrams.Havm2TramTracker.Console
             int tripCounter = 1;
             foreach (var trip in trips)
             {
-                System.Console.WriteLine("Trip HastusTripId: {0}", trip.HastusTripId);
-                System.Console.WriteLine("     Block: {0}", trip.Block);
-                System.Console.WriteLine("     Direction: {0}", trip.Direction);
-                System.Console.WriteLine("     DisplayCode: {0}", trip.DisplayCode);
-                System.Console.WriteLine("     DistanceMetres: {0:d}", trip.DistanceMetres);
-                System.Console.WriteLine("     NextDisplayCode: {0}", trip.NextDisplayCode);
-                System.Console.WriteLine("     StartTime: {0:c}", trip.StartTime);
-                System.Console.WriteLine("     StartTimepoint: {0}", trip.StartTimepoint);
-                System.Console.WriteLine("     EndTime: {0:c}", trip.EndTime);
-                System.Console.WriteLine("     EndTimepoint: {0}", trip.EndTimepoint);
-                System.Console.WriteLine("     VehicleType: {0}", trip.VehicleType);
-                System.Console.WriteLine("     Stops: {0:d}", trip.Stops.Count);
-                int stopNum = 1;
-                foreach (var stop in trip.Stops)
-                {
-                    System.Console.WriteLine("        Stop {0:d}: {1} arriving at {2:c}", stopNum, stop.HastusStopId, stop.PassingTime);
-                    stopNum++;
-                }
+                System.Console.WriteLine(trip.ToString());
+
                 tripCounter++;
                 if (tripCounter >= maxTripsToPrint)
                 {
