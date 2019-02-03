@@ -14,8 +14,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestRunNoTransformationWithNormalDepot()
         {
             // arrange
-            const string block = "db21";
-            const string expectedResult = "D";
+            const string block = "db21-  1";
+            const string expectedResult = "D-1";
             var trip = new Models.HavmTrip
             {
                 Block = block //Ignoring all other properties
@@ -32,8 +32,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestRunNoTransformationWithCamberwellDepot()
         {
             // arrange
-            const string block = "cw07";
-            const string expectedResult = "V";
+            const string block = "cw07- 27";
+            const string expectedResult = "V-27";
             var trip = new Models.HavmTrip
             {
                 Block = block //Ignoring all other properties

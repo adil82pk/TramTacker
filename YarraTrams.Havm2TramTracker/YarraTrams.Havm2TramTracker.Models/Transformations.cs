@@ -9,17 +9,38 @@ namespace YarraTrams.Havm2TramTracker.Models
 {
     public static class Transformations
     {
-           public static string GetRunNumber(HavmTrip trip)
+        public static string GetRunNumber(HavmTrip trip)
         {
+            //Todo: refactor this at DB level (split fields)
+            string block = trip.Block.Trim().ToUpper();
+
             //Todo: Make this configurable?
-            string firstTwoCharsOfBlock = trip.Block.Trim().ToUpper().Substring(0, 2);
+            //Todo: Confirm rule with John.
+            string firstChar;
+            string firstTwoCharsOfBlock = block.Substring(0, 2);
             if (firstTwoCharsOfBlock == "CW")
             {
-                return "V";
+                firstChar = "V";
             }
             else
             {
-                return firstTwoCharsOfBlock.Substring(0, 1);
+                firstChar = firstTwoCharsOfBlock.Substring(0, 1);
+            }
+
+            string trailingChars = block.Substring(block.Length - 3, 3).Trim();
+
+            return firstChar + "-" + trailingChars;
+        }
+
+        public static short GetRouteNo(HavmTrip trip)
+        {
+            if (short.TryParse(trip.DisplayCode, out short route))
+            {
+                return route;
+            }
+            else
+            {
+                throw new FormatException($"Unexpected format for route number on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.DisplayCode ?? "")}\".");
             }
         }
 
@@ -50,6 +71,18 @@ namespace YarraTrams.Havm2TramTracker.Models
             }
 
             return AtLayovertimeShort;
+        }
+
+        public static short GetNextRouteNo(HavmTrip trip)
+        {
+            if (short.TryParse(trip.NextDisplayCode, out short nextRoute))
+            {
+                return nextRoute;
+            }
+            else
+            {
+                throw new FormatException($"Unexpected format for next route number on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.NextDisplayCode ?? "")}\".");
+            }
         }
 
         public static bool GetUpDirection(HavmTrip trip)
@@ -109,14 +142,15 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             switch (trip.OperationalDay.DayOfWeek)
             {
-                //A Melbourne tram week begins on a Saturday
-                case DayOfWeek.Saturday: return 1;
-                case DayOfWeek.Sunday: return 2;
-                case DayOfWeek.Monday: return 3;
-                case DayOfWeek.Tuesday: return 4;
-                case DayOfWeek.Wednesday: return 5;
-                case DayOfWeek.Thursday: return 6;
-                case DayOfWeek.Friday: return 7;
+                //Todo: Check this
+                //A Melbourne tram week begins on a Sunday
+                case DayOfWeek.Saturday: return 6;
+                case DayOfWeek.Sunday: return 0;
+                case DayOfWeek.Monday: return 1;
+                case DayOfWeek.Tuesday: return 2;
+                case DayOfWeek.Wednesday: return 3;
+                case DayOfWeek.Thursday: return 4;
+                case DayOfWeek.Friday: return 5;
                 default: throw new IndexOutOfRangeException("Unknown day of the week.");
             }
         }
