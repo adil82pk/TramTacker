@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YarraTrams.Havm2TramTracker.Processor.Properties {
+namespace YarraTrams.Havm2TramTracker.Logger.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -23,40 +23,30 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Persist Security Info=False;max pool size=500;In" +
-            "tegrated Security=true;database=TramTracker;")]
-        public string TramTrackerDB {
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int MajorEscalationThresholdMinutes {
             get {
-                return ((string)(this["TramTrackerDB"]));
-            }
-            set {
-                this["TramTrackerDB"] = value;
+                return ((int)(this["MajorEscalationThresholdMinutes"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/tramtracker")]
-        public string Havm2TramTrackerAPI {
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int MajorEscalationEventBaseCode {
             get {
-                return ((string)(this["Havm2TramTrackerAPI"]));
-            }
-            set {
-                this["Havm2TramTrackerAPI"] = value;
+                return ((int)(this["MajorEscalationEventBaseCode"]));
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int Havm2TramTrackerTimeoutSeconds {
+        [global::System.Configuration.DefaultSettingValueAttribute("1002")]
+        public string MajorEscalationCodesCsv {
             get {
-                return ((int)(this["Havm2TramTrackerTimeoutSeconds"]));
-            }
-            set {
-                this["Havm2TramTrackerTimeoutSeconds"] = value;
+                return ((string)(this["MajorEscalationCodesCsv"]));
             }
         }
     }

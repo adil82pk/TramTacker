@@ -33,5 +33,40 @@ namespace YarraTrams.Havm2TramTracker.Models.Properties {
                 return ((string)(this["TramTrackerConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>c</string>\r\n  <string>d1</string>\r\n  <string>d2</string>\r\n</ArrayOfString>" +
+            "")]
+        public global::System.Collections.Specialized.StringCollection VehicleGroupsWithLowFloor {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["VehicleGroupsWithLowFloor"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>a</string>
+  <string>b</string>
+  <string>c1</string>
+  <string>c2</string>
+  <string>car</string>
+  <string>e</string>
+  <string>e1</string>
+  <string>l</string>
+  <string>taxi</string>
+  <string>w</string>
+  <string>z</string>
+  <string>z3</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection VehicleGroupsWithoutLowFloor {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["VehicleGroupsWithoutLowFloor"]));
+            }
+        }
     }
 }
