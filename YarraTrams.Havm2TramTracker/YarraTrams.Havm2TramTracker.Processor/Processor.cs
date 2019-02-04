@@ -7,6 +7,7 @@ using YarraTrams.Havm2TramTracker.Models;
 using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Data;
+using YarraTrams.Havm2TramTracker.Logger;
 
 [assembly: InternalsVisibleTo("YarraTrams.Havm2TramTracker.Tests")]
 namespace YarraTrams.Havm2TramTracker.Processor
@@ -51,7 +52,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         #endregion
 
         #region Data Tramsformation and Mapping
-
+        
         /// <summary>
         /// Copies trip objects in to a new DataTable that matches the structure of the T_Temp_Trips table in the TramTracker database.
         /// 
@@ -64,25 +65,84 @@ namespace YarraTrams.Havm2TramTracker.Processor
         internal static TramTrackerDataSet.T_Temp_TripsDataTable CopyTripsToT_Temp_TripsDataTable(List<Models.HavmTrip> trips)
         {
             var tripDataTable = new TramTrackerDataSet.T_Temp_TripsDataTable();
+            var exceptionCounts = new Dictionary<System.DayOfWeek, int>();
+            foreach(var dayOfWeek in Enum.GetValues(typeof(System.DayOfWeek)).Cast<System.DayOfWeek>())
+            {
+                exceptionCounts.Add(dayOfWeek, 0);
+            }
+
+            bool logRowsToFilePriorToInsert = Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert;
+            int tripCounter = 0;
+            int rowCounter = 0;
+
+            var errorLog = new StringBuilder();
 
             foreach (HavmTrip trip in trips)
             {
-                tripDataTable.AddT_Temp_TripsRow(
-                    TripID:           trip.HastusTripId,
-                    RunNo:            Transformations.GetRunNumber(trip),
-                    RouteNo:          1,
-                    FirstTP:          trip.StartTimepoint,
-                    FirstTime:        (int)trip.StartTime.TotalSeconds,
-                    EndTP:            trip.EndTimepoint,
-                    EndTime:          (int)trip.EndTime.TotalSeconds,
-                    AtLayoverTime:    Transformations.GetAtLayovertime(trip),
-                    NextRouteNo:      1,
-                    UpDirection:      Transformations.GetUpDirection(trip),
-                    LowFloor:         Transformations.GetLowFloor(trip),
-                    TripDistance:     Transformations.GetTripDistance(trip),
-                    PublicTrip:       trip.IsPublic, //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
-                    DayOfWeek:        Transformations.GetDayOfWeek(trip)
-                );
+                tripCounter++;
+                try
+                {
+                    TramTrackerDataSet.T_Temp_TripsRow tripsRow = (TramTrackerDataSet.T_Temp_TripsRow)tripDataTable.NewRow();
+                    tripsRow.TripID = trip.HastusTripId;
+                    tripsRow.RunNo = Transformations.GetRunNumber(trip);
+                    tripsRow.RouteNo = Transformations.GetRouteNo(trip);
+                    tripsRow.FirstTP = trip.StartTimepoint;
+                    tripsRow.FirstTime = (int)trip.StartTime.TotalSeconds;
+                    tripsRow.EndTP = trip.EndTimepoint;
+                    tripsRow.EndTime = (int)trip.EndTime.TotalSeconds - 1;//Todo: Investigate this. Why is TT making all trips end 1 second early?
+                    tripsRow.AtLayoverTime = Transformations.GetAtLayovertime(trip);
+                    tripsRow.NextRouteNo = Transformations.GetNextRouteNo(trip);
+                    tripsRow.UpDirection = Transformations.GetUpDirection(trip);
+                    tripsRow.LowFloor = Transformations.GetLowFloor(trip);
+                    tripsRow.TripDistance = Transformations.GetTripDistance(trip);
+                    tripsRow.PublicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+                    tripsRow.DayOfWeek = Transformations.GetDayOfWeek(trip);
+
+                    rowCounter++;
+
+                    if (logRowsToFilePriorToInsert)
+                    {
+                        Helpers.LogfileWriter.writeToFile("T_Temp_TripsRowsPriorToInsert", $"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}\nRow {rowCounter}\n{tripsRow.ToLogString()}", Properties.Settings.Default.LogFilePath);
+                    }
+
+                    tripDataTable.AddT_Temp_TripsRow(tripsRow);
+                }
+                catch (Exception ex)
+                {
+                    errorLog.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
+                    
+                    exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                }
+            }
+
+            int totalErrors = exceptionCounts.Values.Sum();
+            if (totalErrors == 0)
+            {
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
+                    , $"{trips.Count} HAVM trip{(trips.Count == 1 ? "" : "s")} successfully transformed in to the TramTRACKER T_Temp_Trips format.");
+            }
+            else
+            {
+                var today = DateTime.Now;
+                // Write exceptions to file
+                string logFilePath = Properties.Settings.Default.LogFilePath;
+                string filePostFix = "T_Temp_Trips";
+                Helpers.LogfileWriter.writeToFile(filePostFix, errorLog.ToString(),logFilePath);
+
+                // Log error message to event log
+                var message = new StringBuilder();
+                var todayDayOfWeek = today.DayOfWeek;
+                
+                // We print the number of exceptions separately for each of the next 7 days, starting with tomorrow.
+                foreach (var dayOfWeek in exceptionCounts.OrderBy(pair => pair.Key<=todayDayOfWeek?pair.Key+7:pair.Key))
+                {
+                    message.AppendLine($"{dayOfWeek.Key.ToString()} errors: {dayOfWeek.Value}");
+                }
+                message.AppendLine($"See the \"{filePostFix}\" log file under {logFilePath} for more detail.");
+
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_ERROR
+                    , $"Encountered {totalErrors} error{(totalErrors==1?"":"s")} when transforming {trips.Count} HAVM trip{(trips.Count == 1 ? "" : "s")} in to the TramTRACKER T_Temp_Trips format."
+                    , message.ToString());
             }
 
             return tripDataTable;

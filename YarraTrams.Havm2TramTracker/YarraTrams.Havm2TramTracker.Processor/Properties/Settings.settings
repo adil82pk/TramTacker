@@ -11,5 +11,11 @@
     <Setting Name="Havm2TramTrackerTimeoutSeconds" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">600</Value>
     </Setting>
+    <Setting Name="LogFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\iop\Downloads\temp\HAVM2TTLogs</Value>
+    </Setting>
+    <Setting Name="LogT_Temp_TripRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

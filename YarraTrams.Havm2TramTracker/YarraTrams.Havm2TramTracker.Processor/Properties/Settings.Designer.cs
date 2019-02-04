@@ -59,5 +59,29 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 this["Havm2TramTrackerTimeoutSeconds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iop\\Downloads\\temp\\HAVM2TTLogs")]
+        public string LogFilePath {
+            get {
+                return ((string)(this["LogFilePath"]));
+            }
+            set {
+                this["LogFilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LogT_Temp_TripRowsToFilePriorToInsert {
+            get {
+                return ((bool)(this["LogT_Temp_TripRowsToFilePriorToInsert"]));
+            }
+            set {
+                this["LogT_Temp_TripRowsToFilePriorToInsert"] = value;
+            }
+        }
     }
 }
