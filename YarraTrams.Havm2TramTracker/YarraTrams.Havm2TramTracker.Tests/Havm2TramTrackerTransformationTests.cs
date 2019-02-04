@@ -288,7 +288,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         {
             // arrange
             DateTime operationalDay = new DateTime(2019, 1, 1);
-            const byte expectedResult = 4;
+            const byte expectedResult = 2;
             var trip = new Models.HavmTrip
             {
                 OperationalDay = operationalDay //Ignoring all other properties
