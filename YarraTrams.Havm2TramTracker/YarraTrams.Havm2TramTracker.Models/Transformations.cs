@@ -113,23 +113,19 @@ namespace YarraTrams.Havm2TramTracker.Models
             var vehicleGroupsWithLowFloor = Properties.Settings.Default.VehicleGroupsWithLowFloor;
             var vehicleGroupsWithoutLowFloor = Properties.Settings.Default.VehicleGroupsWithoutLowFloor;
             //Todo: Change vehicle type to vehicle group on Trip.
-            //Todo: Make sure comparison is case-insensitive
-            if (vehicleGroupsWithLowFloor.Contains(trip.VehicleType))
+            
+            // There is no case insensitive comparer option for a StringCollection, therefore we must assume that all the values listed in the config file at lower case.
+            if (vehicleGroupsWithLowFloor.Contains(trip.VehicleType.ToLower()))
             {
                 return true;
             }
-            else if (vehicleGroupsWithoutLowFloor.Contains(trip.VehicleType))
+            else if (vehicleGroupsWithoutLowFloor.Contains(trip.VehicleType.ToLower()))
             {
                 return false;
             }
             else //We have an vehicle group that we're not aware of!
             {
-//#if !DEBUG
-                LogWriter.Instance.LogWithoutDelay(EventLogCodes.UNKNOWN_VEHICLE_ENCOUNTERED
-                    , $"Unknown vehicle \"{trip.VehicleType}\"."
-                    , trip.ToString());
-//#endif
-                return false;
+                throw new FormatException($"Unknown vehicle \"{trip.VehicleType}\"."); ;
             }
         }
 
