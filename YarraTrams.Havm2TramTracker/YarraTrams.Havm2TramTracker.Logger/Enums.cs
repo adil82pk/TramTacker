@@ -37,17 +37,23 @@ namespace YarraTrams.Havm2TramTracker.Logger
         #region info
         public const int SERVICE_STARTED = 3001;
         public const int SERVICE_STOPPED = 3002;
+        public const int TRIP_TRANSFORMATION_SUCCESS = 3003;
+        public const int SCHEDULE_TRANSFORMATION_SUCCESS = 3004;
+        public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_SUCCESS = 3005;
         #endregion
 
         #region warning
         public const int SERVICE_CONFIG_CHANGED = 2001;
-        public const int UNKNOWN_VEHICLE_ENCOUNTERED = 2101;
         #endregion
 
         #region error
         public const int FATAL_ERROR = 1000;
         public const int DB_CONNECTION_ERROR = 1001;
         public const int DB_EXECUTE_ERROR = 1002;
+        public const int LOG_FILE_WRITE_ERROR = 1003;
+        public const int TRIP_TRANSFORMATION_ERROR = 1004;
+        public const int SCHEDULE_TRANSFORMATION_ERROR = 1005;
+        public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_ERROR = 1006;
         #endregion
     }
 
