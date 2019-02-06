@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Models;
 using YarraTrams.Havm2TramTracker.Processor;
 using static YarraTrams.Havm2TramTracker.Models.TramTrackerDataSet;
+using System.Linq;
 
 namespace YarraTrams.Havm2TramTracker.Tests
 {
@@ -74,6 +75,53 @@ namespace YarraTrams.Havm2TramTracker.Tests
 
             // assert
             Assert.IsTrue(tripsDT.Rows.Count == 0, "Expecting zero records in the Trip class list but found {0:d} records.", tripsDT.Rows.Count);
+        }
+
+        [TestMethod]
+        public void TestTripsToT_Temp_SchedulesDataTableWithGoodData()
+        {
+            // arrange
+            var trips = new List<Models.HavmTrip>();
+
+            trips.Add(new Models.HavmTrip
+            {
+                HastusTripId = 1,
+                Block = "Block 1",
+                DisplayCode = "86",
+                StartTimepoint = "ncob",
+                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                EndTimepoint = "mpnd",
+                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                HeadwayNextSeconds = 120,
+                NextDisplayCode = "86",
+                Direction = "DOWN",
+                VehicleType = "Z",
+                DistanceMetres = 10000,
+                IsPublic = true,
+                OperationalDay = new DateTime(2019, 2, 1),
+                Stops = new List<Models.HavmTripStop> {
+                    new HavmTripStop
+                        {
+                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            HastusStopId = "ncob",
+                            IsMonitoredOPRReliability = true
+                        },
+                    new HavmTripStop
+                        {
+                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            HastusStopId = "mpnd",
+                            IsMonitoredOPRReliability = true
+                        }
+                    }
+            });
+
+            // act
+            T_Temp_SchedulesDataTable schedulesDT = Processor.Processor.CopyTripsToT_Temp_SchedulesDataTable(trips);
+
+            // assert
+            Assert.IsTrue(trips.Select(x => x.Stops.Count()).Sum() == schedulesDT.Rows.Count, "Number of records in DataTable ({1:d}) doesn't match number of total stops in Trip class list ({0:d}).", trips.Select(x => x.Stops.Count()).Sum(), schedulesDT.Rows.Count);
+            //Todo: check more stuff. Everything! Only once we've settled on the data contract.
+            Assert.IsTrue(trips[0].HastusTripId == schedulesDT[0].TripID, "TripId field in DataTable ({1}) doesn't match HastusTripId from Trip class ({0}).", trips[0].HastusTripId, schedulesDT[0].TripID);
         }
 
         [TestMethod]

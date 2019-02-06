@@ -74,13 +74,25 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LogT_Temp_TripRowsToFilePriorToInsert {
             get {
                 return ((bool)(this["LogT_Temp_TripRowsToFilePriorToInsert"]));
             }
             set {
                 this["LogT_Temp_TripRowsToFilePriorToInsert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogT_Temp_SchedulesRowsToFilePriorToInsert {
+            get {
+                return ((bool)(this["LogT_Temp_SchedulesRowsToFilePriorToInsert"]));
+            }
+            set {
+                this["LogT_Temp_SchedulesRowsToFilePriorToInsert"] = value;
             }
         }
     }

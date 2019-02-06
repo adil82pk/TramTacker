@@ -302,5 +302,54 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         #endregion
+
+        #region StopId
+
+        [TestMethod]
+        public void TestStopIdTransformationWithValidStop()
+        {
+            // arrange
+            const int hastusStopId = 1010;
+            const string expectedResult = "U035Mill";
+
+            Models.HastusStopMapper.stops = new Dictionary<int, string>();
+            Models.HastusStopMapper.stops.Add(hastusStopId, expectedResult);
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = hastusStopId.ToString()
+            };
+
+            // act
+            string stopId = Models.Transformations.GetStopId(stop);
+
+            // assert
+            Assert.IsTrue(stopId == expectedResult, "Expecting value {0} from input of {1} but got {2} instead.", expectedResult, hastusStopId, stopId);
+        }
+
+        [TestMethod]
+        public void TestStopIdTransformationWithInvalidStop()
+        {
+            // arrange
+            const int hastusStopId = 999999;
+            
+            // We're leaving the mapper empty for this test.
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = hastusStopId.ToString()
+            };
+
+            // act
+            // See inside the assert.
+
+            // assert
+            Assert.ThrowsException<Exception>(() =>
+            {
+                string stopId = Models.Transformations.GetStopId(stop);
+            },"Expecting an exception when searching for a stop when the HastusStopMapper is empty.");
+        }
+
+        #endregion
     }
 }
