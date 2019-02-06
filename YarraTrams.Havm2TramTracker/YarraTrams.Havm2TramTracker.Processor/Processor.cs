@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Data;
 using YarraTrams.Havm2TramTracker.Logger;
+using System.IO;
 
 [assembly: InternalsVisibleTo("YarraTrams.Havm2TramTracker.Tests")]
 namespace YarraTrams.Havm2TramTracker.Processor
@@ -71,47 +72,51 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 exceptionCounts.Add(dayOfWeek, 0);
             }
 
+            StringBuilder errorMessages = new StringBuilder();
+
             bool logRowsToFilePriorToInsert = Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert;
-            int tripCounter = 0;
-            int rowCounter = 0;
 
-            var errorLog = new StringBuilder();
-
-            foreach (HavmTrip trip in trips)
+            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}-T_Temp_TripsRowsPriorToInsert.txt", true))
             {
-                tripCounter++;
-                try
+                int tripCounter = 0;
+                int rowCounter = 0;
+
+                foreach (HavmTrip trip in trips)
                 {
-                    TramTrackerDataSet.T_Temp_TripsRow tripsRow = (TramTrackerDataSet.T_Temp_TripsRow)tripDataTable.NewRow();
-                    tripsRow.TripID = trip.HastusTripId;
-                    tripsRow.RunNo = Transformations.GetRunNumber(trip);
-                    tripsRow.RouteNo = Transformations.GetRouteNo(trip);
-                    tripsRow.FirstTP = trip.StartTimepoint;
-                    tripsRow.FirstTime = (int)trip.StartTime.TotalSeconds;
-                    tripsRow.EndTP = trip.EndTimepoint;
-                    tripsRow.EndTime = (int)trip.EndTime.TotalSeconds - 1;//Todo: Investigate this. Why is TT making all trips end 1 second early?
-                    tripsRow.AtLayoverTime = Transformations.GetAtLayovertime(trip);
-                    tripsRow.NextRouteNo = Transformations.GetNextRouteNo(trip);
-                    tripsRow.UpDirection = Transformations.GetUpDirection(trip);
-                    tripsRow.LowFloor = Transformations.GetLowFloor(trip);
-                    tripsRow.TripDistance = Transformations.GetTripDistance(trip);
-                    tripsRow.PublicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
-                    tripsRow.DayOfWeek = Transformations.GetDayOfWeek(trip);
-
-                    rowCounter++;
-
-                    if (logRowsToFilePriorToInsert)
+                    tripCounter++;
+                    try
                     {
-                        Helpers.LogfileWriter.writeToFile("T_Temp_TripsRowsPriorToInsert", $"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}\nRow {rowCounter}\n{tripsRow.ToLogString()}", Properties.Settings.Default.LogFilePath);
-                    }
+                        TramTrackerDataSet.T_Temp_TripsRow tripsRow = (TramTrackerDataSet.T_Temp_TripsRow)tripDataTable.NewRow();
+                        tripsRow.TripID = trip.HastusTripId;
+                        tripsRow.RunNo = Transformations.GetRunNumber(trip);
+                        tripsRow.RouteNo = Transformations.GetRouteNo(trip);
+                        tripsRow.FirstTP = trip.StartTimepoint;
+                        tripsRow.FirstTime = (int)trip.StartTime.TotalSeconds;
+                        tripsRow.EndTP = trip.EndTimepoint;
+                        tripsRow.EndTime = (int)trip.EndTime.TotalSeconds - 1;//Todo: Investigate this. Why is TT making all trips end 1 second early?
+                        tripsRow.AtLayoverTime = Transformations.GetAtLayovertime(trip);
+                        tripsRow.NextRouteNo = Transformations.GetNextRouteNo(trip);
+                        tripsRow.UpDirection = Transformations.GetUpDirection(trip);
+                        tripsRow.LowFloor = Transformations.GetLowFloor(trip);
+                        tripsRow.TripDistance = Transformations.GetTripDistance(trip);
+                        tripsRow.PublicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+                        tripsRow.DayOfWeek = Transformations.GetDayOfWeek(trip);
 
-                    tripDataTable.AddT_Temp_TripsRow(tripsRow);
-                }
-                catch (Exception ex)
-                {
-                    errorLog.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
-                    
-                    exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                        rowCounter++;
+
+                        if (logRowsToFilePriorToInsert)
+                        {
+                            fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}\nRow {rowCounter}\n{tripsRow.ToLogString()}");
+                        }
+
+                        tripDataTable.AddT_Temp_TripsRow(tripsRow);
+                    }
+                    catch (Exception ex)
+                    {
+                        errorMessages.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
+
+                        exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                    }
                 }
             }
 
@@ -127,7 +132,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 // Write exceptions to file
                 string logFilePath = Properties.Settings.Default.LogFilePath;
                 string filePostFix = "T_Temp_Trips";
-                Helpers.LogfileWriter.writeToFile(filePostFix, errorLog.ToString(),logFilePath);
+                Helpers.LogfileWriter.writeToFile(filePostFix, errorMessages.ToString(),logFilePath);
 
                 // Log error message to event log
                 var message = new StringBuilder();
