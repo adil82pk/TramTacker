@@ -72,9 +72,10 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 exceptionCounts.Add(dayOfWeek, 0);
             }
 
-            var errorMessages = new StringBuilder();
+            StringBuilder errorMessages = new StringBuilder();
 
             bool logRowsToFilePriorToInsert = Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert;
+
             using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}-T_Temp_TripsRowsPriorToInsert.txt", true))
             {
                 int tripCounter = 0;
