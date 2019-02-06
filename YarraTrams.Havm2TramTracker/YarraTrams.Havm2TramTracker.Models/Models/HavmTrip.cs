@@ -22,13 +22,14 @@ namespace YarraTrams.Havm2TramTracker.Models
         public int DistanceMetres { get; set; }
         public bool IsPublic { get; set; }
         public DateTime OperationalDay { get; set; }
-        public List<Models.HavmTripStop> Stops { get; set; }
+        public List<HavmTripStop> Stops { get; set; }
         //Todo: Create ToSQL that returns and string (and does transformations).
 
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine($"Trip HastusTripId: {HastusTripId}");
+            output.AppendLine($"     Day: {OperationalDay}");
             output.AppendLine($"     Block: {Block}");
             output.AppendLine($"     Direction: {Direction}");
             output.AppendLine($"     DisplayCode: {DisplayCode}");
