@@ -331,9 +331,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestStopIdTransformationWithInvalidStop()
         {
             // arrange
+            Models.HastusStopMapper.stops = new Dictionary<int, string>();
+            Models.HastusStopMapper.stops.Add(1234, "A stop we won't find");
+
             const int hastusStopId = 999999;
-            
-            // We're leaving the mapper empty for this test.
 
             var stop = new HavmTripStop
             {
