@@ -178,54 +178,67 @@ namespace YarraTrams.Havm2TramTracker.Processor
             int tripCounter = 0;
             int rowCounter = 0;
 
-            var errorLog = new StringBuilder();
+            StringBuilder errorMessages = new StringBuilder();
 
-            foreach (HavmTrip trip in trips)
+            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}-T_Temp_SchedulesRowsPriorToInsert.txt", true))
             {
-                tripCounter++;
-                try
+                foreach (HavmTrip trip in trips)
                 {
-
-                    if (logRowsToFilePriorToInsert)
+                    tripCounter++;
+                    try
                     {
-                        Helpers.LogfileWriter.writeToFile("T_Temp_SchedulesRowsPriorToInsert", $"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}", Properties.Settings.Default.LogFilePath);
-                    }
-                    int tripId = trip.HastusTripId;
-                    string runNo = Transformations.GetRunNumber(trip);
-                    short routeNo = Transformations.GetRouteNo(trip);
-                    byte dayOfWeek = Transformations.GetDayOfWeek(trip);
-                    bool lowFloor = Transformations.GetLowFloor(trip);
-                    bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
-
-                    foreach (HavmTripStop stop in trip.Stops)
-                    {
-                        TramTrackerDataSet.T_Temp_SchedulesRow schedulessRow = (TramTrackerDataSet.T_Temp_SchedulesRow)schedulesDataTable.NewRow();
-                        schedulessRow.TripID = tripId;
-                        schedulessRow.RunNo = runNo;
-                        schedulessRow.RouteNo = routeNo;
-                        schedulessRow.DayOfWeek = dayOfWeek;
-                        schedulessRow.LowFloor = lowFloor;
-                        schedulessRow.PublicTrip = publicTrip;
-                        schedulessRow.OPRTimePoint = stop.IsMonitoredOPRReliability;
-                        schedulessRow.StopID = Transformations.GetStopId(stop);
-                        schedulessRow.Time = (int)stop.PassingTime.TotalSeconds;
-
-                        rowCounter++;
 
                         if (logRowsToFilePriorToInsert)
                         {
-                            Helpers.LogfileWriter.writeToFile("T_Temp_SchedulesRowsPriorToInsert", $"\nRow {rowCounter}\n{schedulessRow.ToLogString()}", Properties.Settings.Default.LogFilePath);
+                            fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}");
                         }
+                        int tripId = trip.HastusTripId;
+                        string runNo = Transformations.GetRunNumber(trip);
+                        short routeNo = Transformations.GetRouteNo(trip);
+                        byte dayOfWeek = Transformations.GetDayOfWeek(trip);
+                        bool lowFloor = Transformations.GetLowFloor(trip);
+                        bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+                        
+                        foreach (HavmTripStop stop in trip.Stops)
+                        {
+                            try
+                            {
+                                rowCounter++;
 
-                        schedulesDataTable.AddT_Temp_SchedulesRow(schedulessRow);
+                                TramTrackerDataSet.T_Temp_SchedulesRow schedulessRow = (TramTrackerDataSet.T_Temp_SchedulesRow)schedulesDataTable.NewRow();
+                                schedulessRow.TripID = tripId;
+                                schedulessRow.RunNo = runNo;
+                                schedulessRow.RouteNo = routeNo;
+                                schedulessRow.DayOfWeek = dayOfWeek;
+                                schedulessRow.LowFloor = lowFloor;
+                                schedulessRow.PublicTrip = publicTrip;
+                                schedulessRow.OPRTimePoint = stop.IsMonitoredOPRReliability;
+                                schedulessRow.StopID = Transformations.GetStopId(stop);
+                                schedulessRow.Time = (int)stop.PassingTime.TotalSeconds;
+
+                                if (logRowsToFilePriorToInsert)
+                                {
+                                    fileWriter.Write($"\nRow {rowCounter}\n{schedulessRow.ToLogString()}");
+                                }
+
+                                schedulesDataTable.AddT_Temp_SchedulesRow(schedulessRow);
+                            }
+                            catch (Exception ex)
+                            {
+                                //This is catching an error with the stop-level data.
+                                errorMessages.Append($"Exception: {ex.Message}\n{stop.ToString(tripId)}\n");
+
+                                exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                            }
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        //This is catching an error with the trip-level data.
+                        errorMessages.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
 
-                }
-                catch (Exception ex)
-                {
-                    errorLog.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
-
-                    exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                        exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                    }
                 }
             }
 
@@ -241,7 +254,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 // Write exceptions to file
                 string logFilePath = Properties.Settings.Default.LogFilePath;
                 string filePostFix = "T_Temp_Schedules";
-                Helpers.LogfileWriter.writeToFile(filePostFix, errorLog.ToString(), logFilePath);
+                Helpers.LogfileWriter.writeToFile(filePostFix, errorMessages.ToString(), logFilePath);
 
                 // Log error message to event log
                 var message = new StringBuilder();
