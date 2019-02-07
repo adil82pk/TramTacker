@@ -161,7 +161,7 @@ namespace YarraTrams.Havm2TramTracker.Models
                     return Models.HastusStopMapper.stops[(stopID)];
                 }
             }
-            throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Has HastusStopMapper.Populate() been run? Is the DB table empt? Is this a new or invalid stop?");
+            throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Has HastusStopMapper.Populate() been run? Is the DB table empty? Is this a new or invalid stop?");
         }
     }
 }
