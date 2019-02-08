@@ -165,7 +165,114 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <returns></returns>
         internal static TramTrackerDataSet.T_Temp_SchedulesDataTable CopyTripsToT_Temp_SchedulesDataTable(List<Models.HavmTrip> trips)
         {
-            throw new NotImplementedException();
+            HastusStopMapper.Populate();
+
+            var schedulesDataTable = new TramTrackerDataSet.T_Temp_SchedulesDataTable();
+            var exceptionCounts = new Dictionary<System.DayOfWeek, int>();
+            foreach (var dayOfWeek in Enum.GetValues(typeof(System.DayOfWeek)).Cast<System.DayOfWeek>())
+            {
+                exceptionCounts.Add(dayOfWeek, 0);
+            }
+
+            bool logRowsToFilePriorToInsert = Properties.Settings.Default.LogT_Temp_SchedulesRowsToFilePriorToInsert;
+            int tripCounter = 0;
+            int rowCounter = 0;
+
+            StringBuilder errorMessages = new StringBuilder();
+
+            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}-T_Temp_SchedulesRowsPriorToInsert.txt", true))
+            {
+                foreach (HavmTrip trip in trips)
+                {
+                    tripCounter++;
+                    try
+                    {
+
+                        if (logRowsToFilePriorToInsert)
+                        {
+                            fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}");
+                        }
+                        int tripId = trip.HastusTripId;
+                        string runNo = Transformations.GetRunNumber(trip);
+                        short routeNo = Transformations.GetRouteNo(trip);
+                        byte dayOfWeek = Transformations.GetDayOfWeek(trip);
+                        bool lowFloor = Transformations.GetLowFloor(trip);
+                        bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+                        
+                        foreach (HavmTripStop stop in trip.Stops)
+                        {
+                            try
+                            {
+                                rowCounter++;
+
+                                TramTrackerDataSet.T_Temp_SchedulesRow schedulessRow = (TramTrackerDataSet.T_Temp_SchedulesRow)schedulesDataTable.NewRow();
+                                schedulessRow.TripID = tripId;
+                                schedulessRow.RunNo = runNo;
+                                schedulessRow.RouteNo = routeNo;
+                                schedulessRow.DayOfWeek = dayOfWeek;
+                                schedulessRow.LowFloor = lowFloor;
+                                schedulessRow.PublicTrip = publicTrip;
+                                schedulessRow.OPRTimePoint = stop.IsMonitoredOPRReliability;
+                                schedulessRow.StopID = Transformations.GetStopId(stop);
+                                schedulessRow.Time = (int)stop.PassingTime.TotalSeconds;
+
+                                if (logRowsToFilePriorToInsert)
+                                {
+                                    fileWriter.Write($"\nRow {rowCounter}\n{schedulessRow.ToLogString()}");
+                                }
+
+                                schedulesDataTable.AddT_Temp_SchedulesRow(schedulessRow);
+                            }
+                            catch (Exception ex)
+                            {
+                                //This is catching an error with the stop-level data.
+                                errorMessages.Append($"Exception: {ex.Message}\n{stop.ToString(tripId)}\n");
+
+                                exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //This is catching an error with the trip-level data.
+                        errorMessages.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
+
+                        exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                    }
+                }
+            }
+
+            int totalErrors = exceptionCounts.Values.Sum();
+            if (totalErrors == 0)
+            {
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
+                    , $"{trips.Count} HAVM trip{(trips.Count == 1 ? "" : "s")} successfully transformed in to the TramTRACKER T_Temp_Schedules format.");
+            }
+            else
+            {
+                var today = DateTime.Now;
+                // Write exceptions to file
+                string logFilePath = Properties.Settings.Default.LogFilePath;
+                string filePostFix = "T_Temp_Schedules";
+                Helpers.LogfileWriter.writeToFile(filePostFix, errorMessages.ToString(), logFilePath);
+
+                // Log error message to event log
+                var message = new StringBuilder();
+                var todayDayOfWeek = today.DayOfWeek;
+
+                // We print the number of exceptions separately for each of the next 7 days, starting with tomorrow.
+                foreach (var dayOfWeek in exceptionCounts.OrderBy(pair => pair.Key <= todayDayOfWeek ? pair.Key + 7 : pair.Key))
+                {
+                    message.AppendLine($"{dayOfWeek.Key.ToString()} errors: {dayOfWeek.Value}");
+                }
+                message.AppendLine($"See the \"{filePostFix}\" log file under {logFilePath} for more detail.");
+
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_ERROR
+                    , $"Encountered {totalErrors} error{(totalErrors == 1 ? "" : "s")} when transforming {trips.Count} HAVM trip{(trips.Count == 1 ? "" : "s")} in to the TramTRACKER T_Temp_Schedules format."
+                    , message.ToString());
+            }
+
+            return schedulesDataTable;
         }
 
         #endregion

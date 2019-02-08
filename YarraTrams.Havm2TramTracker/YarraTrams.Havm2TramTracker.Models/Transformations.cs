@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
+using YarraTrams.Havm2TramTracker.Models;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
@@ -149,6 +150,18 @@ namespace YarraTrams.Havm2TramTracker.Models
                 case DayOfWeek.Friday: return 5;
                 default: throw new IndexOutOfRangeException("Unknown day of the week.");
             }
+        }
+
+        public static string GetStopId(HavmTripStop tripStop)
+        {
+            if (int.TryParse(tripStop.HastusStopId, out var stopID))
+            {
+                if (Models.HastusStopMapper.stops.ContainsKey(stopID))
+                {
+                    return Models.HastusStopMapper.stops[(stopID)];
+                }
+            }
+            throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Has HastusStopMapper.Populate() been run? Is the DB table empty? Is this a new or invalid stop?");
         }
     }
 }

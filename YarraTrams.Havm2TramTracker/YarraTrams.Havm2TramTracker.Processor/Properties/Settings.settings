@@ -15,7 +15,10 @@
       <Value Profile="(Default)">C:\Users\iop\Downloads\temp\HAVM2TTLogs</Value>
     </Setting>
     <Setting Name="LogT_Temp_TripRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LogT_Temp_SchedulesRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
