@@ -10,13 +10,14 @@ namespace YarraTrams.Havm2TramTracker.Models
     {
         public int HastusTripId { get; set; }
         public string Block { get; set; }
-        public string DisplayCode { get; set; }
+        public string Headboard { get; set; }
+        public string Route { get; set; }
         public string StartTimepoint { get; set; }
         public TimeSpan StartTime { get; set; }
         public string EndTimepoint { get; set; }
         public TimeSpan EndTime { get; set; }
         public int HeadwayNextSeconds { get; set; }
-        public string NextDisplayCode { get; set; }
+        public string NextRoute { get; set; }
         public string Direction { get; set; }
         public string VehicleType { get; set; }
         public int DistanceMetres { get; set; }
@@ -32,9 +33,10 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendLine($"     Day: {OperationalDay}");
             output.AppendLine($"     Block: {Block}");
             output.AppendLine($"     Direction: {Direction}");
-            output.AppendLine($"     DisplayCode: {DisplayCode}");
+            output.AppendLine($"     Headboard: {Headboard}");
+            output.AppendLine($"     Route: {Route}");
             output.AppendLine($"     DistanceMetres: {DistanceMetres:d}");
-            output.AppendLine($"     NextDisplayCode: {NextDisplayCode}");
+            output.AppendLine($"     NextRoute: {NextRoute}");
             output.AppendLine($"     StartTime: {StartTime:c}");
             output.AppendLine($"     StartTimepoint: {StartTimepoint}");
             output.AppendLine($"     EndTime: {EndTime:c}");

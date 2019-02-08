@@ -50,10 +50,22 @@ namespace YarraTrams.Havm2TramTracker.Processor
             SaveTripDataToDatabase("T_Temp_Schedules", tripsDT);
         }
 
+        /// <summary>
+        /// Saves HAVM2 trip information to the T_Temp_Schedules in the TramTracker database
+        /// </summary>
+        /// <param name="trips"></param>
+        public static void SaveTripsToT_Temp_SchedulesMasterDetails(List<Models.HavmTrip> trips)
+        {
+            CopyTripsToT_Temp_SchedulesMasterDetailsDataTables(trips, out TramTrackerDataSet.T_Temp_SchedulesMasterDataTable masterTable, out TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable detailsTable);
+
+            SaveTripDataToDatabase("T_Temp_SchedulesMaster", masterTable);
+            SaveTripDataToDatabase("T_Temp_SchedulesDetails", detailsTable);
+        }
+
         #endregion
 
         #region Data Tramsformation and Mapping
-        
+
         /// <summary>
         /// Copies trip objects in to a new DataTable that matches the structure of the T_Temp_Trips table in the TramTracker database.
         /// 
@@ -88,8 +100,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                     {
                         TramTrackerDataSet.T_Temp_TripsRow tripsRow = (TramTrackerDataSet.T_Temp_TripsRow)tripDataTable.NewRow();
                         tripsRow.TripID = trip.HastusTripId;
-                        tripsRow.RunNo = Transformations.GetRunNumber(trip);
-                        tripsRow.RouteNo = Transformations.GetRouteNo(trip);
+                        tripsRow.RunNo = Transformations.GetRunNumberShort(trip);
+                        tripsRow.RouteNo = Transformations.GetRouteNoUsingHeadboard(trip);
                         tripsRow.FirstTP = trip.StartTimepoint;
                         tripsRow.FirstTime = (int)trip.StartTime.TotalSeconds;
                         tripsRow.EndTP = trip.EndTimepoint;
@@ -153,9 +165,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
             return tripDataTable;
         }
 
-        
+
         /// <summary>
-        /// Copies trip objects in to a new DataTable that matches the structure of the T_Temp_Schedules table in the TramTracker database.
+        /// Copies trip objects in to two new DataTables that matche the structure of the T_Temp_SchedulesMaster and T_Temp_SchedulesDetails tables in the TramTracker database.
         /// 
         /// This routine also performs the required data transformations.
         /// 
@@ -193,8 +205,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                             fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}");
                         }
                         int tripId = trip.HastusTripId;
-                        string runNo = Transformations.GetRunNumber(trip);
-                        short routeNo = Transformations.GetRouteNo(trip);
+                        string runNo = Transformations.GetRunNumberShort(trip);
+                        short routeNo = Transformations.GetRouteNoUsingHeadboard(trip);
                         byte dayOfWeek = Transformations.GetDayOfWeek(trip);
                         bool lowFloor = Transformations.GetLowFloor(trip);
                         bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
@@ -273,6 +285,130 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
 
             return schedulesDataTable;
+        }
+
+        internal static void CopyTripsToT_Temp_SchedulesMasterDetailsDataTables(List<Models.HavmTrip> trips, out TramTrackerDataSet.T_Temp_SchedulesMasterDataTable masterTable, out TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable detailsTable)
+        {
+            HastusStopMapper.Populate();
+
+            masterTable = new TramTrackerDataSet.T_Temp_SchedulesMasterDataTable();
+            detailsTable = new TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable();
+
+            var exceptionCounts = new Dictionary<System.DayOfWeek, int>();
+            foreach (var dayOfWeek in Enum.GetValues(typeof(System.DayOfWeek)).Cast<System.DayOfWeek>())
+            {
+                exceptionCounts.Add(dayOfWeek, 0);
+            }
+
+            bool logRowsToFilePriorToInsert = Properties.Settings.Default.LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert;
+            int tripCounter = 0;
+            int masterRowCounter = 0;
+            int detailsRowCounter = 0;
+
+            StringBuilder errorMessages = new StringBuilder();
+
+            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}-T_Temp_SchedulesMasterDetailsRowsPriorToInsert.txt", true))
+            {
+                foreach (HavmTrip trip in trips)
+                {
+                    tripCounter++;
+                    try
+                    {
+                        masterRowCounter++;
+
+                        if (logRowsToFilePriorToInsert)
+                        {
+                            fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}");
+                        }
+                        int tripId = trip.HastusTripId;
+                        string runNo = Transformations.GetRunNumberShort(trip);
+                        string routeNo = Transformations.GetRouteNoUsingRoute(trip).ToString();
+                        bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+
+                        TramTrackerDataSet.T_Temp_SchedulesMasterRow masterRow = masterTable.NewT_Temp_SchedulesMasterRow();
+                        masterRow.TramClass = trip.VehicleType;
+                        masterRow.HeadboardNo = trip.Headboard;
+                        masterRow.RouteNo = "     ".Insert(5-routeNo.Length,routeNo).TrimEnd();
+                        masterRow.RunNo = Transformations.GetRunNumberLong(trip);
+                        masterRow.StartDate = trip.OperationalDay.ToString("dd/MM/yyyy");
+                        masterRow.TripNo = "           ".Insert(11 - tripId.ToString().Length, tripId.ToString()).TrimEnd();
+                        masterRow.PublicTrip = publicTrip?"1":"0";
+
+                        if (logRowsToFilePriorToInsert)
+                        {
+                            fileWriter.Write($"\nRow {detailsRowCounter}\n{masterRow.ToLogString()}");
+                        }
+
+                        masterTable.AddT_Temp_SchedulesMasterRow(masterRow);
+
+                        foreach (HavmTripStop stop in trip.Stops)
+                        {
+                            try
+                            {
+                                detailsRowCounter++;
+
+                                var detailsRow = detailsTable.NewT_Temp_SchedulesDetailsRow();
+                                detailsRow.ArrivalTime = (stop.PassingTime.Hours>9?"":" ") + stop.PassingTime.ToString(@"h\:mm") + "   ";
+                                detailsRow.StopID = stop.HastusStopId;
+                                detailsRow.TripID = "   " + tripId.ToString();
+                                detailsRow.RunNo = trip.Block;
+                                detailsRow.OPRTimePoint = "0";
+
+                                if (logRowsToFilePriorToInsert)
+                                {
+                                    fileWriter.Write($"\nRow {detailsRowCounter}\n{detailsRow.ToLogString()}");
+                                }
+
+                                detailsTable.AddT_Temp_SchedulesDetailsRow(detailsRow);
+                            }
+                            catch (Exception ex)
+                            {
+                                //This is catching an error with the stop-level data.
+                                errorMessages.Append($"Exception: {ex.Message}\n{stop.ToString(tripId)}\n");
+
+                                exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //This is catching an error with the trip-level data.
+                        errorMessages.Append($"Exception: {ex.Message}\n{trip.ToString()}\n");
+
+                        exceptionCounts[trip.OperationalDay.DayOfWeek]++;
+                    }
+                }
+            }
+
+            int totalErrors = exceptionCounts.Values.Sum();
+            if (totalErrors == 0)
+            {
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
+                    , $"{trips.Count} HAVM trip{(trips.Count == 1 ? "" : "s")} successfully transformed in to the TramTRACKER T_Temp_SchedulesMaster/T_Temp_SchedulesDetails format.");
+            }
+            else
+            {
+                var today = DateTime.Now;
+                // Write exceptions to file
+                string logFilePath = Properties.Settings.Default.LogFilePath;
+                string filePostFix = "T_Temp_SchedulesMasterDetails";
+                Helpers.LogfileWriter.writeToFile(filePostFix, errorMessages.ToString(), logFilePath);
+
+                // Log error message to event log
+                var message = new StringBuilder();
+                var todayDayOfWeek = today.DayOfWeek;
+
+                // We print the number of exceptions separately for each of the next 7 days, starting with tomorrow.
+                foreach (var dayOfWeek in exceptionCounts.OrderBy(pair => pair.Key <= todayDayOfWeek ? pair.Key + 7 : pair.Key))
+                {
+                    message.AppendLine($"{dayOfWeek.Key.ToString()} errors: {dayOfWeek.Value}");
+                }
+                message.AppendLine($"See the \"{filePostFix}\" log file under {logFilePath} for more detail.");
+
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_ERROR
+                    , $"Encountered {totalErrors} error{(totalErrors == 1 ? "" : "s")} when transforming {trips.Count} HAVM trip{(trips.Count == 1 ? "" : "s")} in to the TramTRACKER T_Temp_SchedulesMaster/T_Temp_SchedulesDetails format."
+                    , message.ToString());
+            }
         }
 
         #endregion

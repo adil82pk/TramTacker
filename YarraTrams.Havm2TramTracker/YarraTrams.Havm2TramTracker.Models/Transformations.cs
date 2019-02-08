@@ -10,18 +10,21 @@ namespace YarraTrams.Havm2TramTracker.Models
 {
     public static class Transformations
     {
-        public static string GetRunNumber(HavmTrip trip)
+        public static string GetRunNumberShort(HavmTrip trip)
         {
-            //Todo: refactor this at DB level (split fields)
             string block = trip.Block.Trim().ToUpper();
 
-            //Todo: Make this configurable?
-            //Todo: Confirm rule with John.
+            //Todo: Make this configurable.
+            var blockMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
+                { "cw", "v" }
+            };
+
             string firstChar;
             string firstTwoCharsOfBlock = block.Substring(0, 2);
-            if (firstTwoCharsOfBlock == "CW")
+            if (blockMapping.ContainsKey(firstTwoCharsOfBlock.ToLower()))
             {
-                firstChar = "V";
+                firstChar = blockMapping[firstTwoCharsOfBlock.ToLower()];
             }
             else
             {
@@ -30,18 +33,35 @@ namespace YarraTrams.Havm2TramTracker.Models
 
             string trailingChars = block.Substring(block.Length - 3, 3).Trim();
 
-            return firstChar + "-" + trailingChars;
+            return firstChar.ToUpper() + "-" + trailingChars;
         }
 
-        public static short GetRouteNo(HavmTrip trip)
+        public static string GetRunNumberLong(HavmTrip trip)
         {
-            if (short.TryParse(trip.DisplayCode, out short route))
+            return trip.Block.ToLower();
+        }
+
+        public static short GetRouteNoUsingHeadboard(HavmTrip trip)
+        {
+            if (short.TryParse(trip.Headboard, out short route))
             {
                 return route;
             }
             else
             {
-                throw new FormatException($"Unexpected format for route number on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.DisplayCode ?? "")}\".");
+                throw new FormatException($"Unexpected format for headboard on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.Headboard ?? "")}\".");
+            }
+        }
+
+        public static short GetRouteNoUsingRoute(HavmTrip trip)
+        {
+            if (short.TryParse(trip.Route, out short route))
+            {
+                return route;
+            }
+            else
+            {
+                throw new FormatException($"Unexpected format for route on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.Headboard ?? "")}\".");
             }
         }
 
@@ -76,13 +96,13 @@ namespace YarraTrams.Havm2TramTracker.Models
 
         public static short GetNextRouteNo(HavmTrip trip)
         {
-            if (short.TryParse(trip.NextDisplayCode, out short nextRoute))
+            if (short.TryParse(trip.NextRoute, out short nextRoute))
             {
                 return nextRoute;
             }
             else
             {
-                throw new FormatException($"Unexpected format for next route number on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.NextDisplayCode ?? "")}\".");
+                throw new FormatException($"Unexpected format for next route number on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.NextRoute ?? "")}\".");
             }
         }
 
