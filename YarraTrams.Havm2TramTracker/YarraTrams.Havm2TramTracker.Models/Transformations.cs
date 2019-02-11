@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,8 +26,8 @@ namespace YarraTrams.Havm2TramTracker.Models
             
             var blockMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            StringCollection vehicleGroupsWithLowFloor = Properties.Settings.Default.DepotFirstChacterMapping;
-            foreach(string s in vehicleGroupsWithLowFloor)
+            StringCollection depotFirstChacterMapping = Properties.Settings.Default.DepotFirstChacterMapping;
+            foreach(string s in depotFirstChacterMapping)
             {
                 string[] pair = s.Split(new char[] { ',' });
                 blockMapping.Add(pair[0].ToLower(), pair[1].ToLower());
