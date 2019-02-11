@@ -321,18 +321,17 @@ namespace YarraTrams.Havm2TramTracker.Processor
                             fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}");
                         }
                         int tripId = trip.HastusTripId;
-                        string runNo = Transformations.GetRunNumberShort(trip);
+                        string tripIdPadded = tripId.ToString().PadLeft(11);
                         string routeNo = Transformations.GetRouteNoUsingRoute(trip).ToString();
-                        bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
 
                         TramTrackerDataSet.T_Temp_SchedulesMasterRow masterRow = masterTable.NewT_Temp_SchedulesMasterRow();
                         masterRow.TramClass = trip.VehicleType;
                         masterRow.HeadboardNo = trip.Headboard;
-                        masterRow.RouteNo = "     ".Insert(5-routeNo.Length,routeNo).TrimEnd();
+                        masterRow.RouteNo = routeNo.PadLeft(5);
                         masterRow.RunNo = Transformations.GetRunNumberLong(trip);
                         masterRow.StartDate = trip.OperationalDay.ToString("dd/MM/yyyy");
-                        masterRow.TripNo = "           ".Insert(11 - tripId.ToString().Length, tripId.ToString()).TrimEnd();
-                        masterRow.PublicTrip = publicTrip?"1":"0";
+                        masterRow.TripNo = tripIdPadded;
+                        masterRow.PublicTrip = trip.IsPublic ? "1":"0";
 
                         if (logRowsToFilePriorToInsert)
                         {
@@ -348,9 +347,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
                                 detailsRowCounter++;
 
                                 var detailsRow = detailsTable.NewT_Temp_SchedulesDetailsRow();
-                                detailsRow.ArrivalTime = (stop.PassingTime.Hours>9?"":" ") + stop.PassingTime.ToString(@"h\:mm") + "   ";
+                                detailsRow.ArrivalTime = Transformations.GetArrivalTime(stop);
                                 detailsRow.StopID = stop.HastusStopId;
-                                detailsRow.TripID = "   " + tripId.ToString();
+                                detailsRow.TripID = tripIdPadded;
                                 detailsRow.RunNo = trip.Block;
                                 detailsRow.OPRTimePoint = "0";
 

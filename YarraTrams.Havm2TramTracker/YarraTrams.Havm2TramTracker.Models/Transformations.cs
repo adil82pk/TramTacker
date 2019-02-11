@@ -183,5 +183,20 @@ namespace YarraTrams.Havm2TramTracker.Models
             }
             throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Has HastusStopMapper.Populate() been run? Is the DB table empty? Is this a new or invalid stop?");
         }
+
+        public static string GetArrivalTime(HavmTripStop tripStop)
+        {
+            // ArrivalTime is a left-aligned fixed-length string of 8 characters.
+            // The hh:mm portion MUST be five characters long, even when we have a single-digit hour - a single digit hour gets padded with a space on the left. 
+
+            string arrivalTime = tripStop.PassingTime.ToString(@"h\:mm");
+
+            if (tripStop.PassingTime.Hours <= 9)
+            {
+                arrivalTime = " " + arrivalTime;
+            }
+
+            return arrivalTime.PadLeft(8);
+        }
     }
 }
