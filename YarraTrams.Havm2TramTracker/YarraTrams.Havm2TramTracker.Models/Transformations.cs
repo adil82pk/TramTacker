@@ -18,7 +18,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        public static string GetRunNumberShort(HavmTrip trip)
+        public static string GetRunNumberShortForm(HavmTrip trip)
         {
             string block = trip.Block.Trim().ToUpper();
 
@@ -55,7 +55,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        public static string GetRunNumberLong(HavmTrip trip)
+        public static string GetRunNumberLongForm(HavmTrip trip)
         {
             return trip.Block.ToLower();
         }

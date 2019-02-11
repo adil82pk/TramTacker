@@ -22,7 +22,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             };
 
             // act
-            var RunNo = Models.Transformations.GetRunNumberShort(trip);
+            var RunNo = Models.Transformations.GetRunNumberShortForm(trip);
 
             // assert
             Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             };
 
             // act
-            var RunNo = Models.Transformations.GetRunNumberShort(trip);
+            var RunNo = Models.Transformations.GetRunNumberShortForm(trip);
 
             // assert
             Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);

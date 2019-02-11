@@ -100,7 +100,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                     {
                         TramTrackerDataSet.T_Temp_TripsRow tripsRow = (TramTrackerDataSet.T_Temp_TripsRow)tripDataTable.NewRow();
                         tripsRow.TripID = trip.HastusTripId;
-                        tripsRow.RunNo = Transformations.GetRunNumberShort(trip);
+                        tripsRow.RunNo = Transformations.GetRunNumberShortForm(trip);
                         tripsRow.RouteNo = Transformations.GetRouteNoUsingHeadboard(trip);
                         tripsRow.FirstTP = trip.StartTimepoint;
                         tripsRow.FirstTime = (int)trip.StartTime.TotalSeconds;
@@ -205,7 +205,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                             fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{trip.ToString()}");
                         }
                         int tripId = trip.HastusTripId;
-                        string runNo = Transformations.GetRunNumberShort(trip);
+                        string runNo = Transformations.GetRunNumberShortForm(trip);
                         short routeNo = Transformations.GetRouteNoUsingHeadboard(trip);
                         byte dayOfWeek = Transformations.GetDayOfWeek(trip);
                         bool lowFloor = Transformations.GetLowFloor(trip);
@@ -328,7 +328,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         masterRow.TramClass = trip.VehicleType;
                         masterRow.HeadboardNo = trip.Headboard;
                         masterRow.RouteNo = routeNo.PadLeft(5);
-                        masterRow.RunNo = Transformations.GetRunNumberLong(trip);
+                        masterRow.RunNo = Transformations.GetRunNumberLongForm(trip);
                         masterRow.StartDate = trip.OperationalDay.ToString("dd/MM/yyyy");
                         masterRow.TripNo = tripIdPadded;
                         masterRow.PublicTrip = trip.IsPublic ? "1":"0";
