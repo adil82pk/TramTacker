@@ -196,7 +196,7 @@ namespace YarraTrams.Havm2TramTracker.Models
                 arrivalTime = " " + arrivalTime;
             }
 
-            return arrivalTime.PadLeft(8);
+            return arrivalTime.PadRight(8);
         }
     }
 }
