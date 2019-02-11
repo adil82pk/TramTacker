@@ -101,7 +101,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         TramTrackerDataSet.T_Temp_TripsRow tripsRow = (TramTrackerDataSet.T_Temp_TripsRow)tripDataTable.NewRow();
                         tripsRow.TripID = trip.HastusTripId;
                         tripsRow.RunNo = Transformations.GetRunNumberShortForm(trip);
-                        tripsRow.RouteNo = Transformations.GetRouteNoUsingHeadboard(trip);
+                        tripsRow.RouteNo = Transformations.GetRouteNumberUsingHeadboard(trip);
                         tripsRow.FirstTP = trip.StartTimepoint;
                         tripsRow.FirstTime = (int)trip.StartTime.TotalSeconds;
                         tripsRow.EndTP = trip.EndTimepoint;
@@ -206,7 +206,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         }
                         int tripId = trip.HastusTripId;
                         string runNo = Transformations.GetRunNumberShortForm(trip);
-                        short routeNo = Transformations.GetRouteNoUsingHeadboard(trip);
+                        short routeNo = Transformations.GetRouteNumberUsingHeadboard(trip);
                         byte dayOfWeek = Transformations.GetDayOfWeek(trip);
                         bool lowFloor = Transformations.GetLowFloor(trip);
                         bool publicTrip = trip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
@@ -322,7 +322,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         }
                         int tripId = trip.HastusTripId;
                         string tripIdPadded = tripId.ToString().PadLeft(11);
-                        string routeNo = Transformations.GetRouteNoUsingRoute(trip).ToString();
+                        string routeNo = Transformations.GetRouteNumberUsingRoute(trip).ToString();
 
                         TramTrackerDataSet.T_Temp_SchedulesMasterRow masterRow = masterTable.NewT_Temp_SchedulesMasterRow();
                         masterRow.TramClass = trip.VehicleType;
