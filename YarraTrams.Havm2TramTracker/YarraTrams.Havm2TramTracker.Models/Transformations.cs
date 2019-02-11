@@ -22,11 +22,15 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             string block = trip.Block.Trim().ToUpper();
 
-            //Todo: Make this configurable.
-            var blockMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            
+            var blockMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            StringCollection vehicleGroupsWithLowFloor = Properties.Settings.Default.DepotFirstChacterMapping;
+            foreach(string s in vehicleGroupsWithLowFloor)
             {
-                { "cw", "v" }
-            };
+                string[] pair = s.Split(new char[] { ',' });
+                blockMapping.Add(pair[0].ToLower(), pair[1].ToLower());
+            }
 
             string firstChar;
             string firstTwoCharsOfBlock = block.Substring(0, 2);
@@ -57,7 +61,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         }
         
         /// <summary>
-        /// There is no consisten definition for Route inside TramTRACKER. Sometimes it is analogous to HAVM2 Route, sometime to HAVM2 Headboard.
+        /// There is no consistent definition for Route inside TramTRACKER. Sometimes it is analogous to HAVM2 Route, sometime to HAVM2 Headboard.
         /// This routine assumes Route is analogous to Headboard in HAVM2.
         /// </summary>
         /// <param name="trip"></param>
