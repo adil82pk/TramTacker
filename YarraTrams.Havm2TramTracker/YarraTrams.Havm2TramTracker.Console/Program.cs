@@ -16,8 +16,25 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         static void Main(string[] args)
         {
-            System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
-            ShowMainMenu();
+            if (args.Length > 0)
+            {
+                switch (args[0])
+                {
+                    case "sidebyside":
+                        var x = new SideBySideTests.Comparisons();
+                        x.RunComparisons();
+                        break;
+                    default:
+                        System.Console.WriteLine($"Invalid command line parameter \"{args[0]}\". Press <enter> to exit.");
+                        System.Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
+                ShowMainMenu();
+            }
         }
 
         static void ShowMainMenu()

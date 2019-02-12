@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2B1CA8A7-F37F-4DA5-9E2C-46391C13EE95}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>YarraTrams.Havm2TramTracker</RootNamespace>
-    <AssemblyName>YarraTrams.Havm2TramTracker</AssemblyName>
+    <ProjectGuid>{73E7AADA-68E2-474F-8E66-B1FEF3D5472A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YarraTrams.Havm2TramTracker.SideBySideTests</RootNamespace>
+    <AssemblyName>YarraTrams.Havm2TramTracker.SideBySideTests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,14 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="CommandMenu.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Comparisons.cs" />
+    <Compile Include="Models\TramTrackerComparer.cs" />
+    <Compile Include="Models\T_Temp_SchedulesComparer.cs" />
+    <Compile Include="Models\T_Temp_TripsComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemFunctions.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Models\YarraTrams.Havm2TramTracker.Models.csproj">
@@ -60,10 +67,6 @@
     <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Processor\YarraTrams.Havm2TramTracker.Processor.csproj">
       <Project>{047ed2bc-3499-45c1-9b0e-2ad64083bc4e}</Project>
       <Name>YarraTrams.Havm2TramTracker.Processor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\YarraTrams.Havm2TramTracker.SideBySideTests\YarraTrams.Havm2TramTracker.SideBySideTests.csproj">
-      <Project>{73e7aada-68e2-474f-8e66-b1fef3d5472a}</Project>
-      <Name>YarraTrams.Havm2TramTracker.SideBySideTests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
