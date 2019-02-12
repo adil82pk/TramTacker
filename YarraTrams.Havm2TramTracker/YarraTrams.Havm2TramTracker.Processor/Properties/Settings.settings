@@ -20,5 +20,8 @@
     <Setting Name="LogT_Temp_SchedulesRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

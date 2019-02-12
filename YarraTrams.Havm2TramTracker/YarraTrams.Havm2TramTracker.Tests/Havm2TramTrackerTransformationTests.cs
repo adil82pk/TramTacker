@@ -22,7 +22,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             };
 
             // act
-            var RunNo = Models.Transformations.GetRunNumber(trip);
+            var RunNo = Models.Transformations.GetRunNumberShortForm(trip);
 
             // assert
             Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             };
 
             // act
-            var RunNo = Models.Transformations.GetRunNumber(trip);
+            var RunNo = Models.Transformations.GetRunNumberShortForm(trip);
 
             // assert
             Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
@@ -348,7 +348,51 @@ namespace YarraTrams.Havm2TramTracker.Tests
             Assert.ThrowsException<Exception>(() =>
             {
                 string stopId = Models.Transformations.GetStopId(stop);
-            },"Expecting an exception when searching for a stop when the HastusStopMapper is empty.");
+            }, "Expecting an exception when searching for a stop when the HastusStopMapper is empty.");
+        }
+
+        #endregion
+
+        #region ArrivalTime
+
+        [TestMethod]
+        public void TestArrivalTimeTransformationWithEarlyMorningArrival()
+        {
+            // arrange
+            TimeSpan passingTime = new TimeSpan(5,1,0);
+            const string expectedResult = " 5:01   ";
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = "1",
+                PassingTime = passingTime
+            };
+
+            // act
+            string arrivalTime = Models.Transformations.GetArrivalTime(stop);
+
+            // assert
+            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTime, arrivalTime);
+        }
+
+        [TestMethod]
+        public void TestArrivalTimeTransformationWithLateEveningArrival()
+        {
+            // arrange
+            TimeSpan passingTime = new TimeSpan(23, 1, 0);
+            const string expectedResult = "23:01   ";
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = "1",
+                PassingTime = passingTime
+            };
+
+            // act
+            string arrivalTime = Models.Transformations.GetArrivalTime(stop);
+
+            // assert
+            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTime, arrivalTime);
         }
 
         #endregion
