@@ -23,8 +23,6 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             //T_Temp_Schedules
             var schedulesComparer = new Models.T_Temp_SchedulesComparer();
             schedulesComparer.RunComparison();
-
-            System.Console.ReadLine();
         }
     }
 }

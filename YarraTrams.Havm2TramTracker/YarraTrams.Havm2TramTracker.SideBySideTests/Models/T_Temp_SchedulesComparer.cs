@@ -22,12 +22,17 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable existingRows = CastRows(base.ExistingData);
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable newRows = CastRows(base.NewData);
 
-            var existingSchedulesMissingFromNew = from existingSchedules in existingRows
-                                                  from newSchedules in newRows.Where(mapping => mapping.TripID == existingSchedules.TripID && mapping.StopID == existingSchedules.StopID).DefaultIfEmpty()
-                                                  where newSchedules.ScheduleID == 0
-                                                  select (DataRow)existingSchedules;
+            var excludedIDs = new HashSet<int>(newRows.Select(n => (n.TripID.ToString() + "." + n.StopID).GetHashCode()));
+            var existingSchedulesMissingFromNew = existingRows.Where(e => !excludedIDs.Contains((e.TripID.ToString() + "." + e.StopID).GetHashCode()));
 
-            return existingSchedulesMissingFromNew.ToList().CopyToDataTable();
+            if (existingSchedulesMissingFromNew.Count() > 0)
+            {
+                return existingSchedulesMissingFromNew.CopyToDataTable();
+            }
+            else
+            {
+                return new DataTable();
+            }
         }
 
         /// <summary>
@@ -38,12 +43,17 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable existingRows = CastRows(base.ExistingData);
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable newRows = CastRows(base.NewData);
 
-            var newSchedulesNotInExisting = from newSchedules in newRows
-                                            from existingSchedules in existingRows.Where(mapping => mapping.TripID == newSchedules.TripID && mapping.StopID == newSchedules.StopID).DefaultIfEmpty()
-                                            where existingSchedules.ScheduleID == 0
-                                            select (DataRow)newSchedules;
+            var excludedIDs = new HashSet<int>(existingRows.Select(e => (e.TripID.ToString() + "." + e.StopID).GetHashCode()));
+            var newSchedulesNotInExisting = newRows.Where(n => !excludedIDs.Contains((n.TripID.ToString() + "." + n.StopID).GetHashCode()));
 
-            return newSchedulesNotInExisting.ToList().CopyToDataTable();
+            if (newSchedulesNotInExisting.Count() > 0)
+            {
+                return newSchedulesNotInExisting.CopyToDataTable();
+            }
+            else
+            {
+                return new DataTable();
+            }
         }
 
         /// <summary>
@@ -55,17 +65,17 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable newRows = CastRows(base.NewData);
 
             var existingSchedulesThatDifferFromNew = from existingSchedules in existingRows
-                                                     from newSchedules in newRows.Where(mapping => mapping.TripID == existingSchedules.TripID && mapping.StopID == existingSchedules.StopID)
-                                                     where !(existingSchedules.TripID == newSchedules.TripID
-                                                            && existingSchedules.RunNo == newSchedules.RunNo
-                                                            && existingSchedules.StopID == newSchedules.StopID
-                                                            && existingSchedules.RouteNo == newSchedules.RouteNo
-                                                            && existingSchedules.OPRTimePoint == newSchedules.OPRTimePoint
-                                                            && existingSchedules.Time == newSchedules.Time
-                                                            && existingSchedules.DayOfWeek == newSchedules.DayOfWeek
-                                                            && existingSchedules.LowFloor == newSchedules.LowFloor
-                                                            && existingSchedules.PublicTrip == newSchedules.PublicTrip)
-                                                     select new RowPair { ExistingRow = existingSchedules, NewRow = newSchedules };
+                                                    join newSchedules in newRows on new { existingSchedules.TripID, existingSchedules.StopID } equals new { newSchedules.TripID, newSchedules.StopID }
+                                                    where !(existingSchedules.OPRTimePoint == newSchedules.OPRTimePoint
+                                                    && existingSchedules.RunNo == newSchedules.RunNo
+                                                    && existingSchedules.StopID == newSchedules.StopID
+                                                    && existingSchedules.RouteNo == newSchedules.RouteNo
+                                                    && existingSchedules.OPRTimePoint == newSchedules.OPRTimePoint
+                                                    && existingSchedules.Time == newSchedules.Time
+                                                    && existingSchedules.DayOfWeek == newSchedules.DayOfWeek
+                                                    && existingSchedules.LowFloor == newSchedules.LowFloor
+                                                    && existingSchedules.PublicTrip == newSchedules.PublicTrip)
+                                                    select new RowPair { ExistingRow = existingSchedules, NewRow = newSchedules };
 
             return existingSchedulesThatDifferFromNew.ToList<RowPair>();
         }
@@ -76,7 +86,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         private Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable CastRows(DataTable rows)
         {
             var castedRows = new Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable();
-            castedRows.Merge(base.ExistingData);
+            castedRows.Merge(rows);
 
             return castedRows;
         }

@@ -37,6 +37,9 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             ExistingData = GetData(Properties.Settings.Default.TramTrackerExisting, TableName);
             NewData = GetData(Properties.Settings.Default.TramTrackerNew, TableName);
 
+            System.Console.WriteLine($"Total existing rows: {ExistingData.Rows.Count}");
+            System.Console.WriteLine($"Total new rows: {NewData.Rows.Count}");
+
             // Existing rows missing from New
             var existingRowsMissingFromNew = GetExistingRowsMissingFromNew();
 
@@ -61,10 +64,10 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// </summary>
         private DataTable GetData(string conn, string tableName)
         {
-            System.Console.WriteLine($"Using connection{conn}:");
+            System.Console.WriteLine($"Using connection {conn}:");
             System.Console.WriteLine($"...populating {tableName}");
             DataTable dt = new DataTable();
-            using (var da = new SqlDataAdapter($"SELECT TOp 50 * FROM {tableName} WITH (NOLOCK)", conn))
+            using (var da = new SqlDataAdapter($"SELECT * FROM {tableName} WITH (NOLOCK)", conn))
             {
                 da.Fill(dt);
             }
@@ -87,10 +90,17 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
 
                 foreach (DataColumn col in dt.Columns)
                 {
-                    output.Append(col.ColumnName.PadRight(fieldLength));
+                    if(col.ColumnName.Length >= fieldLength)
+                    {
+                        output.Append(col.ColumnName.Substring(0,fieldLength-3)+"...");
+                    }
+                    else
+                    {
+                        output.Append(col.ColumnName.PadRight(fieldLength));
+                    }
                 }
                 output.Append("\n");
-
+                
                 foreach (DataRow row in dt.Rows)
                 {
                     foreach (DataColumn col in dt.Columns)
@@ -141,7 +151,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                         if (rowPair.ExistingRow[col.ColumnName].GetHashCode() != rowPair.NewRow[col.ColumnName].GetHashCode())
                         {
                             string existingValue = rowPair.ExistingRow[col.ColumnName].ToString();
-                            string newValue = rowPair.ExistingRow[col.ColumnName].ToString();
+                            string newValue = rowPair.NewRow[col.ColumnName].ToString();
                             output.Append(existingValue.PadRight(fieldLength));
                             output.Append(newValue.PadRight(fieldLength));
                         }
