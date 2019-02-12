@@ -22,12 +22,17 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable existingRows = CastRows(base.ExistingData);
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable newRows = CastRows(base.NewData);
 
-            var existingTripsMissingFromNew = from existingTrips in existingRows
-                                              from newTrips in newRows.Where(mapping => mapping.TripID == existingTrips.TripID).DefaultIfEmpty()
-                                              where newTrips.TripID == 0
-                                              select (DataRow)existingTrips;
+            var excludedIDs = new HashSet<int>(newRows.Select(n => n.TripID));
+            var existingTripsMissingFromNew = existingRows.Where(e => !excludedIDs.Contains(e.TripID));
 
-            return existingTripsMissingFromNew.ToList().CopyToDataTable();
+            if (existingTripsMissingFromNew.Count() > 0)
+            {
+                return existingTripsMissingFromNew.CopyToDataTable(); 
+            }
+            else
+            {
+                return new DataTable();
+            }
         }
 
         /// <summary>
@@ -38,12 +43,17 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable existingRows = CastRows(base.ExistingData);
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable newRows = CastRows(base.NewData);
 
-            var newTripsNotInExisting = from newtrips in newRows
-                                        from existingTrips in existingRows.Where(mapping => mapping.TripID == newtrips.TripID).DefaultIfEmpty()
-                                        where existingTrips.TripID == 0
-                                        select (DataRow)newtrips;
+            var excludedIDs = new HashSet<int>(existingRows.Select(e => e.TripID));
+            var newTripsNotInExisting = newRows.Where(n => !excludedIDs.Contains(n.TripID));
 
-            return newTripsNotInExisting.ToList().CopyToDataTable();
+            if (newTripsNotInExisting.Count() > 0)
+            {
+                return newTripsNotInExisting.CopyToDataTable();
+            }
+            else
+            {
+                return new DataTable();
+            }
         }
 
         /// <summary>
@@ -80,7 +90,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         private Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable CastRows(DataTable rows)
         {
             var castedRows = new Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable();
-            castedRows.Merge(base.ExistingData);
+            castedRows.Merge(rows);
 
             return castedRows;
         }
