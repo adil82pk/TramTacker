@@ -158,6 +158,23 @@ namespace YarraTrams.Havm2TramTracker.Console
             System.Console.ReadLine();
         }
 
+        private static void CompareData()
+        {
+            string message = "";
+            var clock = new Stopwatch();
+
+            clock.Start();
+            var x = new SideBySideTests.Comparisons();
+            x.RunComparisons();
+            clock.Stop();
+
+            message = message + $"Comparing the data took {clock.Elapsed}.";
+
+            System.Console.WriteLine(message);
+            System.Console.WriteLine("Complete, press <enter> to continue.");
+            System.Console.ReadLine();
+        }
+
         private static bool UploadJsonFileToMemory(out List<HavmTrip> trips)
         {
             System.Console.WriteLine("Enter full path to a JSON file containing valid HAVM2 TramTRACKER data:");
