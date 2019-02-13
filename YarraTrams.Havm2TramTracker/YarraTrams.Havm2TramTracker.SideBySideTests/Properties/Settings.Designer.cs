@@ -26,8 +26,8 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=TramTracker;Integrated Security=" +
-            "True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=TramTrackerLiveCopy;Integrated S" +
+            "ecurity=True")]
         public string TramTrackerExisting {
             get {
                 return ((string)(this["TramTrackerExisting"]));
@@ -42,6 +42,15 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
         public string TramTrackerNew {
             get {
                 return ((string)(this["TramTrackerNew"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("E:\\")]
+        public string FilePathForResults {
+            get {
+                return ((string)(this["FilePathForResults"]));
             }
         }
     }

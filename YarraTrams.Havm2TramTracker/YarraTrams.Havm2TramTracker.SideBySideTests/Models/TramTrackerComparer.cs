@@ -32,7 +32,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// 
         /// Prints results to console (for the time being).
         /// </summary>
-        public void RunComparison()
+        public void RunComparison(out DataTable existingRowsMissingFromNew, out DataTable newRowsNotInExisting, out DataTable existingRowsThatDifferFromNew)
         {
             ExistingData = GetData(Properties.Settings.Default.TramTrackerExisting, TableName);
             NewData = GetData(Properties.Settings.Default.TramTrackerNew, TableName);
@@ -41,22 +41,23 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             System.Console.WriteLine($"Total new rows: {NewData.Rows.Count}");
 
             // Existing rows missing from New
-            var existingRowsMissingFromNew = GetExistingRowsMissingFromNew();
+            existingRowsMissingFromNew = GetExistingRowsMissingFromNew();
 
             System.Console.WriteLine($"Missing rows from new data: {existingRowsMissingFromNew.Rows.Count}");
             System.Console.Write(outputRawDataRows(existingRowsMissingFromNew));
 
             // New rows not in Existing
-            var newRowsNotInExisting = GetNewRowsNotInExisting();
+            newRowsNotInExisting = GetNewRowsNotInExisting();
 
             System.Console.WriteLine($"Extra rows in new data: {newRowsNotInExisting.Rows.Count}");
             System.Console.Write(outputRawDataRows(newRowsNotInExisting));
 
             // Rows in both Existing and New that differ
-            var existingRowsThatDifferFromNew = GetDifferingRows();
+            List<RowPair> existingRowsThatDifferFromNewAsRowPairs = GetDifferingRows();
+            existingRowsThatDifferFromNew = this.Convert(existingRowsThatDifferFromNewAsRowPairs);
 
-            System.Console.WriteLine($"Matching rows that differ in some way: {existingRowsThatDifferFromNew.Count()}");
-            System.Console.Write(outputComparisonRows(existingRowsThatDifferFromNew));
+            System.Console.WriteLine($"Matching rows that differ in some way: {existingRowsThatDifferFromNewAsRowPairs.Count()}");
+            System.Console.Write(outputComparisonRows(existingRowsThatDifferFromNewAsRowPairs));
         }
 
         /// <summary>
@@ -164,6 +165,36 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                 }
                 return output.ToString();
             }
+        }
+
+        private DataTable Convert(List<RowPair> input)
+        {
+            DataTable output = new DataTable();
+            // Create a data table definition that matches the data rows, so we can iterate the columns.
+            List<DataRow> tmpRows = new List<DataRow> { input[0].ExistingRow };
+            DataTable dt = tmpRows.CopyToDataTable();
+            
+            foreach (DataColumn col in dt.Columns)
+            {
+                output.Columns.Add($"{col.ColumnName} Existing", col.DataType);
+                output.Columns.Add($"{col.ColumnName} New", col.DataType);
+            }
+
+            foreach(RowPair rowPair in input)
+            {
+                DataRow dr = output.NewRow();
+                int ii = 0;
+                foreach (DataColumn col in dt.Columns)
+                {
+                    dr[ii] = rowPair.ExistingRow[col.Ordinal];
+                    ii++;
+                    dr[ii] = rowPair.NewRow[col.Ordinal];
+                    ii++;
+                }
+                output.Rows.Add(dr);
+            }
+
+            return output;
         }
     }
 
