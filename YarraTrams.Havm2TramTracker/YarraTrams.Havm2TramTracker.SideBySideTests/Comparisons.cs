@@ -22,6 +22,11 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             schedulesComparer.RunComparison(out DataTable existingRowsMissingFromNewT_Temp_Schedules, out DataTable newRowsNotInExistingT_Temp_Schedules, out DataTable existingRowsThatDifferFromNewT_TempSchedules);
             this.OutputToFile("T_Temp_Schedules", existingRowsMissingFromNewT_Temp_Schedules, newRowsNotInExistingT_Temp_Schedules, existingRowsThatDifferFromNewT_TempSchedules);
 
+            //T_Temp_SchedulesMaster
+            var schedulesMasterComparer = new Models.T_Temp_SchedulesMasterComparer();
+            schedulesMasterComparer.RunComparison(out DataTable existingRowsMissingFromNewT_Temp_SchedulesMaster, out DataTable newRowsNotInExistingT_Temp_SchedulesMaster, out DataTable existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
+            this.OutputToFile("T_Temp_SchedulesMaster", existingRowsMissingFromNewT_Temp_SchedulesMaster, newRowsNotInExistingT_Temp_SchedulesMaster, existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
+
         }
 
         private void OutputToFile(string tableName, DataTable existingRowsMissingFromNew, DataTable newRowsNotInExisting, DataTable existingRowsThatDifferFromNew)
