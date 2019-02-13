@@ -16,8 +16,25 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         static void Main(string[] args)
         {
-            System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
-            ShowMainMenu();
+            if (args.Length > 0)
+            {
+                switch (args[0])
+                {
+                    case "sidebyside":
+                        var x = new SideBySideTests.Comparisons();
+                        x.RunComparisons();
+                        break;
+                    default:
+                        System.Console.WriteLine($"Invalid command line parameter \"{args[0]}\". Press <enter> to exit.");
+                        System.Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
+                ShowMainMenu();
+            }
         }
 
         static void ShowMainMenu()
@@ -32,6 +49,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_Trips database table", () => CallHavm2ApiAndSaveToT_Temp_Trips());
                 MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_Schedules database table", () => CallHavm2ApiAndSaveToT_Temp_Schedules());
                 MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesMaster/Details database tables", () => CallHavm2ApiAndSaveToT_Temp_SchedulesMasterDetails());
+                MainMenu.AddCommand("Compare Existing and New data", () => CompareData());
                 MainMenu.AddCommand("Exit", () => Exit());
             }
             //Todo: Reorder these options to they make sense.
