@@ -52,6 +52,7 @@
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Models\HavmTrip.cs" />
+    <Compile Include="Models\TramTrackerTrip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
