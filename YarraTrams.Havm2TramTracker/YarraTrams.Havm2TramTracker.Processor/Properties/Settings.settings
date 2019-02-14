@@ -21,10 +21,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LogT_Temp_SchedulesMasterRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="DueTime" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">03:00:00</Value>
