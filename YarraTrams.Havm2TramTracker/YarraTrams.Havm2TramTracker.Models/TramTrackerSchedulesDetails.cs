@@ -29,6 +29,22 @@ namespace YarraTrams.Havm2TramTracker.Models
         }
 
         /// <summary>
+        /// Return DataRow
+        /// </summary>
+        /// <returns></returns>
+        public TramTrackerDataSet.T_Temp_SchedulesDetailsRow ToDataRow()
+        {
+            TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable detailsTable = new TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable();
+            TramTrackerDataSet.T_Temp_SchedulesDetailsRow detailsRow = detailsTable.NewT_Temp_SchedulesDetailsRow();
+            detailsRow.ArrivalTime = this.ArrivalTime;
+            detailsRow.StopID = this.StopID;
+            detailsRow.TripID = this.TripID;
+            detailsRow.RunNo = this.RunNo;
+
+            return detailsRow;
+        }
+
+        /// <summary>
         /// ArrivalTime is a left-aligned fixed-length string of 8 characters.
         /// The hh:mm portion MUST be five characters long, even when we have a single-digit hour - a single digit hour gets padded with a space on the left.
         /// </summary>

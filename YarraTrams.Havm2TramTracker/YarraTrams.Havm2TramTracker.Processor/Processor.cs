@@ -89,15 +89,25 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// Saves HAVM2 trip information to the T_Temp_Schedules in the TramTracker database
+        /// Saves HAVM2 trip information to the T_Temp_SchedulesMaster table in the TramTracker database
         /// </summary>
-        /// <param name="trips"></param>
         public static void SaveToSchedulesMaster(List<HavmTrip> havmTrips)
         {
             TramTrackerSchedulesMasterService service = new TramTrackerSchedulesMasterService();
             List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesMasters);
             SaveTripDataToDatabase("T_Temp_SchedulesMaster", dataTable);
+        }
+
+        /// <summary>
+        /// ves HAVM2 trip information to the T_Temp_SchedulesDetails table in the TramTracker database
+        /// </summary>
+        public static void SaveToSchedulesDetails(List<HavmTrip> havmTrips)
+        {
+            TramTrackerSchedulesDetailsService service = new TramTrackerSchedulesDetailsService();
+            List<TramTrackerSchedulesDetails> schedulesDetailss = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert);
+            DataTable dataTable = service.ToDataTable(schedulesDetailss);
+            SaveTripDataToDatabase("T_Temp_SchedulesDetails", dataTable);
         }
 
         #endregion
