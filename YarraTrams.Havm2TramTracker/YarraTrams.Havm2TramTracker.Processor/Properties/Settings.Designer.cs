@@ -107,5 +107,17 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 this["LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("03:00:00")]
+        public global::System.TimeSpan DueTime {
+            get {
+                return ((global::System.TimeSpan)(this["DueTime"]));
+            }
+            set {
+                this["DueTime"] = value;
+            }
+        }
     }
 }
