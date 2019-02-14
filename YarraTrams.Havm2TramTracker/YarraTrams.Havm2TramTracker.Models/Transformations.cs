@@ -257,10 +257,10 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             if (int.TryParse(tripStop.HastusStopId, out var stopID))
             {
-                if (Models.HastusStopMapper.stops.ContainsKey(stopID))
-                {
-                    return Models.HastusStopMapper.stops[(stopID)];
-                }
+                //if (Models.HastusStopMapper.stops.ContainsKey(stopID))
+                //{
+                //    return Models.HastusStopMapper.stops[(stopID)];
+                //}
             }
             throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Has HastusStopMapper.Populate() been run? Is the DB table empty? Is this a new or invalid stop?");
         }

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Helpers\ApiService.cs" />
     <Compile Include="Helpers\ApiHttpClient.cs" />
+    <Compile Include="Helpers\HastusStopMapper.cs" />
     <Compile Include="Helpers\LogfileWriter.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
     <Compile Include="Processor.cs" />
