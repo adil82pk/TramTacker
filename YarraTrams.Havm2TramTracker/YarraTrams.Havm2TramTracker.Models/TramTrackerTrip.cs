@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
-    class TramTrackerTrip : TramTrackerBase
+    public class TramTrackerTrip : TramTrackerBase
     {
         public int TripID { get; set; }
         public string RunNo{ get; set; }
@@ -53,7 +53,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        private short GetAtLayovertime(HavmTrip trip)
+        public short GetAtLayovertime(HavmTrip trip)
         {
             //We merely convert the seconds to minutes
             decimal AtLayovertimeDec = ((decimal)trip.HeadwayNextSeconds / 60);
@@ -88,7 +88,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        private short GetNextRouteNo(HavmTrip trip)
+        public short GetNextRouteNo(HavmTrip trip)
         {
             if (short.TryParse(trip.NextRoute, out short nextRoute))
             {
@@ -107,7 +107,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        private bool GetUpDirection(HavmTrip trip)
+        public bool GetUpDirection(HavmTrip trip)
         {
             if (!(trip.Direction == null))
             {
@@ -136,7 +136,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
-        private decimal GetTripDistance(HavmTrip trip)
+        public decimal GetTripDistance(HavmTrip trip)
         {
             return (decimal)trip.DistanceMetres / (decimal)1000m;
         }
