@@ -16,8 +16,10 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// </summary>
         /// <param name="havmTrips"></param>
         /// <returns></returns>
-        public List<TramTrackerSchedulesMaster> FromHavmTrips(List<HavmTrip> havmTrips)
+        public List<TramTrackerSchedulesMaster> FromHavmTrips(List<HavmTrip> havmTrips, bool logRowsToFilePriorToInsert)
         {
+            string serviceName = this.GetType().Name;
+
             List<TramTrackerSchedulesMaster> schedulesMasters = new List<TramTrackerSchedulesMaster>();
             var exceptionCounts = new Dictionary<System.DayOfWeek, int>();
 
@@ -26,13 +28,12 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                 exceptionCounts.Add(dayOfWeek, 0);
             }
 
-            bool logRowsToFilePriorToInsert = Properties.Settings.Default.LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert;
             int tripCounter = 0;
-            int masterRowCounter = 0;
+            int modelCounter = 0;
 
             StringBuilder errorMessages = new StringBuilder();
 
-            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}-T_Temp_SchedulesMasterDetailsRowsPriorToInsert.txt", true))
+            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}_{serviceName}_PriorToInsert.txt", true))
             {
                 foreach (HavmTrip havmTrip in havmTrips)
                 {
@@ -40,7 +41,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
                     try
                     {
-                        masterRowCounter++;
+                        modelCounter++;
 
                         if (logRowsToFilePriorToInsert)
                         {
@@ -54,7 +55,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
                         if (logRowsToFilePriorToInsert)
                         {
-                           fileWriter.Write($"\nRow {masterRowCounter}\n{schedulesMaster.ToString()}");
+                           fileWriter.Write($"\nRow {modelCounter}\n{schedulesMaster.ToString()}");
                         }
                     }
                     catch (Exception ex)
@@ -70,15 +71,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             if (totalErrors == 0)
             {
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
-                    , $"{havmTrips.Count} HAVM trip{(havmTrips.Count == 1 ? "" : "s")} successfully transformed from HavmTtrips to TramTrackerMasterSchedules format.");
+                    , $"{havmTrips.Count} HAVM trip{(havmTrips.Count == 1 ? "" : "s")} successfully transformed from HavmTtrips inside {serviceName}.");
             }
             else
             {
                 var today = DateTime.Now;
                 // Write exceptions to file
                 string logFilePath = Properties.Settings.Default.LogFilePath;
-                string filePostFix = "TramTrackerMasterSchedules";
-                Helpers.LogfileWriter.writeToFile(filePostFix, errorMessages.ToString(), logFilePath);
+                Helpers.LogfileWriter.writeToFile(serviceName, errorMessages.ToString(), logFilePath);
 
                 // Log error message to event log
                 var message = new StringBuilder();
@@ -90,10 +90,10 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                     message.AppendLine($"{dayOfWeek.Key.ToString()} errors: {dayOfWeek.Value}");
                 }
 
-                message.AppendLine($"See the \"{filePostFix}\" log file under {logFilePath} for more detail.");
+                message.AppendLine($"See the \"{serviceName}\" log file under {logFilePath} for more detail.");
 
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_ERROR
-                    , $"Encountered {totalErrors} error{(totalErrors == 1 ? "" : "s")} when transforming {havmTrips.Count} HAVM trip{(havmTrips.Count == 1 ? "" : "s")} in to the TramTRACKER T_Temp_SchedulesMaster/T_Temp_SchedulesDetails format."
+                    , $"Encountered {totalErrors} error{(totalErrors == 1 ? "" : "s")} when transforming {havmTrips.Count} HAVM trip{(havmTrips.Count == 1 ? "" : "s")} in the {serviceName}."
                   , message.ToString());
             }
 
