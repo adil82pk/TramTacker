@@ -151,7 +151,38 @@ namespace YarraTrams.Havm2TramTracker.Console
             Processor.Processor.SaveToSchedulesMaster(trips);
             clock.Stop();
 
-            message = message + $"\nSaving to T_Temp_SchedulesMaster and T_Temp_SchedulesDetails took {clock.Elapsed}.";
+            message = message + $"\nSaving to T_Temp_SchedulesMaster took {clock.Elapsed}.";
+
+            System.Console.WriteLine(message);
+            System.Console.WriteLine("Complete, press <enter> to continue.");
+            System.Console.ReadLine();
+        }
+
+        private static void CallHavm2ApiAndSaveToT_Temp_SchedulesDetails()
+        {
+            string message = "";
+            var clock = new Stopwatch();
+
+            clock.Start();
+            var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
+            clock.Stop();
+
+            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+
+            clock.Reset();
+            clock.Start();
+            var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
+            clock.Stop();
+
+
+            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+
+            clock.Reset();
+            clock.Start();
+            Processor.Processor.SaveToSchedulesDetails(trips);
+            clock.Stop();
+
+            message = message + $"\nSaving to T_Temp_SchedulesDetails took {clock.Elapsed}.";
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
