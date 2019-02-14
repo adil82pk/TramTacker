@@ -126,7 +126,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
-        public void TestTripsToT_Temp_SchedulesMasterDetailsDataTableWithGoodData()
+        public void TestTripsToSchedulesMasterWithGoodData()
         {
             // arrange
             var trips = new List<Models.HavmTrip>();
@@ -164,14 +164,66 @@ namespace YarraTrams.Havm2TramTracker.Tests
                     }
             });
 
+            var schedulesMasterService = new Processor.Services.TramTrackerSchedulesMasterService();
+            List<Models.TramTrackerSchedulesMaster> schedulesMasters;
+
             // act
-            Processor.Processor.CopyTripsToT_Temp_SchedulesMasterDetailsDataTables(trips, out TramTrackerDataSet.T_Temp_SchedulesMasterDataTable masterTable, out TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable detailsTable);
+            schedulesMasters = schedulesMasterService.FromHavmTrips(trips,false);
 
             // assert
-            Assert.IsTrue(trips.Count == masterTable.Rows.Count, "Number of records in {0} ({2:d}) doesn't match number of total trips in Trip class list ({1:d}).", masterTable.GetType().Name, trips.Count, detailsTable.Rows.Count);
-            Assert.IsTrue(trips.Select(x => x.Stops.Count()).Sum() == detailsTable.Rows.Count, "Number of records in {0} ({2:d}) doesn't match number of total stops in Trip class list ({1:d}).", detailsTable.GetType().Name, trips.Select(x => x.Stops.Count()).Sum(), detailsTable.Rows.Count);
+            Assert.IsTrue(trips.Count == schedulesMasters.Count, "Number of records in {0} ({2:d}) doesn't match number of total trips in Trip class list ({1:d}).", schedulesMasters.GetType().Name, trips.Count, schedulesMasters.Count);
             //Todo: check more stuff. Everything! Only once we've settled on the data contract.
-            Assert.IsTrue(trips[0].Headboard == masterTable[0].HeadboardNo, "HeadboardNo field in DataTable ({1}) doesn't match Headboard from Trip class ({0}).", trips[0].HastusTripId, masterTable[0].HeadboardNo);
+            Assert.IsTrue(trips[0].Headboard == schedulesMasters[0].HeadboardNo, "HeadboardNo field in DataTable ({1}) doesn't match Headboard from Trip class ({0}).", trips[0].HastusTripId, schedulesMasters[0].HeadboardNo);
+        }
+
+        [TestMethod]
+        public void TestTripsToSchedulesDetailsWithGoodData()
+        {
+            // arrange
+            var trips = new List<Models.HavmTrip>();
+
+            trips.Add(new Models.HavmTrip
+            {
+                HastusTripId = 1,
+                Block = "Block 1",
+                Headboard = "86",
+                Route = "86",
+                StartTimepoint = "ncob",
+                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                EndTimepoint = "mpnd",
+                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                HeadwayNextSeconds = 120,
+                NextRoute = "86",
+                Direction = "DOWN",
+                VehicleType = "Z",
+                DistanceMetres = 10000,
+                IsPublic = true,
+                OperationalDay = new DateTime(2019, 2, 1),
+                Stops = new List<Models.HavmTripStop> {
+                    new HavmTripStop
+                        {
+                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            HastusStopId = "1626",
+                            IsMonitoredOPRReliability = true
+                        },
+                    new HavmTripStop
+                        {
+                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            HastusStopId = "3398",
+                            IsMonitoredOPRReliability = true
+                        }
+                    }
+            });
+
+            var schedulesDetailsService = new Processor.Services.TramTrackerSchedulesDetailsService();
+            List<Models.TramTrackerSchedulesDetails> schedulesDetailss;
+
+            // act
+            schedulesDetailss = schedulesDetailsService.FromHavmTrips(trips, false);
+
+            // assert
+            Assert.IsTrue(trips.Select(x => x.Stops.Count()).Sum() == schedulesDetailss.Count, "Number of records in {0} ({2:d}) doesn't match number of total stops in Trip class list ({1:d}).", schedulesDetailss.GetType().Name, trips.Select(x => x.Stops.Count()).Sum(), schedulesDetailss.Count);
+            //Todo: check more stuff. Everything! Only once we've settled on the data contract.
         }
 
         [TestMethod]

@@ -38,9 +38,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
             List<Models.HavmTrip> havmTrips = CopyJsonToTrips(json);
 
             //Populate 4 temp tables
-            SaveTripsToT_Temp_Trips(havmTrips);
-            SaveTripsToT_Temp_Schedules(havmTrips);
-            SaveTripsToT_Temp_SchedulesMasterDetails(havmTrips);
         }
 
         /// <summary>
@@ -74,18 +71,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
         {
             var tripsDT = CopyTripsToT_Temp_SchedulesDataTable(trips);
             SaveTripDataToDatabase("T_Temp_Schedules", tripsDT);
-        }
-
-        /// <summary>
-        /// Saves HAVM2 trip information to the T_Temp_Schedules in the TramTracker database
-        /// </summary>
-        /// <param name="trips"></param>
-        public static void SaveTripsToT_Temp_SchedulesMasterDetails(List<Models.HavmTrip> trips)
-        {
-            CopyTripsToT_Temp_SchedulesMasterDetailsDataTables(trips, out TramTrackerDataSet.T_Temp_SchedulesMasterDataTable masterTable, out TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable detailsTable);
-
-            SaveTripDataToDatabase("T_Temp_SchedulesMaster", masterTable);
-            SaveTripDataToDatabase("T_Temp_SchedulesDetails", detailsTable);
         }
 
         /// <summary>
