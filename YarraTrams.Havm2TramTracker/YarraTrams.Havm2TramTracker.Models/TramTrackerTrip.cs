@@ -45,6 +45,35 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.DayOfWeek = this.GetDayOfWeek(havmTrip);
         }
 
+        /// <summary>
+        /// Return DataRow
+        /// </summary>
+        /// <returns></returns>
+        public TramTrackerDataSet.T_Temp_TripsRow ToDataRow()
+        {
+            TramTrackerDataSet.T_Temp_TripsDataTable dataTable = new TramTrackerDataSet.T_Temp_TripsDataTable();
+            TramTrackerDataSet.T_Temp_TripsRow row = dataTable.NewT_Temp_TripsRow();
+            row.TripID = this.TripID;
+            row.RunNo = this.RunNo;
+            row.RouteNo = this.RouteNo;
+            row.FirstTP = this.FirstTP;
+            row.FirstTime = this.FirstTime;
+            row.EndTP = this.EndTP;
+            row.EndTime = this.EndTime;
+            row.AtLayoverTime = this.AtLayoverTime;
+            row.NextRouteNo = this.NextRouteNo;
+            row.UpDirection = this.UpDirection;
+            row.LowFloor = this.LowFloor;
+            row.TripDistance = this.TripDistance;
+            row.PublicTrip = this.PublicTrip;
+            row.DayOfWeek = this.DayOfWeek;
+
+            return row;
+        }
+
+        /// <summary>
+        /// Returns contents of the class as a string
+        /// </summary>
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();

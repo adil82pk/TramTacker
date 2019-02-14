@@ -35,6 +35,30 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.Time = (int)havmStop.PassingTime.TotalSeconds;
         }
 
+        /// <summary>
+        /// Return DataRow
+        /// </summary>
+        /// <returns></returns>
+        public TramTrackerDataSet.T_Temp_SchedulesRow ToDataRow()
+        {
+            TramTrackerDataSet.T_Temp_SchedulesDataTable dataTable = new TramTrackerDataSet.T_Temp_SchedulesDataTable();
+            TramTrackerDataSet.T_Temp_SchedulesRow row = dataTable.NewT_Temp_SchedulesRow();
+            row.TripID = this.TripID;
+            row.RunNo = this.RunNo;
+            row.RouteNo = this.RouteNo;
+            row.DayOfWeek = this.DayOfWeek;
+            row.LowFloor = this.LowFloor;
+            row.PublicTrip = this.PublicTrip;
+            row.OPRTimePoint = this.OPRTimePoint;
+            row.StopID = this.StopID;
+            row.Time = this.Time;
+
+            return row;
+        }
+
+        /// <summary>
+        /// Returns contents of the class as a string
+        /// </summary>
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
