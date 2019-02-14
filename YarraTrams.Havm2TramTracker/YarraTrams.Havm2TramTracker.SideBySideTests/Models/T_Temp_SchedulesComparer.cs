@@ -22,8 +22,8 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable existingRows = CastRows(base.ExistingData);
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable newRows = CastRows(base.NewData);
 
-            var excludedIDs = new HashSet<int>(newRows.Select(n => (n.TripID.ToString() + "." + n.StopID).GetHashCode()));
-            var existingSchedulesMissingFromNew = existingRows.Where(e => !excludedIDs.Contains((e.TripID.ToString() + "." + e.StopID).GetHashCode()));
+            var excludedIDs = new HashSet<int>(newRows.Select(n => (n.TripID.ToString() + "." + n.StopID.Trim()).GetHashCode()));
+            var existingSchedulesMissingFromNew = existingRows.Where(e => !excludedIDs.Contains((e.TripID.ToString() + "." + e.StopID.Trim()).GetHashCode()));
 
             if (existingSchedulesMissingFromNew.Count() > 0)
             {
@@ -43,8 +43,8 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable existingRows = CastRows(base.ExistingData);
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable newRows = CastRows(base.NewData);
 
-            var excludedIDs = new HashSet<int>(existingRows.Select(e => (e.TripID.ToString() + "." + e.StopID).GetHashCode()));
-            var newSchedulesNotInExisting = newRows.Where(n => !excludedIDs.Contains((n.TripID.ToString() + "." + n.StopID).GetHashCode()));
+            var excludedIDs = new HashSet<int>(existingRows.Select(e => (e.TripID.ToString() + "." + e.StopID.Trim()).GetHashCode()));
+            var newSchedulesNotInExisting = newRows.Where(n => !excludedIDs.Contains((n.TripID.ToString() + "." + n.StopID.Trim()).GetHashCode()));
 
             if (newSchedulesNotInExisting.Count() > 0)
             {
@@ -65,7 +65,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_SchedulesDataTable newRows = CastRows(base.NewData);
 
             var existingSchedulesThatDifferFromNew = from existingSchedules in existingRows
-                                                    join newSchedules in newRows on new { existingSchedules.TripID, existingSchedules.StopID } equals new { newSchedules.TripID, newSchedules.StopID }
+                                                    join newSchedules in newRows on new { existingSchedules.TripID, StopID = existingSchedules.StopID.Trim() } equals new { newSchedules.TripID, StopID = newSchedules.StopID.Trim() }
                                                     where !(existingSchedules.OPRTimePoint == newSchedules.OPRTimePoint
                                                     && existingSchedules.RunNo == newSchedules.RunNo
                                                     && existingSchedules.StopID == newSchedules.StopID
