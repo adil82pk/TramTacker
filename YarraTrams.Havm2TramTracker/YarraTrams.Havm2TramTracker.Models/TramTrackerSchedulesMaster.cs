@@ -50,6 +50,19 @@ namespace YarraTrams.Havm2TramTracker.Models
             return masterRow;
         }
 
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+            output.AppendLine($"Trip TripNo: {TripNo}");
+            output.AppendLine($"     TramClass: {TramClass}");
+            output.AppendLine($"     HeadboardNo: {HeadboardNo}");
+            output.AppendLine($"     RouteNo: {RouteNo}");
+            output.AppendLine($"     RunNo: {RunNo}");
+            output.AppendLine($"     StartDate: {StartDate}");
+            output.AppendLine($"     PublicTrip: {PublicTrip:d}");
+            return output.ToString();
+        }
+
         /// <summary>
         /// There is no consistent definition for Route inside TramTRACKER. Sometimes it is analogous to HAVM2 Route, sometime to HAVM2 Headboard.
         /// This routine assumes Route is analogous to Route in HAVM2.

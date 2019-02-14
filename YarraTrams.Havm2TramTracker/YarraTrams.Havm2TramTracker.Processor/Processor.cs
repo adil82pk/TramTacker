@@ -79,7 +79,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public static void SaveToSchedulesMaster(List<HavmTrip> havmTrips)
         {
             TramTrackerSchedulesMasterService service = new TramTrackerSchedulesMasterService();
-            List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert);
+            List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesMasters);
             SaveTripDataToDatabase("T_Temp_SchedulesMaster", dataTable);
         }
@@ -90,7 +90,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public static void SaveToSchedulesDetails(List<HavmTrip> havmTrips)
         {
             TramTrackerSchedulesDetailsService service = new TramTrackerSchedulesDetailsService();
-            List<TramTrackerSchedulesDetails> schedulesDetailss = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert);
+            List<TramTrackerSchedulesDetails> schedulesDetailss = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesDetailss);
             SaveTripDataToDatabase("T_Temp_SchedulesDetails", dataTable);
         }

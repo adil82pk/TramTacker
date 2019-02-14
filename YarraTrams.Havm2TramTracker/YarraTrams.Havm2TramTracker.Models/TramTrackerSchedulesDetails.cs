@@ -44,6 +44,17 @@ namespace YarraTrams.Havm2TramTracker.Models
             return detailsRow;
         }
 
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+            output.AppendLine($"Stop StopId: {StopID}");
+            output.AppendLine($"  ArrivalTime: {ArrivalTime}");
+            output.AppendLine($"  RunNo: {RunNo}");
+            output.AppendLine($"  OPRTimePoint: {OPRTimePoint}");
+
+            return output.ToString();
+        }
+
         /// <summary>
         /// ArrivalTime is a left-aligned fixed-length string of 8 characters.
         /// The hh:mm portion MUST be five characters long, even when we have a single-digit hour - a single digit hour gets padded with a space on the left.
