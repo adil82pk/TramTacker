@@ -1,6 +1,6 @@
 ﻿namespace YarraTrams.Havm2TramTracker.Processor
 {
-    partial class Service1
+    partial class Havm2TramTrackerService
     {
         /// <summary> 
         /// Required designer variable.

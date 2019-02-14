@@ -17,6 +17,30 @@ namespace YarraTrams.Havm2TramTracker.Processor
     {
         #region Public methods
 
+        //Error handling at master orchestrator, and also handle tables in the individual table population routines.
+
+        //Master orchestraion method goes here
+        
+
+        /// <summary>
+        /// Main entry point for Havm2TramTracker processes. This routine orchestrates all others.
+        /// </summary>
+        public static void Process()
+        {
+            //CopyToLive (not implemented)
+
+            //Get schedule data from HAVM2
+            string json = Helpers.ApiService.GetDataFromHavm2();
+
+            //Create Havm model from JSON
+            List<Models.HavmTrip> havmTrips = CopyJsonToTrips(json);
+
+            //Populate 4 temp tables
+            SaveTripsToT_Temp_Trips(havmTrips);
+            SaveTripsToT_Temp_Schedules(havmTrips);
+            SaveTripsToT_Temp_SchedulesMasterDetails(havmTrips);
+        }
+
         /// <summary>
         /// Takes a JSON string and converts it to in-memory objects.
         /// </summary>

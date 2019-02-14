@@ -23,5 +23,8 @@
     <Setting Name="LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="DueTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">03:00:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
