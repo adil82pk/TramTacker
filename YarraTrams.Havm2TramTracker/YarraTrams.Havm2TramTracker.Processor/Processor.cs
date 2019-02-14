@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Models;
+using YarraTrams.Havm2TramTracker.Processor.Services;
 using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Data;
@@ -31,6 +32,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
             //Get schedule data from HAVM2
             string json = Helpers.ApiService.GetDataFromHavm2();
+
 
             //Create Havm model from JSON
             List<Models.HavmTrip> havmTrips = CopyJsonToTrips(json);
@@ -84,6 +86,18 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
             SaveTripDataToDatabase("T_Temp_SchedulesMaster", masterTable);
             SaveTripDataToDatabase("T_Temp_SchedulesDetails", detailsTable);
+        }
+
+        /// <summary>
+        /// Saves HAVM2 trip information to the T_Temp_Schedules in the TramTracker database
+        /// </summary>
+        /// <param name="trips"></param>
+        public static void SaveToSchedulesMaster(List<HavmTrip> havmTrips)
+        {
+            TramTrackerSchedulesMasterService service = new TramTrackerSchedulesMasterService();
+            List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips);
+            DataTable dataTable = service.ToDataTable(schedulesMasters);
+            SaveTripDataToDatabase("T_Temp_SchedulesMaster", dataTable);
         }
 
         #endregion
