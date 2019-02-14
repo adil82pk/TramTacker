@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\TramTrackerBase.cs" />
+    <Compile Include="Models\TramTrackerSchedules.cs" />
     <Compile Include="Models\TramTrackerSchedulesDetails.cs" />
     <Compile Include="Helpers\DataRowExtensions.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
