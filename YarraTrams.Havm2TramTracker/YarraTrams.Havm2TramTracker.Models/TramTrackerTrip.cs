@@ -45,6 +45,26 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.DayOfWeek = this.GetDayOfWeek(havmTrip);
         }
 
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+            output.AppendLine($"Trip TripID: {TripID}");
+            output.AppendLine($"     RunNo: {RunNo}");
+            output.AppendLine($"     RouteNo: {RouteNo}");
+            output.AppendLine($"     FirstTP: {FirstTP}");
+            output.AppendLine($"     FirstTime: {FirstTime}");
+            output.AppendLine($"     EndTP: {EndTP}");
+            output.AppendLine($"     EndTime: {EndTime}");
+            output.AppendLine($"     AtLayoverTime: {AtLayoverTime}");
+            output.AppendLine($"     NextRouteNo: {NextRouteNo}");
+            output.AppendLine($"     UpDirection: {UpDirection}");
+            output.AppendLine($"     LowFloor: {LowFloor}");
+            output.AppendLine($"     TripDistance: {TripDistance}");
+            output.AppendLine($"     PublicTrip: {PublicTrip}");
+            output.AppendLine($"     DayOfWeek: {DayOfWeek}");
+            return output.ToString();
+        }
+
         /// <summary>
         /// Layover time (the time a vehicle spends at its final timpoint prior to embarking on its next trip) is measured in seconds by HAVM2.
         /// In TramTRACKER the layover time is measured in minutes.

@@ -35,7 +35,23 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.Time = (int)havmStop.PassingTime.TotalSeconds;
         }
 
-         /// <summary>
+        public override string ToString()
+        {
+            StringBuilder output = new StringBuilder();
+            output.AppendLine($"Schedules StopId: {StopID}");
+            output.AppendLine($"  TripID: {TripID}");
+            output.AppendLine($"  RunNo: {RunNo}");
+            output.AppendLine($"  RouteNo: {RouteNo}");
+            output.AppendLine($"  OPRTimePoint: {OPRTimePoint}");
+            output.AppendLine($"  Time: {Time}");
+            output.AppendLine($"  DayOfWeek: {DayOfWeek}");
+            output.AppendLine($"  LowFloor: {LowFloor}");
+            output.AppendLine($"  PublicTrip: {PublicTrip}");
+
+            return output.ToString();
+        }
+
+        /// <summary>
         /// A StopId is a textual identifer for a defined tram stop. e.g. DD16Coll, U080Glen
         /// A StopNo is a numeric identifer for a stop, as defined by HASTUS.
         /// This routine converts a StopNo in to a StopId.

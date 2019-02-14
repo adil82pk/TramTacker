@@ -47,7 +47,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Stop StopId: {StopID}");
+            output.AppendLine($"Details StopId: {StopID}");
             output.AppendLine($"  ArrivalTime: {ArrivalTime}");
             output.AppendLine($"  RunNo: {RunNo}");
             output.AppendLine($"  OPRTimePoint: {OPRTimePoint}");
