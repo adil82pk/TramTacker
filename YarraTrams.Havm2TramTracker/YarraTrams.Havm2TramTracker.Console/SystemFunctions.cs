@@ -86,7 +86,7 @@ namespace YarraTrams.Havm2TramTracker.Console
 
             clock.Reset();
             clock.Start();
-            Processor.Processor.SaveTripsToT_Temp_Trips(trips);
+            Processor.Processor.SaveToTrips(trips);
             clock.Stop();
 
             message = message + $"\nSaving to T_Temp_Trips took {clock.Elapsed}.";
@@ -117,7 +117,7 @@ namespace YarraTrams.Havm2TramTracker.Console
 
             clock.Reset();
             clock.Start();
-            Processor.Processor.SaveTripsToT_Temp_Schedules(trips);
+            Processor.Processor.SaveToSchedules(trips);
             clock.Stop();
 
             message = message + $"\nSaving to T_Temp_Schedules took {clock.Elapsed}.";
