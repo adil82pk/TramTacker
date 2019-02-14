@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Helpers\DataRowExtensions.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
+    <Compile Include="Models\TramTrackerSchedulesMaster.cs" />
     <Compile Include="Models\HastusStopMapper.cs" />
     <Compile Include="Models\HavmTripStop.cs" />
     <Compile Include="Models\TramTrackerDataSet.Designer.cs">
