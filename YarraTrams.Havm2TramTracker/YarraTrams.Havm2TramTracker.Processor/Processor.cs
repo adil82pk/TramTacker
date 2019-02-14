@@ -79,7 +79,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public static void SaveToTrips(List<HavmTrip> havmTrips)
         {
             TramTrackerTripsService service = new TramTrackerTripsService();
-            List<TramTrackerTrip> trips = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert);
+            List<TramTrackerTrips> trips = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(trips);
             SaveTripDataToDatabase("T_Temp_Trips", dataTable);
         }

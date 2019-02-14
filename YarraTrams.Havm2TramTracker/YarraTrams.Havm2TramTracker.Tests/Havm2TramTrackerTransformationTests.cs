@@ -64,7 +64,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var atLayover = model.GetAtLayovertime(trip);
@@ -85,7 +85,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var atLayover = model.GetAtLayovertime(trip);
@@ -105,7 +105,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var atLayover = model.GetAtLayovertime(trip);
@@ -125,7 +125,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var atLayover = model.GetAtLayovertime(trip);
@@ -145,7 +145,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var atLayover = model.GetAtLayovertime(trip);
@@ -166,7 +166,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Direction = direction //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var UpDirection = model.GetUpDirection(trip);
@@ -186,7 +186,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Direction = direction //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var UpDirection = model.GetUpDirection(trip);
@@ -205,7 +205,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Direction = "all over the place" //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             bool success;
@@ -299,7 +299,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 DistanceMetres = distanceMetres //Ignoring all other properties
             };
 
-            var model = new Models.TramTrackerTrip();
+            var model = new Models.TramTrackerTrips();
 
             // act
             var TripDistance = model.GetTripDistance(trip);

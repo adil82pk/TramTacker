@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
-    public class TramTrackerTrip : TramTrackerBase
+    public class TramTrackerTrips : TramTrackerBase
     {
         public int TripID { get; set; }
         public string RunNo{ get; set; }

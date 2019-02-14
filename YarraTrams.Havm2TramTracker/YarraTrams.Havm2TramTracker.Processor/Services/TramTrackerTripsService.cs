@@ -16,11 +16,11 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// </summary>
         /// <param name="havmTrips"></param>
         /// <returns></returns>
-        public List<TramTrackerTrip> FromHavmTrips(List<HavmTrip> havmTrips, bool logRowsToFilePriorToInsert)
+        public List<TramTrackerTrips> FromHavmTrips(List<HavmTrip> havmTrips, bool logRowsToFilePriorToInsert)
         {
             string serviceName = this.GetType().Name;
 
-            List<TramTrackerTrip> trips = new List<TramTrackerTrip>();
+            List<TramTrackerTrips> trips = new List<TramTrackerTrips>();
             var exceptionCounts = new Dictionary<System.DayOfWeek, int>();
 
             foreach (var dayOfWeek in Enum.GetValues(typeof(System.DayOfWeek)).Cast<System.DayOfWeek>())
@@ -48,7 +48,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                             fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{havmTrip.ToString()}");
                         }
 
-                        TramTrackerTrip trip = new TramTrackerTrip();
+                        TramTrackerTrips trip = new TramTrackerTrips();
                         trip.FromHavmTrip(havmTrip);
                         trips.Add(trip);
 
@@ -105,12 +105,12 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// </summary>
         /// <param name="trips"></param>
         /// <returns></returns>
-        public TramTrackerDataSet.T_Temp_TripsDataTable ToDataTable(List<TramTrackerTrip> trips)
+        public TramTrackerDataSet.T_Temp_TripsDataTable ToDataTable(List<TramTrackerTrips> trips)
         {
 
             TramTrackerDataSet.T_Temp_TripsDataTable dataTable = new TramTrackerDataSet.T_Temp_TripsDataTable();
 
-            foreach(TramTrackerTrip trip in trips)
+            foreach(TramTrackerTrips trip in trips)
             {
                 dataTable.Rows.Add(trip.ToDataRow().ItemArray);
             }
