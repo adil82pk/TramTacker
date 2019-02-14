@@ -127,7 +127,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             System.Console.ReadLine();
         }
 
-        private static void CallHavm2ApiAndSaveToT_Temp_SchedulesMasterDetails()
+        private static void CallHavm2ApiAndSaveToT_Temp_SchedulesMaster()
         {
             string message = "";
             var clock = new Stopwatch();
@@ -148,7 +148,7 @@ namespace YarraTrams.Havm2TramTracker.Console
 
             clock.Reset();
             clock.Start();
-            Processor.Processor.SaveTripsToT_Temp_SchedulesMasterDetails(trips);
+            Processor.Processor.SaveToSchedulesMaster(trips);
             clock.Stop();
 
             message = message + $"\nSaving to T_Temp_SchedulesMaster and T_Temp_SchedulesDetails took {clock.Elapsed}.";

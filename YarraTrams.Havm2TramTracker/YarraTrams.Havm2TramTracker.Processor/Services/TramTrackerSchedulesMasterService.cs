@@ -112,10 +112,10 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
             foreach(TramTrackerSchedulesMaster schedulesMaster in schedulesMasters)
             {
-                masterTable.AddT_Temp_SchedulesMasterRow(schedulesMaster.ToDataRow());
+                masterTable.Rows.Add(schedulesMaster.ToDataRow().ItemArray);
             }
 
-            return new TramTrackerDataSet.T_Temp_SchedulesMasterDataTable();
+            return masterTable;
         }
     }
 }
