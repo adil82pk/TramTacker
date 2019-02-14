@@ -44,6 +44,9 @@ namespace YarraTrams.Havm2TramTracker.Models
             return detailsRow;
         }
 
+        /// <summary>
+        /// Returns contents of the class as a string
+        /// </summary>
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
