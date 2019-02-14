@@ -31,7 +31,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.LowFloor = this.GetLowFloor(havmTrip);
             this.PublicTrip = havmTrip.IsPublic;
             this.OPRTimePoint = havmStop.IsMonitoredOPRReliability;
-            this.StopID = this.GetStopId(havmStop);
+            this.StopID = this.GetStopId(havmStop, stopMapping);
             this.Time = (int)havmStop.PassingTime.TotalSeconds;
         }
 
@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// A StopNo is a numeric identifer for a stop, as defined by HASTUS.
         /// This routine converts a StopNo in to a StopId.
         /// It relies on mapping data defined in the TramTracker database.
-        /// This mapping data must be loaded in to memory by calling HastusStopMapper.Populate() prior to calling this routine.
+        /// This mapping data must be populated (via Processor/Helpers/HastisStopMpper) prior to calling this routine.
         /// </summary>
         /// <param name="tripStop"></param>
         /// <returns></returns>
@@ -50,10 +50,10 @@ namespace YarraTrams.Havm2TramTracker.Models
             {
                 if (stopMapping.ContainsKey(stopID))
                 {
-                    return HastusStopMapper.stops[(stopID)];
+                    return stopMapping[(stopID)];
                 }
             }
-            throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Has HastusStopMapper.Populate() been run? Is the DB table empty? Is this a new or invalid stop?");
+            throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Is the DB table empty? Is this a new or invalid stop?");
         }
     }
 }

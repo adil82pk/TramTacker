@@ -312,16 +312,18 @@ namespace YarraTrams.Havm2TramTracker.Tests
             const int hastusStopId = 1010;
             const string expectedResult = "U035Mill";
 
-            Models.HastusStopMapper.stops = new Dictionary<int, string>();
-            Models.HastusStopMapper.stops.Add(hastusStopId, expectedResult);
+            var stopMap = new Dictionary<int, string>();
+            stopMap.Add(hastusStopId, expectedResult);
 
             var stop = new HavmTripStop
             {
                 HastusStopId = hastusStopId.ToString()
             };
 
+            Models.TramTrackerSchedules schedules = new Models.TramTrackerSchedules();
+
             // act
-            string stopId = Models.Transformations.GetStopId(stop);
+            string stopId = schedules.GetStopId(stop, stopMap);
 
             // assert
             Assert.IsTrue(stopId == expectedResult, "Expecting value {0} from input of {1} but got {2} instead.", expectedResult, hastusStopId, stopId);
@@ -331,8 +333,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestStopIdTransformationWithInvalidStop()
         {
             // arrange
-            Models.HastusStopMapper.stops = new Dictionary<int, string>();
-            Models.HastusStopMapper.stops.Add(1234, "A stop we won't find");
+            Dictionary<int, string> stopMap = new Dictionary<int, string>();
+            stopMap.Add(1234, "A stop we won't find");
 
             const int hastusStopId = 999999;
 
@@ -341,14 +343,16 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HastusStopId = hastusStopId.ToString()
             };
 
+            Models.TramTrackerSchedules schedules = new Models.TramTrackerSchedules();
+
             // act
             // See inside the assert.
 
             // assert
             Assert.ThrowsException<Exception>(() =>
             {
-                string stopId = Models.Transformations.GetStopId(stop);
-            }, "Expecting an exception when searching for a stop when the HastusStopMapper is empty.");
+                string stopId = schedules.GetStopId(stop, stopMap);
+            }, "Expecting an exception when searching for an unmapped stop.");
         }
 
         #endregion

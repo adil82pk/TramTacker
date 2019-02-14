@@ -215,8 +215,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <returns></returns>
         internal static TramTrackerDataSet.T_Temp_SchedulesDataTable CopyTripsToT_Temp_SchedulesDataTable(List<Models.HavmTrip> trips)
         {
-            HastusStopMapper.Populate();
-
             var schedulesDataTable = new TramTrackerDataSet.T_Temp_SchedulesDataTable();
             var exceptionCounts = new Dictionary<System.DayOfWeek, int>();
             foreach (var dayOfWeek in Enum.GetValues(typeof(System.DayOfWeek)).Cast<System.DayOfWeek>())
@@ -327,8 +325,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
         internal static void CopyTripsToT_Temp_SchedulesMasterDetailsDataTables(List<Models.HavmTrip> trips, out TramTrackerDataSet.T_Temp_SchedulesMasterDataTable masterTable, out TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable detailsTable)
         {
-            HastusStopMapper.Populate();
-
             masterTable = new TramTrackerDataSet.T_Temp_SchedulesMasterDataTable();
             detailsTable = new TramTrackerDataSet.T_Temp_SchedulesDetailsDataTable();
 
