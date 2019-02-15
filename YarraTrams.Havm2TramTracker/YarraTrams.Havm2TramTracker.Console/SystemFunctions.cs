@@ -22,7 +22,7 @@ namespace YarraTrams.Havm2TramTracker.Console
         {
             if (UploadJsonFileToMemory(out List<HavmTrip> trips))
             {
-                Processor.Processor.SaveTripsToT_Temp_Trips(trips);
+                Processor.Processor.SaveToTrips(trips);
                 
                 System.Console.WriteLine("Complete, press <enter> to continue.");
                 System.Console.ReadLine();
