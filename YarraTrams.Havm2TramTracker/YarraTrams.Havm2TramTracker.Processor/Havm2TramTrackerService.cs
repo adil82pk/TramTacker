@@ -21,10 +21,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private bool stopConfigFileChangeWatcher = false;
         private FileSystemWatcher fileSystemWatcher;
 
-        DateTime lastSuccessfulCopyToLive = DateTime.MinValue;
-        DateTime lastSuccessfulRefreshFromHavm = DateTime.MinValue;
-        int consecutiveFailures = 0;
-
         public Havm2TramTrackerService()
         {
             InitializeComponent();
@@ -69,7 +65,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private void RunProcessing()
         {
             this.StopTimer();
-            LogWriter.Instance.Log(EventLogCodes.SERVICE_STARTED, "qqqq");
+            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, $"Havm2TramTracker scheduled execution has been triggered, as per config setting of {Properties.Settings.Default.DueTime}");
             try
             {
                 Processor.Process();
@@ -91,7 +87,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             
             System.Threading.TimerCallback TimerDelegate = new System.Threading.TimerCallback(TimerTask);
 
-            int interval = 0;//Properties.Settings.Default.IntervalBetweenChecksSeconds * 1000; //convert from seconds to ms
+            int interval = (60 * 60 * 24) * 1000; //get seconds in the day then convert to ms
 
             if (dueTimeSeconds != null)
             {
@@ -103,15 +99,18 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 TimeSpan currentTime = DateTime.Now.TimeOfDay;
                 if (currentTime < dueTime)
                 {
-
+                    dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
                 }
                 else
                 {
-
+                    dueTimeSeconds = (60*60*24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
                 }
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, interval, interval);
+                dueTimeSeconds = dueTimeSeconds * 1000; //Convert from seconds to ms
+
+                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds, interval);
             }
 
+            LogWriter.Instance.Log(EventLogCodes.TIMER_SET, $"Havm2TramTracker scheduled to wake up again in {(int)dueTimeSeconds} seconds");
 
             // Save a reference for Dispose.
             stateObj.TimerReference = processingTimer;
