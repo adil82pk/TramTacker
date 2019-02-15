@@ -1,0 +1,1 @@
+NuGet.exe restore "C:\havm2tramtracker_source_deploy\havm2tramtracker\YarraTrams.Havm2TramTracker\YarraTrams.Havm2TramTracker.sln" 
