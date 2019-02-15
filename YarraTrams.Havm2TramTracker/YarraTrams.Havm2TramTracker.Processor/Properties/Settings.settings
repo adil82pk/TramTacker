@@ -20,7 +20,10 @@
     <Setting Name="LogT_Temp_SchedulesRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LogT_Temp_SchedulesMasterDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+    <Setting Name="LogT_Temp_SchedulesMasterRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="DueTime" Type="System.TimeSpan" Scope="User">

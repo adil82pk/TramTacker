@@ -7,18 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YarraTrams.Havm2TramTracker.Models
+namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 {
     public static class HastusStopMapper
     {
-        public static Dictionary<int, string> stops { get; set; }
-
-        public static void Populate()
+        public static Dictionary<int, string> GetMapping()
         {
-            // Ensure our stop list is empty.
-            stops = null;
+            Dictionary<int, string> stops;
 
-            using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.TramTrackerConnectionString))
+            using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.TramTrackerDB))
             {
                 string query = "SELECT ISNULL(StopID,''), ISNULL(StopNo,0) FROM T_Stops ORDER BY StopID";
 
@@ -49,6 +46,8 @@ namespace YarraTrams.Havm2TramTracker.Models
                     throw new Exception("No stop mapping found in TramTRACKER T_Stops table.");
                 }
             }
+
+            return stops;
         }
     }
 }

@@ -41,36 +41,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TramTrackerBase.cs" />
+    <Compile Include="TramTrackerDataSet.cs">
+      <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TramTrackerSchedules.cs" />
+    <Compile Include="TramTrackerSchedulesDetails.cs" />
     <Compile Include="Helpers\DataRowExtensions.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
-    <Compile Include="Models\HastusStopMapper.cs" />
-    <Compile Include="Models\HavmTripStop.cs" />
-    <Compile Include="Models\TramTrackerDataSet.Designer.cs">
+    <Compile Include="TramTrackerSchedulesMaster.cs" />
+    <Compile Include="HavmTripStop.cs" />
+    <Compile Include="TramTrackerDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Models\HavmTrip.cs" />
+    <Compile Include="HavmTrip.cs" />
+    <Compile Include="TramTrackerTrips.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Transformations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Models\TramTrackerDataSet.xsc">
+    <None Include="TramTrackerDataSet.xsc">
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Models\TramTrackerDataSet.xsd">
+    <None Include="TramTrackerDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TramTrackerDataSet.Designer.cs</LastGenOutput>
       <CustomToolNamespace>YarraTrams.Havm2TramTracker.Models</CustomToolNamespace>
     </None>
-    <None Include="Models\TramTrackerDataSet.xss">
+    <None Include="TramTrackerDataSet.xss">
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">

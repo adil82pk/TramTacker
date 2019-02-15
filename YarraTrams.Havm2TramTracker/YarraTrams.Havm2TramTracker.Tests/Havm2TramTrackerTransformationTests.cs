@@ -21,8 +21,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Block = block //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerBase();
+
             // act
-            var RunNo = Models.Transformations.GetRunNumberShortForm(trip);
+            var RunNo = model.GetRunNumberShortForm(trip);
 
             // assert
             Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
@@ -39,8 +41,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Block = block //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerBase();
+
             // act
-            var RunNo = Models.Transformations.GetRunNumberShortForm(trip);
+            var RunNo = model.GetRunNumberShortForm(trip);
 
             // assert
             Assert.IsTrue(RunNo == expectedResult, "Expecting value \"{0}\" from input of \"{1}\" but got \"{2}\" instead.", expectedResult, block, RunNo);
@@ -60,8 +64,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var atLayover = Models.Transformations.GetAtLayovertime(trip);
+            var atLayover = model.GetAtLayovertime(trip);
 
             // assert
             Assert.IsTrue(atLayover == expectedResult, "Expecting value {0} from input of \"{1}\" but got {2} instead.", expectedResult, headway, atLayover);
@@ -79,8 +85,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var atLayover = Models.Transformations.GetAtLayovertime(trip);
+            var atLayover = model.GetAtLayovertime(trip);
 
             // assert
             Assert.IsTrue(atLayover == expectedResult, "Expecting value {0} from input of \"{1}\" but got {2} instead.", expectedResult, headway, atLayover);
@@ -97,8 +105,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var atLayover = Models.Transformations.GetAtLayovertime(trip);
+            var atLayover = model.GetAtLayovertime(trip);
 
             // assert
             Assert.IsTrue(atLayover == expectedResult, "Expecting value {0} from input of \"{1}\" but got {2} instead.", expectedResult, headway, atLayover);
@@ -115,15 +125,17 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var atLayover = Models.Transformations.GetAtLayovertime(trip);
+            var atLayover = model.GetAtLayovertime(trip);
 
             // assert
             Assert.IsTrue(atLayover == expectedResult, "Expecting value {0} from input of \"{1}\" but got {2} instead.", expectedResult, headway, atLayover);
         }
 
         [TestMethod]
-        public void TestAtLayoverTransformationWithFigureOutside2BitRange()
+        public void TestAtLayoverTransformationWithFigureOutside2ByteRange()
         {
             // arrange
             const int headway = 32768 * 60; //Seconds
@@ -133,8 +145,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HeadwayNextSeconds = headway //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var atLayover = Models.Transformations.GetAtLayovertime(trip);
+            var atLayover = model.GetAtLayovertime(trip);
 
             // assert
             Assert.IsTrue(atLayover == expectedResult, "Expecting value {0} from input of \"{1}\" but got {2} instead.", expectedResult, headway, atLayover);
@@ -152,8 +166,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Direction = direction //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var UpDirection = Models.Transformations.GetUpDirection(trip);
+            var UpDirection = model.GetUpDirection(trip);
 
             // assert
             Assert.IsTrue(UpDirection, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, direction, UpDirection);
@@ -170,8 +186,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Direction = direction //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var UpDirection = Models.Transformations.GetUpDirection(trip);
+            var UpDirection = model.GetUpDirection(trip);
 
             // assert
             Assert.IsFalse(UpDirection, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, direction, UpDirection);
@@ -187,11 +205,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Direction = "all over the place" //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
             bool success;
             try
             {
-                var UpDirection = Models.Transformations.GetUpDirection(trip);
+                var UpDirection = model.GetUpDirection(trip);
                 success = false;
             }
             catch (FormatException ex)
@@ -216,8 +236,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 VehicleType = vehicleGroup //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerBase();
+
             // act
-            var LowFloor = Models.Transformations.GetLowFloor(trip);
+            var LowFloor = model.GetLowFloor(trip);
 
             // assert
             Assert.IsTrue(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
@@ -234,8 +256,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 VehicleType = vehicleGroup //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerBase();
+
             // act
-            var LowFloor = Models.Transformations.GetLowFloor(trip);
+            var LowFloor = model.GetLowFloor(trip);
 
             // assert
             Assert.IsFalse(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
@@ -252,8 +276,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 VehicleType = vehicleGroup //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerBase();
+
             // act
-            var LowFloor = Models.Transformations.GetLowFloor(trip);
+            var LowFloor = model.GetLowFloor(trip);
 
             // assert
             Assert.IsFalse(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
@@ -273,8 +299,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 DistanceMetres = distanceMetres //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerTrips();
+
             // act
-            var TripDistance = Models.Transformations.GetTripDistance(trip);
+            var TripDistance = model.GetTripDistance(trip);
 
             // assert
             Assert.IsTrue(Decimal.Equals(TripDistance, expectedResult), "Expecting value {0} from input of {1} but got {2} instead.", expectedResult, distanceMetres, TripDistance);
@@ -294,8 +322,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 OperationalDay = operationalDay //Ignoring all other properties
             };
 
+            var model = new Models.TramTrackerBase();
+
             // act
-            var DayOfWeek = Models.Transformations.GetDayOfWeek(trip);
+            var DayOfWeek = model.GetDayOfWeek(trip);
 
             // assert
             Assert.IsTrue(DayOfWeek == expectedResult, "Expecting value {0} from input of {1:dddd, MMMM d, yyyy} but got {2} instead.", expectedResult, operationalDay, DayOfWeek);
@@ -312,16 +342,18 @@ namespace YarraTrams.Havm2TramTracker.Tests
             const int hastusStopId = 1010;
             const string expectedResult = "U035Mill";
 
-            Models.HastusStopMapper.stops = new Dictionary<int, string>();
-            Models.HastusStopMapper.stops.Add(hastusStopId, expectedResult);
+            var stopMap = new Dictionary<int, string>();
+            stopMap.Add(hastusStopId, expectedResult);
 
             var stop = new HavmTripStop
             {
                 HastusStopId = hastusStopId.ToString()
             };
 
+            Models.TramTrackerSchedules schedules = new Models.TramTrackerSchedules();
+
             // act
-            string stopId = Models.Transformations.GetStopId(stop);
+            string stopId = schedules.GetStopId(stop, stopMap);
 
             // assert
             Assert.IsTrue(stopId == expectedResult, "Expecting value {0} from input of {1} but got {2} instead.", expectedResult, hastusStopId, stopId);
@@ -331,8 +363,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestStopIdTransformationWithInvalidStop()
         {
             // arrange
-            Models.HastusStopMapper.stops = new Dictionary<int, string>();
-            Models.HastusStopMapper.stops.Add(1234, "A stop we won't find");
+            Dictionary<int, string> stopMap = new Dictionary<int, string>();
+            stopMap.Add(1234, "A stop we won't find");
 
             const int hastusStopId = 999999;
 
@@ -341,14 +373,16 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 HastusStopId = hastusStopId.ToString()
             };
 
+            Models.TramTrackerSchedules schedules = new Models.TramTrackerSchedules();
+
             // act
             // See inside the assert.
 
             // assert
             Assert.ThrowsException<Exception>(() =>
             {
-                string stopId = Models.Transformations.GetStopId(stop);
-            }, "Expecting an exception when searching for a stop when the HastusStopMapper is empty.");
+                string stopId = schedules.GetStopId(stop, stopMap);
+            }, "Expecting an exception when searching for an unmapped stop.");
         }
 
         #endregion
@@ -368,8 +402,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 PassingTime = passingTime
             };
 
+            var model = new Models.TramTrackerSchedulesDetails();
+
             // act
-            string arrivalTime = Models.Transformations.GetArrivalTime(stop);
+            string arrivalTime = model.GetArrivalTime(stop);
 
             // assert
             Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTime, arrivalTime);
@@ -388,8 +424,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 PassingTime = passingTime
             };
 
+            var model = new Models.TramTrackerSchedulesDetails();
+
             // act
-            string arrivalTime = Models.Transformations.GetArrivalTime(stop);
+            string arrivalTime = model.GetArrivalTime(stop);
 
             // assert
             Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTime, arrivalTime);
