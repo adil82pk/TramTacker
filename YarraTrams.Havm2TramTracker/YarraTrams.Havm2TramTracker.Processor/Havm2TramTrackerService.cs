@@ -42,7 +42,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
             try
             {
-                this.RunProcessing();
+                this.RunTimer();
             }
             catch (Exception ex)
             {
