@@ -99,15 +99,16 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 TimeSpan currentTime = DateTime.Now.TimeOfDay;
                 if (currentTime < dueTime)
                 {
+                    //If 3am (configurable) hasn't yet happened today then find the number of seconds between now and then
                     dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
                 }
                 else
                 {
+                    //If 3am (configurable) has already happened today then take 24 hours and minus the time elapsed since 3am
                     dueTimeSeconds = (60*60*24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
-                }
-                dueTimeSeconds = dueTimeSeconds * 1000; //Convert from seconds to ms
+                } 
 
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds, interval);
+                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
             }
 
             LogWriter.Instance.Log(EventLogCodes.TIMER_SET, $"Havm2TramTracker scheduled to wake up again in {(int)dueTimeSeconds} seconds");
