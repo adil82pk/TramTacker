@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Data;
 using YarraTrams.Havm2TramTracker.Logger;
 using System.IO;
+using YarraTrams.Havm2TramTracker.Processor.Helpers;
 
 [assembly: InternalsVisibleTo("YarraTrams.Havm2TramTracker.Tests")]
 namespace YarraTrams.Havm2TramTracker.Processor
@@ -61,7 +62,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerTripsService service = new TramTrackerTripsService();
             List<TramTrackerTrips> trips = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(trips);
-            SaveTripDataToDatabase("T_Temp_Trips", dataTable);
+            DBHelper.SaveTripDataToDatabase("T_Temp_Trips", dataTable);
         }
 
         /// <summary>
@@ -72,7 +73,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerSchedulesService service = new TramTrackerSchedulesService();
             List<TramTrackerSchedules> schedules = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedules);
-            SaveTripDataToDatabase("T_Temp_Schedules", dataTable);
+            DBHelper.SaveTripDataToDatabase("T_Temp_Schedules", dataTable);
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerSchedulesMasterService service = new TramTrackerSchedulesMasterService();
             List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesMasters);
-            SaveTripDataToDatabase("T_Temp_SchedulesMaster", dataTable);
+            DBHelper.SaveTripDataToDatabase("T_Temp_SchedulesMaster", dataTable);
         }
 
         /// <summary>
@@ -94,41 +95,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerSchedulesDetailsService service = new TramTrackerSchedulesDetailsService();
             List<TramTrackerSchedulesDetails> schedulesDetailss = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesDetailss);
-            SaveTripDataToDatabase("T_Temp_SchedulesDetails", dataTable);
+            DBHelper.SaveTripDataToDatabase("T_Temp_SchedulesDetails", dataTable);
         }
 
-        #endregion
-
-        #region Database
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
-        private static void SaveTripDataToDatabase(string tableName,DataTable tripData)
-        {
-            //Dynmaically create SQL here, instead of bulkcopy. Makes error handling easier.
-            
-            // connect to SQL
-            using (SqlConnection connection =
-                    new SqlConnection(Properties.Settings.Default.TramTrackerDB))
-            {
-                SqlBulkCopy bulkCopy =
-                    new SqlBulkCopy
-                    (
-                    connection,
-                    SqlBulkCopyOptions.TableLock |
-                    SqlBulkCopyOptions.FireTriggers |
-                    SqlBulkCopyOptions.UseInternalTransaction,
-                    externalTransaction: null
-                    );
-
-                bulkCopy.DestinationTableName = tableName;
-                connection.Open();
-
-                bulkCopy.WriteToServer(tripData);
-                connection.Close();
-            }
-        }
         #endregion
     }
 }
