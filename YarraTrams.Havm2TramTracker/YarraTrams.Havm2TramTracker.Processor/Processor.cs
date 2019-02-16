@@ -43,7 +43,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
             catch (Exception ex)
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An has Occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
             }
         }
 
