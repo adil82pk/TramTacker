@@ -32,7 +32,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
-            LogWriter.Instance.Log(EventLogCodes.SERVICE_STARTED, "Havm2TramTracker has been started");
+            LogWriter.Instance.LogWithoutDelay(EventLogCodes.SERVICE_STARTED, "Havm2TramTracker has been started");
 
             stopConfigFileChangeWatcher = true;
 
@@ -46,7 +46,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
             catch (Exception ex)
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("A Fatal Error has Occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.FATAL_ERROR, String.Format("A Fatal Error has Occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
             }
         }
 
