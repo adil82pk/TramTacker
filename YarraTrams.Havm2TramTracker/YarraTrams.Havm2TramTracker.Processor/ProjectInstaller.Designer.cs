@@ -39,6 +39,8 @@
             // 
             // serviceInstaller1
             // 
+            this.serviceInstaller1.Description = "YarraTrams.Havm2TramTracker";
+            this.serviceInstaller1.DisplayName = "YarraTrams.Havm2TramTracker";
             this.serviceInstaller1.ServiceName = "YarraTrams.Havm2TramTracker";
             // 
             // ProjectInstaller
