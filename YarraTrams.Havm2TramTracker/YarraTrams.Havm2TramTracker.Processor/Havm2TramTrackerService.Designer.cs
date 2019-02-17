@@ -32,7 +32,6 @@
             // Havm2TramTrackerService
             // 
             this.ServiceName = "YarraTrams.Havm2TramTracker";
-
         }
 
         #endregion
