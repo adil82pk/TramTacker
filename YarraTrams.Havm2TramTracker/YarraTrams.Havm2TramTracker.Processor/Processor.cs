@@ -28,16 +28,23 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// </summary>
         public static void Process()
         {
-            //CopyToLive (not implemented)
+            try
+            {
+                //CopyToLive (not implemented)
 
-            //Get schedule data from HAVM2
-            string json = Helpers.ApiService.GetDataFromHavm2();
+                //Get schedule data from HAVM2
+                string json = Helpers.ApiService.GetDataFromHavm2();
 
 
-            //Create Havm model from JSON
-            List<Models.HavmTrip> havmTrips = CopyJsonToTrips(json);
+                //Create Havm model from JSON
+                List<Models.HavmTrip> havmTrips = CopyJsonToTrips(json);
 
-            //Populate 4 temp tables
+                //Populate 4 temp tables
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+            }
         }
 
         /// <summary>
