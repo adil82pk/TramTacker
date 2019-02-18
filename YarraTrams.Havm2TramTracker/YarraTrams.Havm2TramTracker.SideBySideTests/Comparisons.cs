@@ -14,22 +14,34 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
         {
             //T_Temp_Trips
             var tripsComparer = new Models.T_Temp_TripsComparer();
-            tripsComparer.RunComparison(out DataTable existingRowsMissingFromNewT_Temp_Trips, out DataTable newRowsNotInExistingT_Temp_Trips, out DataTable existingRowsThatDifferFromNewT_TempTrips);
+            DataTable existingRowsMissingFromNewT_Temp_Trips;
+            DataTable newRowsNotInExistingT_Temp_Trips;
+            DataTable existingRowsThatDifferFromNewT_TempTrips;
+            tripsComparer.RunComparison(out existingRowsMissingFromNewT_Temp_Trips, out newRowsNotInExistingT_Temp_Trips, out existingRowsThatDifferFromNewT_TempTrips);
             this.OutputToFile("T_Temp_Trips", existingRowsMissingFromNewT_Temp_Trips, newRowsNotInExistingT_Temp_Trips, existingRowsThatDifferFromNewT_TempTrips);
 
             //T_Temp_Schedules
             var schedulesComparer = new Models.T_Temp_SchedulesComparer();
-            schedulesComparer.RunComparison(out DataTable existingRowsMissingFromNewT_Temp_Schedules, out DataTable newRowsNotInExistingT_Temp_Schedules, out DataTable existingRowsThatDifferFromNewT_TempSchedules);
+            DataTable existingRowsMissingFromNewT_Temp_Schedules;
+            DataTable newRowsNotInExistingT_Temp_Schedules;
+            DataTable existingRowsThatDifferFromNewT_TempSchedules;
+            schedulesComparer.RunComparison(out existingRowsMissingFromNewT_Temp_Schedules, out newRowsNotInExistingT_Temp_Schedules, out existingRowsThatDifferFromNewT_TempSchedules);
             this.OutputToFile("T_Temp_Schedules", existingRowsMissingFromNewT_Temp_Schedules, newRowsNotInExistingT_Temp_Schedules, existingRowsThatDifferFromNewT_TempSchedules);
 
             //T_Temp_SchedulesMaster
             var schedulesMasterComparer = new Models.T_Temp_SchedulesMasterComparer();
-            schedulesMasterComparer.RunComparison(out DataTable existingRowsMissingFromNewT_Temp_SchedulesMaster, out DataTable newRowsNotInExistingT_Temp_SchedulesMaster, out DataTable existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
+            DataTable existingRowsMissingFromNewT_Temp_SchedulesMaster;
+            DataTable newRowsNotInExistingT_Temp_SchedulesMaster;
+            DataTable existingRowsThatDifferFromNewT_Temp_SchedulesMaster;
+            schedulesMasterComparer.RunComparison(out existingRowsMissingFromNewT_Temp_SchedulesMaster, out newRowsNotInExistingT_Temp_SchedulesMaster, out existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
             this.OutputToFile("T_Temp_SchedulesMaster", existingRowsMissingFromNewT_Temp_SchedulesMaster, newRowsNotInExistingT_Temp_SchedulesMaster, existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
 
             //T_Temp_schedulesDetails
             var schedulesDetailsComparer = new Models.T_Temp_SchedulesDetailsComparer();
-            schedulesDetailsComparer.RunComparison(out DataTable existingRowsMissingFromNewT_Temp_SchedulesDetails, out DataTable newRowsNotInExistingT_Temp_SchedulesDetails, out DataTable existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
+            DataTable existingRowsMissingFromNewT_Temp_SchedulesDetails;
+            DataTable newRowsNotInExistingT_Temp_SchedulesDetails;
+            DataTable existingRowsThatDifferFromNewT_Temp_SchedulesDetails;
+            schedulesDetailsComparer.RunComparison(out existingRowsMissingFromNewT_Temp_SchedulesDetails, out newRowsNotInExistingT_Temp_SchedulesDetails, out existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
             this.OutputToFile("T_Temp_SchedulesDetails", existingRowsMissingFromNewT_Temp_SchedulesDetails, newRowsNotInExistingT_Temp_SchedulesDetails, existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
         }
 
@@ -60,7 +72,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             {
                 filePath = filePath + "\\";
             }
-            sl.SaveAs($"{filePath}{tableName}{DateTime.Now.ToString("yyyyMMddThhmmss")}.xlsx");
+            sl.SaveAs(string.Format("{0}{1}{2}.xlsx", filePath, tableName, DateTime.Now.ToString("yyyyMMddThhmmss")));
         }
     }
 }

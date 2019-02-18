@@ -16,10 +16,10 @@ else
 	git clone https://iopdeploy:<password here>@bitbucket.org/ytavmis/havm2tramtracker.git
 fi
 
-echo "Getting the latest from TBU-9-add-automated-scheduling-to-havm2t branch"
+echo "Getting the latest from TBU-38-downgrade-havm2tramtracker-to-c-5 branch"
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker
-git checkout TBU-9-add-automated-scheduling-to-havm2t
-git pull origin TBU-9-add-automated-scheduling-to-havm2t
+git checkout feature/TBU-38-downgrade-havm2tramtracker-to-c-5
+git pull origin feature/TBU-38-downgrade-havm2tramtracker-to-c-5
 
 cd /c/havm2tramtracker_source_deploy
 

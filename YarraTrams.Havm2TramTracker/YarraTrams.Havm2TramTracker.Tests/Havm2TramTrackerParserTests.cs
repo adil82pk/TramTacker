@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Models;
-using YarraTrams.Havm2TramTracker.Processor;
-using static YarraTrams.Havm2TramTracker.Models.TramTrackerDataSet;
 using System.Linq;
 
 namespace YarraTrams.Havm2TramTracker.Tests

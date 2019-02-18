@@ -9,7 +9,8 @@ namespace YarraTrams.Havm2TramTracker.Console
     {
         private static void UploadJsonFileToMemoryAndPrintToConsole()
         {
-            if (UploadJsonFileToMemory(out List<HavmTrip> trips))
+            List<HavmTrip> trips;
+            if (UploadJsonFileToMemory(out trips))
             {
                 PrintTripsToConsole(trips);
 
@@ -20,7 +21,8 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         private static void UploadJsonFileToMemoryAndSaveToT_Temp_Trips()
         {
-            if (UploadJsonFileToMemory(out List<HavmTrip> trips))
+            List<HavmTrip> trips;
+            if (UploadJsonFileToMemory(out trips))
             {
                 Processor.Processor.SaveToTrips(trips);
                 
@@ -38,22 +40,21 @@ namespace YarraTrams.Havm2TramTracker.Console
             var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
-            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+            message = message + string.Format("Getting data from HAVM2 took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
             clock.Stop();
-
-
-            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+            
+            message = message + string.Format("\nPutting data in memory took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             PrintTripsToConsole(trips);
             clock.Stop();
 
-            message = message + $"\nPrinting to the screen took {clock.Elapsed}.";
+            message = message + string.Format("\nPrinting to the screen took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
@@ -74,22 +75,21 @@ namespace YarraTrams.Havm2TramTracker.Console
             var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
-            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+            message = message + string.Format("Getting data from HAVM2 took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
             clock.Stop();
 
-
-            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+            message = message + string.Format("\nPutting data in memory took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             Processor.Processor.SaveToTrips(trips);
             clock.Stop();
 
-            message = message + $"\nSaving to T_Temp_Trips took {clock.Elapsed}.";
+            message = message + string.Format("\nSaving to T_Temp_Trips took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
@@ -105,22 +105,21 @@ namespace YarraTrams.Havm2TramTracker.Console
             var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
-            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+            message = message + string.Format("Getting data from HAVM2 took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
             clock.Stop();
 
-
-            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+            message = message + string.Format("\nPutting data in memory took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             Processor.Processor.SaveToSchedules(trips);
             clock.Stop();
 
-            message = message + $"\nSaving to T_Temp_Schedules took {clock.Elapsed}.";
+            message = message + string.Format("\nSaving to T_Temp_Schedules took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
@@ -136,22 +135,21 @@ namespace YarraTrams.Havm2TramTracker.Console
             var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
-            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+            message = message + string.Format("Getting data from HAVM2 took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
             clock.Stop();
 
-
-            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+            message = message + string.Format("\nPutting data in memory took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             Processor.Processor.SaveToSchedulesMaster(trips);
             clock.Stop();
 
-            message = message + $"\nSaving to T_Temp_SchedulesMaster took {clock.Elapsed}.";
+            message = message + string.Format("\nSaving to T_Temp_SchedulesMaster took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
@@ -167,22 +165,21 @@ namespace YarraTrams.Havm2TramTracker.Console
             var jsonstring = Processor.Helpers.ApiService.GetDataFromHavm2();
             clock.Stop();
 
-            message = message + $"Getting data from HAVM2 took {clock.Elapsed}.";
+            message = message + string.Format("Getting data from HAVM2 took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             var trips = Processor.Processor.CopyJsonToTrips(jsonstring);
             clock.Stop();
 
-
-            message = message + $"\nPutting data in memory took {clock.Elapsed}.";
+            message = message + string.Format("\nPutting data in memory took {0}.", clock.Elapsed);
 
             clock.Reset();
             clock.Start();
             Processor.Processor.SaveToSchedulesDetails(trips);
             clock.Stop();
-
-            message = message + $"\nSaving to T_Temp_SchedulesDetails took {clock.Elapsed}.";
+            
+            message = message + string.Format("\nSaving to T_Temp_SchedulesDetails took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
@@ -199,7 +196,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             x.RunComparisons();
             clock.Stop();
 
-            message = message + $"Comparing the data took {clock.Elapsed}.";
+            message = message + string.Format("Comparing the data took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");

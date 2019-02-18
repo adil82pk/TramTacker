@@ -55,13 +55,14 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// <returns></returns>
         public short GetRouteNumberUsingHeadboard(HavmTrip trip)
         {
-            if (short.TryParse(trip.Headboard, out short route))
+            short route;
+            if (short.TryParse(trip.Headboard, out route))
             {
                 return route;
             }
             else
             {
-                throw new FormatException($"Unexpected format for headboard on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.Headboard ?? "")}\".");
+                throw new FormatException(string.Format("Unexpected format for headboard on trip with HASTUS Id {0}. Expecting a number but got \"{1}\".", trip.HastusTripId, (trip.Headboard ?? "")));
             }
         }
 
@@ -111,7 +112,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             }
             else //We have an vehicle group that we're not aware of!
             {
-                throw new FormatException($"Unknown vehicle \"{trip.VehicleType}\"."); ;
+                throw new FormatException(string.Format("Unknown vehicle \"{0}\".", trip.VehicleType)); ;
             }
         }
     }

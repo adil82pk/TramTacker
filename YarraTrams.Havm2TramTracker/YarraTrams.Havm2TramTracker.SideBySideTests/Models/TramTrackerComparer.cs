@@ -37,26 +37,26 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             ExistingData = GetData(Properties.Settings.Default.TramTrackerExisting, TableName);
             NewData = GetData(Properties.Settings.Default.TramTrackerNew, TableName);
 
-            System.Console.WriteLine($"Total existing rows: {ExistingData.Rows.Count}");
-            System.Console.WriteLine($"Total new rows: {NewData.Rows.Count}");
+            System.Console.WriteLine(string.Format("Total existing rows: {0}", ExistingData.Rows.Count));
+            System.Console.WriteLine(string.Format("Total new rows: {0}", NewData.Rows.Count));
 
             // Existing rows missing from New
             existingRowsMissingFromNew = GetExistingRowsMissingFromNew();
 
-            System.Console.WriteLine($"Missing rows from new data: {existingRowsMissingFromNew.Rows.Count}");
+            System.Console.WriteLine(string.Format("Missing rows from new data: {0}", existingRowsMissingFromNew.Rows.Count));
             System.Console.Write(outputRawDataRows(existingRowsMissingFromNew));
 
             // New rows not in Existing
             newRowsNotInExisting = GetNewRowsNotInExisting();
 
-            System.Console.WriteLine($"Extra rows in new data: {newRowsNotInExisting.Rows.Count}");
+            System.Console.WriteLine(string.Format("Extra rows in new data: {0}", newRowsNotInExisting.Rows.Count));
             System.Console.Write(outputRawDataRows(newRowsNotInExisting));
 
             // Rows in both Existing and New that differ
             List<RowPair> existingRowsThatDifferFromNewAsRowPairs = GetDifferingRows();
             existingRowsThatDifferFromNew = this.Convert(existingRowsThatDifferFromNewAsRowPairs);
 
-            System.Console.WriteLine($"Matching rows that differ in some way: {existingRowsThatDifferFromNewAsRowPairs.Count()}");
+            System.Console.WriteLine(string.Format("Matching rows that differ in some way: {0}", existingRowsThatDifferFromNewAsRowPairs.Count()));
             System.Console.Write(outputComparisonRows(existingRowsThatDifferFromNewAsRowPairs));
         }
 
@@ -65,10 +65,10 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// </summary>
         private DataTable GetData(string conn, string tableName)
         {
-            System.Console.WriteLine($"Using connection {conn}:");
-            System.Console.WriteLine($"...populating {tableName}");
+            System.Console.WriteLine(string.Format("Using connection {0}:", conn));
+            System.Console.WriteLine(string.Format("...populating {0}", tableName));
             DataTable dt = new DataTable();
-            using (var da = new SqlDataAdapter($"SELECT * FROM {tableName} WITH (NOLOCK)", conn))
+            using (var da = new SqlDataAdapter(string.Format("SELECT * FROM {0} WITH (NOLOCK)", tableName), conn))
             {
                 da.Fill(dt);
             }
@@ -176,8 +176,8 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             
             foreach (DataColumn col in dt.Columns)
             {
-                output.Columns.Add($"{col.ColumnName} Existing", col.DataType);
-                output.Columns.Add($"{col.ColumnName} New", col.DataType);
+                output.Columns.Add(string.Format("{0} Existing", col.ColumnName), col.DataType);
+                output.Columns.Add(string.Format("{0} New", col.ColumnName), col.DataType);
             }
 
             foreach(RowPair rowPair in input)

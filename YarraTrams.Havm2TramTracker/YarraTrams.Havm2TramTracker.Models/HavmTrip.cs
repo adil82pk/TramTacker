@@ -29,31 +29,31 @@ namespace YarraTrams.Havm2TramTracker.Models
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Trip HastusTripId: {HastusTripId}");
-            output.AppendLine($"     Day: {OperationalDay}");
-            output.AppendLine($"     Block: {Block}");
-            output.AppendLine($"     Direction: {Direction}");
-            output.AppendLine($"     Headboard: {Headboard}");
-            output.AppendLine($"     Route: {Route}");
-            output.AppendLine($"     DistanceMetres: {DistanceMetres:d}");
-            output.AppendLine($"     NextRoute: {NextRoute}");
-            output.AppendLine($"     StartTime: {StartTime:c}");
-            output.AppendLine($"     StartTimepoint: {StartTimepoint}");
-            output.AppendLine($"     EndTime: {EndTime:c}");
-            output.AppendLine($"     EndTimepoint: {EndTimepoint}");
-            output.AppendLine($"     VehicleType: {VehicleType}");
+            output.AppendFormat("Trip HastusTripId: {0}{1}", HastusTripId, Environment.NewLine);
+            output.AppendFormat("     Day: {0}{1}", OperationalDay, Environment.NewLine);
+            output.AppendFormat("     Block: {0}{1}", Block, Environment.NewLine);
+            output.AppendFormat("     Direction: {0}{1}", Direction, Environment.NewLine);
+            output.AppendFormat("     Headboard: {0}{1}", Headboard, Environment.NewLine);
+            output.AppendFormat("     Route: {0}{1}", Route, Environment.NewLine);
+            output.AppendFormat("     DistanceMetres: {0:d}{1}", DistanceMetres, Environment.NewLine);
+            output.AppendFormat("     NextRoute: {0}{1}", NextRoute, Environment.NewLine);
+            output.AppendFormat("     StartTime: {0:c}{1}", StartTime, Environment.NewLine);
+            output.AppendFormat("     StartTimepoint: {0}{1}", StartTimepoint, Environment.NewLine);
+            output.AppendFormat("     EndTime: {0:c}{1}", EndTime, Environment.NewLine);
+            output.AppendFormat("     EndTimepoint: {0}{1}", EndTimepoint, Environment.NewLine);
+            output.AppendFormat("     VehicleType: {0}{1}", VehicleType, Environment.NewLine);
             if (Stops != null)
             {
-                output.AppendLine($"     Stops: {Stops.Count:d}");
+                output.AppendFormat("     Stops: {0:d}{1}", Stops.Count, Environment.NewLine);
                 int stopNum = 1;
                 foreach (var stop in Stops)
                 {
-                    output.AppendLine($"        Stop {stopNum:d}: {stop.HastusStopId} arriving at {stop.PassingTime:c}");
+                    output.AppendFormat("        Stop {0:d}: {1} arriving at {2:c}{3}", stopNum, stop.HastusStopId, stop.PassingTime, Environment.NewLine);
                     stopNum++;
                 }
             } else
             {
-                output.AppendLine($"     Stops: 0");
+                output.AppendLine("     Stops: 0");
             }
             return output.ToString();
         }

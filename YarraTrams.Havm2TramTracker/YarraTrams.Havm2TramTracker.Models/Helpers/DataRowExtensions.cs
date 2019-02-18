@@ -14,7 +14,7 @@ namespace System.Data
             var output = new StringBuilder();
             foreach(DataColumn col in row.Table.Columns)
             {
-                output.AppendLine($"{col.ColumnName}: {row[col].ToString()}");
+                output.AppendFormat("{0}: {1}{2}", col.ColumnName, row[col].ToString(), Environment.NewLine);
             }
             return output.ToString();
         }

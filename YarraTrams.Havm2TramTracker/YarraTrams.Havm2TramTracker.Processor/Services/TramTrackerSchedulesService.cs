@@ -36,7 +36,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
             StringBuilder errorMessages = new StringBuilder();
 
-            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + $"{DateTime.Now.ToString("yyyy-MM-dd")}_{serviceName}_PriorToInsert.txt", true))
+            using (StreamWriter fileWriter = new StreamWriter(Properties.Settings.Default.LogFilePath + @"\" + string.Format("{0}_{1}_PriorToInsert.txt", DateTime.Now.ToString("yyyy-MM-dd"), serviceName), true))
             {
                 foreach (HavmTrip havmTrip in havmTrips)
                 {
@@ -44,7 +44,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
                     if (logRowsToFilePriorToInsert)
                     {
-                        fileWriter.Write($"\n\n{DateTime.Now}\nTrip {tripCounter}\n{havmTrip.ToString()}");
+                        fileWriter.Write(string.Format("\n\n{0}\nTrip {1}\n{0}", DateTime.Now, tripCounter, havmTrip.ToString())); fileWriter.Write(string.Format("\n\n{0}\nTrip {1}\n{0}", DateTime.Now, tripCounter, havmTrip.ToString()));
                     }
 
                     foreach (HavmTripStop havmStop in havmTrip.Stops)
@@ -60,13 +60,13 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
                             if (logRowsToFilePriorToInsert)
                             {
-                               fileWriter.Write($"\nRow {modelCounter}\n{schedules.ToString()}");
+                                fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedules.ToString()));
                             }
                         }
                         catch (Exception ex)
                         {
                             //This is catching an error with the trip-level data.
-                            errorMessages.Append($"Exception: {ex.Message}\n{havmTrip.ToString()}\n");
+                            errorMessages.Append(string.Format("Exception: {0}\n{1}\n", ex.Message, havmTrip.ToString()));
                             exceptionCounts[havmTrip.OperationalDay.DayOfWeek]++;
                         }
                     }
@@ -77,7 +77,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             if (totalErrors == 0)
             {
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
-                    , $"{havmTrips.Count} HAVM trip{(havmTrips.Count == 1 ? "" : "s")} successfully transformed from HavmTtrips inside {serviceName}.");
+                    , String.Format("{0} HAVM trip{1} successfully transformed from HavmTtrips inside {2}.", havmTrips.Count, (havmTrips.Count == 1 ? "" : "s"), serviceName));
             }
             else
             {
@@ -93,13 +93,13 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                 // We print the number of exceptions separately for each of the next 7 days, starting with tomorrow.
                 foreach (var dayOfWeek in exceptionCounts.OrderBy(pair => pair.Key <= todayDayOfWeek ? pair.Key + 7 : pair.Key))
                 {
-                    message.AppendLine($"{dayOfWeek.Key.ToString()} errors: {dayOfWeek.Value}");
+                    message.AppendLine(String.Format("{0} errors: {1}", dayOfWeek.Key.ToString(), dayOfWeek.Value));
                 }
 
-                message.AppendLine($"See the \"{serviceName}\" log file under {logFilePath} for more detail.");
+                message.AppendLine(string.Format("See the \"{0}\" log file under {1} for more detail.", serviceName, logFilePath));
 
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_ERROR
-                    , $"Encountered {totalErrors} error{(totalErrors == 1 ? "" : "s")} when transforming {havmTrips.Count} HAVM trip{(havmTrips.Count == 1 ? "" : "s")} in the {serviceName}."
+                    , string.Format("Encountered {0} error{1} when transforming {2} HAVM trip{3} in the {4}.", totalErrors, (totalErrors == 1 ? "" : "s"), havmTrips.Count, (havmTrips.Count == 1 ? "" : "s"), serviceName)
                   , message.ToString());
             }
 

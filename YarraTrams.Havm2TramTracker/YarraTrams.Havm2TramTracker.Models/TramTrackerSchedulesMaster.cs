@@ -56,13 +56,13 @@ namespace YarraTrams.Havm2TramTracker.Models
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Trip TripNo: {TripNo}");
-            output.AppendLine($"     TramClass: {TramClass}");
-            output.AppendLine($"     HeadboardNo: {HeadboardNo}");
-            output.AppendLine($"     RouteNo: {RouteNo}");
-            output.AppendLine($"     RunNo: {RunNo}");
-            output.AppendLine($"     StartDate: {StartDate}");
-            output.AppendLine($"     PublicTrip: {PublicTrip:d}");
+            output.AppendFormat("Trip TripNo: {0}{1}", TripNo, Environment.NewLine);
+            output.AppendFormat("     TramClass: {0}{1}", TramClass, Environment.NewLine);
+            output.AppendFormat("     HeadboardNo: {0}{1}", HeadboardNo, Environment.NewLine);
+            output.AppendFormat("     RouteNo: {0}{1}", RouteNo, Environment.NewLine);
+            output.AppendFormat("     RunNo: {0}{1}", RunNo, Environment.NewLine);
+            output.AppendFormat("     StartDate: {0}{1}", StartDate, Environment.NewLine);
+            output.AppendFormat("     PublicTrip: {0:d}{1}", PublicTrip, Environment.NewLine);
             return output.ToString();
         }
 
@@ -74,13 +74,14 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// <returns></returns>
         public short GetRouteNumberUsingRoute(HavmTrip trip)
         {
-            if (short.TryParse(trip.Route, out short route))
+            short route;
+            if (short.TryParse(trip.Route, out route))
             {
                 return route;
             }
             else
             {
-                throw new FormatException($"Unexpected format for route on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.Headboard ?? "")}\".");
+                throw new FormatException(String.Format("Unexpected format for route on trip with HASTUS Id {0}. Expecting a number but got \"{1}\".", trip.HastusTripId, (trip.Headboard ?? "")));
             }
         }
 
