@@ -62,15 +62,14 @@ namespace YarraTrams.Havm2TramTracker.Models
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Schedules StopId: {StopID}");
-            output.AppendLine($"  TripID: {TripID}");
-            output.AppendLine($"  RunNo: {RunNo}");
-            output.AppendLine($"  RouteNo: {RouteNo}");
-            output.AppendLine($"  OPRTimePoint: {OPRTimePoint}");
-            output.AppendLine($"  Time: {Time}");
-            output.AppendLine($"  DayOfWeek: {DayOfWeek}");
-            output.AppendLine($"  LowFloor: {LowFloor}");
-            output.AppendLine($"  PublicTrip: {PublicTrip}");
+            output.AppendFormat("Schedules StopId: {0}{1}", StopID, Environment.NewLine);
+            output.AppendFormat("  TripID: {0}{1}", TripID, Environment.NewLine);
+            output.AppendFormat("  RunNo: {0}{1}", RunNo, Environment.NewLine);
+            output.AppendFormat("  RouteNo: {0}{1}", RouteNo, Environment.NewLine);
+            output.AppendFormat("  OPRTimePoint: {0}{1}", OPRTimePoint, Environment.NewLine);
+            output.AppendFormat("  Time: {0}{1}", Time, Environment.NewLine);
+            output.AppendFormat("  LowFloor: {0}{1}", LowFloor, Environment.NewLine);
+            output.AppendFormat("  PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
 
             return output.ToString();
         }
@@ -93,7 +92,7 @@ namespace YarraTrams.Havm2TramTracker.Models
                     return stopMapping[(stopID)];
                 }
             }
-            throw new Exception($"Unable to find mapping for stop with Hastus Id of {tripStop.HastusStopId}. Is the DB table empty? Is this a new or invalid stop?");
+            throw new Exception(string.Format("Unable to find mapping for stop with Hastus Id of {0}. Is the DB table empty? Is this a new or invalid stop?", tripStop.HastusStopId));
         }
     }
 }

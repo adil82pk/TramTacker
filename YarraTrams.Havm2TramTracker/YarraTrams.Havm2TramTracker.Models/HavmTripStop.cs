@@ -15,9 +15,9 @@ namespace YarraTrams.Havm2TramTracker.Models
         public string ToString(int hastusTripId)
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Stop HastusStopId: {HastusStopId} on HastusTripId:{hastusTripId}");
-            output.AppendLine($"     PassingTime: {PassingTime}");
-            output.AppendLine($"     IsMonitoredOPRReliability: {IsMonitoredOPRReliability}");
+            output.AppendFormat("Stop HastusStopId: {0} on HastusTripId:{1}{2}", HastusStopId, hastusTripId, Environment.NewLine);
+            output.AppendFormat("     PassingTime: {0}{1}", PassingTime, Environment.NewLine);
+            output.AppendFormat("     IsMonitoredOPRReliability: {0}{1}", IsMonitoredOPRReliability, Environment.NewLine);
 
             return output.ToString();
         }

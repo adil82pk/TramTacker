@@ -77,20 +77,20 @@ namespace YarraTrams.Havm2TramTracker.Models
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Trip TripID: {TripID}");
-            output.AppendLine($"     RunNo: {RunNo}");
-            output.AppendLine($"     RouteNo: {RouteNo}");
-            output.AppendLine($"     FirstTP: {FirstTP}");
-            output.AppendLine($"     FirstTime: {FirstTime}");
-            output.AppendLine($"     EndTP: {EndTP}");
-            output.AppendLine($"     EndTime: {EndTime}");
-            output.AppendLine($"     AtLayoverTime: {AtLayoverTime}");
-            output.AppendLine($"     NextRouteNo: {NextRouteNo}");
-            output.AppendLine($"     UpDirection: {UpDirection}");
-            output.AppendLine($"     LowFloor: {LowFloor}");
-            output.AppendLine($"     TripDistance: {TripDistance}");
-            output.AppendLine($"     PublicTrip: {PublicTrip}");
-            output.AppendLine($"     DayOfWeek: {DayOfWeek}");
+            output.AppendFormat("Trip TripID: {0}{1}", TripID, Environment.NewLine);
+            output.AppendFormat("     RunNo: {0}{1}", RunNo, Environment.NewLine);
+            output.AppendFormat("     RouteNo: {0}{1}", RouteNo,  Environment.NewLine);
+            output.AppendFormat("     FirstTP: {0}{1}", FirstTP, Environment.NewLine);
+            output.AppendFormat("     FirstTime: {0}{1}", FirstTime, Environment.NewLine);
+            output.AppendFormat("     EndTP: {0}{1}", EndTP, Environment.NewLine);
+            output.AppendFormat("     EndTime: {0}{1}", EndTime, Environment.NewLine);
+            output.AppendFormat("     AtLayoverTime: {0}{1}", AtLayoverTime, Environment.NewLine);
+            output.AppendFormat("     NextRouteNo: {0}{1}", NextRouteNo, Environment.NewLine);
+            output.AppendFormat("     UpDirection: {0}{1}", UpDirection, Environment.NewLine);
+            output.AppendFormat("     LowFloor: {0}{1}", LowFloor, Environment.NewLine);
+            output.AppendFormat("     TripDistance: {0}{1}", TripDistance, Environment.NewLine);
+            output.AppendFormat("     PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
+            output.AppendFormat("     DayOfWeek: {0}{1}", DayOfWeek, Environment.NewLine);
             return output.ToString();
         }
 
@@ -145,7 +145,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             }
             else
             {
-                throw new FormatException($"Unexpected format for next route number on trip with HASTUS Id {trip.HastusTripId}. Expecting a number but got \"{(trip.NextRoute ?? "")}\".");
+                throw new FormatException(String.Format("Unexpected format for next route number on trip with HASTUS Id {0}. Expecting a number but got \"{1}\".", trip.HastusTripId, (trip.NextRoute ?? "")));
             }
         }
 
@@ -170,12 +170,12 @@ namespace YarraTrams.Havm2TramTracker.Models
                 }
                 else
                 {
-                    throw new FormatException($"Unexpected trip direction on trip with HASTUS Id {trip.HastusTripId}. Expecting \"UP\" or \"DOWN\" but got \"{trip.Direction}\".");
+                    throw new FormatException(String.Format("Unexpected trip direction on trip with HASTUS Id {0}. Expecting \"UP\" or \"DOWN\" but got \"{1}\".", trip.HastusTripId, trip.Direction));
                 }
             }
             else
             {
-                throw new FormatException($"Unexpected trip direction on trip with HASTUS Id {trip.HastusTripId}. Expecting \"UP\" or \"DOWN\" but got null.");
+                throw new FormatException(String.Format("Unexpected trip direction on trip with HASTUS Id {0}. Expecting \"UP\" or \"DOWN\" but got null.", trip.HastusTripId));
             }
         }
 
