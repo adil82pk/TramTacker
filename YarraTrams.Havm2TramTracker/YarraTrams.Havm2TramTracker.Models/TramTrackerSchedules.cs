@@ -85,7 +85,8 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// <returns></returns>
         public string GetStopId(HavmTripStop tripStop, Dictionary<int, string> stopMapping)
         {
-            if (int.TryParse(tripStop.HastusStopId, out var stopID))
+            int stopID;
+            if (int.TryParse(tripStop.HastusStopId, out stopID))
             {
                 if (stopMapping.ContainsKey(stopID))
                 {

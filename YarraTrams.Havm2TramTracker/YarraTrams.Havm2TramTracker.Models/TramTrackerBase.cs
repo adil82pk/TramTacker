@@ -55,7 +55,8 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// <returns></returns>
         public short GetRouteNumberUsingHeadboard(HavmTrip trip)
         {
-            if (short.TryParse(trip.Headboard, out short route))
+            short route;
+            if (short.TryParse(trip.Headboard, out route))
             {
                 return route;
             }

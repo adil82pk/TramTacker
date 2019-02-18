@@ -74,7 +74,8 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// <returns></returns>
         public short GetRouteNumberUsingRoute(HavmTrip trip)
         {
-            if (short.TryParse(trip.Route, out short route))
+            short route;
+            if (short.TryParse(trip.Route, out route))
             {
                 return route;
             }
