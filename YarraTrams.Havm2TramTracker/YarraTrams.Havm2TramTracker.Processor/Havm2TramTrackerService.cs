@@ -65,7 +65,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private void RunProcessing()
         {
             this.StopTimer();
-            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, $"Havm2TramTracker scheduled execution has been triggered, as per config setting of {Properties.Settings.Default.DueTime}");
+            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, as per config setting of {0}", Properties.Settings.Default.DueTime));
             try
             {
                 Processor.Process();
@@ -111,7 +111,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
             }
 
-            LogWriter.Instance.Log(EventLogCodes.TIMER_SET, $"Havm2TramTracker scheduled to wake up again in {(int)dueTimeSeconds} seconds");
+            LogWriter.Instance.Log(EventLogCodes.TIMER_SET, string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds", (int)dueTimeSeconds));
 
             // Save a reference for Dispose.
             stateObj.TimerReference = processingTimer;
