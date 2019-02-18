@@ -25,7 +25,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                         x.RunComparisons();
                         break;
                     default:
-                        System.Console.WriteLine($"Invalid command line parameter \"{args[0]}\". Press <enter> to exit.");
+                        System.Console.WriteLine(String.Format("Invalid command line parameter \"{0}\". Press <enter> to exit.", args[0]));
                         System.Console.ReadLine();
                         break;
                 }
