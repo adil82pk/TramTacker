@@ -72,7 +72,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             {
                 filePath = filePath + "\\";
             }
-            sl.SaveAs($"{filePath}{tableName}{DateTime.Now.ToString("yyyyMMddThhmmss")}.xlsx");
+            sl.SaveAs(string.Format("{0}{1}{2}.xlsx", filePath, tableName, DateTime.Now.ToString("yyyyMMddThhmmss")));
         }
     }
 }
