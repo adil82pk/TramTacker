@@ -42,6 +42,8 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int TRIP_TRANSFORMATION_SUCCESS = 3005;
         public const int SCHEDULE_TRANSFORMATION_SUCCESS = 3006;
         public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_SUCCESS = 3007;
+        public const int PRE_CALL_TO_HAVM = 3009;
+        public const int POST_CALL_TO_HAVM = 3010;
         #endregion
 
         #region warning

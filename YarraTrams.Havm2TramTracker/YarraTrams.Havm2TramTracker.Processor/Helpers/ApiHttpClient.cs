@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
+using YarraTrams.Havm2TramTracker.Logger;
 
 namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 {
@@ -22,9 +23,11 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         {
             string uri = Properties.Settings.Default.Havm2TramTrackerAPI; //Todo: make sure this picks up the latest config when running as a windows service.
 
-            //Todo: Log here
+            LogWriter.Instance.Log(EventLogCodes.PRE_CALL_TO_HAVM, String.Format("About to call HAVM2 service - {0}", uri));
 
             string response = System.Text.Encoding.Default.GetString(httpClient.DownloadData(uri));
+
+            LogWriter.Instance.Log(EventLogCodes.POST_CALL_TO_HAVM, String.Format("Call to HAVM2 successful - {0} bytes returned.", response.Length));
 
             return response;
         }
