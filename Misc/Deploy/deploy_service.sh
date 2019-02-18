@@ -16,20 +16,25 @@ else
 	git clone https://iopdeploy:<password here>@bitbucket.org/ytavmis/havm2tramtracker.git
 fi
 
-echo "Getting the latest from TBU-38-downgrade-havm2tramtracker-to-c-5 branch"
+echo "Getting the latest from develop branch"
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker
-git checkout feature/TBU-38-downgrade-havm2tramtracker-to-c-5
-git pull origin feature/TBU-38-downgrade-havm2tramtracker-to-c-5
+git checkout develop
+git pull origin develop
 
 cd /c/havm2tramtracker_source_deploy
 
-echo "Building Havm2TramTracker Service..."
+echo "Restoring Havm2TramTracker packages..."
 cmd "/c restore_packages.bat"
+echo "Building Havm2TramTracker Service..."
 cmd "/c build_service.bat"
+echo "Building Havm2TramTracker Console..."
+cmd "/c build_console.bat"
 
 cd /c/havm2tramtracker
 echo "Moving service config file"
 cp ./YarraTrams.havm2tramtracker.Processor.exe.config ./bin
+echo "Moving console config file"
+cp ./YarraTrams.havm2tramtracker.Console.exe.config ./consolebin
 
 echo "Press any key to continue"
 read
