@@ -9,7 +9,8 @@ namespace YarraTrams.Havm2TramTracker.Console
     {
         private static void UploadJsonFileToMemoryAndPrintToConsole()
         {
-            if (UploadJsonFileToMemory(out List<HavmTrip> trips))
+            List<HavmTrip> trips;
+            if (UploadJsonFileToMemory(out trips))
             {
                 PrintTripsToConsole(trips);
 
@@ -20,7 +21,8 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         private static void UploadJsonFileToMemoryAndSaveToT_Temp_Trips()
         {
-            if (UploadJsonFileToMemory(out List<HavmTrip> trips))
+            List<HavmTrip> trips;
+            if (UploadJsonFileToMemory(out trips))
             {
                 Processor.Processor.SaveToTrips(trips);
                 
