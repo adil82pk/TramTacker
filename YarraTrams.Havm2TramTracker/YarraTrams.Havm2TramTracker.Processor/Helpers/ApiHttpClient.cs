@@ -21,7 +21,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
         public static string GetDataFromHavm2()
         {
-            string uri = Properties.Settings.Default.Havm2TramTrackerAPI; //Todo: make sure this picks up the latest config when running as a windows service.
+            string uri = Properties.Settings.Default.Havm2TramTrackerAPI;
 
             LogWriter.Instance.Log(EventLogCodes.PRE_CALL_TO_HAVM, String.Format("About to call HAVM2 service - {0}", uri));
 
