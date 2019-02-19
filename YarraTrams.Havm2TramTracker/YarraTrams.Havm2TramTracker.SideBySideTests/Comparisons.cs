@@ -52,21 +52,39 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             SLPageSettings psGood = new SLPageSettings() { TabColor = System.Drawing.Color.LightGreen };
             SLPageSettings psBad = new SLPageSettings() { TabColor = System.Drawing.Color.OrangeRed };
 
+            // First worksheet
             sl.RenameWorksheet(SLDocument.DefaultFirstSheetName, "existingRowsMissingFromNew");
             sl.ImportDataTable(1, 1, existingRowsMissingFromNew, true);
             sl.InsertTable(sl.CreateTable(1, 1, existingRowsMissingFromNew.Rows.Count + 1, existingRowsMissingFromNew.Columns.Count));
             sl.SetPageSettings(existingRowsMissingFromNew.Rows.Count==0? psGood : psBad);
 
+            // Second worksheet
             sl.AddWorksheet("newRowsNotInExisting");
             sl.ImportDataTable(1, 1, newRowsNotInExisting, true);
             sl.InsertTable(sl.CreateTable(1, 1, newRowsNotInExisting.Rows.Count + 1, newRowsNotInExisting.Columns.Count));
             sl.SetPageSettings(newRowsNotInExisting.Rows.Count == 0 ? psGood : psBad);
 
+            // Third worksheet
             sl.AddWorksheet("existingRowsThatDifferFromNew");
             sl.ImportDataTable(1, 1, existingRowsThatDifferFromNew, true);
             sl.InsertTable(sl.CreateTable(1, 1, existingRowsThatDifferFromNew.Rows.Count + 1, existingRowsThatDifferFromNew.Columns.Count));
+
+            int rowCounter = 1;
+            foreach (DataRow row in existingRowsThatDifferFromNew.Rows)
+            {
+                rowCounter++;
+                for (int colCounter = 0; colCounter < (existingRowsThatDifferFromNew.Columns.Count-1); colCounter = colCounter + 2)
+                {
+                    if(!row[colCounter].Equals(row[colCounter+1]))
+                    {
+                        // This data is different so we highlight it.
+                        sl.ApplyNamedCellStyle(rowCounter, (colCounter+2), SLNamedCellStyleValues.Bad);
+                    }
+                }
+            }
             sl.SetPageSettings(existingRowsThatDifferFromNew.Rows.Count == 0 ? psGood : psBad);
 
+            // Save to disk
             string filePath = Properties.Settings.Default.FilePathForResults;
             if (filePath.Substring(filePath.Length-1,1) != "\\")
             {
