@@ -170,28 +170,36 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         private DataTable Convert(List<RowPair> input)
         {
             DataTable output = new DataTable();
-            // Create a data table definition that matches the data rows, so we can iterate the columns.
-            List<DataRow> tmpRows = new List<DataRow> { input[0].ExistingRow };
-            DataTable dt = tmpRows.CopyToDataTable();
-            
-            foreach (DataColumn col in dt.Columns)
+            if (input.Count > 0)
             {
-                output.Columns.Add(string.Format("{0} Existing", col.ColumnName), col.DataType);
-                output.Columns.Add(string.Format("{0} New", col.ColumnName), col.DataType);
-            }
+                // Create a data table definition that matches the data rows, so we can iterate the columns and add them to the DataTable we're returning.
+                List<DataRow> tmpRows = new List<DataRow> { input[0].ExistingRow };
+                DataTable dt = tmpRows.CopyToDataTable();
 
-            foreach(RowPair rowPair in input)
-            {
-                DataRow dr = output.NewRow();
-                int ii = 0;
                 foreach (DataColumn col in dt.Columns)
                 {
-                    dr[ii] = rowPair.ExistingRow[col.Ordinal];
-                    ii++;
-                    dr[ii] = rowPair.NewRow[col.Ordinal];
-                    ii++;
+                    output.Columns.Add(string.Format("{0} Existing", col.ColumnName), col.DataType);
+                    output.Columns.Add(string.Format("{0} New", col.ColumnName), col.DataType);
                 }
-                output.Rows.Add(dr);
+
+                foreach (RowPair rowPair in input)
+                {
+                    DataRow dr = output.NewRow();
+                    int ii = 0;
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        dr[ii] = rowPair.ExistingRow[col.Ordinal];
+                        ii++;
+                        dr[ii] = rowPair.NewRow[col.Ordinal];
+                        ii++;
+                    }
+                    output.Rows.Add(dr);
+                }
+            }
+            else
+            {
+                // If no differences were detected then simply return an empty DataTable with a single column.
+                output.Columns.Add("No Differences", System.Type.GetType("System.String"));
             }
 
             return output;
