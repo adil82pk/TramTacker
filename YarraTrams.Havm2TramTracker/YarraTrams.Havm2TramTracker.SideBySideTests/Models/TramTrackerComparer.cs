@@ -12,8 +12,8 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
     {
         protected string TableName;
 
-        protected DataTable ExistingData;
-        protected DataTable NewData;
+        public DataTable ExistingData { get; set; }
+        public DataTable NewData { get; set; }
 
         private const int fieldLength = 9;
         private const int maxRows = 10;
