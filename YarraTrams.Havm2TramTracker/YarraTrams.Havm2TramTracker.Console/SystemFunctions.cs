@@ -178,8 +178,24 @@ namespace YarraTrams.Havm2TramTracker.Console
             clock.Start();
             Processor.Processor.SaveToSchedulesDetails(trips);
             clock.Stop();
-            
+
             message = message + string.Format("\nSaving to T_Temp_SchedulesDetails took {0}.", clock.Elapsed);
+
+            System.Console.WriteLine(message);
+            System.Console.WriteLine("Complete, press <enter> to continue.");
+            System.Console.ReadLine();
+        }
+
+        private static void CallHavm2ApiAndSaveToAllTables()
+        {
+            string message = "";
+            var clock = new Stopwatch();
+
+            clock.Start();
+            Processor.Processor.Process();
+            clock.Stop();
+
+            message = message + string.Format("Running everything took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");

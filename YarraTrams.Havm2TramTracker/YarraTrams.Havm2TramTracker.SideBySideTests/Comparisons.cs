@@ -29,20 +29,20 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             this.OutputToFile("T_Temp_Schedules", existingRowsMissingFromNewT_Temp_Schedules, newRowsNotInExistingT_Temp_Schedules, existingRowsThatDifferFromNewT_TempSchedules);
 
             //T_Temp_SchedulesMaster
-            var schedulesMasterComparer = new Models.T_Temp_SchedulesMasterComparer();
-            DataTable existingRowsMissingFromNewT_Temp_SchedulesMaster;
-            DataTable newRowsNotInExistingT_Temp_SchedulesMaster;
-            DataTable existingRowsThatDifferFromNewT_Temp_SchedulesMaster;
-            schedulesMasterComparer.RunComparison(out existingRowsMissingFromNewT_Temp_SchedulesMaster, out newRowsNotInExistingT_Temp_SchedulesMaster, out existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
-            this.OutputToFile("T_Temp_SchedulesMaster", existingRowsMissingFromNewT_Temp_SchedulesMaster, newRowsNotInExistingT_Temp_SchedulesMaster, existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
+            //var schedulesMasterComparer = new Models.T_Temp_SchedulesMasterComparer();
+            //DataTable existingRowsMissingFromNewT_Temp_SchedulesMaster;
+            //DataTable newRowsNotInExistingT_Temp_SchedulesMaster;
+            //DataTable existingRowsThatDifferFromNewT_Temp_SchedulesMaster;
+            //schedulesMasterComparer.RunComparison(out existingRowsMissingFromNewT_Temp_SchedulesMaster, out newRowsNotInExistingT_Temp_SchedulesMaster, out existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
+            //this.OutputToFile("T_Temp_SchedulesMaster", existingRowsMissingFromNewT_Temp_SchedulesMaster, newRowsNotInExistingT_Temp_SchedulesMaster, existingRowsThatDifferFromNewT_Temp_SchedulesMaster);
 
             //T_Temp_schedulesDetails
-            var schedulesDetailsComparer = new Models.T_Temp_SchedulesDetailsComparer();
-            DataTable existingRowsMissingFromNewT_Temp_SchedulesDetails;
-            DataTable newRowsNotInExistingT_Temp_SchedulesDetails;
-            DataTable existingRowsThatDifferFromNewT_Temp_SchedulesDetails;
-            schedulesDetailsComparer.RunComparison(out existingRowsMissingFromNewT_Temp_SchedulesDetails, out newRowsNotInExistingT_Temp_SchedulesDetails, out existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
-            this.OutputToFile("T_Temp_SchedulesDetails", existingRowsMissingFromNewT_Temp_SchedulesDetails, newRowsNotInExistingT_Temp_SchedulesDetails, existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
+            //var schedulesDetailsComparer = new Models.T_Temp_SchedulesDetailsComparer();
+            //DataTable existingRowsMissingFromNewT_Temp_SchedulesDetails;
+            //DataTable newRowsNotInExistingT_Temp_SchedulesDetails;
+            //DataTable existingRowsThatDifferFromNewT_Temp_SchedulesDetails;
+            //schedulesDetailsComparer.RunComparison(out existingRowsMissingFromNewT_Temp_SchedulesDetails, out newRowsNotInExistingT_Temp_SchedulesDetails, out existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
+            //this.OutputToFile("T_Temp_SchedulesDetails", existingRowsMissingFromNewT_Temp_SchedulesDetails, newRowsNotInExistingT_Temp_SchedulesDetails, existingRowsThatDifferFromNewT_Temp_SchedulesDetails);
         }
 
         private void OutputToFile(string tableName, DataTable existingRowsMissingFromNew, DataTable newRowsNotInExisting, DataTable existingRowsThatDifferFromNew)

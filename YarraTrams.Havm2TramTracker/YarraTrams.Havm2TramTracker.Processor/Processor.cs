@@ -42,8 +42,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 //Populate 4 temp tables
                 SaveToTrips(havmTrips);
                 SaveToSchedules(havmTrips);
-                SaveToSchedulesMaster(havmTrips);
-                SaveToSchedulesDetails(havmTrips);
+                //SaveToSchedulesMaster(havmTrips);
+                //SaveToSchedulesDetails(havmTrips);
             }
             catch (Exception ex)
             {

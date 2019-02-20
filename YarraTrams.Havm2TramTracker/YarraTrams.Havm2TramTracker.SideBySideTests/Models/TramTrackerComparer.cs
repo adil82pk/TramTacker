@@ -16,6 +16,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         protected DataTable NewData;
 
         private const int fieldLength = 9;
+        private const int maxRows = 10;
 
         public abstract DataTable GetExistingRowsMissingFromNew();
 
@@ -101,7 +102,8 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                     }
                 }
                 output.Append("\n");
-                
+
+                int rowsProcessed = 0;
                 foreach (DataRow row in dt.Rows)
                 {
                     foreach (DataColumn col in dt.Columns)
@@ -110,6 +112,13 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                         output.Append(value.PadRight(fieldLength));
                     }
                     output.Append("\n");
+
+                    rowsProcessed++;
+                    if (rowsProcessed >= maxRows)
+                    {
+                        output.AppendFormat("{0} of {1} rows printed.\n", rowsProcessed, dt.Rows.Count);
+                        break;
+                    }
                 }
                 return output.ToString();
             }
@@ -144,6 +153,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                 }
                 output.Append("\n");
 
+                int rowsProcessed = 0;
                 foreach (RowPair rowPair in rowPairsForComparison)
                 {
                     foreach (DataColumn col in dt.Columns)
@@ -162,6 +172,13 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                         }
                     }
                     output.Append("\n");
+
+                    rowsProcessed++;
+                    if (rowsProcessed >= maxRows)
+                    {
+                        output.AppendFormat("{0} of {1} rows printed.\n", rowsProcessed, rowPairsForComparison.Count);
+                        break;
+                    }
                 }
                 return output.ToString();
             }
