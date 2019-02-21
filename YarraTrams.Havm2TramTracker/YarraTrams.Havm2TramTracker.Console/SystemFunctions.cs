@@ -186,6 +186,22 @@ namespace YarraTrams.Havm2TramTracker.Console
             System.Console.ReadLine();
         }
 
+        private static void CallCopyToLive()
+        {
+            string message = "";
+            var clock = new Stopwatch();
+
+            clock.Start();
+            Processor.Helpers.DBHelper.CopyDataFromTempToLive();
+            clock.Stop();
+
+            message = message + string.Format("Copying data from temp to livess took {0}.", clock.Elapsed);
+
+            System.Console.WriteLine(message);
+            System.Console.WriteLine("Complete, press <enter> to continue.");
+            System.Console.ReadLine();
+        }
+
         private static void CallHavm2ApiAndSaveToAllTables()
         {
             string message = "";
