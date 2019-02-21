@@ -19,5 +19,20 @@
     <Setting Name="FilePathForResults" Type="System.String" Scope="Application">
       <Value Profile="(Default)">E:\</Value>
     </Setting>
+    <Setting Name="SmtpHost" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.mailgun.org</Value>
+    </Setting>
+    <Setting Name="SmtpUsername" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SmtpPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ComparisonSummaryEmailFrom" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dev@inoutput.io</Value>
+    </Setting>
+    <Setting Name="ComparisonSummaryEmailsTo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">anthony@inoutput.io</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
