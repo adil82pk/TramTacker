@@ -25,7 +25,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                         x.RunComparisons();
                         break;
                     default:
-                        System.Console.WriteLine($"Invalid command line parameter \"{args[0]}\". Press <enter> to exit.");
+                        System.Console.WriteLine(String.Format("Invalid command line parameter \"{0}\". Press <enter> to exit.", args[0]));
                         System.Console.ReadLine();
                         break;
                 }
@@ -50,6 +50,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_Schedules database table", () => CallHavm2ApiAndSaveToT_Temp_Schedules());
                 MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesMaster database table", () => CallHavm2ApiAndSaveToT_Temp_SchedulesMaster());
                 MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesDetails database table", () => CallHavm2ApiAndSaveToT_Temp_SchedulesDetails());
+                MainMenu.AddCommand("Call HAVM2 API and save to all tables (exactly what the service does)", () => CallHavm2ApiAndSaveToAllTables());
                 MainMenu.AddCommand("Compare Existing and New data", () => CompareData());
                 MainMenu.AddCommand("Exit", () => Exit());
             }

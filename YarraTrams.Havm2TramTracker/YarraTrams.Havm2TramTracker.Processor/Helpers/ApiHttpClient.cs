@@ -5,33 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
+using YarraTrams.Havm2TramTracker.Logger;
 
 namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 {
     public static class ApiHttpClient
     {
-        public static readonly HttpClient httpClient;
+        public static readonly WebClient httpClient;
 
         static ApiHttpClient()
         {
-            int timeoutInSeconds = Properties.Settings.Default.Havm2TramTrackerTimeoutSeconds; //Todo: make sure this picks up the latest config when running as a windows service.
-            httpClient = new HttpClient();
-            httpClient.Timeout = TimeSpan.FromSeconds(timeoutInSeconds);
+            httpClient = new WebClientWithCustomTimeout();
+            httpClient.UseDefaultCredentials = true;
         }
 
         public static string GetDataFromHavm2()
         {
-            string uri = Properties.Settings.Default.Havm2TramTrackerAPI; //Todo: make sure this picks up the latest config when running as a windows service.
+            string uri = Properties.Settings.Default.Havm2TramTrackerAPI;
 
-            //Todo: Log here
+            LogWriter.Instance.Log(EventLogCodes.PRE_CALL_TO_HAVM, String.Format("About to call HAVM2 service - {0}", uri));
 
-            //Todo: Check code in:
-            //https://bitbucket.org/ytavmis/attributiondataproviderservice/src/master/YarraTrams.ADPS/YarraTrams.ADPS.Services/OdmApiHttpClient.cs
-            //https://bitbucket.org/ytavmis/attributiondataproviderservice/src/a50e66391b09e57ba7c71fa43fa0cfb3299fb64f/YarraTrams.ADPS/YarraTrams.ADPS.Services/OdmApiIntegrationService.cs?at=master#OdmApiIntegrationService.cs-180
+            string response = System.Text.Encoding.Default.GetString(httpClient.DownloadData(uri));
 
-            var response = httpClient.GetStringAsync(uri).Result;
+            LogWriter.Instance.Log(EventLogCodes.POST_CALL_TO_HAVM, String.Format("Call to HAVM2 successful - {0} bytes returned.", response.Length));
 
             return response;
+        }
+    }
+
+    internal class WebClientWithCustomTimeout : WebClient
+    {
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
+            int timeoutInSeconds = Properties.Settings.Default.Havm2TramTrackerTimeoutSeconds;
+            WebRequest w = base.GetWebRequest(uri);
+            w.Timeout = timeoutInSeconds * 1000;
+            return w;
         }
     }
 }

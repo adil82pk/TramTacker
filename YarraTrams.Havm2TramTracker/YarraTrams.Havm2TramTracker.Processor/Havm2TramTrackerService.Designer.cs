@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // Havm2TramTrackerService
+            // 
+            this.ServiceName = "YarraTrams.Havm2TramTracker";
         }
 
         #endregion

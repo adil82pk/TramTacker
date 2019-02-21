@@ -21,10 +21,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private bool stopConfigFileChangeWatcher = false;
         private FileSystemWatcher fileSystemWatcher;
 
-        DateTime lastSuccessfulCopyToLive = DateTime.MinValue;
-        DateTime lastSuccessfulRefreshFromHavm = DateTime.MinValue;
-        int consecutiveFailures = 0;
-
         public Havm2TramTrackerService()
         {
             InitializeComponent();
@@ -46,11 +42,11 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
             try
             {
-                this.RunProcessing();
+                this.RunTimer();
             }
             catch (Exception ex)
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("A Fatal Error has Occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
             }
         }
 
@@ -69,7 +65,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private void RunProcessing()
         {
             this.StopTimer();
-            LogWriter.Instance.Log(EventLogCodes.SERVICE_STARTED, "qqqq");
+            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, as per config setting of {0}", Properties.Settings.Default.DueTime));
             try
             {
                 Processor.Process();
@@ -91,7 +87,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             
             System.Threading.TimerCallback TimerDelegate = new System.Threading.TimerCallback(TimerTask);
 
-            int interval = 0;//Properties.Settings.Default.IntervalBetweenChecksSeconds * 1000; //convert from seconds to ms
+            int interval = (60 * 60 * 24) * 1000; //get seconds in the day then convert to ms
 
             if (dueTimeSeconds != null)
             {
@@ -103,15 +99,19 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 TimeSpan currentTime = DateTime.Now.TimeOfDay;
                 if (currentTime < dueTime)
                 {
-
+                    //If 3am (configurable) hasn't yet happened today then find the number of seconds between now and then
+                    dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
                 }
                 else
                 {
+                    //If 3am (configurable) has already happened today then take 24 hours and minus the time elapsed since 3am
+                    dueTimeSeconds = (60*60*24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
+                } 
 
-                }
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, interval, interval);
+                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
             }
 
+            LogWriter.Instance.Log(EventLogCodes.TIMER_SET, string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds", (int)dueTimeSeconds));
 
             // Save a reference for Dispose.
             stateObj.TimerReference = processingTimer;
