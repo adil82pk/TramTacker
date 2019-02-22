@@ -44,6 +44,7 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_SUCCESS = 3007;
         public const int PRE_CALL_TO_HAVM = 3009;
         public const int POST_CALL_TO_HAVM = 3010;
+        public const int COPY_TO_LIVE_SUCCESS = 3011;
         #endregion
 
         #region warning
@@ -58,6 +59,7 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int TRIP_TRANSFORMATION_ERROR = 1004;
         public const int SCHEDULE_TRANSFORMATION_ERROR = 1005;
         public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_ERROR = 1006;
+        public const int COPY_TO_LIVE_FAILED = 1008;
         #endregion
     }
 
