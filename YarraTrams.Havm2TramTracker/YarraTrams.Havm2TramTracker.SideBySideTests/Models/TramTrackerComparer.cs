@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YarraTrams.Havm2TramTracker.Logger;
 
 namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
 {
@@ -38,26 +39,26 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             ExistingData = GetData(Properties.Settings.Default.TramTrackerExisting, TableName);
             NewData = GetData(Properties.Settings.Default.TramTrackerNew, TableName);
 
-            System.Console.WriteLine(string.Format("Total existing rows: {0}", ExistingData.Rows.Count));
-            System.Console.WriteLine(string.Format("Total new rows: {0}", NewData.Rows.Count));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Total existing rows: {0}", ExistingData.Rows.Count));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Total new rows: {0}", NewData.Rows.Count));
 
             // Existing rows missing from New
             existingRowsMissingFromNew = GetExistingRowsMissingFromNew();
 
-            System.Console.WriteLine(string.Format("Missing rows from new data: {0}", existingRowsMissingFromNew.Rows.Count));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Missing rows from new data: {0}", existingRowsMissingFromNew.Rows.Count));
             System.Console.Write(outputRawDataRows(existingRowsMissingFromNew));
 
             // New rows not in Existing
             newRowsNotInExisting = GetNewRowsNotInExisting();
 
-            System.Console.WriteLine(string.Format("Extra rows in new data: {0}", newRowsNotInExisting.Rows.Count));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Extra rows in new data: {0}", newRowsNotInExisting.Rows.Count));
             System.Console.Write(outputRawDataRows(newRowsNotInExisting));
 
             // Rows in both Existing and New that differ
             List<RowPair> existingRowsThatDifferFromNewAsRowPairs = GetDifferingRows();
             existingRowsThatDifferFromNew = this.Convert(existingRowsThatDifferFromNewAsRowPairs);
 
-            System.Console.WriteLine(string.Format("Matching rows that differ in some way: {0}", existingRowsThatDifferFromNewAsRowPairs.Count()));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Matching rows that differ in some way: {0}", existingRowsThatDifferFromNewAsRowPairs.Count()));
             System.Console.Write(outputComparisonRows(existingRowsThatDifferFromNewAsRowPairs));
         }
 

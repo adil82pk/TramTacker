@@ -2,8 +2,10 @@
 using System;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using YarraTrams.Havm2TramTracker.Logger;
 
 namespace YarraTrams.Havm2TramTracker.SideBySideTests
 {
@@ -29,6 +31,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             DataTable existingRowsThatDifferFromNewT_TempTrips;
             tripsComparer.RunComparison(out existingRowsMissingFromNewT_Temp_Trips, out newRowsNotInExistingT_Temp_Trips, out existingRowsThatDifferFromNewT_TempTrips);
             fileName = this.OutputToFile("T_Temp_Trips", existingRowsMissingFromNewT_Temp_Trips, newRowsNotInExistingT_Temp_Trips, existingRowsThatDifferFromNewT_TempTrips);
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Generated file {0}", fileName));
             mail.Body += GetTableComparisonHtmlSummary("T_Temp_Trips", tripsComparer.ExistingData.Rows.Count, tripsComparer.NewData.Rows.Count, existingRowsMissingFromNewT_Temp_Trips.Rows.Count,newRowsNotInExistingT_Temp_Trips.Rows.Count,existingRowsThatDifferFromNewT_TempTrips.Rows.Count,fileName);
             mail.Attachments.Add(new Attachment(fileName));
 
@@ -67,7 +70,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
             client.Credentials = basicCredential;
             client.Send(mail);
 
-            System.Console.WriteLine(string.Format("Summary email sent to {0}.", Properties.Settings.Default.ComparisonSummaryEmailsTo));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Summary email sent to {0}.", Properties.Settings.Default.ComparisonSummaryEmailsTo));
             System.Console.WriteLine("Comparisons complete.");
         }
 

@@ -74,6 +74,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Logger\YarraTrams.Havm2TramTracker.Logger.csproj">
+      <Project>{87010305-28a2-44e4-8675-7b02fd5862e7}</Project>
+      <Name>YarraTrams.Havm2TramTracker.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Models\YarraTrams.Havm2TramTracker.Models.csproj">
       <Project>{fe22fa30-b89f-4bd1-84c6-9b4f60f99b8e}</Project>
       <Name>YarraTrams.Havm2TramTracker.Models</Name>
