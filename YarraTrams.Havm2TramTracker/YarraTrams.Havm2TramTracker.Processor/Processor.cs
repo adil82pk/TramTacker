@@ -69,7 +69,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerTripsService service = new TramTrackerTripsService();
             List<TramTrackerTrips> trips = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(trips);
-            DBHelper.TruncateThenSaveTripDataToDatabase("T_Temp_Trips", dataTable);
+            DBHelper.TruncateThenSaveTripDataToDatabase(Enums.TableNames.TempTrips, dataTable);
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerSchedulesService service = new TramTrackerSchedulesService();
             List<TramTrackerSchedules> schedules = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedules);
-            DBHelper.TruncateThenSaveTripDataToDatabase("T_Temp_Schedules", dataTable);
+            DBHelper.TruncateThenSaveTripDataToDatabase(Enums.TableNames.TempSchedules, dataTable);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerSchedulesMasterService service = new TramTrackerSchedulesMasterService();
             List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesMasters);
-            DBHelper.TruncateThenSaveTripDataToDatabase("T_Temp_SchedulesMaster", dataTable);
+            DBHelper.TruncateThenSaveTripDataToDatabase(Enums.TableNames.TempSchedulesMaster, dataTable);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TramTrackerSchedulesDetailsService service = new TramTrackerSchedulesDetailsService();
             List<TramTrackerSchedulesDetails> schedulesDetailss = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedulesDetailss);
-            DBHelper.TruncateThenSaveTripDataToDatabase("T_Temp_SchedulesDetails", dataTable);
+            DBHelper.TruncateThenSaveTripDataToDatabase(Enums.TableNames.TempSchedulesDetails, dataTable);
         }
 
         #endregion

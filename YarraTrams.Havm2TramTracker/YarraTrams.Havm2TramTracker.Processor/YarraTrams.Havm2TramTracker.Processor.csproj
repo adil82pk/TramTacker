@@ -54,6 +54,7 @@
     <Compile Include="Helpers\ApiService.cs" />
     <Compile Include="Helpers\ApiHttpClient.cs" />
     <Compile Include="Helpers\DBHelper.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
     <Compile Include="Helpers\HastusStopMapper.cs" />
     <Compile Include="Helpers\LogfileWriter.cs" />
