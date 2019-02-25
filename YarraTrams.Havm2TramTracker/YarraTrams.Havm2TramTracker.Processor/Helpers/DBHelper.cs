@@ -12,35 +12,63 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
     public class DBHelper
     {
         /// <summary>
-        /// 
+        /// Deletes all records from the destination table then inserts the records from the passed-in DataTable;
         /// </summary>
         /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
-        public static void SaveTripDataToDatabase(string tableName, DataTable tripData)
+        public static void TruncateThenSaveTripDataToDatabase(string tableName, DataTable tripData)
         {
-            //Dynmaically create SQL here, instead of bulkcopy. Makes error handling easier.
-
             // connect to SQL
             using (SqlConnection connection =
                     new SqlConnection(Properties.Settings.Default.TramTrackerDB))
             {
-                SqlBulkCopy bulkCopy =
-                    new SqlBulkCopy
-                    (
-                    connection,
-                    SqlBulkCopyOptions.TableLock |
-                    SqlBulkCopyOptions.FireTriggers |
-                    SqlBulkCopyOptions.UseInternalTransaction,
-                    externalTransaction: null
-                    );
-
-                bulkCopy.DestinationTableName = tableName;
                 connection.Open();
 
-                bulkCopy.WriteToServer(tripData);
+                using (SqlTransaction transaction =
+                           connection.BeginTransaction())
+                {
+                    // Delete existing records
+                    string deleteStatement = string.Format("DELETE FROM {0}", tableName);
+                    SqlCommand cmd = new SqlCommand(deleteStatement, connection);
+                    cmd.Transaction = transaction;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandTimeout = 180;
+                    cmd.ExecuteNonQuery();
+
+                    // Insert new records
+                    using (SqlBulkCopy bulkCopy = new SqlBulkCopy(
+                               connection,
+                               SqlBulkCopyOptions.TableLock |
+                                SqlBulkCopyOptions.FireTriggers,
+                               transaction))
+                    {
+                        bulkCopy.DestinationTableName = tableName;
+
+                        try
+                        {
+                            bulkCopy.WriteToServer(tripData);
+                            transaction.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw ex;
+                        }
+                    }
+                }
+
                 connection.Close();
             }
         }
 
+
+        /// <summary>
+        /// Deletes all records from T_Trips and T_Schedules
+        /// then copies the records from T_Temp_Trips to T_Trips
+        /// and copies the records from T_TemP_Schedules to T_Schedules.
+        /// The whole operation either succeeds or fails. It never partially commits.
+        /// 
+        /// Exceptions are logged then re-thrown.
+        /// </summary>
         public static void CopyDataFromTempToLive()
         {
             try
