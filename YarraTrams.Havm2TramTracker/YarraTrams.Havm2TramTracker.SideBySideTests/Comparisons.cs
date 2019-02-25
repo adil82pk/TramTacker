@@ -78,6 +78,23 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
         /// <returns>The full path and filename</returns>
         private string OutputToFile(string tableName, DataTable existingRowsMissingFromNew, DataTable newRowsNotInExisting, DataTable existingRowsThatDifferFromNew)
         {
+            int maxRowsToExport = 10000;
+
+            if (existingRowsMissingFromNew.Rows.Count > maxRowsToExport)
+            {
+                existingRowsMissingFromNew = existingRowsMissingFromNew.AsEnumerable().Skip(existingRowsMissingFromNew.Rows.Count - maxRowsToExport).CopyToDataTable<DataRow>();
+            }
+
+            if (newRowsNotInExisting.Rows.Count > maxRowsToExport)
+            {
+                newRowsNotInExisting = newRowsNotInExisting.AsEnumerable().Skip(newRowsNotInExisting.Rows.Count - maxRowsToExport).CopyToDataTable<DataRow>();
+            }
+
+            if (existingRowsThatDifferFromNew.Rows.Count > maxRowsToExport)
+            {
+                existingRowsThatDifferFromNew = existingRowsThatDifferFromNew.AsEnumerable().Skip(existingRowsThatDifferFromNew.Rows.Count - maxRowsToExport).CopyToDataTable<DataRow>();
+            }
+
             SLDocument sl = new  SLDocument();
 
             SLPageSettings psGood = new SLPageSettings() { TabColor = System.Drawing.Color.LightGreen };
