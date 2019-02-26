@@ -33,59 +33,5 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
                 return ((string)(this["TramTrackerDB"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\")]
-        public string FilePathForResults {
-            get {
-                return ((string)(this["FilePathForResults"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("smtp.mailgun.org")]
-        public string SmtpHost {
-            get {
-                return ((string)(this["SmtpHost"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SmtpUsername {
-            get {
-                return ((string)(this["SmtpUsername"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SmtpPassword {
-            get {
-                return ((string)(this["SmtpPassword"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dev@inoutput.io")]
-        public string ComparisonSummaryEmailFrom {
-            get {
-                return ((string)(this["ComparisonSummaryEmailFrom"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("anthony@inoutput.io")]
-        public string ComparisonSummaryEmailsTo {
-            get {
-                return ((string)(this["ComparisonSummaryEmailsTo"]));
-            }
-        }
     }
 }
