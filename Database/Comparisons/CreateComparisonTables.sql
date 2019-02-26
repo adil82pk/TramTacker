@@ -107,6 +107,7 @@ CREATE TABLE Havm2TTComparison_T_Temp_TripsDiffering (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
 ,PairIdentifier uniqueidentifier NOT NULL
+,IsExisting bit NOT NULL
 ,[TripID] [int] NULL
 ,[RunNo] [char](5) NOT NULL
 ,[RouteNo] [smallint] NOT NULL
@@ -131,6 +132,7 @@ CREATE TABLE Havm2TTComparison_T_Temp_SchedulesDiffering (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
 ,PairIdentifier uniqueidentifier NOT NULL
+,IsExisting bit NOT NULL
 ,[TripID] [int] NOT NULL
 ,[RunNo] [char](5) NOT NULL
 ,[StopID] [char](8) NOT NULL
