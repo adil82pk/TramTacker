@@ -131,5 +131,32 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 this["DueTime"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string LogChangeToFile {
+            get {
+                return ((string)(this["LogChangeToFile"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public string LogSQLToFile {
+            get {
+                return ((string)(this["LogSQLToFile"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DbTableSuffix {
+            get {
+                return ((string)(this["DbTableSuffix"]));
+            }
+        }
     }
 }

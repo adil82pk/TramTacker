@@ -12,6 +12,21 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
     public class DBHelper
     {
         /// <summary>
+        /// Returns DB table name (with suffix appended if configured)
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static string GetDbTableName(string table)
+        {
+            if (Properties.Settings.Default.DbTableSuffix != null)
+            {
+                table += Properties.Settings.Default.DbTableSuffix;
+            }
+
+            return table;
+        }
+
+        /// <summary>
         /// Deletes all records from the destination table then inserts the records from the passed-in DataTable;
         /// </summary>
         /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
