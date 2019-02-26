@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
+using YarraTrams.Havm2TramTracker.SideBySideTests.Helpers;
 
 namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
 {
@@ -13,220 +14,56 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
     {
         protected string TableName;
 
-        public DataTable ExistingData { get; set; }
-        public DataTable NewData { get; set; }
-
-        private const int fieldLength = 9;
-        private const int maxRows = 10;
-
-        public abstract DataTable GetExistingRowsMissingFromNew();
-
-        public abstract DataTable GetNewRowsNotInExisting();
-
-        public abstract List<RowPair> GetDifferingRows();
+        /// <summary>
+        /// Returns a SQL string that, when executed:
+        /// - Compares data in two T_Temp_[...] tables, finding data in the first that's not in the second
+        /// - Inserts results in to Havm2TTComparison_T_Temp_[...]_MissingFromNew
+        /// </summary>
+        public abstract string GetMissingFromNewSql(int runId);
 
         /// <summary>
-        /// Compare data between a TramTRACKER table populated via Existing means and a TramTRACKER table populated via New means.
+        /// Returns a SQL string that, when executed:
+        /// - Compares data in two T_Temp_[...] tables, finding data in the second that's not in the first
+        /// - Inserts results in to Havm2TTComparison_T_Temp_[...]ExtraInNew
+        /// </summary>
+        public abstract string GetExtraInNewSql(int runId);
+
+        /// <summary>
+        /// Returns a SQL string that, when executed:
+        /// - Compares data in two T_Temp_[...] tables, finding data between that two with matching keys but non matching detail
+        /// - Inserts results in to Havm2TTComparison_T_Temp_[...]Differing
+        /// </summary>
+        public abstract string GetDifferingSql(int runId);
+
+        /// <summary>
+        /// Compare data between a tramTRACKER table populated via Existing means and a tramTRACKER table populated via New means.
         /// Looks for:
         /// - Rows in Existing that are missing from New
         /// - Rows in New that are not present in Existing
         /// - Rows with matching key data between Existing and New but with differing detail
-        /// 
-        /// Prints results to console (for the time being).
         /// </summary>
-        public void RunComparison(out DataTable existingRowsMissingFromNew, out DataTable newRowsNotInExisting, out DataTable existingRowsThatDifferFromNew)
+        public void RunComparison(int runId)
         {
-            ExistingData = GetData(Properties.Settings.Default.TramTrackerExisting, TableName);
-            NewData = GetData(Properties.Settings.Default.TramTrackerNew, TableName);
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running GetMissingInNew SQL for {0}.", this.TableName));
+            DBHelper.ExecuteSQL(GetMissingFromNewSql(runId));
 
-            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Total existing rows: {0}", ExistingData.Rows.Count));
-            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Total new rows: {0}", NewData.Rows.Count));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running GetExtraInNew SQL for {0}.", this.TableName));
+            DBHelper.ExecuteSQL(GetExtraInNewSql(runId));
 
-            // Existing rows missing from New
-            existingRowsMissingFromNew = GetExistingRowsMissingFromNew();
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running GetDiffering SQL for {0}.", this.TableName));
+            DBHelper.ExecuteSQL(GetDifferingSql(runId));
 
-            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Missing rows from new data: {0}", existingRowsMissingFromNew.Rows.Count));
-            System.Console.Write(outputRawDataRows(existingRowsMissingFromNew));
-
-            // New rows not in Existing
-            newRowsNotInExisting = GetNewRowsNotInExisting();
-
-            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Extra rows in new data: {0}", newRowsNotInExisting.Rows.Count));
-            System.Console.Write(outputRawDataRows(newRowsNotInExisting));
-
-            // Rows in both Existing and New that differ
-            List<RowPair> existingRowsThatDifferFromNewAsRowPairs = GetDifferingRows();
-            existingRowsThatDifferFromNew = this.Convert(existingRowsThatDifferFromNewAsRowPairs);
-
-            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Matching rows that differ in some way: {0}", existingRowsThatDifferFromNewAsRowPairs.Count()));
-            System.Console.Write(outputComparisonRows(existingRowsThatDifferFromNewAsRowPairs));
+            LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running Summary SQL for {0}.", this.TableName));
+            DBHelper.ExecuteSQL(GetSummarySql(runId));
         }
 
         /// <summary>
-        /// Populates a DataTable using data from the database specified in the passed-in connection string.
+        /// Returns a SQL string that, when executed:
+        /// - Inserts a summary record in to Havm2TTComparisonRunTable
         /// </summary>
-        private DataTable GetData(string conn, string tableName)
+        private string GetSummarySql(int runId)
         {
-            System.Console.WriteLine(string.Format("Using connection {0}:", conn));
-            System.Console.WriteLine(string.Format("...populating {0}", tableName));
-            DataTable dt = new DataTable();
-            using (var da = new SqlDataAdapter(string.Format("SELECT * FROM {0} WITH (NOLOCK)", tableName), conn))
-            {
-                da.Fill(dt);
-            }
-            return dt;
+            return "";
         }
-
-        /// <summary>
-        /// Converts the passed-in DataTable to the a string.
-        /// (This routine is to be replaced by something a little easier for a human to process - likely a spreadsheet.)
-        /// </summary>
-        private string outputRawDataRows(DataTable dt)
-        {
-            if (dt.Rows.Count == 0)
-            {
-                return "";
-            }
-            else
-            {
-                var output = new StringBuilder();
-
-                foreach (DataColumn col in dt.Columns)
-                {
-                    if(col.ColumnName.Length >= fieldLength)
-                    {
-                        output.Append(col.ColumnName.Substring(0,fieldLength-3)+"...");
-                    }
-                    else
-                    {
-                        output.Append(col.ColumnName.PadRight(fieldLength));
-                    }
-                }
-                output.Append("\n");
-
-                int rowsProcessed = 0;
-                foreach (DataRow row in dt.Rows)
-                {
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        string value = row[col.ColumnName].ToString();
-                        output.Append(value.PadRight(fieldLength));
-                    }
-                    output.Append("\n");
-
-                    rowsProcessed++;
-                    if (rowsProcessed >= maxRows)
-                    {
-                        output.AppendFormat("{0} of {1} rows printed.\n", rowsProcessed, dt.Rows.Count);
-                        break;
-                    }
-                }
-                return output.ToString();
-            }
-        }
-
-        /// <summary>
-        /// Converts the passed-in row pairs to a string.
-        /// (This routine is to be replaced by something a little easier for a human to process - likely a spreadsheet.)
-        /// </summary>
-        private string outputComparisonRows(IList<RowPair> rowPairsForComparison)
-        {
-            if (rowPairsForComparison.Count == 0)
-            {
-                return "";
-            }
-            else
-            {
-                var output = new StringBuilder();
-
-                // Create a data table definition that matches the data rows, so we can iterate the columns.
-                List<DataRow> tmpRows = new List<DataRow> { rowPairsForComparison[0].ExistingRow };
-                DataTable dt = tmpRows.CopyToDataTable();
-                foreach (DataColumn col in dt.Columns)
-                {
-                    output.Append(col.ColumnName.PadRight(fieldLength * 2));
-                }
-                output.Append("\n");
-                foreach (DataColumn col in dt.Columns)
-                {
-                    output.Append("Existing".PadRight(fieldLength));
-                    output.Append("New".PadRight(fieldLength));
-                }
-                output.Append("\n");
-
-                int rowsProcessed = 0;
-                foreach (RowPair rowPair in rowPairsForComparison)
-                {
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        //Emit the differing fields, not the identical fields
-                        if (rowPair.ExistingRow[col.ColumnName].GetHashCode() != rowPair.NewRow[col.ColumnName].GetHashCode())
-                        {
-                            string existingValue = rowPair.ExistingRow[col.ColumnName].ToString();
-                            string newValue = rowPair.NewRow[col.ColumnName].ToString();
-                            output.Append(existingValue.PadRight(fieldLength));
-                            output.Append(newValue.PadRight(fieldLength));
-                        }
-                        else
-                        {
-                            output.Append(new String(' ', fieldLength * 2));
-                        }
-                    }
-                    output.Append("\n");
-
-                    rowsProcessed++;
-                    if (rowsProcessed >= maxRows)
-                    {
-                        output.AppendFormat("{0} of {1} rows printed.\n", rowsProcessed, rowPairsForComparison.Count);
-                        break;
-                    }
-                }
-                return output.ToString();
-            }
-        }
-
-        private DataTable Convert(List<RowPair> input)
-        {
-            DataTable output = new DataTable();
-            if (input.Count > 0)
-            {
-                // Create a data table definition that matches the data rows, so we can iterate the columns and add them to the DataTable we're returning.
-                List<DataRow> tmpRows = new List<DataRow> { input[0].ExistingRow };
-                DataTable dt = tmpRows.CopyToDataTable();
-
-                foreach (DataColumn col in dt.Columns)
-                {
-                    output.Columns.Add(string.Format("{0} Existing", col.ColumnName), col.DataType);
-                    output.Columns.Add(string.Format("{0} New", col.ColumnName), col.DataType);
-                }
-
-                foreach (RowPair rowPair in input)
-                {
-                    DataRow dr = output.NewRow();
-                    int ii = 0;
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        dr[ii] = rowPair.ExistingRow[col.Ordinal];
-                        ii++;
-                        dr[ii] = rowPair.NewRow[col.Ordinal];
-                        ii++;
-                    }
-                    output.Rows.Add(dr);
-                }
-            }
-            else
-            {
-                // If no differences were detected then simply return an empty DataTable with a single column.
-                output.Columns.Add("No Differences", System.Type.GetType("System.String"));
-            }
-
-            return output;
-        }
-    }
-
-    public struct RowPair
-    {
-        public DataRow ExistingRow { get; set; }
-        public DataRow NewRow { get; set; }
     }
 }
