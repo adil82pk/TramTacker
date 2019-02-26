@@ -81,7 +81,74 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// </summary>
         public override string GetDifferingSql(int runId)
         {
-            return "";
+            string sql = string.Format(@"CREATE TABLE #Diffs (Id uniqueidentifier, TripID int, [DayOfWeek] int)
+
+                                    INSERT #Diffs
+                                    SELECT NewID(), live.TripID, live.[DayOfWeek]	
+                                    FROM T_Temp_Trips live
+                                    JOIN T_Temp_Trips_TTBU new ON new.TripID = live.TripID
+	                                    AND new.[DayOfWeek]  = live.[DayOfWeek]
+                                    WHERE
+                                    NOT (live.TripID = new.TripID
+                                    AND live.RunNo = new.RunNo 
+                                    AND live.RouteNo = new.RouteNo
+                                    AND live.FirstTP = new.FirstTP
+                                    AND live.FirstTime = new.FirstTime
+                                    AND live.EndTP = new.EndTP 
+                                    AND live.EndTime = new.EndTime
+                                    AND live.AtLayoverTime = new.AtLayoverTime
+                                    AND live.NextRouteNo = new.NextRouteNo
+                                    AND live.UpDirection = new.UpDirection
+                                    AND live.LowFloor = new.LowFloor
+                                    AND live.TripDistance = new.TripDistance
+                                    AND live.PublicTrip = new.PublicTrip
+                                    AND live.[DayOfWeek] = new.[DayOfWeek])
+
+                                    INSERT Havm2TTComparison_T_Temp_TripsDiffering
+                                    SELECT {0}
+                                    ,#Diffs.Id
+                                    ,1
+                                    ,live.TripID			
+                                    ,live.RunNo			
+                                    ,live.RouteNo			
+                                    ,live.FirstTP			
+                                    ,live.FirstTime		
+                                    ,live.EndTP			
+                                    ,live.EndTime			
+                                    ,live.AtLayoverTime	
+                                    ,live.NextRouteNo		
+                                    ,live.UpDirection		
+                                    ,live.LowFloor		
+                                    ,live.TripDistance	
+                                    ,live.PublicTrip		
+                                    ,live.[DayOfWeek]		
+                                    FROM T_Temp_Trips live
+                                    JOIN #Diffs ON #Diffs.TripID = live.TripID
+			                                    AND #Diffs.[DayOfWeek] = live.[DayOfWeek]
+
+                                    INSERT Havm2TTComparison_T_Temp_TripsDiffering
+                                    SELECT {0}
+                                    ,#Diffs.Id
+                                    ,0
+                                    ,new.TripID			
+                                    ,new.RunNo			
+                                    ,new.RouteNo			
+                                    ,new.FirstTP			
+                                    ,new.FirstTime		
+                                    ,new.EndTP			
+                                    ,new.EndTime			
+                                    ,new.AtLayoverTime	
+                                    ,new.NextRouteNo		
+                                    ,new.UpDirection		
+                                    ,new.LowFloor		
+                                    ,new.TripDistance	
+                                    ,new.PublicTrip		
+                                    ,new.[DayOfWeek]		
+                                    FROM T_Temp_Trips_TTBU new
+                                    JOIN #Diffs ON #Diffs.TripID = new.TripID
+			                        AND #Diffs.[DayOfWeek] = new.[DayOfWeek]", runId);
+
+            return sql;
         }
     }
 }
