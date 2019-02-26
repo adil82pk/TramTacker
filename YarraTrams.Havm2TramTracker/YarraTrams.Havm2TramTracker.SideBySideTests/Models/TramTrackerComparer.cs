@@ -63,7 +63,27 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// </summary>
         private string GetSummarySql(int runId)
         {
-            return "";
+            string sql = string.Format(@"DECLARE @TotalExisting int = 0
+                            SELECT @TotalExisting = COUNT(*) FROM {0}
+
+                            DECLARE @TotalNew int = 0
+                            SELECT @TotalNew = COUNT(*) FROM {0}_TTBU
+
+                            DECLARE @MissingFromNew int = 0
+                            SELECT @MissingFromNew = COUNT(*) FROM Havm2TTComparison_{0}_MissingFromNew
+
+                            DECLARE @ExtraInNew int = 0
+                            SELECT @ExtraInNew = COUNT(*) FROM Havm2TTComparison_{0}ExtraInNew
+
+                            DECLARE @Differing int = 0
+                            SELECT @Differing = COUNT(*) FROM Havm2TTComparison_{0}Differing
+
+                            DECLARE @Identical int = @TotalExisting - @MissingFromNew - @Differing
+
+                            INSERT Havm2TTComparisonRunTable
+                            VALUES ({1}, 'T_Temp_Trips', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId);
+
+            return sql;
         }
     }
 }
