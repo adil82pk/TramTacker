@@ -44,11 +44,11 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
         /// Execute supplied SQL,
         /// Return a DataReader with the results
         /// </summary>
-        private static SqlDataReader executeSQLReader(string SQL)
+        private static SqlDataReader executeSQLReader(string sql)
         {
             SqlConnection conn = new SqlConnection(Properties.Settings.Default.TramTrackerDB);
 
-            using (SqlCommand cmd = new SqlCommand(SQL, conn))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
                 cmd.CommandType = CommandType.Text;
 
@@ -64,14 +64,16 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
         /// Execute supplied SQL
         /// Return and integer.
         /// </summary>
-        public static int ExecuteSQLReturnInt(string SQL)
+        public static int ExecuteSQLReturnInt(string sql)
         {
-            using (SqlDataReader reader = DBHelper.executeSQLReader(SQL))
+            using (SqlDataReader reader = DBHelper.executeSQLReader(sql))
             {
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    return (int)reader[0];
+                    int ret;
+                    int.TryParse(reader[0].ToString(), out ret);
+                    return ret;
                 }
                 else
                 {
