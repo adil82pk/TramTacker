@@ -71,7 +71,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             if (totalErrors == 0)
             {
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
-                    , String.Format("{0} HAVM trip{1} successfully transformed from HavmTtrips inside {2}.", havmTrips.Count, (havmTrips.Count == 1 ? "" : "s"), serviceName));
+                    , String.Format("{0} HAVM trip{1} successfully transformed inside {2}.", havmTrips.Count, (havmTrips.Count == 1 ? "" : "s"), serviceName));
             }
             else
             {
