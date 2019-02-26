@@ -57,6 +57,9 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 }
 
                 connection.Close();
+
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.SAVE_TO_DATABASE_SUCCESS
+                    , String.Format("{0} record{1} saved to {2} table.", tripData.Rows.Count, (tripData.Rows.Count == 1 ? "" : "s"), tableName));
             }
         }
 

@@ -45,6 +45,7 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int PRE_CALL_TO_HAVM = 3009;
         public const int POST_CALL_TO_HAVM = 3010;
         public const int COPY_TO_LIVE_SUCCESS = 3011;
+        public const int SAVE_TO_DATABASE_SUCCESS = 3012;
         #endregion
 
         #region warning
