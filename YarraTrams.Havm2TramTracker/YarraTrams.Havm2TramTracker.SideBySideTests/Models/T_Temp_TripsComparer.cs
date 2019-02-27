@@ -22,21 +22,21 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         public override string GetMissingFromNewSql(int runId)
         {
             string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_Trips_MissingFromNew
-                                        SELECT {0}
-                                        , live.TripID
-                                        , live.RunNo
-                                        , live.RouteNo
-                                        , live.FirstTP
-                                        , live.FirstTime
-                                        , live.EndTP
-                                        , live.EndTime
-                                        , live.AtLayoverTime
-                                        , live.NextRouteNo
-                                        , live.UpDirection
-                                        , live.LowFloor
-                                        , live.TripDistance
-                                        , live.PublicTrip
-                                        , live.[DayOfWeek]
+                                        SELECT {0},
+                                        live.TripID,
+                                        live.RunNo,
+                                        live.RouteNo,
+                                        live.FirstTP,
+                                        live.FirstTime,
+                                        live.EndTP,
+                                        live.EndTime,
+                                        live.AtLayoverTime,
+                                        live.NextRouteNo,
+                                        live.UpDirection,
+                                        live.LowFloor,
+                                        live.TripDistance,
+                                        live.PublicTrip,
+                                        live.[DayOfWeek]
                                         FROM T_Temp_Trips live
                                         LEFT JOIN T_Temp_Trips_TTBU new ON new.TripID = live.TripID
                                         WHERE new.TripID IS NULL", runId);
