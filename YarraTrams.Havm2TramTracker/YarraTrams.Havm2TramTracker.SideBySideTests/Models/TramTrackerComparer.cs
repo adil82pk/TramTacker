@@ -73,10 +73,10 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                             SELECT @MissingFromNew = COUNT(*) FROM Havm2TTComparison_{0}_MissingFromNew WHERE Havm2TTComparisonRunId = {1}
 
                             DECLARE @ExtraInNew int = 0
-                            SELECT @ExtraInNew = COUNT(*) FROM Havm2TTComparison_{0}ExtraInNew WHERE Havm2TTComparisonRunId = {1}
+                            SELECT @ExtraInNew = COUNT(*) FROM Havm2TTComparison_{0}_ExtraInNew WHERE Havm2TTComparisonRunId = {1}
 
                             DECLARE @Differing int = 0
-                            SELECT @Differing = COUNT(*) FROM Havm2TTComparison_{0}Differing WHERE Havm2TTComparisonRunId = {1} AND IsExisting = 1
+                            SELECT @Differing = COUNT(*) FROM Havm2TTComparison_{0}_Differing WHERE Havm2TTComparisonRunId = {1} AND IsExisting = 1
 
                             DECLARE @Identical int = @TotalExisting - @MissingFromNew - @Differing
 
