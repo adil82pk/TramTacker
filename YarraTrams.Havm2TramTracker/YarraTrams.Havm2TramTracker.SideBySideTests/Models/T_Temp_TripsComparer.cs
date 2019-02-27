@@ -47,11 +47,11 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// <summary>
         /// Returns a SQL string that, when executed:
         /// - Compares data in two T_Temp_trips tables, finding data in the second that's not in the first
-        /// - Inserts results in to Havm2TTComparison_T_Temp_TripsExtraInNew
+        /// - Inserts results in to Havm2TTComparison_T_Temp_Trips_ExtraInNew
         /// </summary>
         public override string GetExtraInNewSql(int runId)
         {
-            string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_TripsExtraInNew
+            string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_Trips_ExtraInNew
                                         SELECT {0},
                                         new.TripID,		
                                         new.RunNo,
@@ -77,7 +77,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// <summary>
         /// Returns a SQL string that, when executed:
         /// - Compares data in two T_Temp_trips tables, finding data between that two with matching keys but non matching detail
-        /// - Inserts results in to Havm2TTComparison_T_Temp_TripsDiffering
+        /// - Inserts results in to Havm2TTComparison_T_Temp_Trips_Differing
         /// </summary>
         public override string GetDifferingSql(int runId)
         {
@@ -104,7 +104,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                     AND live.PublicTrip = new.PublicTrip
                                     AND live.[DayOfWeek] = new.[DayOfWeek])
 
-                                    INSERT Havm2TTComparison_T_Temp_TripsDiffering
+                                    INSERT Havm2TTComparison_T_Temp_Trips_Differing
                                     SELECT {0},
                                     #Diffs.Id,
                                     1,
@@ -126,7 +126,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                     JOIN #Diffs ON #Diffs.TripID = live.TripID
 			                                    AND #Diffs.[DayOfWeek] = live.[DayOfWeek]
 
-                                    INSERT Havm2TTComparison_T_Temp_TripsDiffering
+                                    INSERT Havm2TTComparison_T_Temp_Trips_Differing
                                     SELECT {0},
                                     #Diffs.Id,
                                     0,

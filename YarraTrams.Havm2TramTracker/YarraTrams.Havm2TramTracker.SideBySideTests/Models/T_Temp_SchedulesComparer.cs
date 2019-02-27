@@ -44,11 +44,11 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// <summary>
         /// Returns a SQL string that, when executed:
         /// - Compares data in two T_Temp_Schedules tables, finding data in the second that's not in the first
-        /// - Inserts results in to Havm2TTComparison_T_Temp_SchedulesExtraInNew
+        /// - Inserts results in to Havm2TTComparison_T_Temp_Schedules_ExtraInNew
         /// </summary>
         public override string GetExtraInNewSql(int runId)
         {
-            string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_SchedulesExtraInNew
+            string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_Schedules_ExtraInNew
                                         SELECT {0},
                                         new.TripID,
 										new.RunNo,
@@ -71,7 +71,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         /// <summary>
         /// Returns a SQL string that, when executed:
         /// - Compares data in two T_Temp_Schedules tables, finding data between that two with matching keys but non matching detail
-        /// - Inserts results in to Havm2TTComparison_T_Temp_SchedulesDiffering
+        /// - Inserts results in to Havm2TTComparison_T_Temp_Schedules_Differing
         /// </summary>
         public override string GetDifferingSql(int runId)
         {
@@ -94,7 +94,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
 									AND live.LowFloor = new.LowFloor
 									AND live.PublicTrip = new.PublicTrip)
 
-                                    INSERT Havm2TTComparison_T_Temp_SchedulesDiffering
+                                    INSERT Havm2TTComparison_T_Temp_Schedules_Differing
                                     SELECT {0},
                                     #Diffs.Id,
                                     1,
@@ -112,7 +112,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
 												AND TRIM(#Diffs.StopID) = TRIM(live.StopID)
 			                                    AND #Diffs.[DayOfWeek] = live.[DayOfWeek]
 
-                                    INSERT Havm2TTComparison_T_Temp_SchedulesDiffering
+                                    INSERT Havm2TTComparison_T_Temp_Schedules_Differing
                                     SELECT {0},
                                     #Diffs.Id,
                                     0,
