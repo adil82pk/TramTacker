@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
 
@@ -35,8 +36,9 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
             }
 
             clock.Stop();
+            string sqlToLog = Regex.Replace(sql.Replace(Environment.NewLine, " "), @"\s+", " ").Substring(0, 50);
             LogWriter.Instance.LogWithoutDelay(EventLogCodes.SIDE_BY_SIDE_INFO
-                     , String.Format("Execution of SQL ({0}...) took {1} seconds.", sql.Substring(0, 20).Replace(Environment.NewLine," "), clock.Elapsed));
+                     , String.Format("Execution of SQL ({0}...) took {1} seconds.", sqlToLog, clock.Elapsed));
         }
 
         /// <summary>
