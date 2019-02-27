@@ -26,76 +26,11 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=TramTrackerLiveCopy;Integrated S" +
-            "ecurity=True")]
-        public string TramTrackerExisting {
-            get {
-                return ((string)(this["TramTrackerExisting"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=TramTracker;Integrated Security=" +
             "True")]
-        public string TramTrackerNew {
+        public string TramTrackerDB {
             get {
-                return ((string)(this["TramTrackerNew"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("E:\\")]
-        public string FilePathForResults {
-            get {
-                return ((string)(this["FilePathForResults"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("smtp.mailgun.org")]
-        public string SmtpHost {
-            get {
-                return ((string)(this["SmtpHost"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SmtpUsername {
-            get {
-                return ((string)(this["SmtpUsername"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string SmtpPassword {
-            get {
-                return ((string)(this["SmtpPassword"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dev@inoutput.io")]
-        public string ComparisonSummaryEmailFrom {
-            get {
-                return ((string)(this["ComparisonSummaryEmailFrom"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("anthony@inoutput.io")]
-        public string ComparisonSummaryEmailsTo {
-            get {
-                return ((string)(this["ComparisonSummaryEmailsTo"]));
+                return ((string)(this["TramTrackerDB"]));
             }
         }
     }

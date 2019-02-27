@@ -63,6 +63,8 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int SCHEDULE_TRANSFORMATION_ERROR = 1005;
         public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_ERROR = 1006;
         public const int COPY_TO_LIVE_FAILED = 1008;
+
+        public const int SIDE_BY_SIDE_ERROR = 1100;
         #endregion
     }
 

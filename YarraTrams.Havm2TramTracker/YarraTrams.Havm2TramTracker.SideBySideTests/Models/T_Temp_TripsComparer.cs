@@ -15,84 +15,140 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
         }
 
         /// <summary>
-        /// Returns a DataTable listing Trips that are present in Existing but not in New.
+        /// Returns a SQL string that, when executed:
+        /// - Compares data in two T_Temp_trips tables, finding data in the first that's not in the second
+        /// - Inserts results in to Havm2TTComparison_T_Temp_Trips_MissingFromNew
         /// </summary>
-        public override DataTable GetExistingRowsMissingFromNew()
+        public override string GetMissingFromNewSql(int runId)
         {
-            Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable existingRows = CastRows(base.ExistingData);
-            Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable newRows = CastRows(base.NewData);
+            string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_Trips_MissingFromNew
+                                        SELECT {0},
+                                        live.TripID,
+                                        live.RunNo,
+                                        live.RouteNo,
+                                        live.FirstTP,
+                                        live.FirstTime,
+                                        live.EndTP,
+                                        live.EndTime,
+                                        live.AtLayoverTime,
+                                        live.NextRouteNo,
+                                        live.UpDirection,
+                                        live.LowFloor,
+                                        live.TripDistance,
+                                        live.PublicTrip,
+                                        live.[DayOfWeek]
+                                        FROM T_Temp_Trips live
+                                        LEFT JOIN T_Temp_Trips_TTBU new ON new.TripID = live.TripID
+                                        WHERE new.TripID IS NULL", runId);
 
-            var excludedIDs = new HashSet<int>(newRows.Select(n => n.TripID));
-            var existingTripsMissingFromNew = existingRows.Where(e => !excludedIDs.Contains(e.TripID));
-
-            if (existingTripsMissingFromNew.Count() > 0)
-            {
-                return existingTripsMissingFromNew.CopyToDataTable(); 
-            }
-            else
-            {
-                return new DataTable();
-            }
+            return sql;
         }
 
         /// <summary>
-        /// Returns a DataTable listing Trips that are present in New but are not present in Existing.
+        /// Returns a SQL string that, when executed:
+        /// - Compares data in two T_Temp_trips tables, finding data in the second that's not in the first
+        /// - Inserts results in to Havm2TTComparison_T_Temp_TripsExtraInNew
         /// </summary>
-        public override DataTable GetNewRowsNotInExisting()
+        public override string GetExtraInNewSql(int runId)
         {
-            Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable existingRows = CastRows(base.ExistingData);
-            Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable newRows = CastRows(base.NewData);
+            string sql = string.Format(@"INSERT Havm2TTComparison_T_Temp_TripsExtraInNew
+                                        SELECT {0},
+                                        new.TripID,		
+                                        new.RunNo,
+                                        new.RouteNo,
+                                        new.FirstTP,
+                                        new.FirstTime,
+                                        new.EndTP,
+                                        new.EndTime,
+                                        new.AtLayoverTime,
+                                        new.NextRouteNo,
+                                        new.UpDirection,
+                                        new.LowFloor,
+                                        new.TripDistance,
+                                        new.PublicTrip,
+                                        new.[DayOfWeek]		
+                                        FROM T_Temp_Trips_TTBU new
+                                        LEFT JOIN T_Temp_Trips live ON live.TripID = new.TripID
+                                        WHERE live.TripID IS NULL", runId);
 
-            var excludedIDs = new HashSet<int>(existingRows.Select(e => e.TripID));
-            var newTripsNotInExisting = newRows.Where(n => !excludedIDs.Contains(n.TripID));
-
-            if (newTripsNotInExisting.Count() > 0)
-            {
-                return newTripsNotInExisting.CopyToDataTable();
-            }
-            else
-            {
-                return new DataTable();
-            }
+            return sql;
         }
 
         /// <summary>
-        /// Returns a list of matching Trips that differ in some way.
+        /// Returns a SQL string that, when executed:
+        /// - Compares data in two T_Temp_trips tables, finding data between that two with matching keys but non matching detail
+        /// - Inserts results in to Havm2TTComparison_T_Temp_TripsDiffering
         /// </summary>
-        public override List<RowPair> GetDifferingRows()
+        public override string GetDifferingSql(int runId)
         {
-            Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable existingRows = CastRows(base.ExistingData);
-            Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable newRows = CastRows(base.NewData);
+            string sql = string.Format(@"CREATE TABLE #Diffs (Id uniqueidentifier, TripID int, [DayOfWeek] int)
 
-            var existingTripsThatDifferFromNew = from existingTrips in existingRows
-                                                 from newTrips in newRows.Where(mapping => mapping.TripID == existingTrips.TripID)
-                                                 where !(existingTrips.RunNo == newTrips.RunNo
-                                                        && existingTrips.RouteNo == newTrips.RouteNo
-                                                        && existingTrips.FirstTP == newTrips.FirstTP
-                                                        && existingTrips.FirstTime == newTrips.FirstTime
-                                                        && existingTrips.EndTP == newTrips.EndTP
-                                                        && existingTrips.EndTime == newTrips.EndTime
-                                                        && existingTrips.AtLayoverTime == newTrips.AtLayoverTime
-                                                        && existingTrips.NextRouteNo == newTrips.NextRouteNo
-                                                        && existingTrips.UpDirection == newTrips.UpDirection
-                                                        && existingTrips.LowFloor == newTrips.LowFloor
-                                                        && existingTrips.TripDistance == newTrips.TripDistance
-                                                        && existingTrips.PublicTrip == newTrips.PublicTrip
-                                                        && existingTrips.DayOfWeek == newTrips.DayOfWeek)
-                                                 select new RowPair { ExistingRow = existingTrips, NewRow = newTrips };
+                                    INSERT #Diffs
+                                    SELECT NewID(), live.TripID, live.[DayOfWeek]	
+                                    FROM T_Temp_Trips live
+                                    JOIN T_Temp_Trips_TTBU new ON new.TripID = live.TripID
+	                                    AND new.[DayOfWeek]  = live.[DayOfWeek]
+                                    WHERE
+                                    NOT (live.TripID = new.TripID
+                                    AND live.RunNo = new.RunNo 
+                                    AND live.RouteNo = new.RouteNo
+                                    AND live.FirstTP = new.FirstTP
+                                    AND live.FirstTime = new.FirstTime
+                                    AND live.EndTP = new.EndTP 
+                                    AND live.EndTime = new.EndTime
+                                    AND live.AtLayoverTime = new.AtLayoverTime
+                                    AND live.NextRouteNo = new.NextRouteNo
+                                    AND live.UpDirection = new.UpDirection
+                                    AND live.LowFloor = new.LowFloor
+                                    AND live.TripDistance = new.TripDistance
+                                    AND live.PublicTrip = new.PublicTrip
+                                    AND live.[DayOfWeek] = new.[DayOfWeek])
 
-            return existingTripsThatDifferFromNew.ToList<RowPair>();
-        }
+                                    INSERT Havm2TTComparison_T_Temp_TripsDiffering
+                                    SELECT {0},
+                                    #Diffs.Id,
+                                    1,
+                                    live.TripID,
+                                    live.RunNo,
+                                    live.RouteNo,
+                                    live.FirstTP,
+                                    live.FirstTime,
+                                    live.EndTP,
+                                    live.EndTime,
+                                    live.AtLayoverTime,
+                                    live.NextRouteNo,
+                                    live.UpDirection,
+                                    live.LowFloor,
+                                    live.TripDistance,
+                                    live.PublicTrip,
+                                    live.[DayOfWeek]
+                                    FROM T_Temp_Trips live
+                                    JOIN #Diffs ON #Diffs.TripID = live.TripID
+			                                    AND #Diffs.[DayOfWeek] = live.[DayOfWeek]
 
-        /// <summary>
-        /// Converts a generic DataTable in to a (typed) T_Temp_TripsDataTable.
-        /// </summary>
-        private Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable CastRows(DataTable rows)
-        {
-            var castedRows = new Havm2TramTracker.Models.TramTrackerDataSet.T_Temp_TripsDataTable();
-            castedRows.Merge(rows);
+                                    INSERT Havm2TTComparison_T_Temp_TripsDiffering
+                                    SELECT {0},
+                                    #Diffs.Id,
+                                    0,
+                                    new.TripID,
+                                    new.RunNo,
+                                    new.RouteNo,
+                                    new.FirstTP,
+                                    new.FirstTime,
+                                    new.EndTP,
+                                    new.EndTime,
+                                    new.AtLayoverTime,
+                                    new.NextRouteNo,
+                                    new.UpDirection,
+                                    new.LowFloor,
+                                    new.TripDistance,
+                                    new.PublicTrip,
+                                    new.[DayOfWeek]		
+                                    FROM T_Temp_Trips_TTBU new
+                                    JOIN #Diffs ON #Diffs.TripID = new.TripID
+			                        AND #Diffs.[DayOfWeek] = new.[DayOfWeek]", runId);
 
-            return castedRows;
+            return sql;
         }
     }
 }
