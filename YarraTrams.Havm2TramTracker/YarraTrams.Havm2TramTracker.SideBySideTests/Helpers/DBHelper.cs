@@ -85,12 +85,12 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
         }
 
         /// <summary>
-        /// Populates a DataTable using data from the database specified in the passed-in connection string.
+        /// Populates a DataTable using data from the database specified in the passed-in SQL.
         /// </summary>
-        public static DataTable GetData(string tableName)
+        public static DataTable GetData(string sql)
         {
             DataTable dt = new DataTable();
-            using (var da = new SqlDataAdapter(string.Format("SELECT * FROM {0} WITH (NOLOCK)", tableName), Properties.Settings.Default.TramTrackerDB))
+            using (var da = new SqlDataAdapter(sql, Properties.Settings.Default.TramTrackerDB))
             {
                 da.Fill(dt);
             }
