@@ -36,7 +36,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
             }
 
             clock.Stop();
-            string sqlToLog = Regex.Replace(sql.Replace(Environment.NewLine, " "), @"\s+", " ").Substring(0, 50);
+            string sqlToLog = Regex.Replace(sql.Replace(Environment.NewLine, " "), @"\s+", " ").Substring(0, 100);
             LogWriter.Instance.LogWithoutDelay(EventLogCodes.SIDE_BY_SIDE_INFO
                      , String.Format("Execution of SQL ({0}...) took {1} seconds.", sqlToLog, clock.Elapsed));
         }
