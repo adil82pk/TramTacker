@@ -81,7 +81,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                             DECLARE @Identical int = @TotalExisting - @MissingFromNew - @Differing
 
                             INSERT Havm2TTComparisonRunTable
-                            VALUES ({1}, 'T_Temp_Trips', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId);
+                            VALUES ({1}, '{0}', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId);
 
             return sql;
         }
