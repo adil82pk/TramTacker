@@ -126,7 +126,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                     live.[DayOfWeek]
                                     FROM T_Temp_Trips live
                                     JOIN #Diffs ON #Diffs.TripID = live.TripID
-			                            AND #Diffs.[DayOfWeek] = live.[DayOfWeek]
+                                        AND #Diffs.[DayOfWeek] = live.[DayOfWeek]
 
                                     INSERT Havm2TTComparison_T_Temp_Trips_Differing
                                     SELECT {0},
@@ -148,7 +148,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                     new.[DayOfWeek]		
                                     FROM T_Temp_Trips_TTBU new
                                     JOIN #Diffs ON #Diffs.TripID = new.TripID
-			                            AND #Diffs.[DayOfWeek] = new.[DayOfWeek]", runId);
+                                       AND #Diffs.[DayOfWeek] = new.[DayOfWeek]", runId);
 
             return sql;
         }
