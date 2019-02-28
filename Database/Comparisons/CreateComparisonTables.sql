@@ -62,7 +62,7 @@ GO
 ALTER TABLE Havm2TTComparison_T_Temp_Schedules_MissingFromNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Schedules_MissingFromNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
 
-CREATE TABLE Havm2TTComparison_T_Temp_TripsExtraInNew (
+CREATE TABLE Havm2TTComparison_T_Temp_Trips_ExtraInNew (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
 ,[TripID] [int] NULL
@@ -79,13 +79,13 @@ Id int IDENTITY(1,1) NOT NULL
 ,[TripDistance] [decimal](6, 3) NULL
 ,[PublicTrip] [bit] NOT NULL
 ,[DayOfWeek] [tinyint] NOT NULL
-,CONSTRAINT [PK_Havm2TTComparison_T_Temp_TripsExtraInNew] PRIMARY KEY CLUSTERED ([Id] ASC)
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_Trips_ExtraInNew] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
 GO
-ALTER TABLE Havm2TTComparison_T_Temp_TripsExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_TripsExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+ALTER TABLE Havm2TTComparison_T_Temp_Trips_ExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Trips_ExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
 
-CREATE TABLE Havm2TTComparison_T_Temp_SchedulesExtraInNew (
+CREATE TABLE Havm2TTComparison_T_Temp_Schedules_ExtraInNew (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
 ,[TripID] [int] NOT NULL
@@ -97,13 +97,13 @@ Id int IDENTITY(1,1) NOT NULL
 ,[DayOfWeek] [tinyint] NOT NULL
 ,[LowFloor] [bit] NOT NULL
 ,[PublicTrip] [bit] NOT NULL
-,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesExtraInNew] PRIMARY KEY CLUSTERED ([Id] ASC)
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_Schedules_ExtraInNew] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
 GO
-ALTER TABLE Havm2TTComparison_T_Temp_SchedulesExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+ALTER TABLE Havm2TTComparison_T_Temp_Schedules_ExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Schedules_ExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
 
-CREATE TABLE Havm2TTComparison_T_Temp_TripsDiffering (
+CREATE TABLE Havm2TTComparison_T_Temp_Trips_Differing (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
 ,PairIdentifier uniqueidentifier NOT NULL
@@ -122,13 +122,13 @@ Id int IDENTITY(1,1) NOT NULL
 ,[TripDistance] [decimal](6, 3) NULL
 ,[PublicTrip] [bit] NOT NULL
 ,[DayOfWeek] [tinyint] NOT NULL
-,CONSTRAINT [PK_Havm2TTComparison_T_Temp_TripsDiffering] PRIMARY KEY CLUSTERED ([Id] ASC)
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_Trips_Differing] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
 GO
-ALTER TABLE Havm2TTComparison_T_Temp_TripsDiffering WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_TripsDiffering_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+ALTER TABLE Havm2TTComparison_T_Temp_Trips_Differing WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Trips_Differing_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
 
-CREATE TABLE Havm2TTComparison_T_Temp_SchedulesDiffering (
+CREATE TABLE Havm2TTComparison_T_Temp_Schedules_Differing (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
 ,PairIdentifier uniqueidentifier NOT NULL
@@ -142,8 +142,8 @@ Id int IDENTITY(1,1) NOT NULL
 ,[DayOfWeek] [tinyint] NOT NULL
 ,[LowFloor] [bit] NOT NULL
 ,[PublicTrip] [bit] NOT NULL
-,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesDiffering] PRIMARY KEY CLUSTERED ([Id] ASC)
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_Schedules_Differing] PRIMARY KEY CLUSTERED ([Id] ASC)
 )
 GO
-ALTER TABLE Havm2TTComparison_T_Temp_SchedulesDiffering WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesDiffering_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+ALTER TABLE Havm2TTComparison_T_Temp_Schedules_Differing WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Schedules_Differing_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO

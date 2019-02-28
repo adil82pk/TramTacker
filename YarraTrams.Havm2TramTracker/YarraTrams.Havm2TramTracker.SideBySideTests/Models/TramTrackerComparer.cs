@@ -54,14 +54,14 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
             DBHelper.ExecuteSQL(GetDifferingSql(runId));
 
             LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running Summary SQL for {0}.", this.TableName));
-            DBHelper.ExecuteSQL(GetSummarySql(runId));
+            DBHelper.ExecuteSQL(GetSummaryInsertSql(runId));
         }
 
         /// <summary>
         /// Returns a SQL string that, when executed:
         /// - Inserts a summary record in to Havm2TTComparisonRunTable
         /// </summary>
-        private string GetSummarySql(int runId)
+        private string GetSummaryInsertSql(int runId)
         {
             string sql = string.Format(@"DECLARE @TotalExisting int = 0
                             SELECT @TotalExisting = COUNT(*) FROM {0}
@@ -73,17 +73,40 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                             SELECT @MissingFromNew = COUNT(*) FROM Havm2TTComparison_{0}_MissingFromNew WHERE Havm2TTComparisonRunId = {1}
 
                             DECLARE @ExtraInNew int = 0
-                            SELECT @ExtraInNew = COUNT(*) FROM Havm2TTComparison_{0}ExtraInNew WHERE Havm2TTComparisonRunId = {1}
+                            SELECT @ExtraInNew = COUNT(*) FROM Havm2TTComparison_{0}_ExtraInNew WHERE Havm2TTComparisonRunId = {1}
 
                             DECLARE @Differing int = 0
-                            SELECT @Differing = COUNT(*) FROM Havm2TTComparison_{0}Differing WHERE Havm2TTComparisonRunId = {1} AND IsExisting = 1
+                            SELECT @Differing = COUNT(*) FROM Havm2TTComparison_{0}_Differing WHERE Havm2TTComparisonRunId = {1} AND IsExisting = 1
 
                             DECLARE @Identical int = @TotalExisting - @MissingFromNew - @Differing
 
                             INSERT Havm2TTComparisonRunTable
-                            VALUES ({1}, 'T_Temp_Trips', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId);
+                            VALUES ({1}, '{0}', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId);
 
             return sql;
+        }
+
+        /// <summary>
+        /// Returns a DataTable showing every summary record for this table for the past X days.
+        /// </summary>
+        public DataTable GetSummaryHistory(int daysBack)
+        {
+            string sql = string.Format(@"SELECT rt.TableName,
+                                        r.RunTime,
+                                        TotalRecordsExisting,
+                                        TotalRecordsNew,
+                                        RecordsIdentical,
+                                        RecordsMissingFromNew,
+                                        RecordsExtraInNew,
+                                        RecordsDiffering,
+                                        r.Id [RunId]
+                                        FROM Havm2TTComparisonRun r
+                                        JOIN Havm2TTComparisonRunTable rt ON rt.Havm2TTComparisonRunId = r.Id
+                                        WHERE DATEDIFF(day, r.RunTime, GETDATE()) < {0}
+                                        AND rt.TableName = '{1}'
+                                        ORDER BY r.RunTime DESC", daysBack, this.TableName);
+
+            return DBHelper.GetData(sql);
         }
     }
 }

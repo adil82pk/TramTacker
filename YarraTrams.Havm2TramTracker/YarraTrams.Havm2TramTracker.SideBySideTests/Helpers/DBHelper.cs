@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
 
@@ -35,8 +36,9 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
             }
 
             clock.Stop();
+            string sqlToLog = Regex.Replace(sql.Replace(Environment.NewLine, " "), @"\s+", " ").Substring(0, 100);
             LogWriter.Instance.LogWithoutDelay(EventLogCodes.SIDE_BY_SIDE_INFO
-                     , String.Format("Execution of SQL ({0}...) took {1} seconds.", sql.Substring(0, 20).Replace(Environment.NewLine," "), clock.Elapsed));
+                     , String.Format("Execution of SQL ({0}...) took {1} seconds.", sqlToLog, clock.Elapsed));
         }
 
         /// <summary>
@@ -83,12 +85,12 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
         }
 
         /// <summary>
-        /// Populates a DataTable using data from the database specified in the passed-in connection string.
+        /// Populates a DataTable using data from the database specified in the passed-in SQL.
         /// </summary>
-        public static DataTable GetData(string tableName)
+        public static DataTable GetData(string sql)
         {
             DataTable dt = new DataTable();
-            using (var da = new SqlDataAdapter(string.Format("SELECT * FROM {0} WITH (NOLOCK)", tableName), Properties.Settings.Default.TramTrackerDB))
+            using (var da = new SqlDataAdapter(sql, Properties.Settings.Default.TramTrackerDB))
             {
                 da.Fill(dt);
             }
