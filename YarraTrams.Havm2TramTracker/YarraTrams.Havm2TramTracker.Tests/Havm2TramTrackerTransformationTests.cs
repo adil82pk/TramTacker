@@ -393,13 +393,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestArrivalTimeTransformationWithEarlyMorningArrival()
         {
             // arrange
-            TimeSpan passingTime = new TimeSpan(5,1,0);
+            int passingTimeSam = 18060;
             const string expectedResult = " 5:01   ";
 
             var stop = new HavmTripStop
             {
                 HastusStopId = "1",
-                PassingTime = passingTime
+                PassingTimeSam = passingTimeSam
             };
 
             var model = new Models.TramTrackerSchedulesDetails();
@@ -408,20 +408,20 @@ namespace YarraTrams.Havm2TramTracker.Tests
             string arrivalTime = model.GetArrivalTime(stop);
 
             // assert
-            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTime, arrivalTime);
+            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTimeSam, arrivalTime);
         }
 
         [TestMethod]
         public void TestArrivalTimeTransformationWithLateEveningArrival()
         {
             // arrange
-            TimeSpan passingTime = new TimeSpan(23, 1, 0);
+            int passingTimeSam = 82860;
             const string expectedResult = "23:01   ";
 
             var stop = new HavmTripStop
             {
                 HastusStopId = "1",
-                PassingTime = passingTime
+                PassingTimeSam = passingTimeSam
             };
 
             var model = new Models.TramTrackerSchedulesDetails();
@@ -430,7 +430,29 @@ namespace YarraTrams.Havm2TramTracker.Tests
             string arrivalTime = model.GetArrivalTime(stop);
 
             // assert
-            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTime, arrivalTime);
+            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTimeSam, arrivalTime);
+        }
+
+        [TestMethod]
+        public void TestArrivalTimeTransformationWithAfterMidnightArrival()
+        {
+            // arrange
+            int passingTimeSam = 86460;
+            const string expectedResult = " 0:01   ";
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = "1",
+                PassingTimeSam = passingTimeSam
+            };
+
+            var model = new Models.TramTrackerSchedulesDetails();
+
+            // act
+            string arrivalTime = model.GetArrivalTime(stop);
+
+            // assert
+            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTimeSam, arrivalTime);
         }
 
         #endregion

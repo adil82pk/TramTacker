@@ -48,7 +48,8 @@ namespace YarraTrams.Havm2TramTracker.Models
                 int stopNum = 1;
                 foreach (var stop in Stops)
                 {
-                    output.AppendFormat("        Stop {0:d}: {1} arriving at {2:c}{3}", stopNum, stop.HastusStopId, stop.PassingTime, Environment.NewLine);
+                    TimeSpan passingTime = new TimeSpan(0, 0, stop.PassingTimeSam);
+                    output.AppendFormat("        Stop {0:d}: {1} arriving at {2:c} ({3} SaM){4}", stopNum, stop.HastusStopId, passingTime, stop.PassingTimeSam, Environment.NewLine);
                     stopNum++;
                 }
             } else
