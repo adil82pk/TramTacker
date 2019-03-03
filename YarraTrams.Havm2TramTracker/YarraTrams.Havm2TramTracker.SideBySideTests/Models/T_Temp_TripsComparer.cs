@@ -38,9 +38,9 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                         live.PublicTrip,
                                         live.[DayOfWeek]
                                         FROM T_Temp_Trips live
-                                        LEFT JOIN T_Temp_Trips_TTBU new ON new.TripID = live.TripID
+                                        LEFT JOIN T_Temp_Trips{1} new ON new.TripID = live.TripID
                                             AND new.DayOfWeek = live.DayOfWeek
-                                        WHERE new.TripID IS NULL", runId);
+                                        WHERE new.TripID IS NULL", runId, Processor.Helpers.SettingsExposer.DbTableSuffix());
 
             return sql;
         }
@@ -67,11 +67,11 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                         new.LowFloor,
                                         new.TripDistance,
                                         new.PublicTrip,
-                                        new.[DayOfWeek]		
-                                        FROM T_Temp_Trips_TTBU new
+                                        new.[DayOfWeek]
+                                        FROM T_Temp_Trips{1} new
                                         LEFT JOIN T_Temp_Trips live ON live.TripID = new.TripID
                                             AND live.DayOfWeek = new.DayOfWeek
-                                        WHERE live.TripID IS NULL", runId);
+                                        WHERE live.TripID IS NULL", runId, Processor.Helpers.SettingsExposer.DbTableSuffix());
 
             return sql;
         }
@@ -88,7 +88,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                     INSERT #Diffs
                                     SELECT NewID(), live.TripID, live.[DayOfWeek]	
                                     FROM T_Temp_Trips live
-                                    JOIN T_Temp_Trips_TTBU new ON new.TripID = live.TripID
+                                    JOIN T_Temp_Trips{1} new ON new.TripID = live.TripID
 	                                    AND new.[DayOfWeek]  = live.[DayOfWeek]
                                     WHERE
                                     NOT (live.TripID = new.TripID
@@ -145,10 +145,10 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                     new.LowFloor,
                                     new.TripDistance,
                                     new.PublicTrip,
-                                    new.[DayOfWeek]		
-                                    FROM T_Temp_Trips_TTBU new
+                                    new.[DayOfWeek]
+                                    FROM T_Temp_Trips{1} new
                                     JOIN #Diffs ON #Diffs.TripID = new.TripID
-                                       AND #Diffs.[DayOfWeek] = new.[DayOfWeek]", runId);
+                                       AND #Diffs.[DayOfWeek] = new.[DayOfWeek]", runId, Processor.Helpers.SettingsExposer.DbTableSuffix());
 
             return sql;
         }

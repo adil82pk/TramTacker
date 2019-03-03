@@ -67,7 +67,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                             SELECT @TotalExisting = COUNT(*) FROM {0}
 
                             DECLARE @TotalNew int = 0
-                            SELECT @TotalNew = COUNT(*) FROM {0}_TTBU
+                            SELECT @TotalNew = COUNT(*) FROM {0}{2}
 
                             DECLARE @MissingFromNew int = 0
                             SELECT @MissingFromNew = COUNT(*) FROM Havm2TTComparison_{0}_MissingFromNew WHERE Havm2TTComparisonRunId = {1}
@@ -81,7 +81,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                             DECLARE @Identical int = @TotalExisting - @MissingFromNew - @Differing
 
                             INSERT Havm2TTComparisonRunTable
-                            VALUES ({1}, '{0}', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId);
+                            VALUES ({1}, '{0}', @TotalExisting, @TotalNew, @Identical, @MissingFromNew, @ExtraInNew, @Differing)", this.TableName, runId, Processor.Helpers.SettingsExposer.DbTableSuffix());
 
             return sql;
         }
