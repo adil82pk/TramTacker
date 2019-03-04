@@ -107,13 +107,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Stops = new List<Models.HavmTripStop> {
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            PassingTimeSam = 3600,
                             HastusStopId = "1626",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            PassingTimeSam = 7200,
                             HastusStopId = "3398",
                             IsMonitoredOPRReliability = true
                         }
@@ -158,13 +158,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Stops = new List<Models.HavmTripStop> {
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            PassingTimeSam = 3600,
                             HastusStopId = "1626",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            PassingTimeSam = 7200,
                             HastusStopId = "3398",
                             IsMonitoredOPRReliability = true
                         }
@@ -209,13 +209,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Stops = new List<Models.HavmTripStop> {
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            PassingTimeSam = 3600,
                             HastusStopId = "1626",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            PassingTimeSam = 7200,
                             HastusStopId = "3398",
                             IsMonitoredOPRReliability = true
                         }
