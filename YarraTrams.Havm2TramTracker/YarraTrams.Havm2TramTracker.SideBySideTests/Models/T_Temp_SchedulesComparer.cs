@@ -88,7 +88,6 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
                                         AND live.RunNo = new.RunNo 
                                         AND live.StopID = new.StopID
                                         AND live.RouteNo = new.RouteNo
-                                        AND live.OPRTimePoint = new.OPRTimePoint
                                         AND live.Time = new.Time 
                                         AND live.DayOfWeek = new.DayOfWeek
                                         AND live.LowFloor = new.LowFloor
