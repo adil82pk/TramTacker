@@ -135,11 +135,31 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
+        public void TestAtLayoverTransformationWithFigureGreaterThanOrEqualToAnHour()
+        {
+            // arrange
+            const int headway = 3600; //Seconds
+            const short expectedResult = 0; //Minute //This should be 60 but, to maintain parity with HASTUS to TramTracker, we trim the hours so the result is less than 60 mins. See actual code for more info.
+            var trip = new Models.HavmTrip
+            {
+                HeadwayNextSeconds = headway //Ignoring all other properties
+            };
+
+            var model = new Models.TramTrackerTrips();
+
+            // act
+            var atLayover = model.GetAtLayovertime(trip);
+
+            // assert
+            Assert.IsTrue(atLayover == expectedResult, "Expecting value {0} from input of \"{1}\" but got {2} instead.", expectedResult, headway, atLayover);
+        }
+
+        [TestMethod]
         public void TestAtLayoverTransformationWithFigureOutside2ByteRange()
         {
             // arrange
             const int headway = 32768 * 60; //Seconds
-            const short expectedResult = 32767; //Minute
+            const short expectedResult = 7; //Minute //This should be 32767 but, to maintain parity with HASTUS to TramTracker, we trim the hours so the result is less than 60 mins. See actual code for more info.
             var trip = new Models.HavmTrip
             {
                 HeadwayNextSeconds = headway //Ignoring all other properties
