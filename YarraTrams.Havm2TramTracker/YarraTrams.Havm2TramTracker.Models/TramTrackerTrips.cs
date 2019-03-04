@@ -33,15 +33,15 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.RunNo = this.GetRunNumberShortForm(havmTrip);
             this.RouteNo = this.GetRouteNumberUsingHeadboard(havmTrip);
             this.FirstTP = havmTrip.StartTimepoint;
-            this.FirstTime = (int)havmTrip.StartTime.TotalSeconds;
+            this.FirstTime = havmTrip.StartTimeSam;
             this.EndTP = havmTrip.EndTimepoint;
-            this.EndTime = (int)havmTrip.EndTime.TotalSeconds - 1;//Todo: Investigate this. Why is TT making all trips end 1 second early?
+            this.EndTime = havmTrip.EndTimeSam - 1;
             this.AtLayoverTime = this.GetAtLayovertime(havmTrip);
             this.NextRouteNo = this.GetNextRouteNo(havmTrip);
             this.UpDirection = this.GetUpDirection(havmTrip);
             this.LowFloor = this.GetLowFloor(havmTrip);
             this.TripDistance = this.GetTripDistance(havmTrip);
-            this.PublicTrip = havmTrip.IsPublic; //Todo: Confirm whether we bother filtering non public trips or we trust HAVM2.
+            this.PublicTrip = havmTrip.IsPublic;
             this.DayOfWeek = this.GetDayOfWeek(havmTrip);
         }
 

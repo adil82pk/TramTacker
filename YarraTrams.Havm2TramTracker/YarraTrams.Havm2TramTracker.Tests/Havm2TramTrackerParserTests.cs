@@ -21,9 +21,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Block = "Block 1",
                 Headboard = "86",
                 StartTimepoint = "ncob",
-                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                StartTimeSam = 3600,
                 EndTimepoint = "mpnd",
-                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                EndTimeSam = 7200,
                 HeadwayNextSeconds = 120,
                 NextRoute = "86",
                 Direction = "DOWN",
@@ -58,9 +58,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Block = "Block 1",
                 Headboard = "86",
                 StartTimepoint = "ncob",
-                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                StartTimeSam = 3600,
                 EndTimepoint = "mpnd",
-                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                EndTimeSam = 7200,
                 HeadwayNextSeconds = 120,
                 NextRoute = "86",
                 Direction = "ZIGZAG",
@@ -94,9 +94,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Headboard = "86",
                 Route = "86",
                 StartTimepoint = "ncob",
-                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                StartTimeSam = 3600,
                 EndTimepoint = "mpnd",
-                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                EndTimeSam = 7200,
                 HeadwayNextSeconds = 120,
                 NextRoute = "86",
                 Direction = "DOWN",
@@ -107,13 +107,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Stops = new List<Models.HavmTripStop> {
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            PassingTimeSam = 3600,
                             HastusStopId = "1626",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            PassingTimeSam = 7200,
                             HastusStopId = "3398",
                             IsMonitoredOPRReliability = true
                         }
@@ -145,9 +145,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Headboard = "86",
                 Route = "86",
                 StartTimepoint = "ncob",
-                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                StartTimeSam = 3600,
                 EndTimepoint = "mpnd",
-                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                EndTimeSam = 7200,
                 HeadwayNextSeconds = 120,
                 NextRoute = "86",
                 Direction = "DOWN",
@@ -158,13 +158,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Stops = new List<Models.HavmTripStop> {
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            PassingTimeSam = 3600,
                             HastusStopId = "1626",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            PassingTimeSam = 7200,
                             HastusStopId = "3398",
                             IsMonitoredOPRReliability = true
                         }
@@ -196,9 +196,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Headboard = "86",
                 Route = "86",
                 StartTimepoint = "ncob",
-                StartTime = new TimeSpan(0, 1, 0, 0, 0),
+                StartTimeSam = 3600,
                 EndTimepoint = "mpnd",
-                EndTime = new TimeSpan(0, 2, 0, 0, 0),
+                EndTimeSam = 7200,
                 HeadwayNextSeconds = 120,
                 NextRoute = "86",
                 Direction = "DOWN",
@@ -209,13 +209,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 Stops = new List<Models.HavmTripStop> {
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 1, 0, 0, 0),
+                            PassingTimeSam = 3600,
                             HastusStopId = "1626",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
                         {
-                            PassingTime = new TimeSpan(0, 2, 0, 0, 0),
+                            PassingTimeSam = 7200,
                             HastusStopId = "3398",
                             IsMonitoredOPRReliability = true
                         }
@@ -245,9 +245,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                     ""block"": ""gh02- 27 This is wrong"",
                                     ""displayCode"": ""61"",
                                     ""startTimepoint"": ""ebtn"",
-                                    ""startTime"": ""00:00:00"",
+                                    ""startTimeSam"": 86400,
                                     ""endTimepoint"": ""scj1"",
-                                    ""endTime"": ""00:06:00"",
+                                    ""endTimeSam"": 86760,
                                     ""headwayNextSeconds"": 0,
                                     ""nextDisplayCode"": ""61"",
                                     ""direction"": ""DOWN"",
@@ -342,9 +342,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                     ""block"": ""gh02- 27 This is wrong"",
                                     ""displayCode"": ""61"",
                                     ""startTimepoint"": ""ebtn"",
-                                    ""startTime"": ""00:00:00"",
+                                    ""startTimeSam"": 86400,
                                     ""endTimepoint"": ""scj1"",
-                                    ""endTime"": ""00:06:00"",
+                                    ""endTimeSam"": 86760,
                                     ""headwayNextSeconds"": 0,
                                     ""nextDisplayCode"": ""61"",
                                     ""direction"": ""DOWN"",
@@ -438,9 +438,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                     ""block"": ""gh02- 27 This is wrong"",
                                     ""displayCode"": ""61"",
                                     ""startTimepoint"": ""ebtn"",
-                                    ""startTime"": ""00:00:00"",
+                                    ""startTimeSam"": 86400,
                                     ""endTimepoint"": ""scj1"",
-                                    ""endTime"": ""00:06:00"",
+                                    ""endTimeSam"": 86760,
                                     ""headwayNextSeconds"": 0,
                                     ""nextDisplayCode"": ""61"",
                                     ""direction"": ""DOWN"",

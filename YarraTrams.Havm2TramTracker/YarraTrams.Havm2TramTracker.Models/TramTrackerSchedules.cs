@@ -32,7 +32,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.PublicTrip = havmTrip.IsPublic;
             this.OPRTimePoint = havmStop.IsMonitoredOPRReliability;
             this.StopID = this.GetStopId(havmStop, stopMapping);
-            this.Time = (int)havmStop.PassingTime.TotalSeconds;
+            this.Time = havmStop.PassingTimeSam;
         }
 
         /// <summary>

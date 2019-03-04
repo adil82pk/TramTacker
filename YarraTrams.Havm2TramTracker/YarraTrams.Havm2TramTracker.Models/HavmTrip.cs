@@ -13,9 +13,9 @@ namespace YarraTrams.Havm2TramTracker.Models
         public string Headboard { get; set; }
         public string Route { get; set; }
         public string StartTimepoint { get; set; }
-        public TimeSpan StartTime { get; set; }
+        public int StartTimeSam { get; set; }
         public string EndTimepoint { get; set; }
-        public TimeSpan EndTime { get; set; }
+        public int EndTimeSam { get; set; }
         public int HeadwayNextSeconds { get; set; }
         public string NextRoute { get; set; }
         public string Direction { get; set; }
@@ -37,9 +37,9 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("     Route: {0}{1}", Route, Environment.NewLine);
             output.AppendFormat("     DistanceMetres: {0:d}{1}", DistanceMetres, Environment.NewLine);
             output.AppendFormat("     NextRoute: {0}{1}", NextRoute, Environment.NewLine);
-            output.AppendFormat("     StartTime: {0:c}{1}", StartTime, Environment.NewLine);
+            output.AppendFormat("     StartTime (SAM): {0}{1}", StartTimeSam, Environment.NewLine);
             output.AppendFormat("     StartTimepoint: {0}{1}", StartTimepoint, Environment.NewLine);
-            output.AppendFormat("     EndTime: {0:c}{1}", EndTime, Environment.NewLine);
+            output.AppendFormat("     EndTime (SAM): {0}{1}", EndTimeSam, Environment.NewLine);
             output.AppendFormat("     EndTimepoint: {0}{1}", EndTimepoint, Environment.NewLine);
             output.AppendFormat("     VehicleType: {0}{1}", VehicleType, Environment.NewLine);
             if (Stops != null)
@@ -48,7 +48,8 @@ namespace YarraTrams.Havm2TramTracker.Models
                 int stopNum = 1;
                 foreach (var stop in Stops)
                 {
-                    output.AppendFormat("        Stop {0:d}: {1} arriving at {2:c}{3}", stopNum, stop.HastusStopId, stop.PassingTime, Environment.NewLine);
+                    TimeSpan passingTime = new TimeSpan(0, 0, stop.PassingTimeSam);
+                    output.AppendFormat("        Stop {0:d}: {1} arriving at {2:c} ({3} SaM){4}", stopNum, stop.HastusStopId, passingTime, stop.PassingTimeSam, Environment.NewLine);
                     stopNum++;
                 }
             } else

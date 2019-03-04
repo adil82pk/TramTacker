@@ -66,9 +66,10 @@ namespace YarraTrams.Havm2TramTracker.Models
         /// <returns></returns>
         public string GetArrivalTime(HavmTripStop tripStop)
         {
-            string arrivalTime = tripStop.PassingTime.ToString(@"h\:mm");
+            TimeSpan passingTime = new TimeSpan(0, 0, tripStop.PassingTimeSam);
+            string arrivalTime = passingTime.ToString(@"h\:mm");
 
-            if (tripStop.PassingTime.Hours <= 9)
+            if (passingTime.Hours <= 9)
             {
                 arrivalTime = " " + arrivalTime;
             }

@@ -8,7 +8,7 @@ namespace YarraTrams.Havm2TramTracker.Models
 {
     public class HavmTripStop
     {
-        public TimeSpan PassingTime { get; set; }
+        public int PassingTimeSam { get; set; }
         public string HastusStopId { get; set; }
         public bool IsMonitoredOPRReliability { get; set; }
 
@@ -16,7 +16,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             StringBuilder output = new StringBuilder();
             output.AppendFormat("Stop HastusStopId: {0} on HastusTripId:{1}{2}", HastusStopId, hastusTripId, Environment.NewLine);
-            output.AppendFormat("     PassingTime: {0}{1}", PassingTime, Environment.NewLine);
+            output.AppendFormat("     PassingTime (SaM): {0}{1}", PassingTimeSam, Environment.NewLine);
             output.AppendFormat("     IsMonitoredOPRReliability: {0}{1}", IsMonitoredOPRReliability, Environment.NewLine);
 
             return output.ToString();
