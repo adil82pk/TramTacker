@@ -127,9 +127,9 @@ namespace YarraTrams.Havm2TramTracker.Tests
             schedules = schedulesService.FromHavmTrips(trips, false);
 
             // assert
-            Assert.IsTrue(trips.Select(x => x.Stops.Count()).Sum() == schedules.Count, "Number of records in DataTable ({1:d}) doesn't match number of total stops in Trip class list ({0:d}).", trips.Select(x => x.Stops.Count()).Sum(), schedules.Count);
+            Assert.IsTrue(trips.Select(x => x.Stops.Count()).Sum() == schedules.Count, "Number of records in schedules ({1:d}) doesn't match number of total stops in Trip class list ({0:d}).", trips.Select(x => x.Stops.Count()).Sum(), schedules.Count);
             //Todo: check more stuff. Everything! Only once we've settled on the data contract.
-            Assert.IsTrue(trips[0].HastusTripId == schedules[0].TripID, "TripId field in DataTable ({1}) doesn't match HastusTripId from Trip class ({0}).", trips[0].HastusTripId, schedules[0].TripID);
+            Assert.IsTrue(trips[0].HastusTripId == schedules[0].TripID, "TripId field in schedules ({1}) doesn't match HastusTripId from Trip class ({0}).", trips[0].HastusTripId, schedules[0].TripID);
         }
 
         [TestMethod]
@@ -282,7 +282,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // assert
             Assert.IsTrue(trips.Count == schedulesMasters.Count, "Number of records in {0} ({2:d}) doesn't match number of total trips in Trip class list ({1:d}).", schedulesMasters.GetType().Name, trips.Count, schedulesMasters.Count);
             //Todo: check more stuff. Everything! Only once we've settled on the data contract.
-            Assert.IsTrue(trips[0].Headboard == schedulesMasters[0].HeadboardNo, "HeadboardNo field in DataTable ({1}) doesn't match Headboard from Trip class ({0}).", trips[0].HastusTripId, schedulesMasters[0].HeadboardNo);
+            Assert.IsTrue(trips[0].Headboard == schedulesMasters[0].HeadboardNo, "HeadboardNo field in schedulesMasters ({1}) doesn't match Headboard from Trip class ({0}).", trips[0].HastusTripId, schedulesMasters[0].HeadboardNo);
         }
 
         [TestMethod]
