@@ -28,7 +28,7 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests
                 //Create Comparison Run parent record
                 runId = DBHelper.ExecuteSQLReturnInt(string.Format("INSERT Havm2TTComparisonRun VALUES ('{0}'); SELECT scope_identity()", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.FFF")));
 
-                LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running side-by-side comparisons. Run Id is {0}.", runId));
+                LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, string.Format("Running side-by-side comparisons. Run Id is {0}. Suffix for new tables is '{1}'.", runId, Processor.Helpers.SettingsExposer.DbTableSuffix()));
 
                 // T_Temp_Trips
                 LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, "Comparing T_Temp_Trips.");
