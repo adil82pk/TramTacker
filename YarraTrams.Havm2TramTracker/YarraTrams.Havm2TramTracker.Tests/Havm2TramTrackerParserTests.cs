@@ -133,6 +133,108 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
+        public void TestTripsToSchedulesWithNonPublicTrip()
+        {
+            // arrange
+            var trips = new List<Models.HavmTrip>();
+
+            trips.Add(new Models.HavmTrip
+            {
+                HastusTripId = 1,
+                Block = "Block 1",
+                Headboard = "86",
+                StartTimepoint = "ncob",
+                StartTimeSam = 3600,
+                EndTimepoint = "mpnd",
+                EndTimeSam = 7200,
+                HeadwayNextSeconds = 120,
+                NextRoute = "86",
+                Direction = "DOWN",
+                VehicleType = "Z",
+                DistanceMetres = 10000,
+                IsPublic = false,
+                OperationalDay = new DateTime(2019, 2, 1),
+                Stops = new List<Models.HavmTripStop> {
+                    new HavmTripStop
+                        {
+                            PassingTimeSam = 3600,
+                            HastusStopId = "1626",
+                            IsMonitoredOPRReliability = true
+                        },
+                    new HavmTripStop
+                        {
+                            PassingTimeSam = 7200,
+                            HastusStopId = "3398",
+                            IsMonitoredOPRReliability = true
+                        }
+                    }
+            });
+
+            var schedulesService = new Processor.Services.TramTrackerSchedulesService();
+            List<Models.TramTrackerSchedules> schedules;
+
+            // act
+            schedules = schedulesService.FromHavmTrips(trips, false);
+
+            // assert
+            Assert.IsTrue(schedules.Count == 0, "Number of records in schedules ({0:d}) should be zero for a non public trip.", schedules.Count);
+        }
+
+        [TestMethod]
+        public void TestTripsToSchedulesWithUnknownStop()
+        {
+            // arrange
+            var trips = new List<Models.HavmTrip>();
+
+            trips.Add(new Models.HavmTrip
+            {
+                HastusTripId = 1,
+                Block = "Block 1",
+                Headboard = "86",
+                StartTimepoint = "ncob",
+                StartTimeSam = 3600,
+                EndTimepoint = "mpnd",
+                EndTimeSam = 7200,
+                HeadwayNextSeconds = 120,
+                NextRoute = "86",
+                Direction = "DOWN",
+                VehicleType = "Z",
+                DistanceMetres = 10000,
+                IsPublic = true,
+                OperationalDay = new DateTime(2019, 2, 1),
+                Stops = new List<Models.HavmTripStop> {
+                    new HavmTripStop
+                        {
+                            PassingTimeSam = 3600,
+                            HastusStopId = "1626",
+                            IsMonitoredOPRReliability = true
+                        },
+                    new HavmTripStop
+                        {
+                            PassingTimeSam = 5400,
+                            HastusStopId = "9998" /* Not a valid id */,
+                            IsMonitoredOPRReliability = true
+                        },
+                    new HavmTripStop
+                        {
+                            PassingTimeSam = 7200,
+                            HastusStopId = "3398",
+                            IsMonitoredOPRReliability = true
+                        }
+                    }
+            });
+
+            var schedulesService = new Processor.Services.TramTrackerSchedulesService();
+            List<Models.TramTrackerSchedules> schedules;
+
+            // act
+            schedules = schedulesService.FromHavmTrips(trips, false);
+
+            // assert
+            Assert.IsTrue(schedules.Count == 2, "Number of records in schedules ({0:d}) should be two for this trip because one of the three provided stops is invalid.", schedules.Count);
+        }
+
+        [TestMethod]
         public void TestTripsToSchedulesMasterWithGoodData()
         {
             // arrange
