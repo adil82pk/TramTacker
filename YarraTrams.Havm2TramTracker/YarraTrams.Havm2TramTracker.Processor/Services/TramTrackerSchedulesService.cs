@@ -47,32 +47,35 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                         fileWriter.Write(string.Format("\n\n{0}\nTrip {1}\n{0}", DateTime.Now, tripCounter, havmTrip.ToString())); fileWriter.Write(string.Format("\n\n{0}\nTrip {1}\n{0}", DateTime.Now, tripCounter, havmTrip.ToString()));
                     }
 
-                    foreach (HavmTripStop havmStop in havmTrip.Stops)
+                    if (havmTrip.IsPublic)
                     {
-                        try
+                        foreach (HavmTripStop havmStop in havmTrip.Stops)
                         {
-                            int stopID;
-                            int.TryParse(havmStop.HastusStopId, out stopID);
-                            if (stopMapping.ContainsKey(stopID))
+                            try
                             {
-                                modelCounter++;
-
-                                TramTrackerSchedules schedules = new TramTrackerSchedules();
-                                schedules.FromHavmTripAndStop(havmTrip, havmStop, stopMapping);
-                                scheduless.Add(schedules);
-
-
-                                if (logRowsToFilePriorToInsert)
+                                int stopID;
+                                int.TryParse(havmStop.HastusStopId, out stopID);
+                                if (stopMapping.ContainsKey(stopID))
                                 {
-                                    fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedules.ToString()));
+                                    modelCounter++;
+
+                                    TramTrackerSchedules schedules = new TramTrackerSchedules();
+                                    schedules.FromHavmTripAndStop(havmTrip, havmStop, stopMapping);
+                                    scheduless.Add(schedules);
+
+
+                                    if (logRowsToFilePriorToInsert)
+                                    {
+                                        fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedules.ToString()));
+                                    }
                                 }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            //This is catching an error with the trip-level data.
-                            errorMessages.Append(string.Format("Exception: {0}\n{1}\n", ex.Message, havmTrip.ToString()));
-                            exceptionCounts[havmTrip.OperationalDay.DayOfWeek]++;
+                            catch (Exception ex)
+                            {
+                                //This is catching an error with the stop-level data.
+                                errorMessages.Append(string.Format("Exception: {0}\n{1}\n", ex.Message, havmTrip.ToString()));
+                                exceptionCounts[havmTrip.OperationalDay.DayOfWeek]++;
+                            }
                         }
                     }
                 }
