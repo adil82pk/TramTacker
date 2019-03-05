@@ -54,15 +54,13 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                             try
                             {
                                 int stopID;
-                                int.TryParse(havmStop.HastusStopId, out stopID);
-                                if (stopMapping.ContainsKey(stopID))
+                                if (int.TryParse(havmStop.HastusStopId, out stopID))
                                 {
                                     modelCounter++;
 
                                     TramTrackerSchedules schedules = new TramTrackerSchedules();
                                     schedules.FromHavmTripAndStop(havmTrip, havmStop, stopMapping);
                                     scheduless.Add(schedules);
-
 
                                     if (logRowsToFilePriorToInsert)
                                     {

@@ -92,6 +92,10 @@ namespace YarraTrams.Havm2TramTracker.Models
                 {
                     return stopMapping[(stopID)];
                 }
+                else
+                {
+                    return stopID.ToString().PadRight(8);
+                }
             }
             throw new Exception(string.Format("Unable to find mapping for stop with Hastus Id of {0}. Is the DB table empty? Is this a new or invalid stop?", tripStop.HastusStopId));
         }
