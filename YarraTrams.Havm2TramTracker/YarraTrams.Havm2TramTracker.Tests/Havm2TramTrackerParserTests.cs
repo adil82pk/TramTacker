@@ -450,22 +450,22 @@ namespace YarraTrams.Havm2TramTracker.Tests
 
             // assert
             Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).", 1, trips.Count);
-            Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].HastusTripId), hastusTripID, trips[0].HastusTripId);
-            Assert.IsTrue(trips[0].Block == block, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Block), block, trips[0].Block);
-            Assert.IsTrue(trips[0].Headboard == headboard, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Headboard), headboard, trips[0].Headboard);
-            Assert.IsTrue(trips[0].Route == route, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Route), route, trips[0].Route);
-            Assert.IsTrue(trips[0].StartTimepoint == startTimepoint, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].StartTimepoint), startTimepoint, trips[0].StartTimepoint);
-            Assert.IsTrue(trips[0].StartTimeSam == startTimeSam, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].StartTimeSam), startTimeSam, trips[0].StartTimeSam);
-            Assert.IsTrue(trips[0].EndTimepoint == endTimepoint, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].EndTimepoint), endTimepoint, trips[0].EndTimepoint);
-            Assert.IsTrue(trips[0].EndTimeSam == endTimeSam, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].EndTimeSam), endTimeSam, trips[0].EndTimeSam);
-            Assert.IsTrue(trips[0].HeadwayNextSeconds == headwayNextSeconds, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].HeadwayNextSeconds), headwayNextSeconds, trips[0].HeadwayNextSeconds);
-            Assert.IsTrue(trips[0].NextRoute == nextRoute, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].NextRoute), nextRoute, trips[0].NextRoute);
-            Assert.IsTrue(trips[0].Direction == direction, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Direction), direction, trips[0].Direction);
-            Assert.IsTrue(trips[0].VehicleType == vehicleType, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].VehicleType), vehicleType, trips[0].VehicleType);
-            Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].DistanceMetres), distanceMetres, trips[0].DistanceMetres);
-            Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<bool>(() => trips[0].IsPublic), isPublic, trips[0].IsPublic);
-            Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<DateTime>(() => trips[0].OperationalDay), operationalDay, trips[0].OperationalDay);
-            Assert.IsTrue(trips[0].Stops.Count == stopCount, "Expecting {0} stops but found {1}.", stopCount, trips[0].Stops.Count);
+            Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting HastusTripId value of '{0}' but got '{1}'.", hastusTripID, trips[0].HastusTripId);
+            Assert.IsTrue(trips[0].Block == block, "Expecting Block value of '{0}' but got '{1}'.", block, trips[0].Block);
+            Assert.IsTrue(trips[0].Headboard == headboard, "Expecting Headboard value of '{0}' but got '{1}'.", headboard, trips[0].Headboard);
+            Assert.IsTrue(trips[0].Route == route, "Expecting Route value of '{0}' but got '{1}'.", route, trips[0].Route);
+            Assert.IsTrue(trips[0].StartTimepoint == startTimepoint, "Expecting StartTimepoint value of '{0}' but got '{1}'.", startTimepoint, trips[0].StartTimepoint);
+            Assert.IsTrue(trips[0].StartTimeSam == startTimeSam, "Expecting StartTimeSam value of '{0}' but got '{1}'.", startTimeSam, trips[0].StartTimeSam);
+            Assert.IsTrue(trips[0].EndTimepoint == endTimepoint, "Expecting EndTimepoint value of '{0}' but got '{1}'.", endTimepoint, trips[0].EndTimepoint);
+            Assert.IsTrue(trips[0].EndTimeSam == endTimeSam, "Expecting EndTimeSam value of '{0}' but got '{1}'.", endTimeSam, trips[0].EndTimeSam);
+            Assert.IsTrue(trips[0].HeadwayNextSeconds == headwayNextSeconds, "Expecting HeadwayNextSeconds value of '{0}' but got '{1}'.", headwayNextSeconds, trips[0].HeadwayNextSeconds);
+            Assert.IsTrue(trips[0].NextRoute == nextRoute, "Expecting NextRoute value of '{0}' but got '{1}'.", nextRoute, trips[0].NextRoute);
+            Assert.IsTrue(trips[0].Direction == direction, "Expecting Direction value of '{0}' but got '{1}'.", direction, trips[0].Direction);
+            Assert.IsTrue(trips[0].VehicleType == vehicleType, "Expecting VehicleType value of '{0}' but got '{1}'.", vehicleType, trips[0].VehicleType);
+            Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting DistanceMetres value of '{0}' but got '{1}'.", distanceMetres, trips[0].DistanceMetres);
+            Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting IsPublic value of '{0}' but got '{1}'.", isPublic, trips[0].IsPublic);
+            Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting OperationalDay value of '{0}' but got '{1}'.", operationalDay, trips[0].OperationalDay);
+            Assert.IsTrue(trips[0].Stops.Count == stopCount, "Expecting {0} stops but found {0}.", stopCount, trips[0].Stops.Count);
             Assert.IsTrue(trips[0].Stops[0].PassingTimeSam == firstStopPassingTimeSam, "We expected the PassingTime on the first stop of the first trip to be '{0}' but it appears to be '{1}' instead.", firstStopPassingTimeSam, trips[0].Stops[0].PassingTimeSam);
             Assert.IsTrue(trips[0].Stops[1].IsMonitoredOPRReliability == secondIsMonitoredOPRReliability, "We expected the isMonitoredOPRReliability on the second stop of the first trip to be '{0}' but it appears to be '{1}' instead.", secondIsMonitoredOPRReliability, trips[0].Stops[1].IsMonitoredOPRReliability);
             Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == lastStopId, "We expected the HastusStopId on the final stop of the first trip to be '{0}' but it appears to be '{1}' instead.", lastStopId, trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
@@ -584,21 +584,21 @@ namespace YarraTrams.Havm2TramTracker.Tests
             
             // assert
             Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).", 1, trips.Count);
-            Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].HastusTripId), hastusTripID, trips[0].HastusTripId);
-            Assert.IsTrue(trips[0].Block == block, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Block), block, trips[0].Block);
-            Assert.IsTrue(trips[0].Headboard == headboard, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Headboard), headboard, trips[0].Headboard);
-            Assert.IsTrue(trips[0].Route == route, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Route), route, trips[0].Route);
-            Assert.IsTrue(trips[0].StartTimepoint == startTimepoint, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].StartTimepoint), startTimepoint, trips[0].StartTimepoint);
-            Assert.IsTrue(trips[0].StartTimeSam == startTimeSam, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].StartTimeSam), startTimeSam, trips[0].StartTimeSam);
-            Assert.IsTrue(trips[0].EndTimepoint == endTimepoint, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].EndTimepoint), endTimepoint, trips[0].EndTimepoint);
-            Assert.IsTrue(trips[0].EndTimeSam == endTimeSam, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].EndTimeSam), endTimeSam, trips[0].EndTimeSam);
-            Assert.IsTrue(trips[0].HeadwayNextSeconds == headwayNextSeconds, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].HeadwayNextSeconds), headwayNextSeconds, trips[0].HeadwayNextSeconds);
-            Assert.IsTrue(trips[0].NextRoute == nextRoute, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].NextRoute), nextRoute, trips[0].NextRoute);
-            Assert.IsTrue(trips[0].Direction == direction, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].Direction), direction, trips[0].Direction);
-            Assert.IsTrue(trips[0].VehicleType == vehicleType, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<string>(() => trips[0].VehicleType), vehicleType, trips[0].VehicleType);
-            Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<int>(() => trips[0].DistanceMetres), distanceMetres, trips[0].DistanceMetres);
-            Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<bool>(() => trips[0].IsPublic), isPublic, trips[0].IsPublic);
-            Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting {0} value of '{1}' but got '{2}'.", NameOf<DateTime>(() => trips[0].OperationalDay), operationalDay, trips[0].OperationalDay);
+            Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting HastusTripId value of '{0}' but got '{1}'.", hastusTripID, trips[0].HastusTripId);
+            Assert.IsTrue(trips[0].Block == block, "Expecting Block value of '{0}' but got '{1}'.", block, trips[0].Block);
+            Assert.IsTrue(trips[0].Headboard == headboard, "Expecting Headboard value of '{0}' but got '{1}'.", headboard, trips[0].Headboard);
+            Assert.IsTrue(trips[0].Route == route, "Expecting Route value of '{0}' but got '{1}'.", route, trips[0].Route);
+            Assert.IsTrue(trips[0].StartTimepoint == startTimepoint, "Expecting StartTimepoint value of '{0}' but got '{1}'.", startTimepoint, trips[0].StartTimepoint);
+            Assert.IsTrue(trips[0].StartTimeSam == startTimeSam, "Expecting StartTimeSam value of '{0}' but got '{1}'.", startTimeSam, trips[0].StartTimeSam);
+            Assert.IsTrue(trips[0].EndTimepoint == endTimepoint, "Expecting EndTimepoint value of '{0}' but got '{1}'.", endTimepoint, trips[0].EndTimepoint);
+            Assert.IsTrue(trips[0].EndTimeSam == endTimeSam, "Expecting EndTimeSam value of '{0}' but got '{1}'.", endTimeSam, trips[0].EndTimeSam);
+            Assert.IsTrue(trips[0].HeadwayNextSeconds == headwayNextSeconds, "Expecting HeadwayNextSeconds value of '{0}' but got '{1}'.", headwayNextSeconds, trips[0].HeadwayNextSeconds);
+            Assert.IsTrue(trips[0].NextRoute == nextRoute, "Expecting NextRoute value of '{0}' but got '{1}'.", nextRoute, trips[0].NextRoute);
+            Assert.IsTrue(trips[0].Direction == direction, "Expecting Direction value of '{0}' but got '{1}'.", direction, trips[0].Direction);
+            Assert.IsTrue(trips[0].VehicleType == vehicleType, "Expecting VehicleType value of '{0}' but got '{1}'.", vehicleType, trips[0].VehicleType);
+            Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting DistanceMetres value of '{0}' but got '{1}'.", distanceMetres, trips[0].DistanceMetres);
+            Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting IsPublic value of '{0}' but got '{1}'.", isPublic, trips[0].IsPublic);
+            Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting OperationalDay value of '{0}' but got '{1}'.", operationalDay, trips[0].OperationalDay);
             Assert.IsTrue(trips[0].Stops.Count == stopCount,"Expecting {0} stops but found {1}.", stopCount, trips[0].Stops.Count);
             Assert.IsTrue(trips[0].Stops[0].PassingTimeSam == firstStopPassingTimeSam, "We expected the PassingTime on the first stop of the first trip to be '{0}' but it appears to be '{1}' instead.", firstStopPassingTimeSam, trips[0].Stops[0].PassingTimeSam);
             Assert.IsTrue(trips[0].Stops[1].IsMonitoredOPRReliability == secondIsMonitoredOPRReliability, "We expected the isMonitoredOPRReliability on the second stop of the first trip to be '{0}' but it appears to be '{1}' instead.", secondIsMonitoredOPRReliability, trips[0].Stops[1].IsMonitoredOPRReliability);
@@ -707,16 +707,6 @@ namespace YarraTrams.Havm2TramTracker.Tests
 
             // assert
             Assert.IsTrue(exceptionMessage.Contains(exceptionText), "Expecting an exception mentioning the word '{0}' when mapping json that is missing the required {0} field.", exceptionText);
-        }
-
-        /// <summary>
-        /// Returns the name of the passed in variable.
-        /// Somewhat equivalent to the NameOf feature in C#6
-        /// </summary>
-        private string NameOf<T>(Expression<Func<T>> expr)
-        {
-            var body = ((MemberExpression)expr.Body);
-            return body.Member.Name;
         }
     }
 }
