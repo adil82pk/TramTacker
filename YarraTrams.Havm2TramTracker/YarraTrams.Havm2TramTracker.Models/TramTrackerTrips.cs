@@ -128,6 +128,9 @@ namespace YarraTrams.Havm2TramTracker.Models
                 AtLayovertimeShort = (short)Math.Round(AtLayovertimeDec, MidpointRounding.AwayFromZero);
             }
 
+            // To maintain parity with the old HASTUS to TramTracker code we trim the hour value of the layover, leaving just minutes. See TBU-108.
+            AtLayovertimeShort = (short)((int)AtLayovertimeShort % 60);
+
             return AtLayovertimeShort;
         }
 
