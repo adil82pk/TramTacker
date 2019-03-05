@@ -11,6 +11,7 @@ using System.Data;
 using YarraTrams.Havm2TramTracker.Logger;
 using System.IO;
 using YarraTrams.Havm2TramTracker.Processor.Helpers;
+using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("YarraTrams.Havm2TramTracker.Tests")]
 namespace YarraTrams.Havm2TramTracker.Processor
@@ -49,15 +50,18 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// Takes a JSON string and converts it to in-memory objects.
+        /// Takes a JSON string and converts it to in-memory HavmTrip/Stop objects.
+        /// The string can contain more fields than expected but must not be missing
+        /// any of the fields marked as Required on the HavmTrip and HavmStop models.
         /// </summary>
         /// <param name="jsonString">A JSON string that matches the format defined in ????.apibp.</param>
-        /// <returns></returns>
         public static List<Models.HavmTrip> CopyJsonToTrips(string jsonString)
         {
-            List<Models.HavmTrip> trips = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.HavmTrip>>(jsonString);
-            //Todo: investigate using automapper instead of Newtsonsoft
-            //Todo: do this manually so we can get more granular errors? e.g. The KTDS datamap.
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.MissingMemberHandling = MissingMemberHandling.Ignore; //Ignore any extra fields we find in the json
+
+            List<Models.HavmTrip> trips = JsonConvert.DeserializeObject<List<Models.HavmTrip>>(jsonString, settings);
+            
             return trips;
         }
 

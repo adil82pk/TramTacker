@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
     public class HavmTripStop
     {
+        [JsonProperty(Required = Required.Always)]
         public int PassingTimeSam { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string HastusStopId { get; set; }
+
         public bool IsMonitoredOPRReliability { get; set; }
 
         public string ToString(int hastusTripId)
