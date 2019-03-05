@@ -299,10 +299,14 @@ namespace YarraTrams.Havm2TramTracker.Tests
             var model = new Models.TramTrackerBase();
 
             // act
-            var LowFloor = model.GetLowFloor(trip);
+            // See inside the assert.
 
             // assert
-            Assert.IsFalse(LowFloor, "Expecting value {0} from input of \"{1}\" but got {2} instead.", true, vehicleGroup, LowFloor);
+
+            Assert.ThrowsException<FormatException>(() =>
+            {
+                var LowFloor = model.GetLowFloor(trip);
+            }, "Expecting an exception of type FormatException when determining if an unknown vehicle group has a low floor.");
 
         }
         #endregion
