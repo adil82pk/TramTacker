@@ -360,7 +360,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         #region StopId
 
         [TestMethod]
-        public void TestStopIdTransformationWithValidStop()
+        public void TestStopIdTransformationWithValidStopBecauseOfLookup()
         {
             // arrange
             const int hastusStopId = 1010;
@@ -384,17 +384,40 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
+        public void TestStopIdTransformationWithValidStopBecauseItIsAnInt()
+        {
+            // arrange
+            const int hastusStopId = 8018;
+            const string expectedResult = "8018    ";
+
+            var stopMap = new Dictionary<int, string>(); // Empty stop mapping dictionary
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = hastusStopId.ToString()
+            };
+
+            Models.TramTrackerSchedules schedules = new Models.TramTrackerSchedules();
+
+            // act
+            string stopId = schedules.GetStopId(stop, stopMap);
+
+            // assert
+            Assert.IsTrue(stopId == expectedResult, "Expecting value {0} from input of {1} but got {2} instead.", expectedResult, hastusStopId, stopId);
+        }
+
+        [TestMethod]
         public void TestStopIdTransformationWithInvalidStop()
         {
             // arrange
             Dictionary<int, string> stopMap = new Dictionary<int, string>();
             stopMap.Add(1234, "A stop we won't find");
 
-            const int hastusStopId = 999999;
+            const string hastusStopId = "fls1";
 
             var stop = new HavmTripStop
             {
-                HastusStopId = hastusStopId.ToString()
+                HastusStopId = hastusStopId
             };
 
             Models.TramTrackerSchedules schedules = new Models.TramTrackerSchedules();
