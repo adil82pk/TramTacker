@@ -212,7 +212,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                     new HavmTripStop
                         {
                             PassingTimeSam = 5400,
-                            HastusStopId = "9998" /* Not a valid id */,
+                            HastusStopId = "NotValid",
                             IsMonitoredOPRReliability = true
                         },
                     new HavmTripStop
