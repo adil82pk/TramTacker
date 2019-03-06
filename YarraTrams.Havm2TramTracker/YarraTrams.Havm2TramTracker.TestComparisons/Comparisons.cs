@@ -9,9 +9,9 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using YarraTrams.Havm2TramTracker.Logger;
-using YarraTrams.Havm2TramTracker.SideBySideTests.Helpers;
+using YarraTrams.Havm2TramTracker.TestComparisons.Helpers;
 
-namespace YarraTrams.Havm2TramTracker.SideBySideTests
+namespace YarraTrams.Havm2TramTracker.TestComparisons
 {
     public class Comparisons
     {

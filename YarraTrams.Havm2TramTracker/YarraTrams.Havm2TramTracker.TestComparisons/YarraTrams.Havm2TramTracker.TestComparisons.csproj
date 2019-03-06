@@ -7,8 +7,8 @@
     <ProjectGuid>{73E7AADA-68E2-474F-8E66-B1FEF3D5472A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>YarraTrams.Havm2TramTracker.SideBySideTests</RootNamespace>
-    <AssemblyName>YarraTrams.Havm2TramTracker.SideBySideTests</AssemblyName>
+    <RootNamespace>YarraTrams.Havm2TramTracker.TestComparisons</RootNamespace>
+    <AssemblyName>YarraTrams.Havm2TramTracker.TestComparisons</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -63,6 +63,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

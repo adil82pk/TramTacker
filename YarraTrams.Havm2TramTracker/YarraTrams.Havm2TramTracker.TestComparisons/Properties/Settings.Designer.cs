@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
+namespace YarraTrams.Havm2TramTracker.TestComparisons.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -31,15 +31,6 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
         public string TramTrackerDB {
             get {
                 return ((string)(this["TramTrackerDB"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("dev@inoutput.io")]
-        public string ComparisonSummaryEmailFrom {
-            get {
-                return ((string)(this["ComparisonSummaryEmailFrom"]));
             }
         }
         
@@ -76,6 +67,15 @@ namespace YarraTrams.Havm2TramTracker.SideBySideTests.Properties {
         public string SmtpPassword {
             get {
                 return ((string)(this["SmtpPassword"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("dev@inoutput.io")]
+        public string ComparisonSummaryEmailFrom {
+            get {
+                return ((string)(this["ComparisonSummaryEmailFrom"]));
             }
         }
     }

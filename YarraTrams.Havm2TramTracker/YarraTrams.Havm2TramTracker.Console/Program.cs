@@ -21,7 +21,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 switch (args[0])
                 {
                     case "sidebyside":
-                        var x = new SideBySideTests.Comparisons();
+                        var x = new TestComparisons.Comparisons();
                         x.RunComparisons();
                         break;
                     default:

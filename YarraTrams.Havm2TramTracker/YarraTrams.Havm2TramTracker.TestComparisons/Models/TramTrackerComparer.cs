@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
-using YarraTrams.Havm2TramTracker.SideBySideTests.Helpers;
+using YarraTrams.Havm2TramTracker.TestComparisons.Helpers;
 
-namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
+namespace YarraTrams.Havm2TramTracker.TestComparisons.Models
 {
     abstract class TramTrackerComparer
     {

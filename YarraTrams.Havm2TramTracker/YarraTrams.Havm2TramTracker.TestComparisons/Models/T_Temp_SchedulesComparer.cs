@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YarraTrams.Havm2TramTracker.SideBySideTests.Models
+namespace YarraTrams.Havm2TramTracker.TestComparisons.Models
 {
     internal class T_Temp_SchedulesComparer : TramTrackerComparer
     {

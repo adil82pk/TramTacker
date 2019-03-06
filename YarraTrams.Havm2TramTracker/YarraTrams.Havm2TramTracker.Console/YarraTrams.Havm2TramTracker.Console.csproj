@@ -78,9 +78,9 @@
       <Project>{047ed2bc-3499-45c1-9b0e-2ad64083bc4e}</Project>
       <Name>YarraTrams.Havm2TramTracker.Processor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YarraTrams.Havm2TramTracker.SideBySideTests\YarraTrams.Havm2TramTracker.SideBySideTests.csproj">
+    <ProjectReference Include="..\YarraTrams.Havm2TramTracker.TestComparisons\YarraTrams.Havm2TramTracker.TestComparisons.csproj">
       <Project>{73e7aada-68e2-474f-8e66-b1fef3d5472a}</Project>
-      <Name>YarraTrams.Havm2TramTracker.SideBySideTests</Name>
+      <Name>YarraTrams.Havm2TramTracker.TestComparisons</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
