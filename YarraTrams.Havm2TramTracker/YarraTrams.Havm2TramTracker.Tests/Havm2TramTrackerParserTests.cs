@@ -383,7 +383,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                             {
                                                 ""passingTimeSam"":25920,
                                                 ""hastusStopId"":""1896"",
-                                                ""isMonitoredOPRReliability"":false
+                                                // This is where the isMonitoredOPRReliability fields goes but it's optional.
                                             },
                                             {
                                                 ""passingTimeSam"":25980,
