@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.Logger", "YarraTrams.Havm2TramTracker.Logger\YarraTrams.Havm2TramTracker.Logger.csproj", "{87010305-28A2-44E4-8675-7B02FD5862E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.SideBySideTests", "YarraTrams.Havm2TramTracker.SideBySideTests\YarraTrams.Havm2TramTracker.SideBySideTests.csproj", "{73E7AADA-68E2-474F-8E66-B1FEF3D5472A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YarraTrams.Havm2TramTracker.TestComparisons", "YarraTrams.Havm2TramTracker.TestComparisons\YarraTrams.Havm2TramTracker.TestComparisons.csproj", "{73E7AADA-68E2-474F-8E66-B1FEF3D5472A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

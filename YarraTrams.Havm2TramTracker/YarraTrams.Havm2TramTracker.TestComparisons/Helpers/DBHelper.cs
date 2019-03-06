@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
 
-namespace YarraTrams.Havm2TramTracker.SideBySideTests.Helpers
+namespace YarraTrams.Havm2TramTracker.TestComparisons.Helpers
 {
     class DBHelper
     {

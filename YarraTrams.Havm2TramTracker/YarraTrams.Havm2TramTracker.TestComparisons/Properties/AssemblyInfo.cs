@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("YarraTrams.Havm2TramTracker.SideBySideTests")]
+[assembly: AssemblyTitle("YarraTrams.Havm2TramTracker.TestComparisons")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("YarraTrams.Havm2TramTracker.SideBySideTests")]
+[assembly: AssemblyProduct("YarraTrams.Havm2TramTracker.TestComparisons")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

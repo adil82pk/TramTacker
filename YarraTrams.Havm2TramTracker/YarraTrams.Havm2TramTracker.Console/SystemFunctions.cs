@@ -224,7 +224,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             var clock = new Stopwatch();
 
             clock.Start();
-            var x = new SideBySideTests.Comparisons();
+            var x = new TestComparisons.Comparisons();
             x.RunComparisons();
             clock.Stop();
 
