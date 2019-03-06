@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Models;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace YarraTrams.Havm2TramTracker.Tests
 {
@@ -339,289 +340,373 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestJsonToTripsWithStandardJson()
         {
             // arrange
+            int hastusTripID = 76245555;
+            string block = "kw05-  1";
+            string headboard = "48";
+            string route = "48";
+            string startTimepoint = "nbal";
+            int startTimeSam = 25920;
+            string endTimepoint = "viha";
+            int endTimeSam = 28320;
+            int headwayNextSeconds = 1260;
+            string nextRoute = "48";
+            string direction = "UP";
+            string vehicleType = "c1";
+            int distanceMetres = 14122;
+            bool isPublic = true;
+            DateTime operationalDay = new DateTime(2019, 3, 10);
+            int stopCount = 12;
+            int firstStopPassingTimeSam = 25920;
+            bool secondIsMonitoredOPRReliability = true;
+            string lastStopId = "8018";
+
             #region "JSON string containing a single trip"
-            var jsonString = @"
-                            [
-                                {
-                                    ""hastusTripId"": 62770458,
-                                    ""block"": ""gh02- 27 This is wrong"",
-                                    ""displayCode"": ""61"",
-                                    ""startTimepoint"": ""ebtn"",
-                                    ""startTimeSam"": 86400,
-                                    ""endTimepoint"": ""scj1"",
-                                    ""endTimeSam"": 86760,
-                                    ""headwayNextSeconds"": 0,
-                                    ""nextDisplayCode"": ""61"",
-                                    ""direction"": ""DOWN"",
-                                    ""vehicleType"": ""b"",
-                                    ""distanceMetres"": 3074,
-                                    ""isPublic"": true,
-                                    ""operationalDay"": ""2018-04-23T00:00:00"",
-                                    ""stops"": [
+            string jsonString = @"
+                                    [
                                         {
-                                            ""passingTime"": ""00:00:00"",
-                                            ""hastusStopId"": ""1135"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:01:00"",
-                                            ""hastusStopId"": ""1134"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:01:00"",
-                                            ""hastusStopId"": ""1133"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:02:00"",
-                                            ""hastusStopId"": ""1132"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:02:00"",
-                                            ""hastusStopId"": ""1131"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:03:00"",
-                                            ""hastusStopId"": ""1130"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:03:00"",
-                                            ""hastusStopId"": ""1129"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:04:00"",
-                                            ""hastusStopId"": ""1128"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:04:00"",
-                                            ""hastusStopId"": ""1127"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:05:00"",
-                                            ""hastusStopId"": ""1126"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:05:00"",
-                                            ""hastusStopId"": ""1125"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:06:00"",
-                                            ""hastusStopId"": ""1124"",
-                                            ""isMonitoredOPRReliability"": false
+                                        ""hastusTripId"":76245555,
+                                        ""block"":""kw05-  1"",
+                                        ""headboard"":""48"",
+                                        ""route"":""48"",
+                                        ""startTimepoint"":""nbal"",
+                                        ""startTimeSam"":25920,
+                                        ""endTimepoint"":""viha"",
+                                        ""endTimeSam"":28320,
+                                        ""headwayNextSeconds"":1260,
+                                        ""nextRoute"":""48"",
+                                        ""direction"":""UP"",
+                                        ""vehicleType"":""c1"",
+                                        ""distanceMetres"":14122,
+                                        ""isPublic"":true,
+                                        ""operationalDay"":""2019-03-10T00:00:00"",
+                                        ""stops"":[
+                                            {
+                                                ""passingTimeSam"":25920,
+                                                ""hastusStopId"":""1896"",
+                                                // This is where the isMonitoredOPRReliability fields goes but it's optional.
+                                            },
+                                            {
+                                                ""passingTimeSam"":25980,
+                                                ""hastusStopId"":""1895"",
+                                                ""isMonitoredOPRReliability"":true
+                                            },
+                                            {
+                                                ""passingTimeSam"":26940,
+                                                ""hastusStopId"":""1923"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27000,
+                                                ""hastusStopId"":""1922"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27480,
+                                                ""hastusStopId"":""3710"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27540,
+                                                ""hastusStopId"":""3709"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27540,
+                                                ""hastusStopId"":""fls1"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27660,
+                                                ""hastusStopId"":""3509"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27780,
+                                                ""hastusStopId"":""3508"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28200,
+                                                ""hastusStopId"":""3498"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28260,
+                                                ""hastusStopId"":""3497"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28320,
+                                                ""hastusStopId"":""8018"",
+                                                ""isMonitoredOPRReliability"":false
+                                            }
+                                            ]
                                         }
-                                    ]
-                                }
-                            ]";
+                                    ]";
             #endregion
+            
             // act
             var trips = Processor.Processor.CopyJsonToTrips(jsonString);
 
             // assert
             Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).", 1, trips.Count);
-            //Todo: check more stuff
-            Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == "1124", "We expected the HastusStopId on the final stop of the first trip to be '1124' but it appears to be '{0}' instead.", trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
+            Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting HastusTripId value of '{0}' but got '{1}'.", hastusTripID, trips[0].HastusTripId);
+            Assert.IsTrue(trips[0].Block == block, "Expecting Block value of '{0}' but got '{1}'.", block, trips[0].Block);
+            Assert.IsTrue(trips[0].Headboard == headboard, "Expecting Headboard value of '{0}' but got '{1}'.", headboard, trips[0].Headboard);
+            Assert.IsTrue(trips[0].Route == route, "Expecting Route value of '{0}' but got '{1}'.", route, trips[0].Route);
+            Assert.IsTrue(trips[0].StartTimepoint == startTimepoint, "Expecting StartTimepoint value of '{0}' but got '{1}'.", startTimepoint, trips[0].StartTimepoint);
+            Assert.IsTrue(trips[0].StartTimeSam == startTimeSam, "Expecting StartTimeSam value of '{0}' but got '{1}'.", startTimeSam, trips[0].StartTimeSam);
+            Assert.IsTrue(trips[0].EndTimepoint == endTimepoint, "Expecting EndTimepoint value of '{0}' but got '{1}'.", endTimepoint, trips[0].EndTimepoint);
+            Assert.IsTrue(trips[0].EndTimeSam == endTimeSam, "Expecting EndTimeSam value of '{0}' but got '{1}'.", endTimeSam, trips[0].EndTimeSam);
+            Assert.IsTrue(trips[0].HeadwayNextSeconds == headwayNextSeconds, "Expecting HeadwayNextSeconds value of '{0}' but got '{1}'.", headwayNextSeconds, trips[0].HeadwayNextSeconds);
+            Assert.IsTrue(trips[0].NextRoute == nextRoute, "Expecting NextRoute value of '{0}' but got '{1}'.", nextRoute, trips[0].NextRoute);
+            Assert.IsTrue(trips[0].Direction == direction, "Expecting Direction value of '{0}' but got '{1}'.", direction, trips[0].Direction);
+            Assert.IsTrue(trips[0].VehicleType == vehicleType, "Expecting VehicleType value of '{0}' but got '{1}'.", vehicleType, trips[0].VehicleType);
+            Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting DistanceMetres value of '{0}' but got '{1}'.", distanceMetres, trips[0].DistanceMetres);
+            Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting IsPublic value of '{0}' but got '{1}'.", isPublic, trips[0].IsPublic);
+            Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting OperationalDay value of '{0}' but got '{1}'.", operationalDay, trips[0].OperationalDay);
+            Assert.IsTrue(trips[0].Stops.Count == stopCount, "Expecting {0} stops but found {0}.", stopCount, trips[0].Stops.Count);
+            Assert.IsTrue(trips[0].Stops[0].PassingTimeSam == firstStopPassingTimeSam, "We expected the PassingTime on the first stop of the first trip to be '{0}' but it appears to be '{1}' instead.", firstStopPassingTimeSam, trips[0].Stops[0].PassingTimeSam);
+            Assert.IsTrue(trips[0].Stops[1].IsMonitoredOPRReliability == secondIsMonitoredOPRReliability, "We expected the isMonitoredOPRReliability on the second stop of the first trip to be '{0}' but it appears to be '{1}' instead.", secondIsMonitoredOPRReliability, trips[0].Stops[1].IsMonitoredOPRReliability);
+            Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == lastStopId, "We expected the HastusStopId on the final stop of the first trip to be '{0}' but it appears to be '{1}' instead.", lastStopId, trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
         }
 
         [TestMethod]
         public void TestJsonToTripsWithExtraFieldInJson()
         {
             // arrange
+            int hastusTripID = 76245555;
+            string block = "kw05-  1";
+            string headboard = "48";
+            string route = "48";
+            string startTimepoint = "nbal";
+            int startTimeSam = 25920;
+            string endTimepoint = "viha";
+            int endTimeSam = 28320;
+            int headwayNextSeconds = 1260;
+            string nextRoute = "48";
+            string direction = "UP";
+            string vehicleType = "c1";
+            int distanceMetres = 14122;
+            bool isPublic = true;
+            DateTime operationalDay = new DateTime(2019,3,10);
+            int stopCount = 12;
+            int firstStopPassingTimeSam = 25920;
+            bool secondIsMonitoredOPRReliability = true;
+            string lastStopId = "8018";
             #region "JSON string containing a single trip and more fields than we expect"
-            var jsonString = @"
-                            [
-                                {
-                                    ""ANewFieldThatWeDoNotKnowAbout"": ""A new value that we are not expecting"",
-                                    ""hastusTripId"": 62770458,
-                                    ""block"": ""gh02- 27 This is wrong"",
-                                    ""displayCode"": ""61"",
-                                    ""startTimepoint"": ""ebtn"",
-                                    ""startTimeSam"": 86400,
-                                    ""endTimepoint"": ""scj1"",
-                                    ""endTimeSam"": 86760,
-                                    ""headwayNextSeconds"": 0,
-                                    ""nextDisplayCode"": ""61"",
-                                    ""direction"": ""DOWN"",
-                                    ""vehicleType"": ""b"",
-                                    ""distanceMetres"": 3074,
-                                    ""isPublic"": true,
-                                    ""operationalDay"": ""2018-04-23T00:00:00"",
-                                    ""stops"": [
+            string jsonString = @"
+                                    [
                                         {
-                                            ""passingTime"": ""00:00:00"",
-                                            ""hastusStopId"": ""1135"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:01:00"",
-                                            ""hastusStopId"": ""1134"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:01:00"",
-                                            ""hastusStopId"": ""1133"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:02:00"",
-                                            ""hastusStopId"": ""1132"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:02:00"",
-                                            ""hastusStopId"": ""1131"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:03:00"",
-                                            ""hastusStopId"": ""1130"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:03:00"",
-                                            ""hastusStopId"": ""1129"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:04:00"",
-                                            ""hastusStopId"": ""1128"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:04:00"",
-                                            ""hastusStopId"": ""1127"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:05:00"",
-                                            ""hastusStopId"": ""1126"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:05:00"",
-                                            ""hastusStopId"": ""1125"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:06:00"",
-                                            ""hastusStopId"": ""1124"",
-                                            ""isMonitoredOPRReliability"": false
+                                        ""ANewFieldThatWeDoNotKnowAbout"": ""A new value that we are not expecting"",
+                                        ""hastusTripId"":76245555,
+                                        ""block"":""kw05-  1"",
+                                        ""headboard"":""48"",
+                                        ""route"":""48"",
+                                        ""startTimepoint"":""nbal"",
+                                        ""startTimeSam"":25920,
+                                        ""endTimepoint"":""viha"",
+                                        ""endTimeSam"":28320,
+                                        ""headwayNextSeconds"":1260,
+                                        ""nextRoute"":""48"",
+                                        ""direction"":""UP"",
+                                        ""vehicleType"":""c1"",
+                                        ""distanceMetres"":14122,
+                                        ""isPublic"":true,
+                                        ""operationalDay"":""2019-03-10T00:00:00"",
+                                        ""stops"":[
+                                            {
+                                                ""passingTimeSam"":25920,
+                                                ""hastusStopId"":""1896"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":25980,
+                                                ""hastusStopId"":""1895"",
+                                                ""isMonitoredOPRReliability"":true
+                                            },
+                                            {
+                                                ""passingTimeSam"":26940,
+                                                ""hastusStopId"":""1923"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27000,
+                                                ""hastusStopId"":""1922"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27480,
+                                                ""hastusStopId"":""3710"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27540,
+                                                ""hastusStopId"":""3709"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27540,
+                                                ""hastusStopId"":""fls1"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27660,
+                                                ""hastusStopId"":""3509"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27780,
+                                                ""hastusStopId"":""3508"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28200,
+                                                ""hastusStopId"":""3498"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28260,
+                                                ""hastusStopId"":""3497"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28320,
+                                                ""hastusStopId"":""8018"",
+                                                ""isMonitoredOPRReliability"":false
+                                            }
+                                            ]
                                         }
-                                    ]
-                                }
-                            ]";
+                                    ]";
             #endregion
             // act
             var trips = Processor.Processor.CopyJsonToTrips(jsonString);
-
+            
             // assert
             Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).", 1, trips.Count);
-            //Todo: check more stuff
-            Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == "1124", "We expected the HastusStopId on the final stop of the first trip to be '1124' but it appears to be '{0}' instead.", trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
+            Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting HastusTripId value of '{0}' but got '{1}'.", hastusTripID, trips[0].HastusTripId);
+            Assert.IsTrue(trips[0].Block == block, "Expecting Block value of '{0}' but got '{1}'.", block, trips[0].Block);
+            Assert.IsTrue(trips[0].Headboard == headboard, "Expecting Headboard value of '{0}' but got '{1}'.", headboard, trips[0].Headboard);
+            Assert.IsTrue(trips[0].Route == route, "Expecting Route value of '{0}' but got '{1}'.", route, trips[0].Route);
+            Assert.IsTrue(trips[0].StartTimepoint == startTimepoint, "Expecting StartTimepoint value of '{0}' but got '{1}'.", startTimepoint, trips[0].StartTimepoint);
+            Assert.IsTrue(trips[0].StartTimeSam == startTimeSam, "Expecting StartTimeSam value of '{0}' but got '{1}'.", startTimeSam, trips[0].StartTimeSam);
+            Assert.IsTrue(trips[0].EndTimepoint == endTimepoint, "Expecting EndTimepoint value of '{0}' but got '{1}'.", endTimepoint, trips[0].EndTimepoint);
+            Assert.IsTrue(trips[0].EndTimeSam == endTimeSam, "Expecting EndTimeSam value of '{0}' but got '{1}'.", endTimeSam, trips[0].EndTimeSam);
+            Assert.IsTrue(trips[0].HeadwayNextSeconds == headwayNextSeconds, "Expecting HeadwayNextSeconds value of '{0}' but got '{1}'.", headwayNextSeconds, trips[0].HeadwayNextSeconds);
+            Assert.IsTrue(trips[0].NextRoute == nextRoute, "Expecting NextRoute value of '{0}' but got '{1}'.", nextRoute, trips[0].NextRoute);
+            Assert.IsTrue(trips[0].Direction == direction, "Expecting Direction value of '{0}' but got '{1}'.", direction, trips[0].Direction);
+            Assert.IsTrue(trips[0].VehicleType == vehicleType, "Expecting VehicleType value of '{0}' but got '{1}'.", vehicleType, trips[0].VehicleType);
+            Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting DistanceMetres value of '{0}' but got '{1}'.", distanceMetres, trips[0].DistanceMetres);
+            Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting IsPublic value of '{0}' but got '{1}'.", isPublic, trips[0].IsPublic);
+            Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting OperationalDay value of '{0}' but got '{1}'.", operationalDay, trips[0].OperationalDay);
+            Assert.IsTrue(trips[0].Stops.Count == stopCount,"Expecting {0} stops but found {1}.", stopCount, trips[0].Stops.Count);
+            Assert.IsTrue(trips[0].Stops[0].PassingTimeSam == firstStopPassingTimeSam, "We expected the PassingTime on the first stop of the first trip to be '{0}' but it appears to be '{1}' instead.", firstStopPassingTimeSam, trips[0].Stops[0].PassingTimeSam);
+            Assert.IsTrue(trips[0].Stops[1].IsMonitoredOPRReliability == secondIsMonitoredOPRReliability, "We expected the isMonitoredOPRReliability on the second stop of the first trip to be '{0}' but it appears to be '{1}' instead.", secondIsMonitoredOPRReliability, trips[0].Stops[1].IsMonitoredOPRReliability);
+            Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == lastStopId, "We expected the HastusStopId on the final stop of the first trip to be '{0}' but it appears to be '{1}' instead.", lastStopId, trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
         }
 
         [TestMethod]
         public void TestJsonToTripsWithMissingFieldInJson()
         {
             // arrange
+            string exceptionMessage = "";
+            string exceptionText = "HastusTripId";
             #region "JSON string containing a single trip but missing an important field"
-            var jsonString = @"
-                            [
-                                {
-                                    //Usually the Hastus Trip Id field is here
-                                    ""block"": ""gh02- 27 This is wrong"",
-                                    ""displayCode"": ""61"",
-                                    ""startTimepoint"": ""ebtn"",
-                                    ""startTimeSam"": 86400,
-                                    ""endTimepoint"": ""scj1"",
-                                    ""endTimeSam"": 86760,
-                                    ""headwayNextSeconds"": 0,
-                                    ""nextDisplayCode"": ""61"",
-                                    ""direction"": ""DOWN"",
-                                    ""vehicleType"": ""b"",
-                                    ""distanceMetres"": 3074,
-                                    ""isPublic"": true,
-                                    ""operationalDay"": ""2018-04-23T00:00:00"",
-                                    ""stops"": [
+            string jsonString = @"
+                                    [
                                         {
-                                            ""passingTime"": ""00:00:00"",
-                                            ""hastusStopId"": ""1135"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:01:00"",
-                                            ""hastusStopId"": ""1134"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:01:00"",
-                                            ""hastusStopId"": ""1133"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:02:00"",
-                                            ""hastusStopId"": ""1132"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:02:00"",
-                                            ""hastusStopId"": ""1131"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:03:00"",
-                                            ""hastusStopId"": ""1130"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:03:00"",
-                                            ""hastusStopId"": ""1129"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:04:00"",
-                                            ""hastusStopId"": ""1128"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:04:00"",
-                                            ""hastusStopId"": ""1127"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:05:00"",
-                                            ""hastusStopId"": ""1126"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:05:00"",
-                                            ""hastusStopId"": ""1125"",
-                                            ""isMonitoredOPRReliability"": false
-                                        },
-                                        {
-                                            ""passingTime"": ""00:06:00"",
-                                            ""hastusStopId"": ""1124"",
-                                            ""isMonitoredOPRReliability"": false
+                                        // Usually the hastusTripId field is here.
+                                        ""block"":""kw05-  1"",
+                                        ""headboard"":""48"",
+                                        ""route"":""48"",
+                                        ""startTimepoint"":""nbal"",
+                                        ""startTimeSam"":25920,
+                                        ""endTimepoint"":""viha"",
+                                        ""endTimeSam"":28320,
+                                        ""headwayNextSeconds"":1260,
+                                        ""nextRoute"":""48"",
+                                        ""direction"":""UP"",
+                                        ""vehicleType"":""c1"",
+                                        ""distanceMetres"":14122,
+                                        ""isPublic"":true,
+                                        ""operationalDay"":""2019-03-10T00:00:00"",
+                                        ""stops"":[
+                                            {
+                                                ""passingTimeSam"":25920,
+                                                ""hastusStopId"":""1896"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":25980,
+                                                ""hastusStopId"":""1895"",
+                                                ""isMonitoredOPRReliability"":true
+                                            },
+                                            {
+                                                ""passingTimeSam"":26940,
+                                                ""hastusStopId"":""1923"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27000,
+                                                ""hastusStopId"":""1922"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27480,
+                                                ""hastusStopId"":""3710"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27540,
+                                                ""hastusStopId"":""3709"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27540,
+                                                ""hastusStopId"":""fls1"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27660,
+                                                ""hastusStopId"":""3509"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":27780,
+                                                ""hastusStopId"":""3508"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28200,
+                                                ""hastusStopId"":""3498"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28260,
+                                                ""hastusStopId"":""3497"",
+                                                ""isMonitoredOPRReliability"":false
+                                            },
+                                            {
+                                                ""passingTimeSam"":28320,
+                                                ""hastusStopId"":""8018"",
+                                                ""isMonitoredOPRReliability"":false
+                                            }
+                                            ]
                                         }
-                                    ]
-                                }
-                            ]";
+                                    ]";
             #endregion
             // act
-            var trips = Processor.Processor.CopyJsonToTrips(jsonString);
+            try
+            {
+                var trips = Processor.Processor.CopyJsonToTrips(jsonString);
+            }
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
 
             // assert
-            //Todo: check that derialisation fails in some way
-            Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).", 1, trips.Count);
-            Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == "1124", "We expected the HastusStopId on the final stop of the first trip to be '1124' but it appears to be '{0}' instead.", trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
+            Assert.IsTrue(exceptionMessage.Contains(exceptionText), "Expecting an exception mentioning the word '{0}' when mapping json that is missing the required {0} field.", exceptionText);
         }
     }
 }

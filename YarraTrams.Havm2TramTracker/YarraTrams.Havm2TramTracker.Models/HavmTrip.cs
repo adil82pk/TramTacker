@@ -3,28 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
     public class HavmTrip
     {
+        [JsonProperty(Required = Required.Always)]
         public int HastusTripId { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string Block { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string Headboard { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string Route { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string StartTimepoint { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public int StartTimeSam { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string EndTimepoint { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public int EndTimeSam { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public int HeadwayNextSeconds { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string NextRoute { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string Direction { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string VehicleType { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public int DistanceMetres { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public bool IsPublic { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public DateTime OperationalDay { get; set; }
+
         public List<HavmTripStop> Stops { get; set; }
-        //Todo: Create ToSQL that returns and string (and does transformations).
 
         public override string ToString()
         {
