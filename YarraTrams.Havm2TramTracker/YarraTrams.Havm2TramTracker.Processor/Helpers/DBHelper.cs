@@ -27,9 +27,32 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         }
 
         /// <summary>
+        /// Execute the passed-in sql using the passed-in connection and passed-in transaction.
+        /// </summary>
+        private static void ExecuteSql(string sql, SqlConnection connection, SqlTransaction transaction)
+        {
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            cmd.Transaction = transaction;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Execute the passed-in sql using the passed-in connection.
+        /// </summary>
+        private static void ExecuteSqlProc(string procName, SqlConnection connection)
+        {
+            SqlCommand cmd = new SqlCommand(procName, connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
         /// Deletes all records from the destination table then inserts the records from the passed-in DataTable;
         /// </summary>
-        /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
+        /// <param name="tripData">A typed DataTable. You can use the .ToDataTable routines on the TramTracker objects to generate one.</param>
         public static void TruncateThenSaveTripDataToDatabase(string tableName, DataTable tripData)
         {
             // connect to SQL
