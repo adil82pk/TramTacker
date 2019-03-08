@@ -20,4 +20,6 @@ BEGIN
     ) ON [PRIMARY]
 END
 GO
-
+INSERT T_Preferences
+VALUES (0,'2019-1-1',0,0,0,0,0,0,23,22)
+GO
