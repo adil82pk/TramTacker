@@ -37,7 +37,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
     {
         protected override WebRequest GetWebRequest(Uri uri)
         {
-            int timeoutInSeconds = Properties.Settings.Default.Havm2TramTrackerTimeoutSeconds;
+            int timeoutInSeconds = Properties.Settings.Default.Havm2TramTrackerAPITimeoutSeconds;
             WebRequest w = base.GetWebRequest(uri);
             w.Timeout = timeoutInSeconds * 1000;
             return w;

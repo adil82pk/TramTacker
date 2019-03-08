@@ -51,12 +51,12 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int Havm2TramTrackerTimeoutSeconds {
+        public int Havm2TramTrackerAPITimeoutSeconds {
             get {
-                return ((int)(this["Havm2TramTrackerTimeoutSeconds"]));
+                return ((int)(this["Havm2TramTrackerAPITimeoutSeconds"]));
             }
             set {
-                this["Havm2TramTrackerTimeoutSeconds"] = value;
+                this["Havm2TramTrackerAPITimeoutSeconds"] = value;
             }
         }
         
@@ -156,6 +156,15 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         public string DbTableSuffix {
             get {
                 return ((string)(this["DbTableSuffix"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int DBCommandTimeoutSeconds {
+            get {
+                return ((int)(this["DBCommandTimeoutSeconds"]));
             }
         }
     }
