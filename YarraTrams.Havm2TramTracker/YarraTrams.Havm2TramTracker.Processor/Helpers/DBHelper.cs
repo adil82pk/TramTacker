@@ -196,6 +196,16 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     {
                         throw new Exception("No results returned from operation to copy temp data to live.");
                     }
+
+                    reader.Close();
+
+                    ExecuteSqlProc("CopyOverlapTripsToTrips", conn);
+                    ExecuteSqlProc("CopyOverlapScheduleToSchedule", conn);
+                    ExecuteSqlProc("[CreateDailyData2.5]", conn);
+                    ExecuteSqlProc("SetDayOfWeek", conn);
+
+                    LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
+                            , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                 }
             }
             catch (Exception ex)
