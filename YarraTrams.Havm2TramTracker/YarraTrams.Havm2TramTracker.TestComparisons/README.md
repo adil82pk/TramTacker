@@ -25,12 +25,13 @@ Under YarraTrams.Havm2TramTracker.Processor.Properties.Settings
 Under YarraTrams.Havm2TramTracker.TestComparisons.Properties.Settings
 
 2. TramTrackerDB - the database connection string
-3. ComparisonSummaryEmailFrom - 
-4. ComparisonSummaryEmailsTo - qqq (mutliple addresses delimited by commas or semi-colons)
+3. ComparisonSummaryEmailFrom
+4. ComparisonSummaryEmailsTo - mutliple addresses delimited by commas or semi-colons
 5. SmtpHost
 6. SmtpUsername
 7. SmtpPassword
-(You can use the IOP Mailgun details in LastPass for the Smtp settings.)
+
+You can use the IOP Mailgun details in LastPass for the Smtp settings.
 
 ## Database
 
