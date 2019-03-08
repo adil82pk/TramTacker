@@ -30,8 +30,9 @@ The Windows services has the following config settings available:
 
 - DueTime - the service kicks of processing once per day at this time.
 - Havm2TramTrackerAPI - full address of the HAVM2 ExternalAPI
-- Havm2TramTrackerTimeoutSeconds - timeout for the API call, should be set to a high number.
+- Havm2TramTrackerAPITimeoutSeconds - timeout for the API call, should be set to a high number.
 - TramTrackerDB - DB connection string
+- DBCommandTimeoutSeconds - timeout for every command executed by Havm2TramTracker against the TramTracker database.
 - DbTableSuffix - For testing, this application can insert into test tables (with this suffix), instead of the real tables.
 - LogFilePath
 - LogT_Temp_TripRowsToFilePriorToInsert - True/False - controls whether we log this HAVM2 and TT data to file as we convert it.
