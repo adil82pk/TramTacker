@@ -64,33 +64,36 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 using (SqlTransaction transaction =
                            connection.BeginTransaction())
                 {
-                    // Delete existing records
-                    string deleteStatement = string.Format("DELETE FROM {0}", tableName);
-                    SqlCommand cmd = new SqlCommand(deleteStatement, connection);
-                    cmd.Transaction = transaction;
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandTimeout = 180;
-                    cmd.ExecuteNonQuery();
-
-                    // Insert new records
-                    using (SqlBulkCopy bulkCopy = new SqlBulkCopy(
-                               connection,
-                               SqlBulkCopyOptions.TableLock |
-                                SqlBulkCopyOptions.FireTriggers,
-                               transaction))
+                    try
                     {
-                        bulkCopy.DestinationTableName = tableName;
+                        // Update Preferences and delete existing records
+                        string deleteStatement = string.Format("DELETE FROM {0};", tableName);
+                        ExecuteSql(deleteStatement, connection, transaction);
 
-                        try
+                        // Insert new records
+                        using (SqlBulkCopy bulkCopy = new SqlBulkCopy(
+                                   connection,
+                                   SqlBulkCopyOptions.TableLock |
+                                    SqlBulkCopyOptions.FireTriggers,
+                                   transaction))
                         {
+                            bulkCopy.DestinationTableName = tableName;
                             bulkCopy.WriteToServer(tripData);
-                            transaction.Commit();
                         }
-                        catch (Exception ex)
+
+                        // Update Overlaps & Preferences (if required)
+                        string updPreferencesStatement = GetPostUpdateTempSql(tableName);
+                        if (!String.IsNullOrEmpty(updPreferencesStatement))
                         {
-                            transaction.Rollback();
-                            throw ex;
+                            ExecuteSql(updPreferencesStatement, connection, transaction);
                         }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
                     }
                 }
 
@@ -98,6 +101,28 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.SAVE_TO_DATABASE_SUCCESS
                     , String.Format("{0} record{1} saved to {2} table.", tripData.Rows.Count, (tripData.Rows.Count == 1 ? "" : "s"), tableName));
+            }
+        }
+
+        /// <summary>
+        /// Returns the sql to populated the overlaps and update the relevant T_Preferences field if this table is one that gets "copied to live".
+        /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
+        /// </summary>
+        private static string GetPostUpdateTempSql(string tableName)
+        {
+            if (tableName == GetDbTableName("T_Temp_Trips"))
+            {
+                return @"UPDATE T_Preferences SET TripsLoaded = 1;
+                        EXEC CopyOverlappingTempTrips;";
+            }
+            else if (tableName == GetDbTableName("T_Temp_Schedules"))
+            {
+                return @"UPDATE T_Preferences SET ScheduleLoaded = 1;
+                        EXEC CopyOverlappingTempSchedules;";
+            }
+            else
+            {
+                return "";
             }
         }
 
