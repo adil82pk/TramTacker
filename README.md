@@ -46,7 +46,9 @@ The Windows services has the following config settings available:
 
 #### Local Database setup
 1. Create TramTracker database
-2. Create tables - run `database/Create_OT_Temp_xxx_TTBU_tables.sql`
+2. Create Temp tables - run `database/Create_OT_Temp_xxx_TTBU_tables.sql`
+3. Create T_Preferences - run `database/Create_T_Preferences_table.sql`
+4. Create stored procesure _stubs_ - run `database/CreateExistingImportProcs.sql`
 
 ### Comparison Testing
 Havm2TramTracker has a TestComparison feature that compares tables populated by two different pieces of code.
