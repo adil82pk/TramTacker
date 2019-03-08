@@ -174,7 +174,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandTimeout = 180;
+                    cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
