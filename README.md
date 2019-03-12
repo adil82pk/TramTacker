@@ -30,8 +30,9 @@ The Windows services has the following config settings available:
 
 - DueTime - the service kicks of processing once per day at this time.
 - Havm2TramTrackerAPI - full address of the HAVM2 ExternalAPI
-- Havm2TramTrackerTimeoutSeconds - timeout for the API call, should be set to a high number.
+- Havm2TramTrackerAPITimeoutSeconds - timeout for the API call, should be set to a high number.
 - TramTrackerDB - DB connection string
+- DBCommandTimeoutSeconds - timeout for every command executed by Havm2TramTracker against the TramTracker database.
 - DbTableSuffix - For testing, this application can insert into test tables (with this suffix), instead of the real tables.
 - LogFilePath
 - LogT_Temp_TripRowsToFilePriorToInsert - True/False - controls whether we log this HAVM2 and TT data to file as we convert it.
@@ -45,7 +46,9 @@ The Windows services has the following config settings available:
 
 #### Local Database setup
 1. Create TramTracker database
-2. Create tables - run `database/Create_OT_Temp_xxx_TTBU_tables.sql`
+2. Create Temp tables - run `database/Create_OT_Temp_xxx_TTBU_tables.sql`
+3. Create T_Preferences - run `database/Create_T_Preferences_table.sql`
+4. Create stored procesure _stubs_ - run `database/CreateExistingImportProcs.sql`
 
 ### Comparison Testing
 Havm2TramTracker has a TestComparison feature that compares tables populated by two different pieces of code.

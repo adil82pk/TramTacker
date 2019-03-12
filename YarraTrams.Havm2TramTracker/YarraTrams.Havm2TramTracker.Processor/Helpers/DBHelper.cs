@@ -27,9 +27,32 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         }
 
         /// <summary>
+        /// Execute the passed-in sql using the passed-in connection and passed-in transaction.
+        /// </summary>
+        private static void ExecuteSql(string sql, SqlConnection connection, SqlTransaction transaction)
+        {
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            cmd.Transaction = transaction;
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// Execute the passed-in sql using the passed-in connection.
+        /// </summary>
+        private static void ExecuteSqlProc(string procName, SqlConnection connection)
+        {
+            SqlCommand cmd = new SqlCommand(procName, connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
         /// Deletes all records from the destination table then inserts the records from the passed-in DataTable;
         /// </summary>
-        /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
+        /// <param name="tripData">A typed DataTable. You can use the .ToDataTable routines on the TramTracker objects to generate one.</param>
         public static void TruncateThenSaveTripDataToDatabase(string tableName, DataTable tripData)
         {
             // connect to SQL
@@ -41,33 +64,36 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 using (SqlTransaction transaction =
                            connection.BeginTransaction())
                 {
-                    // Delete existing records
-                    string deleteStatement = string.Format("DELETE FROM {0}", tableName);
-                    SqlCommand cmd = new SqlCommand(deleteStatement, connection);
-                    cmd.Transaction = transaction;
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandTimeout = 180;
-                    cmd.ExecuteNonQuery();
-
-                    // Insert new records
-                    using (SqlBulkCopy bulkCopy = new SqlBulkCopy(
-                               connection,
-                               SqlBulkCopyOptions.TableLock |
-                                SqlBulkCopyOptions.FireTriggers,
-                               transaction))
+                    try
                     {
-                        bulkCopy.DestinationTableName = tableName;
+                        // Update Preferences and delete existing records
+                        string deleteStatement = string.Format("DELETE FROM {0};", tableName);
+                        ExecuteSql(deleteStatement, connection, transaction);
 
-                        try
+                        // Insert new records
+                        using (SqlBulkCopy bulkCopy = new SqlBulkCopy(
+                                   connection,
+                                   SqlBulkCopyOptions.TableLock |
+                                    SqlBulkCopyOptions.FireTriggers,
+                                   transaction))
                         {
+                            bulkCopy.DestinationTableName = tableName;
                             bulkCopy.WriteToServer(tripData);
-                            transaction.Commit();
                         }
-                        catch (Exception ex)
+
+                        // Update Overlaps & Preferences (if required)
+                        string updPreferencesStatement = GetPostUpdateTempSql(tableName);
+                        if (!String.IsNullOrEmpty(updPreferencesStatement))
                         {
-                            transaction.Rollback();
-                            throw ex;
+                            ExecuteSql(updPreferencesStatement, connection, transaction);
                         }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
                     }
                 }
 
@@ -75,6 +101,28 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.SAVE_TO_DATABASE_SUCCESS
                     , String.Format("{0} record{1} saved to {2} table.", tripData.Rows.Count, (tripData.Rows.Count == 1 ? "" : "s"), tableName));
+            }
+        }
+
+        /// <summary>
+        /// Returns the sql to populated the overlaps and update the relevant T_Preferences field if this table is one that gets "copied to live".
+        /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
+        /// </summary>
+        private static string GetPostUpdateTempSql(string tableName)
+        {
+            if (tableName == GetDbTableName("T_Temp_Trips"))
+            {
+                return @"UPDATE T_Preferences SET TripsLoaded = 1;
+                        EXEC CopyOverlappingTempTrips;";
+            }
+            else if (tableName == GetDbTableName("T_Temp_Schedules"))
+            {
+                return @"UPDATE T_Preferences SET ScheduleLoaded = 1;
+                        EXEC CopyOverlappingTempSchedules;";
+            }
+            else
+            {
+                return "";
             }
         }
 
@@ -95,39 +143,44 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 {
                     string query = @"
                                 BEGIN TRAN
-
-                                -- It's all or nothing - we either insert 1 or more records into both tables or we abort completely,
+                                
+                                -- It's all or nothing - we either insert 1 or more records into both tables or we abort completely.
                                 BEGIN TRY
-	                                DELETE dbo.T_Trips
-	                                DECLARE @CountOfT_Trips int = @@ROWCOUNT
+                                    UPDATE T_Preferences SET DataAvailable = 0;
                                     
-	                                INSERT dbo.T_Trips
-	                                SELECT *
-	                                FROM dbo.T_Temp_Trips
-	                                DECLARE @CountOfT_Temp_Trips int = @@ROWCOUNT
+                                    DELETE dbo.T_Trips;
+                                    DECLARE @CountOfT_Trips int = @@ROWCOUNT
                                     
-	                                DELETE dbo.T_Schedules
-	                                DECLARE @CountOfT_Schedules int = @@ROWCOUNT
+                                    INSERT dbo.T_Trips
+                                    SELECT *
+                                    FROM dbo.T_Temp_Trips;
+                                    DECLARE @CountOfT_Temp_Trips int = @@ROWCOUNT
                                     
-	                                INSERT dbo.T_Schedules
-	                                SELECT [TripID], [RunNo], [StopID], [RouteNo], [OPRTimePoint], [Time], [DayOfWeek], [LowFloor], [PublicTrip]
-	                                FROM dbo.T_Temp_Schedules
-	                                DECLARE @CountOfT_Temp_Schedules int = @@ROWCOUNT
+                                    DELETE dbo.T_Schedules;
+                                    DECLARE @CountOfT_Schedules int = @@ROWCOUNT
                                     
-	                                IF @CountOfT_Temp_Trips = 0
-		                                RAISERROR('No trips to insert',16,1)
+                                    INSERT dbo.T_Schedules
+                                    SELECT [TripID], [RunNo], [StopID], [RouteNo], [OPRTimePoint], [Time], [DayOfWeek], [LowFloor], [PublicTrip]
+                                    FROM dbo.T_Temp_Schedules;
+                                    DECLARE @CountOfT_Temp_Schedules int = @@ROWCOUNT
                                     
-	                                IF @CountOfT_Temp_Schedules = 0
-		                                RAISERROR('No schedules to insert',16,1)
+                                    IF @CountOfT_Temp_Trips = 0
+                                       RAISERROR('No trips to insert',16,1)
                                     
-	                                SELECT @CountOfT_Trips [TripsDeleted], @CountOfT_Temp_Trips [TripsAdded], @CountOfT_Schedules [SchedulesDeleted], @CountOfT_Temp_Schedules [SchedulesAdded]
+                                    IF @CountOfT_Temp_Schedules = 0
+                                       RAISERROR('No schedules to insert',16,1)
                                     
-	                                COMMIT TRAN
+                                    SELECT @CountOfT_Trips [TripsDeleted], @CountOfT_Temp_Trips [TripsAdded], @CountOfT_Schedules [SchedulesDeleted], @CountOfT_Temp_Schedules [SchedulesAdded]
+                                    
+                                    -- We set Trips/ScheduleLoaded to 0 here. We set them back to one when we next populate the T_Temp_Trips/Schedules tables.
+                                    UPDATE T_Preferences SET DataAvailable = 1, TripsLoaded = 0, ScheduleLoaded = 0;
+                                    
+                                    COMMIT TRAN
                                 END TRY
                                 BEGIN CATCH
-	                                ROLLBACK TRAN
+                                    ROLLBACK TRAN
                                     
-	                                DECLARE @ErrorMessage NVARCHAR(4000);  
+                                    DECLARE @ErrorMessage NVARCHAR(4000);  
                                     DECLARE @ErrorSeverity INT;  
                                     DECLARE @ErrorState INT;  
                                     
@@ -136,7 +189,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                         @ErrorSeverity = ERROR_SEVERITY(),  
                                         @ErrorState = ERROR_STATE();  
                                     
-	                                RAISERROR (@ErrorMessage, -- Message text.
+                                    RAISERROR (@ErrorMessage, -- Message text.
                                                @ErrorSeverity, -- Severity.
                                                @ErrorState -- State.
                                                );
@@ -146,7 +199,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandTimeout = 180;
+                    cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -168,6 +221,16 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     {
                         throw new Exception("No results returned from operation to copy temp data to live.");
                     }
+
+                    reader.Close();
+
+                    ExecuteSqlProc("CopyOverlapTripsToTrips", conn);
+                    ExecuteSqlProc("CopyOverlapScheduleToSchedule", conn);
+                    ExecuteSqlProc("[CreateDailyData2.5]", conn);
+                    ExecuteSqlProc("SetDayOfWeek", conn);
+
+                    LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
+                            , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                 }
             }
             catch (Exception ex)
