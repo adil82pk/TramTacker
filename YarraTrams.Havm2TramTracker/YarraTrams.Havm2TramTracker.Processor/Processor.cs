@@ -31,7 +31,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 DBHelper.CopyDataFromTempToLive();
 
                 // Get schedule data from HAVM2
-                string json = Helpers.ApiService.GetDataFromHavm2();
+                string json = Helpers.ApiService.GetDataFromHavm2(null);
 
 
                 // Create Havm model from JSON
