@@ -13,6 +13,8 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         //command menus
         static CommandMenu MainMenu = null;
+        static CommandMenu ProdSupportMenu = null;
+        static CommandMenu TestingMenu = null;
 
         static void Main(string[] args)
         {
@@ -43,16 +45,8 @@ namespace YarraTrams.Havm2TramTracker.Console
             {
                 MainMenu = new CommandMenu();
                 MainMenu.Title = "Main Menu";
-                MainMenu.AddCommand("Upload JSON file to memory and print to console", () => UploadJsonFileToMemoryAndPrintToConsole());
-                MainMenu.AddCommand("Upload JSON file to T_Temp_Trips database table", () => UploadJsonFileToMemoryAndSaveToT_Temp_Trips());
-                MainMenu.AddCommand("Call HAVM2 API and print to console", () => CallHavm2ApiAndPrintToConsole());
-                MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_Trips database table", () => CallHavm2ApiAndSaveToT_Temp_Trips());
-                MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_Schedules database table", () => CallHavm2ApiAndSaveToT_Temp_Schedules());
-                MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesMaster database table", () => CallHavm2ApiAndSaveToT_Temp_SchedulesMaster());
-                MainMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesDetails database table", () => CallHavm2ApiAndSaveToT_Temp_SchedulesDetails());
-                MainMenu.AddCommand("Copy to live tables", () => CallCopyToLive());
-                MainMenu.AddCommand("Call HAVM2 API and save to all tables", () => CallHavm2ApiAndSaveToAllTables());
-                MainMenu.AddCommand("Compare Existing and New data", () => CompareData());
+                MainMenu.AddCommand("Production Support menu", () => ShowProdSupportMenu());
+                MainMenu.AddCommand("Testing menu", () => ShowTestingMenu());
                 MainMenu.AddCommand("Exit", () => Exit());
             }
             //Todo: Reorder these options to they make sense.

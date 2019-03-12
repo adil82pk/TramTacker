@@ -8,6 +8,25 @@ namespace YarraTrams.Havm2TramTracker.Console
 {
     public partial class Program
     {
+        static void ShowTestingMenu()
+        {
+            if (TestingMenu == null)
+            {
+                TestingMenu = new CommandMenu(MainMenu);
+                TestingMenu.Title = "Testing Menu";
+                TestingMenu.AddCommand("Upload JSON file to memory and print to console", () => UploadJsonFileToMemoryAndPrintToConsole());
+                TestingMenu.AddCommand("Upload JSON file to T_Temp_Trips database table", () => UploadJsonFileToMemoryAndSaveToT_Temp_Trips());
+                TestingMenu.AddCommand("Call HAVM2 API and print to console", () => CallHavm2ApiAndPrintToConsole());
+                TestingMenu.AddCommand("Call HAVM2 API and save to T_Temp_Trips database table", () => CallHavm2ApiAndSaveToT_Temp_Trips());
+                TestingMenu.AddCommand("Call HAVM2 API and save to T_Temp_Schedules database table", () => CallHavm2ApiAndSaveToT_Temp_Schedules());
+                TestingMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesMaster database table", () => CallHavm2ApiAndSaveToT_Temp_SchedulesMaster());
+                TestingMenu.AddCommand("Call HAVM2 API and save to T_Temp_SchedulesDetails database table", () => CallHavm2ApiAndSaveToT_Temp_SchedulesDetails());
+                TestingMenu.AddCommand("Compare Existing and New data", () => CompareData());
+            }
+
+            TestingMenu.Show();
+        }
+
         private static void UploadJsonFileToMemoryAndPrintToConsole()
         {
             List<HavmTrip> trips;
@@ -183,61 +202,6 @@ namespace YarraTrams.Havm2TramTracker.Console
             clock.Stop();
 
             message = message + string.Format("\nSaving to T_Temp_SchedulesDetails took {0}.", clock.Elapsed);
-
-            System.Console.WriteLine(message);
-            System.Console.WriteLine("Complete, press <enter> to continue.");
-            System.Console.ReadLine();
-        }
-
-        private static void CallCopyToLive()
-        {
-            string message = "";
-            var clock = new Stopwatch();
-
-            clock.Start();
-            Processor.Helpers.DBHelper.CopyDataFromTempToLive();
-            clock.Stop();
-
-            message = message + string.Format("Copying data from temp to live took {0}.", clock.Elapsed);
-
-            System.Console.WriteLine(message);
-            System.Console.WriteLine("Complete, press <enter> to continue.");
-            System.Console.ReadLine();
-        }
-
-        private static void CallHavm2ApiAndSaveToAllTables()
-        {
-            DateTime? baseDate = GetDateFromUser("Enter a date (timetable data will start from the day following), blank for default:");
-
-            string message = "";
-            var clock = new Stopwatch();
-
-            // Get schedule data from HAVM2
-            clock.Start();
-            string json = Processor.Helpers.ApiService.GetDataFromHavm2(baseDate);
-            clock.Stop();
-            message += string.Format("Getting data from HAVM2 took {0}.", clock.Elapsed);
-
-            // Create Havm model from JSON
-            clock.Reset();
-            clock.Start();
-            List<Models.HavmTrip> havmTrips = Processor.Processor.CopyJsonToTrips(json);
-            clock.Stop();
-            message += string.Format("\nPutting data in memory took  {0}.", clock.Elapsed);
-
-            // Populate T_Temp_Trips
-            clock.Reset();
-            clock.Start();
-            Processor.Processor.SaveToTrips(havmTrips);
-            clock.Stop();
-            message += string.Format("\nSaving to T_Temp_Trips took {0}.", clock.Elapsed);
-
-            // Populate T_Temp_Schedules
-            clock.Reset();
-            clock.Start();
-            Processor.Processor.SaveToSchedules(havmTrips);
-            clock.Stop();
-            message += string.Format("\nSaving to T_Temp_SchedulesDetails took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
             System.Console.WriteLine("Complete, press <enter> to continue.");
