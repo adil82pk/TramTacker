@@ -16,10 +16,10 @@ else
 	git clone https://iopdeploy:<password here>@bitbucket.org/ytavmis/havm2tramtracker.git
 fi
 
-echo "Getting the latest from develop branch"
+echo "Getting the latest from dev branch"
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker
-git checkout develop
-git pull origin develop
+git checkout dev
+git pull origin dev
 
 cd /c/havm2tramtracker_source_deploy
 
