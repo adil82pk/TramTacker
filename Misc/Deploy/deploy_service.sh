@@ -18,8 +18,8 @@ fi
 
 echo "Getting the latest from develop branch"
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker
-git checkout develop
-git pull origin develop
+git checkout dev
+git pull origin dev
 
 cd /c/havm2tramtracker_source_deploy
 
