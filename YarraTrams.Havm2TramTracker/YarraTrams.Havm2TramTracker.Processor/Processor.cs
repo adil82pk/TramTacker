@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Models;
+using YarraTrams.Havm2TramTracker.Processor.Services;
 using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Data;
+using YarraTrams.Havm2TramTracker.Logger;
+using System.IO;
+using YarraTrams.Havm2TramTracker.Processor.Helpers;
+using Newtonsoft.Json;
 
 [assembly: InternalsVisibleTo("YarraTrams.Havm2TramTracker.Tests")]
 namespace YarraTrams.Havm2TramTracker.Processor
@@ -16,125 +21,94 @@ namespace YarraTrams.Havm2TramTracker.Processor
         #region Public methods
 
         /// <summary>
-        /// Takes a JSON string and converts it to in-memory objects.
+        /// Main entry point for Havm2TramTracker processes. This routine orchestrates all others.
+        /// </summary>
+        public static void Process()
+        {
+            try
+            {
+                // CopyToLive
+                DBHelper.CopyDataFromTempToLive();
+
+                // Get schedule data from HAVM2
+                string json = Helpers.ApiService.GetDataFromHavm2(null);
+
+
+                // Create Havm model from JSON
+                List<Models.HavmTrip> havmTrips = CopyJsonToTrips(json);
+
+                // Populate 4 temp tables
+                SaveToTrips(havmTrips);
+                SaveToSchedules(havmTrips);
+                //SaveToSchedulesMaster(havmTrips);
+                //SaveToSchedulesDetails(havmTrips);
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured\n\nMessage: {0}\n\nStacktrace:{1}", Helpers.ExceptionHelper.GetExceptionMessagesRecursive(ex) , ex.StackTrace));
+            }
+        }
+
+        /// <summary>
+        /// Takes a JSON string and converts it to in-memory HavmTrip/Stop objects.
+        /// The string can contain more fields than expected but must not be missing
+        /// any of the fields marked as Required on the HavmTrip and HavmStop models.
         /// </summary>
         /// <param name="jsonString">A JSON string that matches the format defined in ????.apibp.</param>
-        /// <returns></returns>
         public static List<Models.HavmTrip> CopyJsonToTrips(string jsonString)
         {
-            List<Models.HavmTrip> trips = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.HavmTrip>>(jsonString);
-            //Todo: investigate using automapper instead of Newtsonsoft
-            //Todo: do this manually so we can get more granular errors? e.g. The KTDS datamap.
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.MissingMemberHandling = MissingMemberHandling.Ignore; //Ignore any extra fields we find in the json
+
+            List<Models.HavmTrip> trips = JsonConvert.DeserializeObject<List<Models.HavmTrip>>(jsonString, settings);
+            
             return trips;
         }
 
         /// <summary>
-        /// Saves HAVM2 trip information to the T_Temp_Trips in the TramTracker database
+        /// Saves HAVM2 trip information to the T_Temp_Trips table in the TramTracker database
         /// </summary>
-        /// <param name="trips"></param>
-        public static void SaveTripsToT_Temp_Trips(List<Models.HavmTrip> trips)
+        public static void SaveToTrips(List<HavmTrip> havmTrips)
         {
-            var tripsDT = CopyTripsToT_Temp_TripsDataTable(trips);
-            SaveTripDataToDatabase("T_Temp_Trips", tripsDT);
+            TramTrackerTripsService service = new TramTrackerTripsService();
+            List<TramTrackerTrips> trips = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_TripRowsToFilePriorToInsert);
+            DataTable dataTable = service.ToDataTable(trips);
+            DBHelper.TruncateThenSaveTripDataToDatabase(DBHelper.GetDbTableName(Enums.TableNames.TempTrips), dataTable);
         }
 
         /// <summary>
-        /// Saves HAVM2 trip information to the T_Temp_Schedules in the TramTracker database
+        /// ves HAVM2 trip information to the T_Temp_Schedules table in the TramTracker database
         /// </summary>
-        /// <param name="trips"></param>
-        public static void SaveTripsToT_Temp_Schedules(List<Models.HavmTrip> trips)
+        public static void SaveToSchedules(List<HavmTrip> havmTrips)
         {
-            var tripsDT = CopyTripsToT_Temp_SchedulesDataTable(trips);
-            SaveTripDataToDatabase("T_Temp_Schedules", tripsDT);
+            TramTrackerSchedulesService service = new TramTrackerSchedulesService();
+            List<TramTrackerSchedules> schedules = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesRowsToFilePriorToInsert);
+            DataTable dataTable = service.ToDataTable(schedules);
+            DBHelper.TruncateThenSaveTripDataToDatabase(DBHelper.GetDbTableName(Enums.TableNames.TempSchedules), dataTable);
         }
-
-        #endregion
-
-        #region Data Tramsformation and Mapping
 
         /// <summary>
-        /// Copies trip objects in to a new DataTable that matches the structure of the T_Temp_Trips table in the TramTracker database.
-        /// 
-        /// This routine also performs the required data transformations.
-        /// 
-        /// The returned DataTable can be bulk-copied in to the TramTRACKER database using the SaveTripsToDatabase routine.
+        /// Saves HAVM2 trip information to the T_Temp_SchedulesMaster table in the TramTracker database
         /// </summary>
-        /// <param name="trips"></param>
-        /// <returns></returns>
-        internal static TramTrackerDataSet.T_Temp_TripsDataTable CopyTripsToT_Temp_TripsDataTable(List<Models.HavmTrip> trips)
+        public static void SaveToSchedulesMaster(List<HavmTrip> havmTrips)
         {
-            var tripDataTable = new TramTrackerDataSet.T_Temp_TripsDataTable();
-
-            foreach (HavmTrip trip in trips)
-            {
-                tripDataTable.AddT_Temp_TripsRow(
-                    TripID: trip.HastusTripId, //Todo: Create all transformations
-                    RunNo: trip.DisplayCode,
-                    RouteNo:          1,
-                    FirstTP:          trip.StartTimepoint,
-                    FirstTime:        (int)trip.StartTime.TotalSeconds,
-                    EndTP:            trip.EndTimepoint,
-                    EndTime:          (int)trip.EndTime.TotalSeconds,
-                    AtLayoverTime:Transformations.GetAtLayovertime(trip),
-                    NextRouteNo:      1,
-                    UpDirection:      Transformations.GetUpDirection(trip),
-                    LowFloor:         false,
-                    TripDistance:     500,
-                    PublicTrip:       true,
-                    DayOfWeek:        1
-                );
-            }
-
-            return tripDataTable;
+            TramTrackerSchedulesMasterService service = new TramTrackerSchedulesMasterService();
+            List<TramTrackerSchedulesMaster> schedulesMasters = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesMasterRowsToFilePriorToInsert);
+            DataTable dataTable = service.ToDataTable(schedulesMasters);
+            DBHelper.TruncateThenSaveTripDataToDatabase(DBHelper.GetDbTableName(Enums.TableNames.TempSchedulesMaster), dataTable);
         }
 
-        
         /// <summary>
-        /// Copies trip objects in to a new DataTable that matches the structure of the T_Temp_Schedules table in the TramTracker database.
-        /// 
-        /// This routine also performs the required data transformations.
-        /// 
-        /// The returned DataTable can be bulk-copied in to the TramTRACKER database using the SaveTripsToDatabase routine.
+        /// ves HAVM2 trip information to the T_Temp_SchedulesDetails table in the TramTracker database
         /// </summary>
-        /// <param name="trips"></param>
-        /// <returns></returns>
-        internal static TramTrackerDataSet.T_Temp_SchedulesDataTable CopyTripsToT_Temp_SchedulesDataTable(List<Models.HavmTrip> trips)
+        public static void SaveToSchedulesDetails(List<HavmTrip> havmTrips)
         {
-            throw new NotImplementedException();
+            TramTrackerSchedulesDetailsService service = new TramTrackerSchedulesDetailsService();
+            List<TramTrackerSchedulesDetails> schedulesDetailss = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert);
+            DataTable dataTable = service.ToDataTable(schedulesDetailss);
+            DBHelper.TruncateThenSaveTripDataToDatabase(DBHelper.GetDbTableName(Enums.TableNames.TempSchedulesDetails), dataTable);
         }
 
-        #endregion
-
-        #region Database
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="tripData">A typed DataTable. You can use the CopyTripsTo???DataTable routines to generate one.</param>
-        private static void SaveTripDataToDatabase(string tableName,DataTable tripData)
-        {
-            //Dynmaically create SQL here, instead of bulkcopy. Makes error handling easier.
-            
-            // connect to SQL
-            using (SqlConnection connection =
-                    new SqlConnection(Properties.Settings.Default.TramTrackerDB))
-            {
-                SqlBulkCopy bulkCopy =
-                    new SqlBulkCopy
-                    (
-                    connection,
-                    SqlBulkCopyOptions.TableLock |
-                    SqlBulkCopyOptions.FireTriggers |
-                    SqlBulkCopyOptions.UseInternalTransaction,
-                    externalTransaction: null
-                    );
-
-                bulkCopy.DestinationTableName = tableName;
-                connection.Open();
-
-                bulkCopy.WriteToServer(tripData);
-                connection.Close();
-            }
-        }
         #endregion
     }
 }

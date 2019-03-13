@@ -10,5 +10,36 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Initial Catalog=TramTracker;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="VehicleGroupsWithLowFloor" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;c&lt;/string&gt;
+  &lt;string&gt;d1&lt;/string&gt;
+  &lt;string&gt;d2&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="VehicleGroupsWithoutLowFloor" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;a&lt;/string&gt;
+  &lt;string&gt;b&lt;/string&gt;
+  &lt;string&gt;c1&lt;/string&gt;
+  &lt;string&gt;c2&lt;/string&gt;
+  &lt;string&gt;car&lt;/string&gt;
+  &lt;string&gt;e&lt;/string&gt;
+  &lt;string&gt;e1&lt;/string&gt;
+  &lt;string&gt;l&lt;/string&gt;
+  &lt;string&gt;taxi&lt;/string&gt;
+  &lt;string&gt;w&lt;/string&gt;
+  &lt;string&gt;z&lt;/string&gt;
+  &lt;string&gt;z3&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="DepotFirstChacterMapping" Type="System.Collections.Specialized.StringCollection" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;cw,v&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

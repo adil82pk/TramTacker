@@ -1,0 +1,81 @@
+[
+    {
+        "hastusTripId": 73509572,
+        "block": "gh02- 21",
+        "headboard": "61",
+        "route": "64",
+        "startTimepoint": "ebtn",
+        // startTimeSam usually goes here
+        "endTimepoint": "scj1",
+        "endTimeSam": 86760,
+        "headwayNextSeconds": 0,
+        "nextRoute": "64",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 3074,
+        "isPublic": true,
+        "operationalDay": "2019-03-07T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86400,
+                "hastusStopId": "1135",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1134",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1133",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1132",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1131",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1130",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1129",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1128",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1127",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1126",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1125",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1124",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    }
+]

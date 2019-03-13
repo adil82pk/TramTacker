@@ -13,11 +13,30 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         //command menus
         static CommandMenu MainMenu = null;
+        static CommandMenu ProdSupportMenu = null;
+        static CommandMenu TestingMenu = null;
 
         static void Main(string[] args)
         {
-            System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
-            ShowMainMenu();
+            if (args.Length > 0)
+            {
+                switch (args[0])
+                {
+                    case "sidebyside":
+                        var x = new TestComparisons.Comparisons();
+                        x.RunComparisons();
+                        break;
+                    default:
+                        System.Console.WriteLine(String.Format("Invalid command line parameter \"{0}\". Press <enter> to exit.", args[0]));
+                        System.Console.ReadLine();
+                        break;
+                }
+            }
+            else
+            {
+                System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
+                ShowMainMenu();
+            }
         }
 
         static void ShowMainMenu()
@@ -26,11 +45,11 @@ namespace YarraTrams.Havm2TramTracker.Console
             {
                 MainMenu = new CommandMenu();
                 MainMenu.Title = "Main Menu";
-                MainMenu.AddCommand("Upload JSON file to memory and print to console", () => UploadJsonFileToMemoryAndPrintToConsole());
-                MainMenu.AddCommand("Upload JSON file to T_Temp_Trips database table", () => UploadJsonFileToMemoryAndSaveToT_Temp_Trips());
+                MainMenu.AddCommand("Production Support menu", () => ShowProdSupportMenu());
+                MainMenu.AddCommand("Testing menu", () => ShowTestingMenu());
                 MainMenu.AddCommand("Exit", () => Exit());
             }
-
+            //Todo: Reorder these options to they make sense.
             MainMenu.Show();
         }
 

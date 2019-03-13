@@ -1,6 +1,6 @@
 ﻿namespace YarraTrams.Havm2TramTracker.Processor
 {
-    partial class Service1
+    partial class Havm2TramTrackerService
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.ServiceName = "Service1";
+            // 
+            // Havm2TramTrackerService
+            // 
+            this.ServiceName = "YarraTrams.Havm2TramTracker";
         }
 
         #endregion

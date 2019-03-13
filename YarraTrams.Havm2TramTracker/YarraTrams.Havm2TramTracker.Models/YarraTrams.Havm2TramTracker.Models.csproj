@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>YarraTrams.Havm2TramTracker.Models</RootNamespace>
     <AssemblyName>YarraTrams.Havm2TramTracker.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,39 +46,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\HavmTripStop.cs" />
-    <Compile Include="Models\TramTrackerDataSet.Designer.cs">
+    <Compile Include="TramTrackerBase.cs" />
+    <Compile Include="TramTrackerDataSet.cs">
+      <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TramTrackerSchedules.cs" />
+    <Compile Include="TramTrackerSchedulesDetails.cs" />
+    <Compile Include="Helpers\DataRowExtensions.cs" />
+    <Compile Include="Helpers\SettingsRefresher.cs" />
+    <Compile Include="TramTrackerSchedulesMaster.cs" />
+    <Compile Include="HavmTripStop.cs" />
+    <Compile Include="TramTrackerDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Models\HavmTrip.cs" />
+    <Compile Include="HavmTrip.cs" />
+    <Compile Include="TramTrackerTrips.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Transformations.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Models\TramTrackerDataSet.xsc">
+    <None Include="packages.config" />
+    <None Include="TramTrackerDataSet.xsc">
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </None>
-    <None Include="Models\TramTrackerDataSet.xsd">
+    <None Include="TramTrackerDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TramTrackerDataSet.Designer.cs</LastGenOutput>
       <CustomToolNamespace>YarraTrams.Havm2TramTracker.Models</CustomToolNamespace>
     </None>
-    <None Include="Models\TramTrackerDataSet.xss">
+    <None Include="TramTrackerDataSet.xss">
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Logger\YarraTrams.Havm2TramTracker.Logger.csproj">
+      <Project>{87010305-28A2-44E4-8675-7B02FD5862E7}</Project>
+      <Name>YarraTrams.Havm2TramTracker.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
