@@ -31,6 +31,9 @@ echo "Building Havm2TramTracker Console..."
 cmd "/c build_console.bat"
 
 cd /c/havm2tramtracker
+echo "Removing all configs that the build copied across"
+rm ./bin/*.config
+rm ./consolebin/*.config
 echo "Moving service config file"
 cp ./YarraTrams.havm2tramtracker.Processor.exe.config ./bin
 echo "Moving console config file"
