@@ -2,31 +2,31 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="YarraTrams.Havm2TramTracker.Processor.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="TramTrackerDB" Type="System.String" Scope="User">
+    <Setting Name="TramTrackerDB" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Persist Security Info=False;max pool size=500;Integrated Security=true;database=TramTracker;</Value>
     </Setting>
-    <Setting Name="Havm2TramTrackerAPI" Type="System.String" Scope="User">
+    <Setting Name="Havm2TramTrackerAPI" Type="System.String" Scope="Application">
       <Value Profile="(Default)">http://localhost:49467/tramtracker</Value>
     </Setting>
-    <Setting Name="Havm2TramTrackerAPITimeoutSeconds" Type="System.Int32" Scope="User">
+    <Setting Name="Havm2TramTrackerAPITimeoutSeconds" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">600</Value>
     </Setting>
-    <Setting Name="LogFilePath" Type="System.String" Scope="User">
+    <Setting Name="LogFilePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Users\iop\Downloads\temp\HAVM2TTLogs</Value>
     </Setting>
-    <Setting Name="LogT_Temp_TripRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+    <Setting Name="LogT_Temp_TripRowsToFilePriorToInsert" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LogT_Temp_SchedulesRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+    <Setting Name="LogT_Temp_SchedulesRowsToFilePriorToInsert" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LogT_Temp_SchedulesMasterRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+    <Setting Name="LogT_Temp_SchedulesMasterRowsToFilePriorToInsert" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="User">
+    <Setting Name="LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="DueTime" Type="System.TimeSpan" Scope="User">
+    <Setting Name="DueTime" Type="System.TimeSpan" Scope="Application">
       <Value Profile="(Default)">03:00:00</Value>
     </Setting>
     <Setting Name="DbTableSuffix" Type="System.String" Scope="Application">
