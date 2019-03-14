@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         private static void CallHavm2ApiAndSaveToAllTables()
         {
-            DateTime? baseDate = GetDateFromUser("Enter a date (timetable data will start from the day following), blank for default:");
+            DateTime? baseDate = GetDateFromUser("Enter a date (data will start from the day following), blank for default:");
 
             string message = "";
             var clock = new Stopwatch();
