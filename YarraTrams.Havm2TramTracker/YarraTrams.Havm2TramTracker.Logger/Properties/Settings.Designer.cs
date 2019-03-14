@@ -43,7 +43,7 @@ namespace YarraTrams.Havm2TramTracker.Logger.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1002")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public string MajorEscalationCodesCsv {
             get {
                 return ((string)(this["MajorEscalationCodesCsv"]));
