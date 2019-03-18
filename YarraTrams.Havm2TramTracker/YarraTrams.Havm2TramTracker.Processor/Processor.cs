@@ -28,7 +28,10 @@ namespace YarraTrams.Havm2TramTracker.Processor
             try
             {
                 // CopyToLive
-                DBHelper.CopyDataFromTempToLive();
+                if (Properties.Settings.Default.ExecuteCopyToLiveAsPartOfDailyProcess)
+                {
+                    DBHelper.CopyDataFromTempToLive();
+                }
 
                 // Get schedule data from HAVM2
                 string json = Helpers.ApiService.GetDataFromHavm2(null);
