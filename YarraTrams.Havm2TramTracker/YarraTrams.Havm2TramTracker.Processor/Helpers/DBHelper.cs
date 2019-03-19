@@ -78,6 +78,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                    transaction))
                         {
                             bulkCopy.DestinationTableName = tableName;
+                            bulkCopy.BulkCopyTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
                             bulkCopy.WriteToServer(tripData);
                         }
 
