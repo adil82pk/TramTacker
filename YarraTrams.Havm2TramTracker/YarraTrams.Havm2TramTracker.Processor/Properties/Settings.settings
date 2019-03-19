@@ -35,5 +35,8 @@
     <Setting Name="DBCommandTimeoutSeconds" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">600</Value>
     </Setting>
+    <Setting Name="ExecuteCopyToLiveAsPartOfDailyProcess" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

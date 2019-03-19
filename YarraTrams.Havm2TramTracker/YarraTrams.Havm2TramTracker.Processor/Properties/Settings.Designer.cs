@@ -122,5 +122,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((int)(this["DBCommandTimeoutSeconds"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExecuteCopyToLiveAsPartOfDailyProcess {
+            get {
+                return ((bool)(this["ExecuteCopyToLiveAsPartOfDailyProcess"]));
+            }
+        }
     }
 }
