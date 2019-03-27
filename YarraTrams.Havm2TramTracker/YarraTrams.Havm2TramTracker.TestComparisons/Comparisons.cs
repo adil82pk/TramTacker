@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons
                 Models.T_Temp_SchedulesComparer schedulesComparer = new Models.T_Temp_SchedulesComparer();
                 schedulesComparer.RunComparison(runId);
 
-                // T_Temp_Schedules
+                // T_Temp_SchedulesMaster
                 LogWriter.Instance.Log(EventLogCodes.SIDE_BY_SIDE_INFO, "Comparing T_Temp_SchedulesMaster.");
                 Models.T_Temp_SchedulesMasterComparer schedulesMasterComparer = new Models.T_Temp_SchedulesMasterComparer();
                 schedulesMasterComparer.RunComparison(runId);
