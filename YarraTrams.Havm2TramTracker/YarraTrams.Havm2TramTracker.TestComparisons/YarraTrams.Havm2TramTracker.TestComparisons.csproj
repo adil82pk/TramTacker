@@ -55,6 +55,7 @@
     <Compile Include="Comparisons.cs" />
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Models\TramTrackerComparer.cs" />
+    <Compile Include="Models\T_Temp_SchedulesDetailsComparer.cs" />
     <Compile Include="Models\T_Temp_SchedulesComparer.cs" />
     <Compile Include="Models\T_Temp_SchedulesMaster.cs" />
     <Compile Include="Models\T_Temp_TripsComparer.cs" />
