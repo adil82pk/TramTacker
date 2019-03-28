@@ -62,6 +62,36 @@ GO
 ALTER TABLE Havm2TTComparison_T_Temp_Schedules_MissingFromNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Schedules_MissingFromNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
 
+CREATE TABLE Havm2TTComparison_T_Temp_SchedulesMaster_MissingFromNew (
+Id int IDENTITY(1,1) NOT NULL
+,Havm2TTComparisonRunId int NOT NULL
+,[TramClass] [varchar](50) NULL
+,[HeadboardNo] [varchar](50) NULL
+,[RouteNo] [varchar](50) NULL
+,[RunNo] [varchar](50) NULL
+,[StartDate] [varchar](50) NULL
+,[TripNo] [varchar](15) NULL
+,[PublicTrip] [varchar](50) NULL
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesMaster_MissingFromNew] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+ALTER TABLE Havm2TTComparison_T_Temp_SchedulesMaster_MissingFromNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesMaster_MissingFromNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+GO
+
+CREATE TABLE Havm2TTComparison_T_Temp_SchedulesDetails_MissingFromNew (
+Id int IDENTITY(1,1) NOT NULL
+,Havm2TTComparisonRunId int NOT NULL
+,[ArrivalTime] [varchar](50) NULL
+,[StopID] [varchar](50) NULL
+,[TripID] [varchar](50) NULL
+,[RunNo] [varchar](50) NULL
+,[OPRTimePoint] [varchar](50) NULL
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesDetails_MissingFromNew] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+ALTER TABLE Havm2TTComparison_T_Temp_SchedulesDetails_MissingFromNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesDetails_MissingFromNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+GO
+
 CREATE TABLE Havm2TTComparison_T_Temp_Trips_ExtraInNew (
 Id int IDENTITY(1,1) NOT NULL
 ,Havm2TTComparisonRunId int NOT NULL
@@ -101,6 +131,36 @@ Id int IDENTITY(1,1) NOT NULL
 )
 GO
 ALTER TABLE Havm2TTComparison_T_Temp_Schedules_ExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Schedules_ExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+GO
+
+CREATE TABLE Havm2TTComparison_T_Temp_SchedulesMaster_ExtraInNew (
+Id int IDENTITY(1,1) NOT NULL
+,Havm2TTComparisonRunId int NOT NULL
+,[TramClass] [varchar](50) NULL
+,[HeadboardNo] [varchar](50) NULL
+,[RouteNo] [varchar](50) NULL
+,[RunNo] [varchar](50) NULL
+,[StartDate] [varchar](50) NULL
+,[TripNo] [varchar](15) NULL
+,[PublicTrip] [varchar](50) NULL
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesMaster_ExtraInNew] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+ALTER TABLE Havm2TTComparison_T_Temp_SchedulesMaster_ExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesMaster_ExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+GO
+
+CREATE TABLE Havm2TTComparison_T_Temp_SchedulesDetails_ExtraInNew (
+Id int IDENTITY(1,1) NOT NULL
+,Havm2TTComparisonRunId int NOT NULL
+,[ArrivalTime] [varchar](50) NULL
+,[StopID] [varchar](50) NULL
+,[TripID] [varchar](50) NULL
+,[RunNo] [varchar](50) NULL
+,[OPRTimePoint] [varchar](50) NULL
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesDetails_ExtraInNew] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+ALTER TABLE Havm2TTComparison_T_Temp_SchedulesDetails_ExtraInNew WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesDetails_ExtraInNew_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
 
 CREATE TABLE Havm2TTComparison_T_Temp_Trips_Differing (
@@ -146,4 +206,38 @@ Id int IDENTITY(1,1) NOT NULL
 )
 GO
 ALTER TABLE Havm2TTComparison_T_Temp_Schedules_Differing WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_Schedules_Differing_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+GO
+
+CREATE TABLE Havm2TTComparison_T_Temp_SchedulesMaster_Differing (
+Id int IDENTITY(1,1) NOT NULL
+,Havm2TTComparisonRunId int NOT NULL
+,PairIdentifier uniqueidentifier NOT NULL
+,IsExisting bit NOT NULL
+,[TramClass] [varchar](50) NULL
+,[HeadboardNo] [varchar](50) NULL
+,[RouteNo] [varchar](50) NULL
+,[RunNo] [varchar](50) NULL
+,[StartDate] [varchar](50) NULL
+,[TripNo] [varchar](15) NULL
+,[PublicTrip] [varchar](50) NULL
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesMaster_Differing] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+ALTER TABLE Havm2TTComparison_T_Temp_SchedulesMaster_Differing WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesMaster_Differing_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
+GO
+
+CREATE TABLE Havm2TTComparison_T_Temp_SchedulesDetails_Differing (
+Id int IDENTITY(1,1) NOT NULL
+,Havm2TTComparisonRunId int NOT NULL
+,PairIdentifier uniqueidentifier NOT NULL
+,IsExisting bit NOT NULL
+,[ArrivalTime] [varchar](50) NULL
+,[StopID] [varchar](50) NULL
+,[TripID] [varchar](50) NULL
+,[RunNo] [varchar](50) NULL
+,[OPRTimePoint] [varchar](50) NULL
+,CONSTRAINT [PK_Havm2TTComparison_T_Temp_SchedulesDetails_Differing] PRIMARY KEY CLUSTERED ([Id] ASC)
+)
+GO
+ALTER TABLE Havm2TTComparison_T_Temp_SchedulesDetails_Differing WITH CHECK ADD CONSTRAINT [FK_Havm2TTComparison_T_Temp_SchedulesDetails_Differing_Havm2TTComparisonRun] FOREIGN KEY(Havm2TTComparisonRunId) REFERENCES Havm2TTComparisonRun ([Id])
 GO
