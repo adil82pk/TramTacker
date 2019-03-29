@@ -236,9 +236,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                     reader.Close();
 
+                    // Copy trips from T_Temp_Overlap_Trips to T_Trips, only if the trip doesn't already exist in T_Trips (based on DayOfWeek, RunNo, RouteNo and FirstTime).
+                    // (T_Temp_Overlap_Trips was populated by CopyOverlappingTempTrips following the bulk insert in to T_Temp_Trips.)
                     ExecuteSqlProc("CopyOverlapTripsToTrips", conn);
+
+                    // Copy trip stops from T_Temp_Overlap_Schedules to T_Schedules, only if the trip stop doesn't already exist in T_Schedules (based on DayOfWeek, RunNo, RouteNo, Time, TripID and StopID).
+                    // (T_Temp_Overlap_Schedules was populated by CopyOverlappingTempSchedules following the bulk insert in to T_Temp_Trips.)
                     ExecuteSqlProc("CopyOverlapScheduleToSchedule", conn);
+
+                    // Populate several tables with trip and schedule data.
+                    // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
                     ExecuteSqlProc("[CreateDailyData2.5]", conn);
+                    
+                    // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
                     ExecuteSqlProc("SetDayOfWeek", conn);
 
                     LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
