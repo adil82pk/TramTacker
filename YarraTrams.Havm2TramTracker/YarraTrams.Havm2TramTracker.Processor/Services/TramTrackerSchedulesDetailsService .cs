@@ -48,16 +48,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                     {
                         try
                         {
-                            modelCounter++;
-
-                            TramTrackerSchedulesDetails schedulesDetails = new TramTrackerSchedulesDetails();
-                            schedulesDetails.FromHavmTripAndStop(havmTrip,havmStop);
-                            schedulesDetailss.Add(schedulesDetails);
-
-
-                            if (logRowsToFilePriorToInsert)
+                            int stopID;
+                            if (int.TryParse(havmStop.HastusStopId, out stopID))
                             {
-                                fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedulesDetails.ToString()));
+                                modelCounter++;
+
+                                TramTrackerSchedulesDetails schedulesDetails = new TramTrackerSchedulesDetails();
+                                schedulesDetails.FromHavmTripAndStop(havmTrip, havmStop);
+                                schedulesDetailss.Add(schedulesDetails);
+                                    
+                                if (logRowsToFilePriorToInsert)
+                                {
+                                    fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedulesDetails.ToString()));
+                                }
                             }
                         }
                         catch (Exception ex)
