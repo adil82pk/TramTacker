@@ -459,6 +459,28 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
+        public void TestArrivalTimeTransformationWithMidMorningArrival()
+        {
+            // arrange
+            int passingTimeSam = 32400;
+            const string expectedResult = " 9:00   ";
+
+            var stop = new HavmTripStop
+            {
+                HastusStopId = "1",
+                PassingTimeSam = passingTimeSam
+            };
+
+            var model = new Models.TramTrackerSchedulesDetails();
+
+            // act
+            string arrivalTime = model.GetArrivalTime(stop);
+
+            // assert
+            Assert.IsTrue(arrivalTime == expectedResult, "Expecting value \"{0}\" from input of {1} but got \"{2}\" instead.", expectedResult, passingTimeSam, arrivalTime);
+        }
+
+        [TestMethod]
         public void TestArrivalTimeTransformationWithLateEveningArrival()
         {
             // arrange
