@@ -44,27 +44,33 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                         fileWriter.Write(string.Format("\n\n{0}\nTrip {1}\n{0}", DateTime.Now, tripCounter, havmTrip.ToString()));
                     }
 
-                    foreach (HavmTripStop havmStop in havmTrip.Stops)
+                    if (havmTrip.IsPublic)
                     {
-                        try
+                        foreach (HavmTripStop havmStop in havmTrip.Stops)
                         {
-                            modelCounter++;
-
-                            TramTrackerSchedulesDetails schedulesDetails = new TramTrackerSchedulesDetails();
-                            schedulesDetails.FromHavmTripAndStop(havmTrip,havmStop);
-                            schedulesDetailss.Add(schedulesDetails);
-
-
-                            if (logRowsToFilePriorToInsert)
+                            try
                             {
-                                fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedulesDetails.ToString()));
+                                int stopID;
+                                if (int.TryParse(havmStop.HastusStopId, out stopID))
+                                {
+                                    modelCounter++;
+
+                                    TramTrackerSchedulesDetails schedulesDetails = new TramTrackerSchedulesDetails();
+                                    schedulesDetails.FromHavmTripAndStop(havmTrip, havmStop);
+                                    schedulesDetailss.Add(schedulesDetails);
+                                    
+                                    if (logRowsToFilePriorToInsert)
+                                    {
+                                        fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedulesDetails.ToString()));
+                                    }
+                                }
                             }
-                        }
-                        catch (Exception ex)
-                        {
-                            //This is catching an error with the trip-level data.
-                            errorMessages.Append(string.Format("Exception: {0}\n{1}\n", ex.Message, havmTrip.ToString()));
-                            exceptionCounts[havmTrip.OperationalDay.DayOfWeek]++;
+                            catch (Exception ex)
+                            {
+                                //This is catching an error with the trip-level data.
+                                errorMessages.Append(string.Format("Exception: {0}\n{1}\n", ex.Message, havmTrip.ToString()));
+                                exceptionCounts[havmTrip.OperationalDay.DayOfWeek]++;
+                            }
                         }
                     }
                 }
