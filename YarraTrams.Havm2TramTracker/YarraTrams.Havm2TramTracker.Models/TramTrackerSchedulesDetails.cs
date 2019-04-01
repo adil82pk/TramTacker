@@ -23,9 +23,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.StopID = havmStop.HastusStopId;
             this.TripID = havmTrip.HastusTripId.ToString().PadLeft(11);
             this.RunNo = havmTrip.Block;
-
-            //TODO: How does hastus know this value?
-            this.OPRTimePoint = "0";
+            this.OPRTimePoint = havmStop.IsMonitoredOPRReliability ? "1" : "0";
         }
 
         /// <summary>
@@ -40,6 +38,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             detailsRow.StopID = this.StopID;
             detailsRow.TripID = this.TripID;
             detailsRow.RunNo = this.RunNo;
+            detailsRow.OPRTimePoint = this.OPRTimePoint;
 
             return detailsRow;
         }
