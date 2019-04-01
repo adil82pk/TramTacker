@@ -485,7 +485,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         {
             // arrange
             int passingTimeSam = 86460;
-            const string expectedResult = " 0:01   ";
+            const string expectedResult = "24:01   ";
 
             var stop = new HavmTripStop
             {
