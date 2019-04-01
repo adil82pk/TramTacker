@@ -24,7 +24,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             this.TramClass = trip.VehicleType;
             this.HeadboardNo = trip.Headboard;
-            this.RouteNo = this.GetRouteNumberUsingRoute(trip).ToString();
+            this.RouteNo = this.GetRouteNumberUsingRoute(trip).ToString().PadLeft(5);
             this.RunNo = this.GetRunNumberLongForm(trip);
             this.StartDate = trip.OperationalDay.ToString("dd/MM/yyyy");
             this.TripNo = trip.HastusTripId.ToString().PadLeft(11);
