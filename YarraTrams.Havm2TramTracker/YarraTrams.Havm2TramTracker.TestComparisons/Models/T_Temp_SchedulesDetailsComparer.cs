@@ -79,8 +79,7 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons.Models
                                             NOT (live.ArrivalTime = new.ArrivalTime
                                                 AND live.StopID = new.StopID
                                                 AND live.TripID = new.TripID
-                                                AND live.RunNo = new.RunNo
-                                                AND live.OPRTimePoint = new.OPRTimePoint)
+                                                AND live.RunNo = new.RunNo)
                                             ) x
 
                                         INSERT Havm2TTComparison_T_Temp_SchedulesDetails_Differing

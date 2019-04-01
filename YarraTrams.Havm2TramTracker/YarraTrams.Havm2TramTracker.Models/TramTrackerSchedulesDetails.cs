@@ -23,9 +23,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.StopID = havmStop.HastusStopId;
             this.TripID = havmTrip.HastusTripId.ToString().PadLeft(11);
             this.RunNo = havmTrip.Block;
-
-            //TODO: How does hastus know this value?
-            this.OPRTimePoint = "0";
+            this.OPRTimePoint = havmStop.IsMonitoredOPRReliability ? "1" : "0";
         }
 
         /// <summary>
@@ -40,6 +38,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             detailsRow.StopID = this.StopID;
             detailsRow.TripID = this.TripID;
             detailsRow.RunNo = this.RunNo;
+            detailsRow.OPRTimePoint = this.OPRTimePoint;
 
             return detailsRow;
         }
@@ -59,20 +58,13 @@ namespace YarraTrams.Havm2TramTracker.Models
         }
 
         /// <summary>
-        /// ArrivalTime is a left-aligned fixed-length string of 8 characters.
-        /// The hh:mm portion MUST be five characters long, even when we have a single-digit hour - a single digit hour gets padded with a space on the left.
+        /// ArrivalTime is a left-aligned fixed-length string of 8 characters, hh:mm format.
+        /// A single digit minute gets padded with a zero on the left, a single digit hour with a space.
         /// </summary>
-        /// <param name="tripStop"></param>
-        /// <returns></returns>
         public string GetArrivalTime(HavmTripStop tripStop)
         {
             TimeSpan passingTime = new TimeSpan(0, 0, tripStop.PassingTimeSam);
-            string arrivalTime = passingTime.ToString(@"h\:mm");
-
-            if (passingTime.Hours <= 9)
-            {
-                arrivalTime = " " + arrivalTime;
-            }
+            string arrivalTime = ((int)passingTime.TotalHours).ToString().PadLeft(2) + ":" + passingTime.Minutes.ToString().PadLeft(2, '0');
 
             return arrivalTime.PadRight(8);
         }
