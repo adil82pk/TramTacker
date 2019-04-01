@@ -65,7 +65,7 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons.Models
         /// </summary>
         public override string GetDifferingSql(int runId)
         {
-            string sql = string.Format(@"CREATE TABLE #Diffs (Id uniqueidentifier, TripID varchar(50), StopID varchar(50) COLLATE database_default)
+            string sql = string.Format(@"CREATE TABLE #Diffs (Id uniqueidentifier, TripID varchar(50) COLLATE database_default, StopID varchar(50) COLLATE database_default)
 
                                         INSERT #Diffs
                                         SELECT NewId(), *
