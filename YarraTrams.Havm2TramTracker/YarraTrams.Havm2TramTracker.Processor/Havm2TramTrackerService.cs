@@ -219,14 +219,14 @@ namespace YarraTrams.Havm2TramTracker.Processor
             };
 
             // filter items that are set
-            List<string> configNotSet = requiredConfig.Select(conf => Properties.Settings.Default.Properties[conf] == null ? conf : null)
+            List<string> configNotSet = requiredConfig.Select(conf => (Properties.Settings.Default.Properties[conf] == null) || string.IsNullOrEmpty(Properties.Settings.Default.Properties[conf].DefaultValue.ToString()) ? conf : null)
                 .Where(conf => conf != null)
                 .ToList<string>();
 
             if (configNotSet.Count > 0)
             {
                 configNotSet.ForEach(conf => LogWriter.Instance.Log(
-                    EventLogCodes.FATAL_ERROR,
+                    EventLogCodes.INVALID_CONFIGURATION,
                     String.Format("Fatal error - Please set Config property: {0}", conf)));
 
                 return false;

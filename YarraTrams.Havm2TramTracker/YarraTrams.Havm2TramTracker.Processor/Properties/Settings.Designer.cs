@@ -35,7 +35,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/tramtracker")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Havm2TramTrackerAPI {
             get {
                 return ((string)(this["Havm2TramTrackerAPI"]));
