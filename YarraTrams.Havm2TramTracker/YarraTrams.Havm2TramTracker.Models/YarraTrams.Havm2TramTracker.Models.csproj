@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\SettingsExposer.cs" />
     <Compile Include="TramTrackerBase.cs" />
     <Compile Include="TramTrackerDataSet.cs">
       <DependentUpon>TramTrackerDataSet.xsd</DependentUpon>

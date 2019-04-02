@@ -34,19 +34,26 @@ namespace YarraTrams.Havm2TramTracker.Processor
         {
             LogWriter.Instance.Log(EventLogCodes.SERVICE_STARTED, "Havm2TramTracker has been started");
 
-            stopConfigFileChangeWatcher = true;
-
-            /// start config file change watcher
-            Thread myWorkerThread = new Thread(WatchConfigFileChange) { Name = "Havm2TramTracker Service Config File Change Watcher Thread" };
-            myWorkerThread.Start();
-
-            try
+            if (IsConfigurationValid())
             {
-                this.RunTimer();
+                stopConfigFileChangeWatcher = true;
+
+                /// start config file change watcher
+                Thread myWorkerThread = new Thread(WatchConfigFileChange) { Name = "Havm2TramTracker Service Config File Change Watcher Thread" };
+                myWorkerThread.Start();
+
+                try
+                {
+                    this.RunTimer();
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                }
             }
-            catch (Exception ex)
+            else
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                this.Stop();
             }
         }
 
@@ -185,6 +192,55 @@ namespace YarraTrams.Havm2TramTracker.Processor
             YarraTrams.Havm2TramTracker.Models.Helpers.SettingsRefresher.RefreshSettings();
             LogWriter.Instance.InitializeSettings();
             fileSystemWatcher.EnableRaisingEvents = true;
+        }
+
+       protected bool IsConfigurationValid()
+        {
+            if (AllRequiredConfigEntriesPresent())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if all required config settings are set
+        /// </summary>
+        private bool AllRequiredConfigEntriesPresent()
+        {
+            List<string> requiredConfig = new List<string> {
+                "TramTrackerDB",
+                "Havm2TramTrackerAPI",
+                "DueTime",
+                "ExecuteCopyToLiveAsPartOfDailyProcess"
+            };
+
+            // filter items that are set
+            List<string> configNotSet = requiredConfig.Select(conf => Properties.Settings.Default.Properties[conf] == null ? conf : null)
+                .Where(conf => conf != null)
+                .ToList<string>();
+
+            if (configNotSet.Count > 0)
+            {
+                configNotSet.ForEach(conf => LogWriter.Instance.Log(
+                    EventLogCodes.FATAL_ERROR,
+                    String.Format("Fatal error - Please set Config property: {0}", conf)));
+
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if all strings in a list are lower case
+        /// </summary>
+        private bool AreStringsLowerCase(List<string> list)
+        {
+            return list.All(str => !string.IsNullOrEmpty(str) && !str.Any(c => char.IsUpper(c)));
         }
     }
 }
