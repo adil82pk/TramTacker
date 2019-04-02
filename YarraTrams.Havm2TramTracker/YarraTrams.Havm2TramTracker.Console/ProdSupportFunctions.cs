@@ -70,7 +70,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             clock.Start();
             Processor.Processor.SaveToSchedules(havmTrips);
             clock.Stop();
-            message += string.Format("\nSaving to T_Temp_SchedulesDetails took {0}.", clock.Elapsed);
+            message += string.Format("\nSaving to T_Temp_Schedules took {0}.", clock.Elapsed);
 
             // Populate T_Temp_SchedulesMaster
             clock.Reset();

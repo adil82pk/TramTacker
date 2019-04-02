@@ -30,6 +30,10 @@ cmd "/c build_service.bat"
 echo "Building Havm2TramTracker Console..."
 cmd "/c build_console.bat"
 
+echo "Running Comparison table Migrations..."
+cd /c/havm2tramtracker_source_deploy/havm2tramtracker/YarraTrams.Havm2TramTracker/YarraTrams.Havm2TramTracker.TestComparisons/Migrations
+cmd "/c TestComparisons_migrations_up.bat <server name here> <database name here> <true or false here> <if false, username here> <if false, password here> "
+
 cd /c/havm2tramtracker
 echo "Removing all configs that the build copied across"
 rm ./bin/*.config
