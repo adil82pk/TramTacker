@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
 
@@ -140,14 +141,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
 
         /// <summary>
-        /// Deletes all records from T_Trips and T_Schedules
-        /// then copies the records from T_Temp_Trips to T_Trips
-        /// and copies the records from T_TemP_Schedules to T_Schedules.
-        /// The whole operation either succeeds or fails. It never partially commits.
+        /// Deletes all records from T_Trips and T_Schedules then copies the records from
+        /// T_Temp_Trips to T_Trips and copies the records from T_TemP_Schedules to
+        /// T_Schedules. The whole copy operation either succeeds or fails. It never
+        /// partially commits.
+        /// Subsequent to copying the data we call a series of stored procs that update
+        /// various dependant database tables. These stored procs can leave the database
+        /// in an inconsistent state however they can be safely rerun (they always
+        /// "truncate" then "insert" - they're idempotent).
         /// 
-        /// Exceptions are logged then re-thrown.
+        /// Exceptions are logged then we retry. After X retries we give up and re-throw
+        /// the error for a higher level routine to deal with.
         /// </summary>
-        public static void CopyDataFromTempToLive()
+        public static void CopyDataFromTempToLive(int retryCount = 0)
         {
             try
             {
@@ -259,8 +265,20 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             {
                 // We make sure we load a very specific event log so that SCOM alerts can be configured in a granular way.
                 LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_FAILED
-                            , ex.Message);
-                throw ex;
+                            , ex.Message + ((retryCount > 0) ? string.Format("\nRetry count = {0}", retryCount) : ""));
+
+                // We retry a certain amount of times
+                if (retryCount < Properties.Settings.Default.MaxCopyToLiveRetryCount)
+                {
+                    retryCount++;
+                    Thread.Sleep(Properties.Settings.Default.GapBetweenCopyToLiveRetriesInSecs * 1000);
+                    CopyDataFromTempToLive(retryCount);
+                }
+                else
+                {
+                    throw new Exception(string.Format("Error in CopyDataFromTempToLive process, retried {0} times, waiting {1} seconds between each try."
+                                                    , retryCount, Properties.Settings.Default.GapBetweenCopyToLiveRetriesInSecs), ex);
+                }
             }
         }
     }
