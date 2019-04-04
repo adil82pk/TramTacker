@@ -25,8 +25,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Persist Security Info=False;max pool size=500;In" +
-            "tegrated Security=true;database=TramTracker;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string TramTrackerDB {
             get {
                 return ((string)(this["TramTrackerDB"]));
@@ -98,7 +97,6 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("03:00:00")]
         public global::System.TimeSpan DueTime {
             get {
                 return ((global::System.TimeSpan)(this["DueTime"]));
@@ -107,7 +105,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("_TTBU")]
         public string DbTableSuffix {
             get {
                 return ((string)(this["DbTableSuffix"]));
