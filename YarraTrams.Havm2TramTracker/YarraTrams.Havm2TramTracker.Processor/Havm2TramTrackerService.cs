@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -192,13 +193,34 @@ namespace YarraTrams.Havm2TramTracker.Processor
             YarraTrams.Havm2TramTracker.Models.Helpers.SettingsRefresher.RefreshSettings();
             LogWriter.Instance.InitializeSettings();
             fileSystemWatcher.EnableRaisingEvents = true;
+
+            if (!IsConfigurationValid())
+            {
+                this.Stop();
+            }
         }
 
-       protected bool IsConfigurationValid()
+        /// <summary>
+        /// Checks that the entries in the configuration file are valid.
+        /// Can't identify all issues though.
+        /// 
+        /// Writes event log entries when it finds something wrong.
+        /// </summary>
+        protected bool IsConfigurationValid()
         {
             if (AllRequiredConfigEntriesPresent())
             {
-                return true;
+                if (AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithLowFloor()) && AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithoutLowFloor()))
+                {
+                    return true;
+                }
+                else
+                {
+                    LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        "Fatal error - VehicleGroupsWithLowFloor and VehicleGroupsWithLowFloor config entry lists must only contain lower-case items.");
+                    return false;
+                }
             }
             else
             {
@@ -208,39 +230,53 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
         /// <summary>
         /// Returns true if all required config settings are set
+        /// 
+        /// Works with string fields and timespan fields, not with bools though.
         /// </summary>
         private bool AllRequiredConfigEntriesPresent()
         {
-            List<string> requiredConfig = new List<string> {
+            try
+            {
+                List<string> requiredConfig = new List<string> {
                 "TramTrackerDB",
                 "Havm2TramTrackerAPI",
-                "DueTime",
-                "ExecuteCopyToLiveAsPartOfDailyProcess"
+                "DueTime"
             };
 
-            // filter items that are set
-            List<string> configNotSet = requiredConfig.Select(conf => (Properties.Settings.Default.Properties[conf] == null) || string.IsNullOrEmpty(Properties.Settings.Default.Properties[conf].DefaultValue.ToString()) ? conf : null)
-                .Where(conf => conf != null)
-                .ToList<string>();
+                // filter items that are set
+                List<string> configNotSet = requiredConfig.Select(conf => (Properties.Settings.Default[conf] == null) || string.IsNullOrEmpty(Properties.Settings.Default[conf].ToString()) ? conf : null)
+                    .Where(conf => conf != null)
+                    .ToList<string>();
 
-            if (configNotSet.Count > 0)
+                if (configNotSet.Count > 0)
+                {
+                    configNotSet.ForEach(conf => LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        String.Format("Fatal error - Please set Config property: {0}", conf)));
+
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
             {
-                configNotSet.ForEach(conf => LogWriter.Instance.Log(
-                    EventLogCodes.INVALID_CONFIGURATION,
-                    String.Format("Fatal error - Please set Config property: {0}", conf)));
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        String.Format("Fatal error: {0}", ex.Message));
 
                 return false;
             }
-
-            return true;
         }
 
         /// <summary>
-        /// Returns true if all strings in a list are lower case
+        /// Returns true if all strings in a list (from the config file) are lower case
         /// </summary>
-        private bool AreStringsLowerCase(List<string> list)
+        private bool AllStringsAreLowerCase(System.Collections.Specialized.StringCollection col)
         {
-            return list.All(str => !string.IsNullOrEmpty(str) && !str.Any(c => char.IsUpper(c)));
+            return col.Cast<string>()
+                    .ToList()
+                        .All(str => !string.IsNullOrEmpty(str) && !str.Any(c => char.IsUpper(c)));
         }
     }
 }
