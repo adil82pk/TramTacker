@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 {
-    class ExceptionHelper
+    public class ExceptionHelper
     {
         public static string GetExceptionMessagesRecursive(Exception e, string message = "")
         {

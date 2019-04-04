@@ -131,5 +131,23 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((bool)(this["ExecuteCopyToLiveAsPartOfDailyProcess"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int MaxCopyToLiveRetryCount {
+            get {
+                return ((int)(this["MaxCopyToLiveRetryCount"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int GapBetweenCopyToLiveRetriesInSecs {
+            get {
+                return ((int)(this["GapBetweenCopyToLiveRetriesInSecs"]));
+            }
+        }
     }
 }
