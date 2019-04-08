@@ -69,7 +69,10 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons.Models
         /// </summary>
         public override string GetDifferingSql(int runId)
         {
-            string sql = string.Format(@"CREATE TABLE #Diffs (Id uniqueidentifier, TripNo int, StartDate datetime)
+            string sql = string.Format(@"
+                                    SET DATEFORMAT dmy; --The TramTracker database uses the us_english language, hence the date format defaults to mdy. This is required for an implicit date conversion below.
+
+                                    CREATE TABLE #Diffs (Id uniqueidentifier, TripNo int, StartDate datetime)
 
                                     INSERT #Diffs
                                     SELECT NewID(), live.TripNo, live.StartDate
