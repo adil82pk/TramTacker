@@ -73,7 +73,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private void RunProcessing()
         {
             this.StopTimer();
-            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, as per config setting of {0}", Properties.Settings.Default.DueTime));
+            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, as per config setting of {0}", Properties.Settings.Default.CopyToLiveDueTime));
             try
             {
                 Processor.Process();
@@ -103,7 +103,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
             else
             {
-                TimeSpan dueTime = Properties.Settings.Default.DueTime;
+                TimeSpan dueTime = Properties.Settings.Default.CopyToLiveDueTime;
                 TimeSpan currentTime = DateTime.Now.TimeOfDay;
                 if (currentTime < dueTime)
                 {
@@ -212,7 +212,14 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 if (AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithLowFloor()) && AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithoutLowFloor()))
                 {
-                    return true;
+                    if (TriggerTimesAreValid())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
@@ -240,7 +247,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 List<string> requiredConfig = new List<string> {
                 "TramTrackerDB",
                 "Havm2TramTrackerAPI",
-                "DueTime"
+                "CopyToLiveDueTime",
+                "RefreshTempDueTime"
             };
 
                 // filter items that are set
@@ -277,6 +285,46 @@ namespace YarraTrams.Havm2TramTracker.Processor
             return col.Cast<string>()
                     .ToList()
                         .All(str => !string.IsNullOrEmpty(str) && !str.Any(c => char.IsUpper(c)));
+        }
+
+        /// <summary>
+        /// Returns true if the trigger times are both less than 24 hours and differ by more than 30 mins.
+        /// Logs to the event log and returns false if the above isn't true.
+        /// </summary>
+        private bool TriggerTimesAreValid()
+        {
+            TimeSpan refreshTempDueTime = Properties.Settings.Default.RefreshTempDueTime;
+            TimeSpan copyToLiveDueTime = Properties.Settings.Default.CopyToLiveDueTime;
+
+            if (refreshTempDueTime.TotalHours >= 24 || copyToLiveDueTime.TotalHours >= 24)
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        string.Format("Fatal error - the values for RefreshTempDueTime ({0}) and CopyToLiveDueTime ({1}) must be between 00:00:00 and 23:59:59."
+                                , refreshTempDueTime
+                                , copyToLiveDueTime
+                                )
+                        );
+                return false;
+            }
+
+            const double minDiff = 30; // Minutes.
+            double diff = Math.Abs(refreshTempDueTime.TotalMinutes - copyToLiveDueTime.TotalMinutes);
+            if (diff < minDiff || diff > (1440 - minDiff)) // There are 1440 minutes in a day.
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        string.Format("Fatal error - the values for RefreshTempDueTime ({0}) and CopyToLiveDueTime ({1}) must be more than {2} minutes apart, currently they're {3} minutes apart."
+                                , refreshTempDueTime
+                                , copyToLiveDueTime
+                                , minDiff
+                                , diff < minDiff ? diff : (1440 - diff)
+                                )
+                        );
+                return false;
+            }
+
+            return true;
         }
     }
 }

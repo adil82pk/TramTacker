@@ -97,9 +97,9 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.TimeSpan DueTime {
+        public global::System.TimeSpan CopyToLiveDueTime {
             get {
-                return ((global::System.TimeSpan)(this["DueTime"]));
+                return ((global::System.TimeSpan)(this["CopyToLiveDueTime"]));
             }
         }
         
@@ -136,6 +136,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         public int GapBetweenCopyToLiveRetriesInSecs {
             get {
                 return ((int)(this["GapBetweenCopyToLiveRetriesInSecs"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.TimeSpan RefreshTempDueTime {
+            get {
+                return ((global::System.TimeSpan)(this["RefreshTempDueTime"]));
             }
         }
     }
