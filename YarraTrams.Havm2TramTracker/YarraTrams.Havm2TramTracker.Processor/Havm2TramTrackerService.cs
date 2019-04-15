@@ -308,6 +308,18 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 return false;
             }
 
+            if (refreshTempDueTime.TotalHours <= copyToLiveDueTime.TotalHours)
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        string.Format("Fatal error - the RefreshTempDueTime ({0}) must be set to a time that occurs after the CopyToLiveDueTime ({1}). This is because the RefreshTemp process will not include data for the current day in the refresh, therefore the CopyToLive process would have no data on which to base current day predictions."
+                                , refreshTempDueTime
+                                , copyToLiveDueTime
+                                )
+                        );
+                return false;
+            }
+
             const double minDiff = 30; // Minutes.
             double diff = Math.Abs(refreshTempDueTime.TotalMinutes - copyToLiveDueTime.TotalMinutes);
             if (diff < minDiff || diff > (1440 - minDiff)) // There are 1440 minutes in a day.
