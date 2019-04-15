@@ -108,46 +108,31 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TimeSpan copyToLiveDueTime = Properties.Settings.Default.CopyToLiveDueTime;
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             TimeSpan dueTime;
-            int dueTimeSeconds;
 
+            // This logic depends on the validation inside the TriggerTimesAreValid method.
             // If the current time is either prior to the two triggers or subsequent to the two triggers...
-            if ((currentTime < refreshTempDueTime && currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime && currentTime > copyToLiveDueTime))
+            if ((currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime))
             {
-                // ...then the next trigger time is the earlier of the two triggers.
-                if (refreshTempDueTime < copyToLiveDueTime)
-                {
-                    dueTime = refreshTempDueTime;
-                    stateObj.process = processes.RefreshTemp;
-                }
-                else
-                {
-                    dueTime = copyToLiveDueTime;
-                    stateObj.process = processes.CopyToLive;
-                }
+                // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
+                dueTime = copyToLiveDueTime;
+                stateObj.process = processes.CopyToLive;
             }
             else
             {
-                // ...otherwise we're in between the triggers so the we want the later of the two.
-                if (refreshTempDueTime > copyToLiveDueTime)
-                {
-                    dueTime = refreshTempDueTime;
-                    stateObj.process = processes.RefreshTemp;
-                }
-                else
-                {
-                    dueTime = copyToLiveDueTime;
-                    stateObj.process = processes.CopyToLive;
-                }
+                // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
+                dueTime = refreshTempDueTime;
+                stateObj.process = processes.RefreshTemp;
             }
 
+            int dueTimeSeconds;
             if (currentTime < dueTime)
             {
-                //If 3am (configurable) hasn't yet happened today then find the number of seconds between now and then
+                //If trigger time hasn't yet happened today then find the number of seconds between now and then
                 dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
             }
             else
             {
-                //If 3am (configurable) has already happened today then take 24 hours and minus the time elapsed since 3am
+                //If trigger time has already happened today then take 24 hours and minus the time elapsed since 3am
                 dueTimeSeconds = (60 * 60 * 24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
             }
             
