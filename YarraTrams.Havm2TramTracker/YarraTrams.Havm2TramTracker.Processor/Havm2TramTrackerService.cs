@@ -70,7 +70,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <summary>
         /// Core processing orchestration
         /// </summary>
-        private void RunProcessing(processes process)
+        private void RunProcessing(Processes process)
         {
             this.StopTimer();
             LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, running the {0} process", process.ToString()));
@@ -78,10 +78,10 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 switch (process)
                 {
-                    case processes.CopyToLive:
+                    case Processes.CopyToLive:
                         Processor.CopyToLive();
                         break;
-                    case processes.RefreshTemp:
+                    case Processes.RefreshTemp:
                         Processor.RefreshTemp();
                         break;
                     default:
@@ -115,13 +115,13 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
                 dueTime = copyToLiveDueTime;
-                stateObj.process = processes.CopyToLive;
+                stateObj.process = Processes.CopyToLive;
             }
             else
             {
                 // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
                 dueTime = refreshTempDueTime;
-                stateObj.process = processes.RefreshTemp;
+                stateObj.process = Processes.RefreshTemp;
             }
 
             int dueTimeSeconds;
@@ -180,7 +180,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
         }
 
-        private enum processes
+        private enum Processes
         {
             CopyToLive,
             RefreshTemp
@@ -190,7 +190,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         {
             public System.Threading.Timer TimerReference;
             public bool TimerCanceled;
-            public processes process;
+            public Processes process;
         }
 
         /// <summary>
