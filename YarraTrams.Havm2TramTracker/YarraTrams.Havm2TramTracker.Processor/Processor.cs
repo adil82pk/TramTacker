@@ -21,15 +21,29 @@ namespace YarraTrams.Havm2TramTracker.Processor
         #region Public methods
 
         /// <summary>
-        /// Main entry point for Havm2TramTracker processes. This routine orchestrates all others.
+        /// Copies data from the T_Temp... tables to the equivalent T_... tables.
+        /// One of two main entry points for Havm2TramTracker processes (the other is RefreshTemp).
         /// </summary>
-        public static void Process()
+        public static void CopyToLive()
         {
             try
             {
-                // CopyToLive
                 DBHelper.CopyDataFromTempToLive();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured\n\nMessage: {0}\n\nStacktrace:{1}", Helpers.ExceptionHelper.GetExceptionMessagesRecursive(ex), ex.StackTrace));
+            }
+        }
 
+        /// <summary>
+        /// Truncates the T_Temp... tables and repopulates them with the latest HAVM2 data.
+        /// One of two main entry points for Havm2TramTracker processes (the other is CopyToLive).
+        /// </summary>
+        public static void RefreshTemp()
+        {
+            try
+            {
                 // Get schedule data from HAVM2
                 string json = Helpers.ApiService.GetDataFromHavm2(null);
 
@@ -45,7 +59,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
             catch (Exception ex)
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured\n\nMessage: {0}\n\nStacktrace:{1}", Helpers.ExceptionHelper.GetExceptionMessagesRecursive(ex) , ex.StackTrace));
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured\n\nMessage: {0}\n\nStacktrace:{1}", Helpers.ExceptionHelper.GetExceptionMessagesRecursive(ex), ex.StackTrace));
             }
         }
 

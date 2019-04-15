@@ -70,13 +70,24 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <summary>
         /// Core processing orchestration
         /// </summary>
-        private void RunProcessing()
+        private void RunProcessing(Processes process)
         {
             this.StopTimer();
-            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, as per config setting of {0}", Properties.Settings.Default.CopyToLiveDueTime));
+            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, running the {0} process", process.ToString()));
             try
             {
-                Processor.Process();
+                switch (process)
+                {
+                    case Processes.CopyToLive:
+                        Processor.CopyToLive();
+                        break;
+                    case Processes.RefreshTemp:
+                        Processor.RefreshTemp();
+                        break;
+                    default:
+                        throw new NotImplementedException(string.Format("Process {0} not implemented.", process.ToString()));
+                }
+                        
             }
             catch (Exception ex)
             {
@@ -86,40 +97,59 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// If dueTimeSeconds isn't provided, this method schedules the next execution to occur at 3am (configurable)
+        /// Schedules the next process execution, according to the config settings.
         /// </summary>
-        public void RunTimer(int? dueTimeSeconds = null)
+        public void RunTimer()
         {
             stateObj = new TimerStateClass();
             stateObj.TimerCanceled = false;
+
+            TimeSpan refreshTempDueTime = Properties.Settings.Default.RefreshTempDueTime;
+            TimeSpan copyToLiveDueTime = Properties.Settings.Default.CopyToLiveDueTime;
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            TimeSpan dueTime;
+
+            // This logic depends on the validation inside the TriggerTimesAreValid method.
+            // If the current time is either prior to the two triggers or subsequent to the two triggers...
+            if ((currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime))
+            {
+                // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
+                dueTime = copyToLiveDueTime;
+                stateObj.process = Processes.CopyToLive;
+            }
+            else
+            {
+                // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
+                dueTime = refreshTempDueTime;
+                stateObj.process = Processes.RefreshTemp;
+            }
+
+            int dueTimeSeconds;
+            if (currentTime < dueTime)
+            {
+                //If trigger time hasn't yet happened today then find the number of seconds between now and then
+                dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
+            }
+            else
+            {
+                //If trigger time has already happened today then take 24 hours and minus the time elapsed since 3am
+                dueTimeSeconds = (60 * 60 * 24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
+            }
             
             System.Threading.TimerCallback TimerDelegate = new System.Threading.TimerCallback(TimerTask);
 
             int interval = (60 * 60 * 24) * 1000; //get seconds in the day then convert to ms
 
-            if (dueTimeSeconds != null)
-            {
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, dueTimeSeconds.Value * 1000, interval);
-            }
-            else
-            {
-                TimeSpan dueTime = Properties.Settings.Default.CopyToLiveDueTime;
-                TimeSpan currentTime = DateTime.Now.TimeOfDay;
-                if (currentTime < dueTime)
-                {
-                    //If 3am (configurable) hasn't yet happened today then find the number of seconds between now and then
-                    dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
-                }
-                else
-                {
-                    //If 3am (configurable) has already happened today then take 24 hours and minus the time elapsed since 3am
-                    dueTimeSeconds = (60*60*24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
-                } 
+            processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
 
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
-            }
-
-            LogWriter.Instance.Log(EventLogCodes.TIMER_SET, string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds", (int)dueTimeSeconds));
+            LogWriter.Instance.Log(EventLogCodes.TIMER_SET,
+                                    string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds to run {1}.\n\nCopyToLive setting = {2}\nRefreshTemp setting = {3}",
+                                        (int)dueTimeSeconds,
+                                        stateObj.process.ToString(),
+                                        copyToLiveDueTime,
+                                        refreshTempDueTime
+                                    )
+                                  );
 
             // Save a reference for Dispose.
             stateObj.TimerReference = processingTimer;
@@ -146,14 +176,21 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
             else
             {
-                this.RunProcessing();
+                this.RunProcessing(State.process);
             }
+        }
+
+        private enum Processes
+        {
+            CopyToLive,
+            RefreshTemp
         }
 
         private class TimerStateClass
         {
             public System.Threading.Timer TimerReference;
             public bool TimerCanceled;
+            public Processes process;
         }
 
         /// <summary>
