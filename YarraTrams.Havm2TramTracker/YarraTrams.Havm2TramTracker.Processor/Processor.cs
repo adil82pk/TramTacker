@@ -96,7 +96,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public static void SaveToSchedules(List<HavmTrip> havmTrips)
         {
             TramTrackerSchedulesService service = new TramTrackerSchedulesService();
-            List<TramTrackerSchedules> schedules = service.FromHavmTrips(havmTrips, Properties.Settings.Default.LogT_Temp_SchedulesRowsToFilePriorToInsert);
+            List<TramTrackerSchedules> schedules = service.FromHavmTrips(havmTrips, Helpers.HastusStopMapper.GetMapping(), Properties.Settings.Default.LogT_Temp_SchedulesRowsToFilePriorToInsert);
             DataTable dataTable = service.ToDataTable(schedules);
             DBHelper.TruncateThenSaveTripDataToDatabase(DBHelper.GetDbTableName(Enums.TableNames.TempSchedules), dataTable);
         }

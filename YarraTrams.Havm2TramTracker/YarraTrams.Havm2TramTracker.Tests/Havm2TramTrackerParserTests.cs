@@ -121,16 +121,24 @@ namespace YarraTrams.Havm2TramTracker.Tests
                     }
             });
 
+            // Stop mapping
+            string expectedStop1Value = "A Mapped Stop";
+            string expectedStop2Value = "3398    ";
+            Dictionary<int, string> stopMapping = new Dictionary<int, string>();
+            stopMapping.Add(1626, expectedStop1Value);
+
             var schedulesService = new Processor.Services.TramTrackerSchedulesService();
-            List<Models.TramTrackerSchedules> schedules;
 
             // act
-            schedules = schedulesService.FromHavmTrips(trips, false);
+            List<Models.TramTrackerSchedules> schedules = schedulesService.FromHavmTrips(trips, stopMapping, false);
 
             // assert
             Assert.IsTrue(trips.Select(x => x.Stops.Count()).Sum() == schedules.Count, "Number of records in schedules ({1:d}) doesn't match number of total stops in Trip class list ({0:d}).", trips.Select(x => x.Stops.Count()).Sum(), schedules.Count);
             //Todo: check more stuff. Everything! Only once we've settled on the data contract.
             Assert.IsTrue(trips[0].HastusTripId == schedules[0].TripID, "TripId field in schedules ({1}) doesn't match HastusTripId from Trip class ({0}).", trips[0].HastusTripId, schedules[0].TripID);
+            Assert.IsTrue(schedules[0].StopID == expectedStop1Value, "StopID field in first schedule \"{1}\" doesn't match the expected StopID \"{0}\".", expectedStop1Value, schedules[0].StopID);
+            Assert.IsTrue(schedules[1].StopID == expectedStop2Value, "StopID field in second schedule \"{1}\" doesn't match the expected StopID \"{0}\".", expectedStop2Value, schedules[1].StopID);
+
         }
 
         [TestMethod]
@@ -171,11 +179,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                     }
             });
 
+            // Stop mapping (empty for this test).
+            Dictionary<int, string> stopMapping = new Dictionary<int, string>();
+
             var schedulesService = new Processor.Services.TramTrackerSchedulesService();
-            List<Models.TramTrackerSchedules> schedules;
 
             // act
-            schedules = schedulesService.FromHavmTrips(trips, false);
+            List<Models.TramTrackerSchedules> schedules = schedulesService.FromHavmTrips(trips, stopMapping, false);
 
             // assert
             Assert.IsTrue(schedules.Count == 0, "Number of records in schedules ({0:d}) should be zero for a non public trip.", schedules.Count);
@@ -225,11 +235,13 @@ namespace YarraTrams.Havm2TramTracker.Tests
                     }
             });
 
+            // Stop mapping (empty for this test).
+            Dictionary<int, string> stopMapping = new Dictionary<int, string>();
+
             var schedulesService = new Processor.Services.TramTrackerSchedulesService();
-            List<Models.TramTrackerSchedules> schedules;
 
             // act
-            schedules = schedulesService.FromHavmTrips(trips, false);
+            List<Models.TramTrackerSchedules> schedules = schedulesService.FromHavmTrips(trips, stopMapping, false);
 
             // assert
             Assert.IsTrue(schedules.Count == 2, "Number of records in schedules ({0:d}) should be two for this trip because one of the three provided stops is invalid.", schedules.Count);
