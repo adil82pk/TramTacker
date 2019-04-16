@@ -180,7 +180,52 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
         }
 
-        private enum Processes
+        /// <summary>
+        /// Uses the (passed-in) current time and the passed-in trigger times to determine:
+        ///  - the next trigger time; and
+        ///  - the next triggered operation
+        /// </summary>
+        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime, out TimeSpan triggerTime, out Processes process)
+        {
+            // This logic depends on the validation inside the TriggerTimesAreValid method.
+            // If the current time is either prior to the two triggers or subsequent to the two triggers...
+            if ((currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime))
+            {
+                // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
+                triggerTime = copyToLiveDueTime;
+                process = Processes.CopyToLive;
+            }
+            else
+            {
+                // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
+                triggerTime = refreshTempDueTime;
+                process = Processes.RefreshTemp;
+            }
+        }
+
+        /// <summary>
+        /// Returns an int representing the number of milliseconds between the passed-in currentTime and the dueTime.
+        /// Assumes both times are less than 24hrs.
+        /// </summary>
+        public int ConvertDueTimeToMilliseconds(TimeSpan currentTime, TimeSpan dueTime)
+        {
+            int dueTimeSeconds;
+
+            if (currentTime < dueTime)
+            {
+                //If trigger time hasn't yet happened today then find the number of seconds between now and then
+                dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
+            }
+            else
+            {
+                //If trigger time has already happened today then take 24 hours and minus the time elapsed since 3am
+                dueTimeSeconds = (60 * 60 * 24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
+            }
+
+            return dueTimeSeconds * 1000;
+        }
+
+        public enum Processes
         {
             CopyToLive,
             RefreshTemp
