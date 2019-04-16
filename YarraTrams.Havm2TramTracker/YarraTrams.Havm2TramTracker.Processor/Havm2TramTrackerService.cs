@@ -339,7 +339,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <summary>
         /// Returns true if all strings in a list (from the config file) are lower case
         /// </summary>
-        private bool AllStringsAreLowerCase(System.Collections.Specialized.StringCollection col)
+        public bool AllStringsAreLowerCase(System.Collections.Specialized.StringCollection col)
         {
             return col.Cast<string>()
                     .ToList()

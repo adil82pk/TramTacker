@@ -4,12 +4,64 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Processor;
 using System.ServiceProcess;
 using System.Linq.Expressions;
+using System.Collections.Specialized;
 
 namespace YarraTrams.Havm2TramTracker.Tests
 {
     [TestClass]
     public class Havm2TramTrackerCoreServiceTests
     {
+        [TestMethod]
+        public void TestAllStringsAreLowerCaseWhenTheyAreAllLowerCase()
+        {
+            // arrange
+            String[] arr = new String[] { "a", "c1", "taxi" };
+            StringCollection col = new StringCollection();
+            col.AddRange(arr);
+
+            var service = new Havm2TramTrackerService();
+
+            // act
+            bool result = service.AllStringsAreLowerCase(col);
+
+            // assert
+            Assert.IsTrue(result, "Passing the values \"{0}\" should be valid.", String.Join(",", arr));
+        }
+
+        [TestMethod]
+        public void TestAllStringsAreLowerCaseWhenPassingABlank()
+        {
+            // arrange
+            String[] arr = new String[] { "", "c1", "taxi" };
+            StringCollection col = new StringCollection();
+            col.AddRange(arr);
+
+            var service = new Havm2TramTrackerService();
+
+            // act
+            bool result = service.AllStringsAreLowerCase(col);
+
+            // assert
+            Assert.IsFalse(result, "Passing the values \"{0}\" should be invalid.", String.Join(",", arr));
+        }
+
+        [TestMethod]
+        public void TestAllStringsAreLowerCaseWhenPassingAnUpper()
+        {
+            // arrange
+            String[] arr = new String[] { "A", "c1", "taxi" };
+            StringCollection col = new StringCollection();
+            col.AddRange(arr);
+
+            var service = new Havm2TramTrackerService();
+
+            // act
+            bool result = service.AllStringsAreLowerCase(col);
+
+            // assert
+            Assert.IsFalse(result, "Passing the values \"{0}\" should be invalid.", String.Join(",", arr));
+        }
+
         [TestMethod]
         public void TestTriggerTimesAreValidWhenTriggerTimesAreValid()
         {
