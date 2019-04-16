@@ -51,8 +51,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Havm2TramTrackerCoreServiceTests.cs" />
     <Compile Include="Havm2TramTrackerTransformationTests.cs" />
     <Compile Include="Havm2TramTrackerParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
