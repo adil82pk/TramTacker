@@ -17,10 +17,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// </summary>
         /// <param name="havmTrips"></param>
         /// <returns></returns>
-        public List<TramTrackerSchedules> FromHavmTrips(List<HavmTrip> havmTrips, bool logRowsToFilePriorToInsert)
+        public List<TramTrackerSchedules> FromHavmTrips(List<HavmTrip> havmTrips, Dictionary<int, string> stopMapping, bool logRowsToFilePriorToInsert)
         {
-            Dictionary<int,string> stopMapping = Helpers.HastusStopMapper.GetMapping();
-
             string serviceName = this.GetType().Name;
 
             List<TramTrackerSchedules> scheduless = new List<TramTrackerSchedules>();
