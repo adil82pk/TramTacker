@@ -271,7 +271,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 if (AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithLowFloor()) && AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithoutLowFloor()))
                 {
-                    if (TriggerTimesAreValid())
+                    if (TriggerTimesAreValid(Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime))
                     {
                         return true;
                     }
@@ -347,14 +347,14 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// Returns true if the trigger times are both less than 24 hours and differ by more than 30 mins.
+        /// Returns true if:
+        /// - The trigger times are both less than 24 hours; and
+        /// - They differ by more than 30 mins; and
+        /// - The refreshTempDueTime follows the copyToLiveDueTime.
         /// Logs to the event log and returns false if the above isn't true.
         /// </summary>
-        private bool TriggerTimesAreValid()
+        public bool TriggerTimesAreValid(TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime)
         {
-            TimeSpan refreshTempDueTime = Properties.Settings.Default.RefreshTempDueTime;
-            TimeSpan copyToLiveDueTime = Properties.Settings.Default.CopyToLiveDueTime;
-
             if (refreshTempDueTime.TotalHours >= 24 || copyToLiveDueTime.TotalHours >= 24)
             {
                 LogWriter.Instance.Log(
