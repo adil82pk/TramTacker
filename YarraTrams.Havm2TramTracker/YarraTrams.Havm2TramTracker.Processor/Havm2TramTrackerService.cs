@@ -101,53 +101,30 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// </summary>
         public void RunTimer()
         {
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            TimeSpan triggerTime;
+            Processes triggerProcess;
+
+            DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime, out triggerTime, out triggerProcess);
+
+            int dueTimeMilliseconds = ConvertDueTimeToMilliseconds(currentTime, triggerTime);
+
             stateObj = new TimerStateClass();
             stateObj.TimerCanceled = false;
+            stateObj.process = triggerProcess;
 
-            TimeSpan refreshTempDueTime = Properties.Settings.Default.RefreshTempDueTime;
-            TimeSpan copyToLiveDueTime = Properties.Settings.Default.CopyToLiveDueTime;
-            TimeSpan currentTime = DateTime.Now.TimeOfDay;
-            TimeSpan dueTime;
-
-            // This logic depends on the validation inside the TriggerTimesAreValid method.
-            // If the current time is either prior to the two triggers or subsequent to the two triggers...
-            if ((currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime))
-            {
-                // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
-                dueTime = copyToLiveDueTime;
-                stateObj.process = Processes.CopyToLive;
-            }
-            else
-            {
-                // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
-                dueTime = refreshTempDueTime;
-                stateObj.process = Processes.RefreshTemp;
-            }
-
-            int dueTimeSeconds;
-            if (currentTime < dueTime)
-            {
-                //If trigger time hasn't yet happened today then find the number of seconds between now and then
-                dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
-            }
-            else
-            {
-                //If trigger time has already happened today then take 24 hours and minus the time elapsed since 3am
-                dueTimeSeconds = (60 * 60 * 24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
-            }
-            
             System.Threading.TimerCallback TimerDelegate = new System.Threading.TimerCallback(TimerTask);
 
             int interval = (60 * 60 * 24) * 1000; //get seconds in the day then convert to ms
 
-            processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
+            processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, dueTimeMilliseconds, interval);
 
             LogWriter.Instance.Log(EventLogCodes.TIMER_SET,
                                     string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds to run {1}.\n\nCopyToLive setting = {2}\nRefreshTemp setting = {3}",
-                                        (int)dueTimeSeconds,
+                                        dueTimeMilliseconds/1000,
                                         stateObj.process.ToString(),
-                                        copyToLiveDueTime,
-                                        refreshTempDueTime
+                                        Properties.Settings.Default.CopyToLiveDueTime,
+                                        Properties.Settings.Default.RefreshTempDueTime
                                     )
                                   );
 
