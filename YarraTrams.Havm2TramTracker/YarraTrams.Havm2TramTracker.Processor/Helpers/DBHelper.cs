@@ -67,7 +67,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 {
                     try
                     {
-                        // Update Preferences and delete existing records
+                        // Update Overlaps (if required) using yesterday's data
+                        string updOverlapsStatement = GetPreUpdateTempSql(tableName);
+                        if (!String.IsNullOrEmpty(updOverlapsStatement))
+                        {
+                            ExecuteSql(updOverlapsStatement, connection, transaction);
+                        }
+
+                        // Delete existing records
                         string deleteStatement = string.Format("DELETE FROM {0};", tableName);
                         ExecuteSql(deleteStatement, connection, transaction);
 
@@ -83,7 +90,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                             bulkCopy.WriteToServer(tripData);
                         }
 
-                        // Update Overlaps & Preferences (if required)
+                        // Update Preferences (if required)
                         string updPreferencesStatement = GetPostUpdateTempSql(tableName);
                         if (!String.IsNullOrEmpty(updPreferencesStatement))
                         {
@@ -118,20 +125,21 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         }
 
         /// <summary>
-        /// Returns the sql to populated the overlaps and update the relevant T_Preferences field if this table is one that gets "copied to live".
+        /// Returns the sql to populate the overlaps if this table is one that gets "copied to live".
         /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
+        /// Why do we do this here and not inside CopyDataFromTempToLive? Well putting the statements here (where everything is in a transaction, thus it either fully
+        /// fails or fully completes) makes it possible to run CopyDataFromTempToLive (a heavy process that doesn't run in a transaction) over and over without
+        /// worrying about the results changing (it retains its idempotency).
         /// </summary>
-        private static string GetPostUpdateTempSql(string tableName)
+        private static string GetPreUpdateTempSql(string tableName)
         {
             if (tableName == GetDbTableName("T_Temp_Trips"))
             {
-                return @"UPDATE T_Preferences SET TripsLoaded = 1;
-                        EXEC CopyOverlappingTempTrips;";
+                return "EXEC CopyOverlappingTempTrips;";
             }
             else if (tableName == GetDbTableName("T_Temp_Schedules"))
             {
-                return @"UPDATE T_Preferences SET ScheduleLoaded = 1;
-                        EXEC CopyOverlappingTempSchedules;";
+                return "EXEC CopyOverlappingTempSchedules;";
             }
             else
             {
@@ -139,6 +147,25 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             }
         }
 
+        /// <summary>
+        /// Returns the sql to update the relevant T_Preferences field if this table is one that gets "copied to live".
+        /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
+        /// </summary>
+        private static string GetPostUpdateTempSql(string tableName)
+        {
+            if (tableName == GetDbTableName("T_Temp_Trips"))
+            {
+                return "UPDATE T_Preferences SET TripsLoaded = 1;";
+            }
+            else if (tableName == GetDbTableName("T_Temp_Schedules"))
+            {
+                return "UPDATE T_Preferences SET ScheduleLoaded = 1;";
+            }
+            else
+            {
+                return "";
+            }
+        }
 
         /// <summary>
         /// Deletes all records from T_Trips and T_Schedules then copies the records from
