@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
 
@@ -66,7 +67,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 {
                     try
                     {
-                        // Update Preferences and delete existing records
+                        // Update Overlaps (if required) using yesterday's data
+                        string updOverlapsStatement = GetPreUpdateTempSql(tableName);
+                        if (!String.IsNullOrEmpty(updOverlapsStatement))
+                        {
+                            ExecuteSql(updOverlapsStatement, connection, transaction);
+                        }
+
+                        // Delete existing records
                         string deleteStatement = string.Format("DELETE FROM {0};", tableName);
                         ExecuteSql(deleteStatement, connection, transaction);
 
@@ -78,10 +86,11 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                    transaction))
                         {
                             bulkCopy.DestinationTableName = tableName;
+                            bulkCopy.BulkCopyTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
                             bulkCopy.WriteToServer(tripData);
                         }
 
-                        // Update Overlaps & Preferences (if required)
+                        // Update Preferences (if required)
                         string updPreferencesStatement = GetPostUpdateTempSql(tableName);
                         if (!String.IsNullOrEmpty(updPreferencesStatement))
                         {
@@ -92,7 +101,18 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     }
                     catch (Exception ex)
                     {
-                        transaction.Rollback();
+                        try
+                        {
+                            if (transaction != null)
+                            {
+                                transaction.Rollback();
+                            }
+                        }
+                        catch (Exception ex2)
+                        {
+                            // SQL Server may choose to rollback the transaction itself, so this code prevents the original error from being swallowed.
+                             LogWriter.Instance.Log(EventLogCodes.DB_EXECUTE_ERROR, String.Format("Error encountered when rolling back transaction:\n\nMessage: {0}\n\nType:{1}", ex2.Message, ex2.GetType()));
+                        }
                         throw ex;
                     }
                 }
@@ -105,20 +125,21 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         }
 
         /// <summary>
-        /// Returns the sql to populated the overlaps and update the relevant T_Preferences field if this table is one that gets "copied to live".
+        /// Returns the sql to populate the overlaps if this table is one that gets "copied to live".
         /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
+        /// Why do we do this here and not inside CopyDataFromTempToLive? Well putting the statements here (where everything is in a transaction, thus it either fully
+        /// fails or fully completes) makes it possible to run CopyDataFromTempToLive (a heavy process that doesn't run in a transaction) over and over without
+        /// worrying about the results changing (it retains its idempotency).
         /// </summary>
-        private static string GetPostUpdateTempSql(string tableName)
+        private static string GetPreUpdateTempSql(string tableName)
         {
             if (tableName == GetDbTableName("T_Temp_Trips"))
             {
-                return @"UPDATE T_Preferences SET TripsLoaded = 1;
-                        EXEC CopyOverlappingTempTrips;";
+                return "EXEC CopyOverlappingTempTrips;";
             }
             else if (tableName == GetDbTableName("T_Temp_Schedules"))
             {
-                return @"UPDATE T_Preferences SET ScheduleLoaded = 1;
-                        EXEC CopyOverlappingTempSchedules;";
+                return "EXEC CopyOverlappingTempSchedules;";
             }
             else
             {
@@ -126,16 +147,40 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             }
         }
 
+        /// <summary>
+        /// Returns the sql to update the relevant T_Preferences field if this table is one that gets "copied to live".
+        /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
+        /// </summary>
+        private static string GetPostUpdateTempSql(string tableName)
+        {
+            if (tableName == GetDbTableName("T_Temp_Trips"))
+            {
+                return "UPDATE T_Preferences SET TripsLoaded = 1;";
+            }
+            else if (tableName == GetDbTableName("T_Temp_Schedules"))
+            {
+                return "UPDATE T_Preferences SET ScheduleLoaded = 1;";
+            }
+            else
+            {
+                return "";
+            }
+        }
 
         /// <summary>
-        /// Deletes all records from T_Trips and T_Schedules
-        /// then copies the records from T_Temp_Trips to T_Trips
-        /// and copies the records from T_TemP_Schedules to T_Schedules.
-        /// The whole operation either succeeds or fails. It never partially commits.
+        /// Deletes all records from T_Trips and T_Schedules then copies the records from
+        /// T_Temp_Trips to T_Trips and copies the records from T_TemP_Schedules to
+        /// T_Schedules. The whole copy operation either succeeds or fails. It never
+        /// partially commits.
+        /// Subsequent to copying the data we call a series of stored procs that update
+        /// various dependant database tables. These stored procs can leave the database
+        /// in an inconsistent state however they can be safely rerun (they always
+        /// "truncate" then "insert" - they're idempotent).
         /// 
-        /// Exceptions are logged then re-thrown.
+        /// Exceptions are logged then we retry. After X retries we give up and re-throw
+        /// the error for a higher level routine to deal with.
         /// </summary>
-        public static void CopyDataFromTempToLive()
+        public static void CopyDataFromTempToLive(int retryCount = 0)
         {
             try
             {
@@ -224,9 +269,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                     reader.Close();
 
+                    // Copy trips from T_Temp_Overlap_Trips to T_Trips, only if the trip doesn't already exist in T_Trips (based on DayOfWeek, RunNo, RouteNo and FirstTime).
+                    // (T_Temp_Overlap_Trips was populated by CopyOverlappingTempTrips following the bulk insert in to T_Temp_Trips.)
                     ExecuteSqlProc("CopyOverlapTripsToTrips", conn);
+
+                    // Copy trip stops from T_Temp_Overlap_Schedules to T_Schedules, only if the trip stop doesn't already exist in T_Schedules (based on DayOfWeek, RunNo, RouteNo, Time, TripID and StopID).
+                    // (T_Temp_Overlap_Schedules was populated by CopyOverlappingTempSchedules following the bulk insert in to T_Temp_Trips.)
                     ExecuteSqlProc("CopyOverlapScheduleToSchedule", conn);
+
+                    // Populate several tables with trip and schedule data.
+                    // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
                     ExecuteSqlProc("[CreateDailyData2.5]", conn);
+                    
+                    // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
                     ExecuteSqlProc("SetDayOfWeek", conn);
 
                     LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
@@ -237,8 +292,20 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             {
                 // We make sure we load a very specific event log so that SCOM alerts can be configured in a granular way.
                 LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_FAILED
-                            , ex.Message);
-                throw ex;
+                            , ex.Message + ((retryCount > 0) ? string.Format("\nRetry count = {0}", retryCount) : ""));
+
+                // We retry a certain amount of times
+                if (retryCount < Properties.Settings.Default.MaxCopyToLiveRetryCount)
+                {
+                    retryCount++;
+                    Thread.Sleep(Properties.Settings.Default.GapBetweenCopyToLiveRetriesInSecs * 1000);
+                    CopyDataFromTempToLive(retryCount);
+                }
+                else
+                {
+                    throw new Exception(string.Format("Error in CopyDataFromTempToLive process, retried {0} times, waiting {1} seconds between each try."
+                                                    , retryCount, Properties.Settings.Default.GapBetweenCopyToLiveRetriesInSecs), ex);
+                }
             }
         }
     }

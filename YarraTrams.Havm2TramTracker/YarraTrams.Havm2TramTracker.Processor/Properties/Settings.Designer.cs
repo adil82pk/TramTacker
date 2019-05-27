@@ -23,118 +23,89 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Persist Security Info=False;max pool size=500;In" +
-            "tegrated Security=true;database=TramTracker;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string TramTrackerDB {
             get {
                 return ((string)(this["TramTrackerDB"]));
-            }
-            set {
-                this["TramTrackerDB"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/tramtracker")]
-        public string Havm2TramTrackerAPI {
-            get {
-                return ((string)(this["Havm2TramTrackerAPI"]));
-            }
-            set {
-                this["Havm2TramTrackerAPI"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600")]
-        public int Havm2TramTrackerAPITimeoutSeconds {
-            get {
-                return ((int)(this["Havm2TramTrackerAPITimeoutSeconds"]));
-            }
-            set {
-                this["Havm2TramTrackerAPITimeoutSeconds"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iop\\Downloads\\temp\\HAVM2TTLogs")]
-        public string LogFilePath {
-            get {
-                return ((string)(this["LogFilePath"]));
-            }
-            set {
-                this["LogFilePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LogT_Temp_TripRowsToFilePriorToInsert {
-            get {
-                return ((bool)(this["LogT_Temp_TripRowsToFilePriorToInsert"]));
-            }
-            set {
-                this["LogT_Temp_TripRowsToFilePriorToInsert"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LogT_Temp_SchedulesRowsToFilePriorToInsert {
-            get {
-                return ((bool)(this["LogT_Temp_SchedulesRowsToFilePriorToInsert"]));
-            }
-            set {
-                this["LogT_Temp_SchedulesRowsToFilePriorToInsert"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LogT_Temp_SchedulesMasterRowsToFilePriorToInsert {
-            get {
-                return ((bool)(this["LogT_Temp_SchedulesMasterRowsToFilePriorToInsert"]));
-            }
-            set {
-                this["LogT_Temp_SchedulesMasterRowsToFilePriorToInsert"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert {
-            get {
-                return ((bool)(this["LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert"]));
-            }
-            set {
-                this["LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("03:00:00")]
-        public global::System.TimeSpan DueTime {
-            get {
-                return ((global::System.TimeSpan)(this["DueTime"]));
-            }
-            set {
-                this["DueTime"] = value;
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Havm2TramTrackerAPI {
+            get {
+                return ((string)(this["Havm2TramTrackerAPI"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int Havm2TramTrackerAPITimeoutSeconds {
+            get {
+                return ((int)(this["Havm2TramTrackerAPITimeoutSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iop\\Downloads\\temp\\HAVM2TTLogs")]
+        public string LogFilePath {
+            get {
+                return ((string)(this["LogFilePath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogT_Temp_TripRowsToFilePriorToInsert {
+            get {
+                return ((bool)(this["LogT_Temp_TripRowsToFilePriorToInsert"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogT_Temp_SchedulesRowsToFilePriorToInsert {
+            get {
+                return ((bool)(this["LogT_Temp_SchedulesRowsToFilePriorToInsert"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogT_Temp_SchedulesMasterRowsToFilePriorToInsert {
+            get {
+                return ((bool)(this["LogT_Temp_SchedulesMasterRowsToFilePriorToInsert"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert {
+            get {
+                return ((bool)(this["LogT_Temp_SchedulesDetailsRowsToFilePriorToInsert"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.TimeSpan CopyToLiveDueTime {
+            get {
+                return ((global::System.TimeSpan)(this["CopyToLiveDueTime"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("_TTBU")]
         public string DbTableSuffix {
             get {
                 return ((string)(this["DbTableSuffix"]));
@@ -147,6 +118,32 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         public int DBCommandTimeoutSeconds {
             get {
                 return ((int)(this["DBCommandTimeoutSeconds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int MaxCopyToLiveRetryCount {
+            get {
+                return ((int)(this["MaxCopyToLiveRetryCount"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int GapBetweenCopyToLiveRetriesInSecs {
+            get {
+                return ((int)(this["GapBetweenCopyToLiveRetriesInSecs"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.TimeSpan RefreshTempDueTime {
+            get {
+                return ((global::System.TimeSpan)(this["RefreshTempDueTime"]));
             }
         }
     }

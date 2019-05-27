@@ -91,4 +91,23 @@ GO
 ALTER TABLE [dbo].[T_Temp_Schedules_TTBU] ADD  CONSTRAINT [DF_T_Temp_Schedules_TTBU_PublicTrip]  DEFAULT ((0)) FOR [PublicTrip]
 GO
 
+CREATE TABLE [dbo].[T_Temp_SchedulesMaster_TTBU](
+	[TramClass] [varchar](50) NULL,
+	[HeadboardNo] [varchar](50) NULL,
+	[RouteNo] [varchar](50) NULL,
+	[RunNo] [varchar](50) NULL,
+	[StartDate] [varchar](50) NULL,
+	[TripNo] [varchar](15) NULL,
+	[PublicTrip] [varchar](50) NULL
+) ON [PRIMARY]
 
+GO
+
+CREATE TABLE [dbo].[T_Temp_SchedulesDetails_TTBU](
+	[ArrivalTime] [varchar](50) NULL,
+	[StopID] [varchar](50) NULL,
+	[TripID] [varchar](50) NULL,
+	[RunNo] [varchar](50) NULL,
+	[OPRTimePoint] [varchar](50) NULL
+) ON [PRIMARY]
+GO

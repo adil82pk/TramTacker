@@ -41,7 +41,8 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int TIMER_TRIGGERED = 3004;
         public const int TRIP_TRANSFORMATION_SUCCESS = 3005;
         public const int SCHEDULE_TRANSFORMATION_SUCCESS = 3006;
-        public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_SUCCESS = 3007;
+        public const int SCHEDULEMASTER_TRANSFORMATION_SUCCESS = 3007;
+        public const int SCHEDULEDETAILS_TRANSFORMATION_SUCCESS = 3008;
         public const int PRE_CALL_TO_HAVM = 3009;
         public const int POST_CALL_TO_HAVM = 3010;
         public const int COPY_TO_LIVE_SUCCESS = 3011;
@@ -62,8 +63,10 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int LOG_FILE_WRITE_ERROR = 1003;
         public const int TRIP_TRANSFORMATION_ERROR = 1004;
         public const int SCHEDULE_TRANSFORMATION_ERROR = 1005;
-        public const int SCHEDULE_MASTERDETAILS_TRANSFORMATION_ERROR = 1006;
+        public const int SCHEDULEMASTER_TRANSFORMATION_ERROR = 1006;
+        public const int SCHEDULEDETAILS_TRANSFORMATION_ERROR = 1007;
         public const int COPY_TO_LIVE_FAILED = 1008;
+        public const int INVALID_CONFIGURATION = 1009;
 
         public const int SIDE_BY_SIDE_ERROR = 1100;
         #endregion

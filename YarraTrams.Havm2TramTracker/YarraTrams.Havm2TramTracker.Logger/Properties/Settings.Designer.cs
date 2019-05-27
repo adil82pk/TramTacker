@@ -25,7 +25,7 @@ namespace YarraTrams.Havm2TramTracker.Logger.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
         public int MajorEscalationThresholdMinutes {
             get {
                 return ((int)(this["MajorEscalationThresholdMinutes"]));
@@ -43,7 +43,7 @@ namespace YarraTrams.Havm2TramTracker.Logger.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1002")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1008")]
         public string MajorEscalationCodesCsv {
             get {
                 return ((string)(this["MajorEscalationCodesCsv"]));

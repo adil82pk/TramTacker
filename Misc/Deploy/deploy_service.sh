@@ -16,10 +16,10 @@ else
 	git clone https://iopdeploy:<password here>@bitbucket.org/ytavmis/havm2tramtracker.git
 fi
 
-echo "Getting the latest from develop branch"
+echo "Getting the latest from dev branch"
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker
-git checkout develop
-git pull origin develop
+git checkout dev
+git pull origin dev
 
 cd /c/havm2tramtracker_source_deploy
 
@@ -30,7 +30,14 @@ cmd "/c build_service.bat"
 echo "Building Havm2TramTracker Console..."
 cmd "/c build_console.bat"
 
+echo "Running Comparison table Migrations..."
+cd /c/havm2tramtracker_source_deploy/havm2tramtracker/YarraTrams.Havm2TramTracker/YarraTrams.Havm2TramTracker.TestComparisons/Migrations
+cmd "/c TestComparisons_migrations_up.bat <server name here> <database name here> <true or false here> <if false, username here> <if false, password here> "
+
 cd /c/havm2tramtracker
+echo "Removing all configs that the build copied across"
+rm ./bin/*.config
+rm ./consolebin/*.config
 echo "Moving service config file"
 cp ./YarraTrams.havm2tramtracker.Processor.exe.config ./bin
 echo "Moving console config file"

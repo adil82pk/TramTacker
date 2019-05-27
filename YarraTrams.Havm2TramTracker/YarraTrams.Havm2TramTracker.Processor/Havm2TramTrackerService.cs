@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -34,19 +35,26 @@ namespace YarraTrams.Havm2TramTracker.Processor
         {
             LogWriter.Instance.Log(EventLogCodes.SERVICE_STARTED, "Havm2TramTracker has been started");
 
-            stopConfigFileChangeWatcher = true;
-
-            /// start config file change watcher
-            Thread myWorkerThread = new Thread(WatchConfigFileChange) { Name = "Havm2TramTracker Service Config File Change Watcher Thread" };
-            myWorkerThread.Start();
-
-            try
+            if (IsConfigurationValid())
             {
-                this.RunTimer();
+                stopConfigFileChangeWatcher = true;
+
+                /// start config file change watcher
+                Thread myWorkerThread = new Thread(WatchConfigFileChange) { Name = "Havm2TramTracker Service Config File Change Watcher Thread" };
+                myWorkerThread.Start();
+
+                try
+                {
+                    this.RunTimer();
+                }
+                catch (Exception ex)
+                {
+                    LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                }
             }
-            catch (Exception ex)
+            else
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                this.Stop();
             }
         }
 
@@ -62,13 +70,24 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <summary>
         /// Core processing orchestration
         /// </summary>
-        private void RunProcessing()
+        private void RunProcessing(Processes process)
         {
             this.StopTimer();
-            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, as per config setting of {0}", Properties.Settings.Default.DueTime));
+            LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, running the {0} process", process.ToString()));
             try
             {
-                Processor.Process();
+                switch (process)
+                {
+                    case Processes.CopyToLive:
+                        Processor.CopyToLive();
+                        break;
+                    case Processes.RefreshTemp:
+                        Processor.RefreshTemp();
+                        break;
+                    default:
+                        throw new NotImplementedException(string.Format("Process {0} not implemented.", process.ToString()));
+                }
+                        
             }
             catch (Exception ex)
             {
@@ -78,40 +97,36 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// If dueTimeSeconds isn't provided, this method schedules the next execution to occur at 3am (configurable)
+        /// Schedules the next process execution, according to the config settings.
         /// </summary>
-        public void RunTimer(int? dueTimeSeconds = null)
+        public void RunTimer()
         {
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            TimeSpan triggerTime;
+            Processes triggerProcess;
+
+            DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime, out triggerTime, out triggerProcess);
+
+            int dueTimeMilliseconds = ConvertDueTimeToMilliseconds(currentTime, triggerTime);
+
             stateObj = new TimerStateClass();
             stateObj.TimerCanceled = false;
-            
+            stateObj.process = triggerProcess;
+
             System.Threading.TimerCallback TimerDelegate = new System.Threading.TimerCallback(TimerTask);
 
             int interval = (60 * 60 * 24) * 1000; //get seconds in the day then convert to ms
 
-            if (dueTimeSeconds != null)
-            {
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, dueTimeSeconds.Value * 1000, interval);
-            }
-            else
-            {
-                TimeSpan dueTime = Properties.Settings.Default.DueTime;
-                TimeSpan currentTime = DateTime.Now.TimeOfDay;
-                if (currentTime < dueTime)
-                {
-                    //If 3am (configurable) hasn't yet happened today then find the number of seconds between now and then
-                    dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
-                }
-                else
-                {
-                    //If 3am (configurable) has already happened today then take 24 hours and minus the time elapsed since 3am
-                    dueTimeSeconds = (60*60*24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
-                } 
+            processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, dueTimeMilliseconds, interval);
 
-                processingTimer = new System.Threading.Timer(TimerDelegate, stateObj, (int)dueTimeSeconds * 1000, interval); //Convert from seconds to ms
-            }
-
-            LogWriter.Instance.Log(EventLogCodes.TIMER_SET, string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds", (int)dueTimeSeconds));
+            LogWriter.Instance.Log(EventLogCodes.TIMER_SET,
+                                    string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds to run {1}.\n\nCopyToLive setting = {2}\nRefreshTemp setting = {3}",
+                                        dueTimeMilliseconds/1000,
+                                        stateObj.process.ToString(),
+                                        Properties.Settings.Default.CopyToLiveDueTime,
+                                        Properties.Settings.Default.RefreshTempDueTime
+                                    )
+                                  );
 
             // Save a reference for Dispose.
             stateObj.TimerReference = processingTimer;
@@ -138,14 +153,66 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
             else
             {
-                this.RunProcessing();
+                this.RunProcessing(State.process);
             }
+        }
+
+        /// <summary>
+        /// Uses the (passed-in) current time and the passed-in trigger times to determine:
+        ///  - the next trigger time; and
+        ///  - the next triggered operation
+        /// </summary>
+        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime, out TimeSpan triggerTime, out Processes process)
+        {
+            // This logic depends on the validation inside the TriggerTimesAreValid method.
+            // If the current time is either prior to the two triggers or subsequent to the two triggers...
+            if ((currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime))
+            {
+                // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
+                triggerTime = copyToLiveDueTime;
+                process = Processes.CopyToLive;
+            }
+            else
+            {
+                // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
+                triggerTime = refreshTempDueTime;
+                process = Processes.RefreshTemp;
+            }
+        }
+
+        /// <summary>
+        /// Returns an int representing the number of milliseconds between the passed-in currentTime and the dueTime.
+        /// Assumes both times are less than 24hrs.
+        /// </summary>
+        public int ConvertDueTimeToMilliseconds(TimeSpan currentTime, TimeSpan dueTime)
+        {
+            int dueTimeSeconds;
+
+            if (currentTime < dueTime)
+            {
+                //If trigger time hasn't yet happened today then find the number of seconds between now and then
+                dueTimeSeconds = (int)dueTime.Subtract(currentTime).TotalSeconds;
+            }
+            else
+            {
+                //If trigger time has already happened today then take 24 hours and minus the time elapsed since 3am
+                dueTimeSeconds = (60 * 60 * 24) - (int)currentTime.Subtract(dueTime).TotalSeconds;
+            }
+
+            return dueTimeSeconds * 1000;
+        }
+
+        public enum Processes
+        {
+            CopyToLive,
+            RefreshTemp
         }
 
         private class TimerStateClass
         {
             public System.Threading.Timer TimerReference;
             public bool TimerCanceled;
+            public Processes process;
         }
 
         /// <summary>
@@ -185,6 +252,150 @@ namespace YarraTrams.Havm2TramTracker.Processor
             YarraTrams.Havm2TramTracker.Models.Helpers.SettingsRefresher.RefreshSettings();
             LogWriter.Instance.InitializeSettings();
             fileSystemWatcher.EnableRaisingEvents = true;
+
+            if (!IsConfigurationValid())
+            {
+                this.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Checks that the entries in the configuration file are valid.
+        /// Can't identify all issues though.
+        /// 
+        /// Writes event log entries when it finds something wrong.
+        /// </summary>
+        protected bool IsConfigurationValid()
+        {
+            if (AllRequiredConfigEntriesPresent())
+            {
+                if (AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithLowFloor()) && AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithoutLowFloor()))
+                {
+                    if (TriggerTimesAreValid(Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        "Fatal error - VehicleGroupsWithLowFloor and VehicleGroupsWithLowFloor config entry lists must only contain lower-case items.");
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if all required config settings are set
+        /// 
+        /// Works with string fields and timespan fields, not with bools though.
+        /// </summary>
+        private bool AllRequiredConfigEntriesPresent()
+        {
+            try
+            {
+                List<string> requiredConfig = new List<string> {
+                "TramTrackerDB",
+                "Havm2TramTrackerAPI",
+                "CopyToLiveDueTime",
+                "RefreshTempDueTime"
+            };
+
+                // filter items that are set
+                List<string> configNotSet = requiredConfig.Select(conf => (Properties.Settings.Default[conf] == null) || string.IsNullOrEmpty(Properties.Settings.Default[conf].ToString()) ? conf : null)
+                    .Where(conf => conf != null)
+                    .ToList<string>();
+
+                if (configNotSet.Count > 0)
+                {
+                    configNotSet.ForEach(conf => LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        String.Format("Fatal error - Please set Config property: {0}", conf)));
+
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        String.Format("Fatal error: {0}", ex.Message));
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns true if all strings in a list (from the config file) are lower case
+        /// </summary>
+        public bool AllStringsAreLowerCase(System.Collections.Specialized.StringCollection col)
+        {
+            return col.Cast<string>()
+                    .ToList()
+                        .All(str => !string.IsNullOrEmpty(str) && !str.Any(c => char.IsUpper(c)));
+        }
+
+        /// <summary>
+        /// Returns true if:
+        /// - The trigger times are both less than 24 hours; and
+        /// - They differ by more than 30 mins; and
+        /// - The refreshTempDueTime follows the copyToLiveDueTime.
+        /// Logs to the event log and returns false if the above isn't true.
+        /// </summary>
+        public bool TriggerTimesAreValid(TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime)
+        {
+            if (refreshTempDueTime.TotalHours >= 24 || copyToLiveDueTime.TotalHours >= 24)
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        string.Format("Fatal error - the values for RefreshTempDueTime ({0}) and CopyToLiveDueTime ({1}) must be between 00:00:00 and 23:59:59."
+                                , refreshTempDueTime
+                                , copyToLiveDueTime
+                                )
+                        );
+                return false;
+            }
+
+            if (refreshTempDueTime.TotalHours <= copyToLiveDueTime.TotalHours)
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        string.Format("Fatal error - the RefreshTempDueTime ({0}) must be set to a time that occurs after the CopyToLiveDueTime ({1}). This is because the RefreshTemp process will not include data for the current day in the refresh, therefore the CopyToLive process would have no data on which to base current day predictions."
+                                , refreshTempDueTime
+                                , copyToLiveDueTime
+                                )
+                        );
+                return false;
+            }
+
+            const double minDiff = 30; // Minutes.
+            double diff = Math.Abs(refreshTempDueTime.TotalMinutes - copyToLiveDueTime.TotalMinutes);
+            if (diff < minDiff || diff > (1440 - minDiff)) // There are 1440 minutes in a day.
+            {
+                LogWriter.Instance.Log(
+                        EventLogCodes.INVALID_CONFIGURATION,
+                        string.Format("Fatal error - the values for RefreshTempDueTime ({0}) and CopyToLiveDueTime ({1}) must be more than {2} minutes apart, currently they're {3} minutes apart."
+                                , refreshTempDueTime
+                                , copyToLiveDueTime
+                                , minDiff
+                                , diff < minDiff ? diff : (1440 - diff)
+                                )
+                        );
+                return false;
+            }
+
+            return true;
         }
     }
 }

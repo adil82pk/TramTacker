@@ -18,24 +18,34 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            try
             {
-                switch (args[0])
+                if (args.Length > 0)
                 {
-                    case "sidebyside":
-                        var x = new TestComparisons.Comparisons();
-                        x.RunComparisons();
-                        break;
-                    default:
-                        System.Console.WriteLine(String.Format("Invalid command line parameter \"{0}\". Press <enter> to exit.", args[0]));
-                        System.Console.ReadLine();
-                        break;
+                    switch (args[0])
+                    {
+                        case "sidebyside":
+                            var x = new TestComparisons.Comparisons();
+                            x.RunComparisons();
+                            break;
+                        default:
+                            System.Console.WriteLine(String.Format("Invalid command line parameter \"{0}\". Press <enter> to exit.", args[0]));
+                            System.Console.ReadLine();
+                            break;
+                    }
+                }
+                else
+                {
+                    System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
+                    ShowMainMenu();
                 }
             }
-            else
+            catch (Exception ex)
             {
-                System.Console.ForegroundColor = CONSOLE_COLOR_MAIN;
-                ShowMainMenu();
+                System.Console.WriteLine(Processor.Helpers.ExceptionHelper.GetExceptionMessagesRecursive(ex));
+                System.Console.WriteLine(ex.StackTrace);
+                System.Console.WriteLine("Press any key to exit");
+                System.Console.Read();
             }
         }
 

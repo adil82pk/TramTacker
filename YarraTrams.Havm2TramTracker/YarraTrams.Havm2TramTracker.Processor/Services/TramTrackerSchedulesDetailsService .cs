@@ -48,16 +48,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                     {
                         try
                         {
-                            modelCounter++;
-
-                            TramTrackerSchedulesDetails schedulesDetails = new TramTrackerSchedulesDetails();
-                            schedulesDetails.FromHavmTripAndStop(havmTrip,havmStop);
-                            schedulesDetailss.Add(schedulesDetails);
-
-
-                            if (logRowsToFilePriorToInsert)
+                            int stopID;
+                            if (int.TryParse(havmStop.HastusStopId, out stopID))
                             {
-                                fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedulesDetails.ToString()));
+                                modelCounter++;
+
+                                TramTrackerSchedulesDetails schedulesDetails = new TramTrackerSchedulesDetails();
+                                schedulesDetails.FromHavmTripAndStop(havmTrip, havmStop);
+                                schedulesDetailss.Add(schedulesDetails);
+                                    
+                                if (logRowsToFilePriorToInsert)
+                                {
+                                    fileWriter.Write(string.Format("\nRow {0}\n{1}", modelCounter, schedulesDetails.ToString()));
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -73,7 +76,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             int totalErrors = exceptionCounts.Values.Sum();
             if (totalErrors == 0)
             {
-                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_SUCCESS
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.SCHEDULEDETAILS_TRANSFORMATION_SUCCESS
                     , String.Format("{0} HAVM trip{1} successfully transformed inside {2}.", havmTrips.Count, (havmTrips.Count == 1 ? "" : "s"), serviceName));
             }
             else
@@ -95,7 +98,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
                 message.AppendLine(string.Format("See the \"{0}\" log file under {1} for more detail.", serviceName, logFilePath));
 
-                LogWriter.Instance.LogWithoutDelay(EventLogCodes.TRIP_TRANSFORMATION_ERROR
+                LogWriter.Instance.LogWithoutDelay(EventLogCodes.SCHEDULEDETAILS_TRANSFORMATION_ERROR
                     , string.Format("Encountered {0} error{1} when transforming {2} HAVM trip{3} in the {4}.", totalErrors, (totalErrors == 1 ? "" : "s"), havmTrips.Count, (havmTrips.Count == 1 ? "" : "s"), serviceName)
                   , message.ToString());
             }

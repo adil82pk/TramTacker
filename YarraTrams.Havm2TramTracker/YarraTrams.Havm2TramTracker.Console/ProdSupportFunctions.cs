@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         private static void CallHavm2ApiAndSaveToAllTables()
         {
-            DateTime? baseDate = GetDateFromUser("Enter a date (timetable data will start from the day following), blank for default:");
+            DateTime? baseDate = GetDateFromUser("Enter a date (data will start from the day following), blank for default:");
 
             string message = "";
             var clock = new Stopwatch();
@@ -69,6 +69,20 @@ namespace YarraTrams.Havm2TramTracker.Console
             clock.Reset();
             clock.Start();
             Processor.Processor.SaveToSchedules(havmTrips);
+            clock.Stop();
+            message += string.Format("\nSaving to T_Temp_Schedules took {0}.", clock.Elapsed);
+
+            // Populate T_Temp_SchedulesMaster
+            clock.Reset();
+            clock.Start();
+            Processor.Processor.SaveToSchedulesMaster(havmTrips);
+            clock.Stop();
+            message += string.Format("\nSaving to T_Temp_SchedulesMaster took {0}.", clock.Elapsed);
+
+            // Populate T_Temp_SchedulesDetails
+            clock.Reset();
+            clock.Start();
+            Processor.Processor.SaveToSchedulesDetails(havmTrips);
             clock.Stop();
             message += string.Format("\nSaving to T_Temp_SchedulesDetails took {0}.", clock.Elapsed);
 
