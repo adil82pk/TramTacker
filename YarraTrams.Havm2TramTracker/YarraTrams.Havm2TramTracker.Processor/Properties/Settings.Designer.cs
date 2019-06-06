@@ -146,5 +146,23 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((global::System.TimeSpan)(this["RefreshTempDueTime"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int MaxGetDataFromHavm2RetryCount {
+            get {
+                return ((int)(this["MaxGetDataFromHavm2RetryCount"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int GapBetweenGetDataFromHavm2RetriesInSecs {
+            get {
+                return ((int)(this["GapBetweenGetDataFromHavm2RetriesInSecs"]));
+            }
+        }
     }
 }
