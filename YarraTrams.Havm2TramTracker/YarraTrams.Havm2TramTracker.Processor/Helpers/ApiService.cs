@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -24,6 +25,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     return ApiHttpClient.GetDataFromHavm2(baseDate);
                 }).Result;
 
+                LogResultAndCleanUp(result);
+
                 return result;
             }
             catch (Exception ex)
@@ -44,6 +47,28 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                                     , retryCount, Properties.Settings.Default.GapBetweenGetDataFromHavm2RetriesInSecs), ex);
                 }
             }
+        }
+
+        /// <summary>
+        /// Write JSON result to file and clean up any old JSON result files.
+        /// </summary>
+        private static void LogResultAndCleanUp(string result)
+        {
+            string logFilePath = Properties.Settings.Default.LogFilePath;
+            string logFilePrefix = "HAVM2_Result_";
+            string logFileType = "json";
+            
+            // Clean up old files
+            var dir = new DirectoryInfo(logFilePath);
+
+            foreach (var file in dir.EnumerateFiles(logFilePrefix + "*." + logFileType))
+            {
+                file.Delete();
+            }
+
+            // Write JSON result to file
+            string logFileName = logFilePrefix + DateTime.Now.ToString("yyyyMMddHHmmss") + "." + logFileType;
+            Helpers.LogfileWriter.writeToFile(logFilePath + @"\" + logFileName, result);
         }
     }
 }
