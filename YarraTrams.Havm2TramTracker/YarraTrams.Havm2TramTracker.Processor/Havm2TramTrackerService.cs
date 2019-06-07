@@ -27,6 +27,12 @@ namespace YarraTrams.Havm2TramTracker.Processor
             InitializeComponent();
         }
 
+        public enum Processes
+        {
+            CopyToLive,
+            RefreshTemp
+        }
+
         /// <summary>
         /// Service starts
         /// </summary>
@@ -200,12 +206,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
 
             return dueTimeSeconds * 1000;
-        }
-
-        public enum Processes
-        {
-            CopyToLive,
-            RefreshTemp
         }
 
         private class TimerStateClass
