@@ -11,13 +11,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Logger;
+using YarraTrams.Havm2TramTracker.Processor.Helpers;
 
 namespace YarraTrams.Havm2TramTracker.Processor
 {
     public partial class Havm2TramTrackerService : ServiceBase
     {
         private System.Threading.Timer processingTimer;
-        private TimerStateClass stateObj;
+        private TimerState stateObj;
 
         private bool stopConfigFileChangeWatcher = false;
         private FileSystemWatcher fileSystemWatcher;
@@ -25,12 +26,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public Havm2TramTrackerService()
         {
             InitializeComponent();
-        }
-
-        public enum Processes
-        {
-            CopyToLive,
-            RefreshTemp
         }
 
         /// <summary>
@@ -76,7 +71,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// <summary>
         /// Core processing orchestration
         /// </summary>
-        private void RunProcessing(Processes process)
+        private void RunProcessing(Enums.Processes process)
         {
             this.StopTimer();
             LogWriter.Instance.Log(EventLogCodes.TIMER_TRIGGERED, String.Format("Havm2TramTracker scheduled execution has been triggered, running the {0} process", process.ToString()));
@@ -84,10 +79,10 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 switch (process)
                 {
-                    case Processes.CopyToLive:
+                    case Enums.Processes.CopyToLive:
                         Processor.CopyToLive();
                         break;
-                    case Processes.RefreshTemp:
+                    case Enums.Processes.RefreshTemp:
                         Processor.RefreshTemp();
                         break;
                     default:
@@ -109,13 +104,13 @@ namespace YarraTrams.Havm2TramTracker.Processor
         {
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             TimeSpan triggerTime;
-            Processes triggerProcess;
+            Enums.Processes triggerProcess;
 
             DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime, out triggerTime, out triggerProcess);
 
             int dueTimeMilliseconds = ConvertDueTimeToMilliseconds(currentTime, triggerTime);
 
-            stateObj = new TimerStateClass();
+            stateObj = new TimerState();
             stateObj.TimerCanceled = false;
             stateObj.process = triggerProcess;
 
@@ -149,7 +144,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
         private void TimerTask(object StateObj)
         {
-            TimerStateClass State = (TimerStateClass)StateObj;
+            TimerState State = (TimerState)StateObj;
             
             //System.Diagnostics.Debug.WriteLine("Launched new thread  " + DateTime.Now.ToString());
             if (State.TimerCanceled) // Dispose Requested.            
@@ -167,7 +162,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         ///  - the next trigger time; and
         ///  - the next triggered operation
         /// </summary>
-        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime, out TimeSpan triggerTime, out Processes process)
+        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
         {
             // This logic depends on the validation inside the TriggerTimesAreValid method.
             // If the current time is either prior to the two triggers or subsequent to the two triggers...
@@ -175,13 +170,13 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
                 triggerTime = copyToLiveDueTime;
-                process = Processes.CopyToLive;
+                process = Enums.Processes.CopyToLive;
             }
             else
             {
                 // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
                 triggerTime = refreshTempDueTime;
-                process = Processes.RefreshTemp;
+                process = Enums.Processes.RefreshTemp;
             }
         }
 
@@ -205,13 +200,6 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
 
             return dueTimeSeconds * 1000;
-        }
-
-        private class TimerStateClass
-        {
-            public System.Threading.Timer TimerReference;
-            public bool TimerCanceled;
-            public Processes process;
         }
 
         /// <summary>

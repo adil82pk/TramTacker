@@ -84,6 +84,7 @@
     <Compile Include="Services\TramTrackerSchedulesDetailsService .cs" />
     <Compile Include="Services\TramTrackerTripsService.cs" />
     <Compile Include="Services\TramTrackerSchedulesMasterService.cs" />
+    <Compile Include="TimerState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
