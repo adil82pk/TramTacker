@@ -150,8 +150,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         private void TimerTask(object StateObj)
         {
             TimerStateClass State = (TimerStateClass)StateObj;
-            // Use the interlocked class to increment the counter variable.
-            //System.Threading.Interlocked.Increment(ref State.SomeValue);
+            
             //System.Diagnostics.Debug.WriteLine("Launched new thread  " + DateTime.Now.ToString());
             if (State.TimerCanceled) // Dispose Requested.            
             {
