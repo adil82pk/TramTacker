@@ -106,7 +106,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             TimeSpan triggerTime;
             Enums.Processes triggerProcess;
 
-            DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime, out triggerTime, out triggerProcess);
+            DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempWithTomorrowsDataDueTime, Properties.Settings.Default.CopyTodaysDataToLiveDueTime, out triggerTime, out triggerProcess);
 
             int dueTimeMilliseconds = ConvertDueTimeToMilliseconds(currentTime, triggerTime);
 
@@ -124,8 +124,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                                     string.Format("Havm2TramTracker scheduled to wake up again in {0} seconds to run {1}.\n\nCopyToLive setting = {2}\nRefreshTemp setting = {3}",
                                         dueTimeMilliseconds/1000,
                                         stateObj.process.ToString(),
-                                        Properties.Settings.Default.CopyToLiveDueTime,
-                                        Properties.Settings.Default.RefreshTempDueTime
+                                        Properties.Settings.Default.CopyTodaysDataToLiveDueTime,
+                                        Properties.Settings.Default.RefreshTempWithTomorrowsDataDueTime
                                     )
                                   );
 
@@ -162,20 +162,20 @@ namespace YarraTrams.Havm2TramTracker.Processor
         ///  - the next trigger time; and
         ///  - the next triggered operation
         /// </summary>
-        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
+        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempWithTomorrowsDataDueTime, TimeSpan copyTodaysDataToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
         {
             // This logic depends on the validation inside the TriggerTimesAreValid method.
             // If the current time is either prior to the two triggers or subsequent to the two triggers...
-            if ((currentTime < copyToLiveDueTime) || (currentTime > refreshTempDueTime))
+            if ((currentTime < copyTodaysDataToLiveDueTime) || (currentTime > refreshTempWithTomorrowsDataDueTime))
             {
                 // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
-                triggerTime = copyToLiveDueTime;
+                triggerTime = copyTodaysDataToLiveDueTime;
                 process = Enums.Processes.CopyToLive;
             }
             else
             {
                 // ...otherwise we're in between the triggers so the we want the later of the two, which is always RefreshTemp.
-                triggerTime = refreshTempDueTime;
+                triggerTime = refreshTempWithTomorrowsDataDueTime;
                 process = Enums.Processes.RefreshTemp;
             }
         }
@@ -258,7 +258,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 if (AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithLowFloor()) && AllStringsAreLowerCase(Models.Helpers.SettingsExposer.VehicleGroupsWithoutLowFloor()))
                 {
-                    if (TriggerTimesAreValid(Properties.Settings.Default.RefreshTempDueTime, Properties.Settings.Default.CopyToLiveDueTime))
+                    if (TriggerTimesAreValid(Properties.Settings.Default.RefreshTempWithTomorrowsDataDueTime, Properties.Settings.Default.CopyTodaysDataToLiveDueTime))
                     {
                         return true;
                     }
@@ -293,8 +293,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 List<string> requiredConfig = new List<string> {
                 "TramTrackerDB",
                 "Havm2TramTrackerAPI",
-                "CopyToLiveDueTime",
-                "RefreshTempDueTime"
+                "CopyTodaysDataToLiveDueTime",
+                "RefreshTempWithTomorrowsDataDueTime"
             };
 
                 // filter items that are set
@@ -337,44 +337,44 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// Returns true if:
         /// - The trigger times are both less than 24 hours; and
         /// - They differ by more than 30 mins; and
-        /// - The refreshTempDueTime follows the copyToLiveDueTime.
+        /// - The refreshTempWithTomorrowsDataDueTime follows the copyTodaysDataToLiveDueTime.
         /// Logs to the event log and returns false if the above isn't true.
         /// </summary>
-        public bool TriggerTimesAreValid(TimeSpan refreshTempDueTime, TimeSpan copyToLiveDueTime)
+        public bool TriggerTimesAreValid(TimeSpan refreshTempWithTomorrowsDataDueTime, TimeSpan copyTodaysDataToLiveDueTime)
         {
-            if (refreshTempDueTime.TotalHours >= 24 || copyToLiveDueTime.TotalHours >= 24)
+            if (refreshTempWithTomorrowsDataDueTime.TotalHours >= 24 || copyTodaysDataToLiveDueTime.TotalHours >= 24)
             {
                 LogWriter.Instance.Log(
                         EventLogCodes.INVALID_CONFIGURATION,
-                        string.Format("Fatal error - the values for RefreshTempDueTime ({0}) and CopyToLiveDueTime ({1}) must be between 00:00:00 and 23:59:59."
-                                , refreshTempDueTime
-                                , copyToLiveDueTime
+                        string.Format("Fatal error - the values for RefreshTempWithTomorrowsDataDueTime ({0}) and copyTodaysDataToLiveDueTime ({1}) must be between 00:00:00 and 23:59:59."
+                                , refreshTempWithTomorrowsDataDueTime
+                                , copyTodaysDataToLiveDueTime
                                 )
                         );
                 return false;
             }
 
-            if (refreshTempDueTime.TotalHours <= copyToLiveDueTime.TotalHours)
+            if (refreshTempWithTomorrowsDataDueTime.TotalHours <= copyTodaysDataToLiveDueTime.TotalHours)
             {
                 LogWriter.Instance.Log(
                         EventLogCodes.INVALID_CONFIGURATION,
-                        string.Format("Fatal error - the RefreshTempDueTime ({0}) must be set to a time that occurs after the CopyToLiveDueTime ({1}). This is because the RefreshTemp process will not include data for the current day in the refresh, therefore the CopyToLive process would have no data on which to base current day predictions."
-                                , refreshTempDueTime
-                                , copyToLiveDueTime
+                        string.Format("Fatal error - the RefreshTempWithTomorrowsDataDueTime ({0}) must be set to a time that occurs after the copyTodaysDataToLiveDueTime ({1}). This is because the RefreshTemp process will not include data for the current day in the refresh, therefore the CopyToLive process would have no data on which to base current day predictions."
+                                , refreshTempWithTomorrowsDataDueTime
+                                , copyTodaysDataToLiveDueTime
                                 )
                         );
                 return false;
             }
 
             const double minDiff = 30; // Minutes.
-            double diff = Math.Abs(refreshTempDueTime.TotalMinutes - copyToLiveDueTime.TotalMinutes);
+            double diff = Math.Abs(refreshTempWithTomorrowsDataDueTime.TotalMinutes - copyTodaysDataToLiveDueTime.TotalMinutes);
             if (diff < minDiff || diff > (1440 - minDiff)) // There are 1440 minutes in a day.
             {
                 LogWriter.Instance.Log(
                         EventLogCodes.INVALID_CONFIGURATION,
-                        string.Format("Fatal error - the values for RefreshTempDueTime ({0}) and CopyToLiveDueTime ({1}) must be more than {2} minutes apart, currently they're {3} minutes apart."
-                                , refreshTempDueTime
-                                , copyToLiveDueTime
+                        string.Format("Fatal error - the values for RefreshTempWithTomorrowsDataDueTime ({0}) and copyTodaysDataToLiveDueTime ({1}) must be more than {2} minutes apart, currently they're {3} minutes apart."
+                                , refreshTempWithTomorrowsDataDueTime
+                                , copyTodaysDataToLiveDueTime
                                 , minDiff
                                 , diff < minDiff ? diff : (1440 - diff)
                                 )
