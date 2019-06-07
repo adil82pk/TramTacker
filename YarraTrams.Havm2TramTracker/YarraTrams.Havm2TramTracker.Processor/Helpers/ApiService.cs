@@ -14,6 +14,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         /// Calls HAVM2 and returns trip and stop data for the next 7 days, starting from tomorrow.
         /// </summary>
         /// <param name="baseDate">ONLY USED FOR TESTING. Tells HAVM2 to retrieve data based on a custom date, instead of using today's date.</param>
+        /// <param name="retryCount">Number of retries attempted - no need to pass this.</param>
         /// <returns>A JSON-formatted string.</returns>
         public static string GetDataFromHavm2(DateTime? baseDate, int retryCount = 0)
         {
