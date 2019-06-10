@@ -257,6 +257,21 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 this.Stop();
             }
+            else
+            {
+                // If config updated whilst a process is executing then weird stuff might happen. We raise an alert but leave the current processing alone.
+                if (stateObj != null && stateObj.TimerCanceled)
+                {
+                    LogWriter.Instance.Log(EventLogCodes.CONFIGURATION_UPDATED_WHILST_INPROCESS, "Configuration updated whilst process being actively executed. This can cause unusual behaviour.");
+                }
+                else
+                {
+                    // Stop currently running timer then trigger new timer.
+                    LogWriter.Instance.Log(EventLogCodes.TIMER_SET, "Resetting the timer");
+                    this.StopTimer();
+                    this.RunTimer();
+                }
+            }
         }
 
         /// <summary>
