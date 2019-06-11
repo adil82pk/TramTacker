@@ -77,7 +77,6 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             switch (trip.OperationalDay.DayOfWeek)
             {
-                //Todo: Check this
                 //A Melbourne tram week begins on a Sunday
                 case System.DayOfWeek.Saturday: return 6;
                 case System.DayOfWeek.Sunday: return 0;
@@ -113,6 +112,36 @@ namespace YarraTrams.Havm2TramTracker.Models
             else //We have an vehicle group that we're not aware of!
             {
                 throw new FormatException(string.Format("Unknown vehicle \"{0}\".", trip.VehicleType)); ;
+            }
+        }
+
+        /// <summary>
+        /// The designation for up/down direction comes from HAVM2 as a string (either "UP" or "DOWN").
+        /// TramTRACKER expects the up/down direction to be defined as true/false (up = true, down = false).
+        /// THis routine converts the string designation to a boolean.
+        /// </summary>
+        /// <param name="trip"></param>
+        /// <returns></returns>
+        public bool GetUpDirection(HavmTrip trip)
+        {
+            if (!(trip.Direction == null))
+            {
+                if (trip.Direction.Trim().ToUpper() == "UP")
+                {
+                    return true;
+                }
+                else if (trip.Direction.Trim().ToUpper() == "DOWN")
+                {
+                    return false;
+                }
+                else
+                {
+                    throw new FormatException(String.Format("Unexpected trip direction on trip with HASTUS Id {0}. Expecting \"UP\" or \"DOWN\" but got \"{1}\".", trip.HastusTripId, trip.Direction));
+                }
+            }
+            else
+            {
+                throw new FormatException(String.Format("Unexpected trip direction on trip with HASTUS Id {0}. Expecting \"UP\" or \"DOWN\" but got null.", trip.HastusTripId));
             }
         }
     }

@@ -164,5 +164,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((int)(this["GapBetweenGetDataFromHavm2RetriesInSecs"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int NumberOfPredictionsPerTripStop {
+            get {
+                return ((int)(this["NumberOfPredictionsPerTripStop"]));
+            }
+        }
     }
 }
