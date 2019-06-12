@@ -16,7 +16,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 ProdSupportMenu = new CommandMenu(MainMenu);
                 ProdSupportMenu.Title = "Production Support Menu";
                 ProdSupportMenu.AddCommand("Copy to live tables", () => CallCopyToLive());
-                ProdSupportMenu.AddCommand("Call HAVM2 API and save to all tables", () => CallHavm2ApiAndSaveToAllTables());
+                ProdSupportMenu.AddCommand("Call HAVM2 API and save to all staging/temp tables", () => CallHavm2ApiAndSaveToAllTables());
             }
 
             ProdSupportMenu.Show();

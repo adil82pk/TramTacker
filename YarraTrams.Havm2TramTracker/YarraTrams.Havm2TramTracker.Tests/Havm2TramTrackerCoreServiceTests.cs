@@ -5,6 +5,7 @@ using YarraTrams.Havm2TramTracker.Processor;
 using System.ServiceProcess;
 using System.Linq.Expressions;
 using System.Collections.Specialized;
+using YarraTrams.Havm2TramTracker.Processor.Helpers;
 
 namespace YarraTrams.Havm2TramTracker.Tests
 {
@@ -134,10 +135,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
             TimeSpan refreshTempDueTime = new TimeSpan(23, 0, 0);
             TimeSpan copyToLiveDueTime = new TimeSpan(3, 0, 0);
             TimeSpan dueTime;
-            Havm2TramTrackerService.Processes process;
+            Enums.Processes process;
 
             TimeSpan expectedDueTime = copyToLiveDueTime;
-            Havm2TramTrackerService.Processes expectedProcess = Havm2TramTrackerService.Processes.CopyToLive;
+            Enums.Processes expectedProcess = Enums.Processes.CopyToLive;
 
             var service = new Havm2TramTrackerService();
 
@@ -157,10 +158,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
             TimeSpan refreshTempDueTime = new TimeSpan(23, 00, 00);
             TimeSpan copyToLiveDueTime = new TimeSpan(3, 0, 0);
             TimeSpan dueTime;
-            Havm2TramTrackerService.Processes process;
+            Enums.Processes process;
 
             TimeSpan expectedDueTime = copyToLiveDueTime;
-            Havm2TramTrackerService.Processes expectedProcess = Havm2TramTrackerService.Processes.CopyToLive;
+            Enums.Processes expectedProcess = Enums.Processes.CopyToLive;
 
             var service = new Havm2TramTrackerService();
 
@@ -180,10 +181,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
             TimeSpan refreshTempDueTime = new TimeSpan(23, 00, 00);
             TimeSpan copyToLiveDueTime = new TimeSpan(3, 0, 0);
             TimeSpan dueTime;
-            Havm2TramTrackerService.Processes process;
+            Enums.Processes process;
 
             TimeSpan expectedDueTime = refreshTempDueTime;
-            Havm2TramTrackerService.Processes expectedProcess = Havm2TramTrackerService.Processes.RefreshTemp;
+            Enums.Processes expectedProcess = Enums.Processes.RefreshTemp;
 
             var service = new Havm2TramTrackerService();
 

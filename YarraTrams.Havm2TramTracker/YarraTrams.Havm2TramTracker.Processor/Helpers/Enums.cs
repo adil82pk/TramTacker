@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 {
-    class Enums
+    public class Enums
     {
         public static class TableNames
         {
@@ -14,6 +14,12 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             public const string TempSchedules = "T_Temp_Schedules";
             public const string TempSchedulesMaster = "T_Temp_SchedulesMaster";
             public const string TempSchedulesDetails = "T_Temp_SchedulesDetails";
+        }
+
+        public enum Processes
+        {
+            CopyToLive,
+            RefreshTemp
         }
     }
 }
