@@ -68,6 +68,7 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int COPY_TO_LIVE_FAILED = 1008;
         public const int INVALID_CONFIGURATION = 1009;
         public const int HAVM2_API_ERROR = 1010;
+        public const int CONFIGURATION_UPDATED_WHILST_INPROCESS = 1011;
 
         public const int SIDE_BY_SIDE_ERROR = 1100;
         #endregion
