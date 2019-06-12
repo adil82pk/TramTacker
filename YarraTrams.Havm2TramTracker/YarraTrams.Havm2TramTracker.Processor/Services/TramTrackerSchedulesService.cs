@@ -75,37 +75,10 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                         }
                     }
                 }
-
-                // Set the "CatchTime" on each trip stop - this field tells the prediction calculations when we should start "catching" this trip stop and make predictions for it.
-                byte currentDayOfWeek = 255;
-                short currentRouteNo = 0;
-                string currentStopId = "0";
-                bool currentUpDirection = true;
-                int numberOfPredictionsPerTripStop = Properties.Settings.Default.NumberOfPredictionsPerTripStop;
-                Queue<int> passingTimes = new Queue<int>();
-
-                foreach (TramTrackerSchedules tripStop in scheduless.OrderBy(s => s.DayOfWeek).ThenBy(s => s.RouteNo).ThenBy(s => s.StopID).ThenBy(s => s.UpDirection).ThenBy(s => s.Time))
-                {
-                    // Upon reaching a new unique combination of DayOfWeek+RouteNo+StopID+Direction we set the next X CatchTimes to 0.
-                    if (currentUpDirection != tripStop.UpDirection || currentStopId != tripStop.StopID || currentRouteNo != tripStop.RouteNo || currentDayOfWeek != tripStop.DayOfWeek)
-                    {
-                        currentDayOfWeek = tripStop.DayOfWeek;
-                        currentRouteNo = tripStop.RouteNo;
-                        currentStopId = tripStop.StopID;
-                        currentUpDirection = tripStop.UpDirection;
-
-                        passingTimes.Clear();
-                        for(int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
-                        {
-                            passingTimes.Enqueue(0);
-                        }
-                    }
-
-                    // Set the CatchTime on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
-                    tripStop.CatchTime = passingTimes.Dequeue();
-                    passingTimes.Enqueue(tripStop.Time);
-                }
             }
+
+            // Set the "CatchTime" on each trip stop - this field tells the prediction calculations when we should start "catching" this trip stop and make predictions for it.
+            scheduless = this.SetCatchTimes(scheduless, Properties.Settings.Default.NumberOfPredictionsPerTripStop);
 
             int totalErrors = exceptionCounts.Values.Sum();
             if (totalErrors == 0)
@@ -156,6 +129,45 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             }
 
             return masterTable;
+        }
+
+        /// <summary>
+        /// Adds a CatchTime to every schedule record.
+        /// The CatchTime field tells the prediction calculations when we should start "catching" this trip stop and make predictions for it.
+        /// </summary>
+        /// <param name="scheduless">A list of schedules without their CatchTime set</param>
+        /// <param name="numberOfPredictionsPerTripStop">Number of predictions we want to make for each Stop/Route/Direction combination</param>
+        /// <returns></returns>
+        public List<TramTrackerSchedules> SetCatchTimes(List<TramTrackerSchedules> scheduless, int numberOfPredictionsPerTripStop)
+        {
+            byte currentDayOfWeek = 255;
+            short currentRouteNo = 0;
+            string currentStopId = "0";
+            bool currentUpDirection = true;
+            Queue<int> passingTimes = new Queue<int>();
+
+            foreach (TramTrackerSchedules tripStop in scheduless.OrderBy(s => s.DayOfWeek).ThenBy(s => s.RouteNo).ThenBy(s => s.StopID).ThenBy(s => s.UpDirection).ThenBy(s => s.Time))
+            {
+                // Upon reaching a new unique combination of DayOfWeek+RouteNo+StopID+Direction we set the next X CatchTimes to 0.
+                if (currentUpDirection != tripStop.UpDirection || currentStopId != tripStop.StopID || currentRouteNo != tripStop.RouteNo || currentDayOfWeek != tripStop.DayOfWeek)
+                {
+                    currentDayOfWeek = tripStop.DayOfWeek;
+                    currentRouteNo = tripStop.RouteNo;
+                    currentStopId = tripStop.StopID;
+                    currentUpDirection = tripStop.UpDirection;
+
+                    passingTimes.Clear();
+                    for (int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
+                    {
+                        passingTimes.Enqueue(0);
+                    }
+                }
+
+                // Set the CatchTime on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
+                tripStop.CatchTime = passingTimes.Dequeue();
+                passingTimes.Enqueue(tripStop.Time);
+            }
+            return scheduless;
         }
     }
 }
