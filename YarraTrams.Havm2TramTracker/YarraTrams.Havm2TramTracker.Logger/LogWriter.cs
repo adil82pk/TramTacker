@@ -132,10 +132,10 @@ namespace YarraTrams.Havm2TramTracker.Logger
         {
             // Windows imposes a limit on the size of event log messages and doesn't auto-truncate, so we truncate ourselves.
             // The actual length limit depends on the version of Windows but they are all around 32k.
-            const int maxEventLogmessageLength = 31000;
-            if (message.Length > maxEventLogmessageLength)
+            const int maxEventLogMessageLength = 31000;
+            if (message.Length > maxEventLogMessageLength)
             {
-                message = string.Format("{0}\n...(Remaining {1} characters truncated.)", message.Substring(0, maxEventLogmessageLength - 50), (message.Length - maxEventLogmessageLength));
+                message = string.Format("{0}\n...(Remaining {1} characters truncated.)", message.Substring(0, maxEventLogMessageLength - 50), (message.Length - maxEventLogMessageLength));
             }
 
             DateTime now = DateTime.Now;
