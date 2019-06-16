@@ -153,6 +153,7 @@
     <Compile Include="Helpers\LogfileWriter.cs" />
     <Compile Include="Helpers\SettingsExposer.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
+    <Compile Include="Migrations\201906162255_AddTripFieldsForNewPredictions.cs" />
     <Compile Include="Migrations\201906112101_AddPredictFromSaMToSchedules.cs" />
     <Compile Include="Migrations\VersionTable.cs" />
     <Compile Include="Processor.cs" />
