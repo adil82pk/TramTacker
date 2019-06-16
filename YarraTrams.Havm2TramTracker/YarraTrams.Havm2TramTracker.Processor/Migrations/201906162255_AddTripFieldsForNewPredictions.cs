@@ -17,13 +17,13 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons
             Alter.Table("T_Trips").AddColumn("HavmTimetableId").AsInt32().NotNullable().SetExistingRowsTo(0);
             Alter.Table("T_Trips").AddColumn("HastusPermanentTripNumber").AsInt32().NotNullable().SetExistingRowsTo(0);
             Alter.Table("T_Trips").AddColumn("RunSequenceNumber").AsInt32().NotNullable().SetExistingRowsTo(0);
-            Alter.Table("T_Trips").AddColumn("HeadwayPreviousSeconds").AsInt32().NotNullable().SetExistingRowsTo(0);
+            Alter.Table("T_Trips").AddColumn("AtLayoverTimePrevious").AsInt32().NotNullable().SetExistingRowsTo(0);
 
             Alter.Table("T_Temp_Trips").AddColumn("HavmTripId").AsInt32().NotNullable().SetExistingRowsTo(0);
             Alter.Table("T_Temp_Trips").AddColumn("HavmTimetableId").AsInt32().NotNullable().SetExistingRowsTo(0);
             Alter.Table("T_Temp_Trips").AddColumn("HastusPermanentTripNumber").AsInt32().NotNullable().SetExistingRowsTo(0);
             Alter.Table("T_Temp_Trips").AddColumn("RunSequenceNumber").AsInt32().NotNullable().SetExistingRowsTo(0);
-            Alter.Table("T_Temp_Trips").AddColumn("HeadwayPreviousSeconds").AsInt32().NotNullable().SetExistingRowsTo(0);
+            Alter.Table("T_Temp_Trips").AddColumn("AtLayoverTimePrevious").AsInt32().NotNullable().SetExistingRowsTo(0);
         }
 
         public override void Down()
@@ -32,13 +32,13 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons
             Delete.Column("HavmTimetableId").FromTable("T_Trips");
             Delete.Column("HastusPermanentTripNumber").FromTable("T_Trips");
             Delete.Column("RunSequenceNumber").FromTable("T_Trips");
-            Delete.Column("HeadwayPreviousSeconds").FromTable("T_Trips");
+            Delete.Column("AtLayoverTimePrevious").FromTable("T_Trips");
 
             Delete.Column("HavmTripId").FromTable("T_Temp_Trips");
             Delete.Column("HavmTimetableId").FromTable("T_Temp_Trips");
             Delete.Column("HastusPermanentTripNumber").FromTable("T_Temp_Trips");
             Delete.Column("RunSequenceNumber").FromTable("T_Temp_Trips");
-            Delete.Column("HeadwayPreviousSeconds").FromTable("T_Temp_Trips");
+            Delete.Column("AtLayoverTimePrevious").FromTable("T_Temp_Trips");
         }
     }
 }
