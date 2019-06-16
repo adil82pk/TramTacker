@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YarraTrams.Havm2TramTracker.Models.Helpers;
 
 namespace YarraTrams.Havm2TramTracker.Models
 {
@@ -116,9 +117,9 @@ namespace YarraTrams.Havm2TramTracker.Models
         }
 
         /// <summary>
-        /// The designation for up/down direction comes from HAVM2 as a string (either "UP" or "DOWN").
+        /// The designation for up/down direction comes from HAVM2 as a string (either "UP" or "DOWN") - see TripDirections enum.
         /// TramTRACKER expects the up/down direction to be defined as true/false (up = true, down = false).
-        /// THis routine converts the string designation to a boolean.
+        /// This routine converts the string designation to a boolean.
         /// </summary>
         /// <param name="trip"></param>
         /// <returns></returns>
@@ -126,11 +127,11 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             if (!(trip.Direction == null))
             {
-                if (trip.Direction.Trim().ToUpper() == "UP")
+                if (trip.Direction.Trim().ToUpper() == Enums.TripDirections.Up.ToUpper())
                 {
                     return true;
                 }
-                else if (trip.Direction.Trim().ToUpper() == "DOWN")
+                else if (trip.Direction.Trim().ToUpper() == Enums.TripDirections.Down.ToUpper())
                 {
                     return false;
                 }
