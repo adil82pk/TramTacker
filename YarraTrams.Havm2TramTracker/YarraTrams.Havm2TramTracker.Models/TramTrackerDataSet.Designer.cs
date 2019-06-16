@@ -412,6 +412,16 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             private global::System.Data.DataColumn columnDayOfWeek;
             
+            private global::System.Data.DataColumn columnHavmTripId;
+            
+            private global::System.Data.DataColumn columnHavmTimetableId;
+            
+            private global::System.Data.DataColumn columnHastusPermanentTripNumber;
+            
+            private global::System.Data.DataColumn columnRunSequenceNumber;
+            
+            private global::System.Data.DataColumn columnAtLayoverTimePrevious;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public T_Temp_TripsDataTable() {
@@ -559,6 +569,46 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn HavmTripIdColumn {
+                get {
+                    return this.columnHavmTripId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn HavmTimetableIdColumn {
+                get {
+                    return this.columnHavmTimetableId;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn HastusPermanentTripNumberColumn {
+                get {
+                    return this.columnHastusPermanentTripNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn RunSequenceNumberColumn {
+                get {
+                    return this.columnRunSequenceNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn AtLayoverTimePreviousColumn {
+                get {
+                    return this.columnAtLayoverTimePrevious;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -594,7 +644,26 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public T_Temp_TripsRow AddT_Temp_TripsRow(int TripID, string RunNo, short RouteNo, string FirstTP, int FirstTime, string EndTP, int EndTime, short AtLayoverTime, short NextRouteNo, bool UpDirection, bool LowFloor, decimal TripDistance, bool PublicTrip, byte DayOfWeek) {
+            public T_Temp_TripsRow AddT_Temp_TripsRow(
+                        int TripID, 
+                        string RunNo, 
+                        short RouteNo, 
+                        string FirstTP, 
+                        int FirstTime, 
+                        string EndTP, 
+                        int EndTime, 
+                        short AtLayoverTime, 
+                        short NextRouteNo, 
+                        bool UpDirection, 
+                        bool LowFloor, 
+                        decimal TripDistance, 
+                        bool PublicTrip, 
+                        byte DayOfWeek, 
+                        int HavmTripId, 
+                        int HavmTimetableId, 
+                        int HastusPermanentTripNumber, 
+                        int RunSequenceNumber, 
+                        int AtLayoverTimePrevious) {
                 T_Temp_TripsRow rowT_Temp_TripsRow = ((T_Temp_TripsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         TripID,
@@ -610,7 +679,12 @@ namespace YarraTrams.Havm2TramTracker.Models {
                         LowFloor,
                         TripDistance,
                         PublicTrip,
-                        DayOfWeek};
+                        DayOfWeek,
+                        HavmTripId,
+                        HavmTimetableId,
+                        HastusPermanentTripNumber,
+                        RunSequenceNumber,
+                        AtLayoverTimePrevious};
                 rowT_Temp_TripsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowT_Temp_TripsRow);
                 return rowT_Temp_TripsRow;
@@ -657,6 +731,11 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 this.columnTripDistance = base.Columns["TripDistance"];
                 this.columnPublicTrip = base.Columns["PublicTrip"];
                 this.columnDayOfWeek = base.Columns["DayOfWeek"];
+                this.columnHavmTripId = base.Columns["HavmTripId"];
+                this.columnHavmTimetableId = base.Columns["HavmTimetableId"];
+                this.columnHastusPermanentTripNumber = base.Columns["HastusPermanentTripNumber"];
+                this.columnRunSequenceNumber = base.Columns["RunSequenceNumber"];
+                this.columnAtLayoverTimePrevious = base.Columns["AtLayoverTimePrevious"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -690,6 +769,16 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 base.Columns.Add(this.columnPublicTrip);
                 this.columnDayOfWeek = new global::System.Data.DataColumn("DayOfWeek", typeof(byte), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDayOfWeek);
+                this.columnHavmTripId = new global::System.Data.DataColumn("HavmTripId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHavmTripId);
+                this.columnHavmTimetableId = new global::System.Data.DataColumn("HavmTimetableId", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHavmTimetableId);
+                this.columnHastusPermanentTripNumber = new global::System.Data.DataColumn("HastusPermanentTripNumber", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHastusPermanentTripNumber);
+                this.columnRunSequenceNumber = new global::System.Data.DataColumn("RunSequenceNumber", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRunSequenceNumber);
+                this.columnAtLayoverTimePrevious = new global::System.Data.DataColumn("AtLayoverTimePrevious", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAtLayoverTimePrevious);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnRunNo,
                                 this.columnRouteNo,
@@ -2090,6 +2179,87 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int HavmTripId {
+                get {
+                    try {
+                        return ((int)(this[this.tableT_Temp_Trips.HavmTripIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HavmTripId\' in table \'T_Temp_Trips\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableT_Temp_Trips.HavmTripIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int HavmTimetableId {
+                get {
+                    try {
+                        return ((int)(this[this.tableT_Temp_Trips.HavmTimetableIdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HavmTimetableId\' in table \'T_Temp_Trips\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableT_Temp_Trips.HavmTimetableIdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int HastusPermanentTripNumber {
+                get {
+                    try {
+                        return ((int)(this[this.tableT_Temp_Trips.HastusPermanentTripNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HastusPermanentTripNumber\' in table \'T_Temp_Trips\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableT_Temp_Trips.HastusPermanentTripNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int RunSequenceNumber {
+                get {
+                    try {
+                        return ((int)(this[this.tableT_Temp_Trips.RunSequenceNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RunSequenceNumber\' in table \'T_Temp_Trips\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableT_Temp_Trips.RunSequenceNumberColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public int AtLayoverTimePrevious {
+                get {
+                    try {
+                        return ((int)(this[this.tableT_Temp_Trips.AtLayoverTimePreviousColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AtLayoverTimePrevious\' in table \'T_Temp_Trips\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableT_Temp_Trips.AtLayoverTimePreviousColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public bool IsTripIDNull() {
                 return this.IsNull(this.tableT_Temp_Trips.TripIDColumn);
             }
@@ -2122,6 +2292,66 @@ namespace YarraTrams.Havm2TramTracker.Models {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetTripDistanceNull() {
                 this[this.tableT_Temp_Trips.TripDistanceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsHavmTripIdNull() {
+                return this.IsNull(this.tableT_Temp_Trips.HavmTripIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetHavmTripIdNull() {
+                this[this.tableT_Temp_Trips.HavmTripIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsHavmTimetableIdNull() {
+                return this.IsNull(this.tableT_Temp_Trips.HavmTimetableIdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetHavmTimetableIdNull() {
+                this[this.tableT_Temp_Trips.HavmTimetableIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsHastusPermanentTripNumberNull() {
+                return this.IsNull(this.tableT_Temp_Trips.HastusPermanentTripNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetHastusPermanentTripNumberNull() {
+                this[this.tableT_Temp_Trips.HastusPermanentTripNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsRunSequenceNumberNull() {
+                return this.IsNull(this.tableT_Temp_Trips.RunSequenceNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetRunSequenceNumberNull() {
+                this[this.tableT_Temp_Trips.RunSequenceNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool IsAtLayoverTimePreviousNull() {
+                return this.IsNull(this.tableT_Temp_Trips.AtLayoverTimePreviousColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public void SetAtLayoverTimePreviousNull() {
+                this[this.tableT_Temp_Trips.AtLayoverTimePreviousColumn] = global::System.Convert.DBNull;
             }
         }
         
