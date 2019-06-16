@@ -25,7 +25,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Persist Security Info=False;Asynchronous Process" +
+            "ing=true;max pool size=500;User ID=avmis;Password=avmis;database=TramTracker;")]
         public string TramTrackerDB {
             get {
                 return ((string)(this["TramTrackerDB"]));
@@ -34,7 +35,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("qqq")]
         public string Havm2TramTrackerAPI {
             get {
                 return ((string)(this["Havm2TramTrackerAPI"]));

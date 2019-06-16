@@ -77,7 +77,7 @@
               <xs:element name="DayOfWeek" msprop:Generator_ColumnVarNameInTable="columnDayOfWeek" msprop:Generator_ColumnPropNameInRow="DayOfWeek" msprop:Generator_ColumnPropNameInTable="DayOfWeekColumn" msprop:Generator_UserColumnName="DayOfWeek" type="xs:unsignedByte" />
               <xs:element name="LowFloor" msprop:Generator_ColumnVarNameInTable="columnLowFloor" msprop:Generator_ColumnPropNameInRow="LowFloor" msprop:Generator_ColumnPropNameInTable="LowFloorColumn" msprop:Generator_UserColumnName="LowFloor" type="xs:boolean" />
               <xs:element name="PublicTrip" msprop:Generator_ColumnVarNameInTable="columnPublicTrip" msprop:Generator_ColumnPropNameInRow="PublicTrip" msprop:Generator_ColumnPropNameInTable="PublicTripColumn" msprop:Generator_UserColumnName="PublicTrip" type="xs:boolean" />
-              <xs:element name="CatchTime" msprop:Generator_ColumnVarNameInTable="columnCatchTime" msprop:Generator_ColumnPropNameInRow="CatchTime" msprop:Generator_ColumnPropNameInTable="CatchTimeColumn" msprop:Generator_UserColumnName="CatchTime" type="xs:int" default="0" />
+              <xs:element name="PredictFromSaM" msprop:Generator_ColumnVarNameInTable="columnPredictFromSaM" msprop:Generator_ColumnPropNameInRow="PredictFromSaM" msprop:Generator_ColumnPropNameInTable="PredictFromSaMColumn" msprop:Generator_UserColumnName="PredictFromSaM" type="xs:int" default="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

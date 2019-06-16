@@ -19,7 +19,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         public bool LowFloor { get; set; }
         public bool PublicTrip { get; set; }
         public bool UpDirection { get; set; }
-        public int CatchTime { get; set; }
+        public int PredictFromSaM { get; set; }
 
         /// <summary>
         /// Populate data from HavmTrip object
@@ -55,7 +55,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             row.OPRTimePoint = this.OPRTimePoint;
             row.StopID = this.StopID;
             row.Time = this.Time;
-            row.CatchTime = this.CatchTime;
+            row.PredictFromSaM = this.PredictFromSaM;
 
             return row;
         }
@@ -72,7 +72,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("  RouteNo: {0}{1}", RouteNo, Environment.NewLine);
             output.AppendFormat("  OPRTimePoint: {0}{1}", OPRTimePoint, Environment.NewLine);
             output.AppendFormat("  Time: {0}{1}", Time, Environment.NewLine);
-            output.AppendFormat("  CatchTime: {0}{1}", CatchTime, Environment.NewLine);
+            output.AppendFormat("  PredictFromSaM: {0}{1}", PredictFromSaM, Environment.NewLine);
             output.AppendFormat("  LowFloor: {0}{1}", LowFloor, Environment.NewLine);
             output.AppendFormat("  PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
             output.AppendFormat("  UpDirection: {0}{1}", UpDirection, Environment.NewLine);

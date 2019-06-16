@@ -13,14 +13,14 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons
     {
         public override void Up()
         {
-            Alter.Table("T_Schedules").AddColumn("CatchTime").AsInt32().NotNullable().SetExistingRowsTo(0);
-            Alter.Table("T_Temp_Schedules").AddColumn("CatchTime").AsInt32().NotNullable().SetExistingRowsTo(0);
+            Alter.Table("T_Schedules").AddColumn("PredictFromSaM").AsInt32().NotNullable().SetExistingRowsTo(0);
+            Alter.Table("T_Temp_Schedules").AddColumn("PredictFromSaM").AsInt32().NotNullable().SetExistingRowsTo(0);
         }
 
         public override void Down()
         {
-            Delete.Column("CatchTime").FromTable("T_Schedules");
-            Delete.Column("CatchTime").FromTable("T_Temp_Schedules");
+            Delete.Column("PredictFromSaM").FromTable("T_Schedules");
+            Delete.Column("PredictFromSaM").FromTable("T_Temp_Schedules");
         }
     }
 }
