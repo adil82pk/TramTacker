@@ -140,7 +140,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// <returns></returns>
         public List<TramTrackerSchedules> SetCatchTimes(List<TramTrackerSchedules> scheduless, int numberOfPredictionsPerTripStop)
         {
-            byte currentDayOfWeek = 255;
+            byte currentDayOfWeek = 255; // DayOfWeek is stored in the TramTracker DB as a TinyInt (a byte - 3 bits would, in fact, be enough to store 0,1,2,3,4,5 or 6!). We set the working variable to 255 so as the first trip is recognised as a "new" trip in the loop.
             short currentRouteNo = 0;
             string currentStopId = "0";
             bool currentUpDirection = true;
