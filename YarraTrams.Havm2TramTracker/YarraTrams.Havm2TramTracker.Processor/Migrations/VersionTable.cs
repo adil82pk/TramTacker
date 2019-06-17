@@ -21,7 +21,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
         public override string TableName
         {
-            get { return "VersionInfoTTBU"; }
+            get { return "VersionInfoHavm2TT"; }
         }
     }
 }
