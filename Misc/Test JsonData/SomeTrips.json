@@ -1,0 +1,5722 @@
+[
+    {
+        "hastusTripId": 78351160,
+        "havmTripId": 35113718,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69095059,
+        "block": "gh02- 21",
+        "runSequenceNumber": 22,
+        "headboard": "61",
+        "route": "64",
+        "startTimepoint": "ebtn",
+        "startTimeSam": 86400,
+        "endTimepoint": "scj1",
+        "endTimeSam": 86760,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 0,
+        "nextRoute": "64",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 3074,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86400,
+                "hastusStopId": "1135",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1134",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1133",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1132",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1131",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1130",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1129",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1128",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1127",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1126",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1125",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1124",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78922884,
+        "havmTripId": 35111300,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69070469,
+        "block": "es04- 76",
+        "runSequenceNumber": 26,
+        "headboard": "82",
+        "route": "82",
+        "startTimepoint": "fcry",
+        "startTimeSam": 86400,
+        "endTimepoint": "mpnd",
+        "endTimeSam": 87780,
+        "headwayPreviousSeconds": 540,
+        "headwayNextSeconds": 120,
+        "nextRoute": "82",
+        "direction": "UP",
+        "vehicleType": "z",
+        "distanceMetres": 8998,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86400,
+                "hastusStopId": "4364",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86400,
+                "hastusStopId": "4363",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "4362",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "4361",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "4360",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "4359",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "4358",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "4357",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "4356",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "4355",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "4354",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "4353",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "4352",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "4351",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "4350",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "4349",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "4348",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1346",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1345",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1344",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1343",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1342",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1341",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1340",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1339",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1338",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1337",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "4336",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "4335",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "4334",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "4333",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "2294",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "mpn1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78347577,
+        "havmTripId": 35114958,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69098201,
+        "block": "br03- 50",
+        "runSequenceNumber": 21,
+        "headboard": "1",
+        "route": "1",
+        "startTimepoint": "smbh",
+        "startTimeSam": 86460,
+        "endTimepoint": "ecob",
+        "endTimeSam": 88980,
+        "headwayPreviousSeconds": 960,
+        "headwayNextSeconds": 120,
+        "nextRoute": "1",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 13292,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1242",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1241",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1240",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1239",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1238",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1237",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1236",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1235",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1234",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1233",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1232",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1230",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1229",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1228",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1227",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "art1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "3114",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "3113",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "3111",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3110",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "los1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "3108",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3107",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "3104",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3103",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "3101",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2224",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2223",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2222",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2221",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2220",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2219",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2218",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2217",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2216",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2215",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2214",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2213",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2212",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2211",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2210",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2209",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2208",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2207",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "moh1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2206",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2205",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2204",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2203",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2202",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "9001",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78921420,
+        "havmTripId": 35112338,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 71086741,
+        "block": "sb06- 55",
+        "runSequenceNumber": 46,
+        "headboard": "36",
+        "route": "30",
+        "startTimepoint": "lasp",
+        "startTimeSam": 86460,
+        "endTimepoint": "sbdp",
+        "endTimeSam": 87120,
+        "headwayPreviousSeconds": 0,
+        "headwayNextSeconds": 0,
+        "nextRoute": "30",
+        "direction": "UP",
+        "vehicleType": "a",
+        "distanceMetres": 2016,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "3651",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "3252",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "3201",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "3254",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "spf1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "3256",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "3257",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "whc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "2707",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "2708",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78921677,
+        "havmTripId": 35110598,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69069373,
+        "block": "es04- 32",
+        "runSequenceNumber": 23,
+        "headboard": "81",
+        "route": "59",
+        "startTimepoint": "awst",
+        "startTimeSam": 86460,
+        "endTimepoint": "esdp",
+        "endTimeSam": 87600,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 120,
+        "nextRoute": "59",
+        "direction": "UP",
+        "vehicleType": "b",
+        "distanceMetres": 9396,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1320",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1319",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1318",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1317",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1316",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1315",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1314",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1313",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1312",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1311",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1310",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1309",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1308",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1306",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1305",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1304",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1303",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1302",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1301",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1300",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1299",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1298",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1297",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1296",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1295",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1294",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1292",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1291",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1290",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1289",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1288",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "esd1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78922429,
+        "havmTripId": 35110440,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69068494,
+        "block": "cw07- 33",
+        "runSequenceNumber": 14,
+        "headboard": "70",
+        "route": "70",
+        "startTimepoint": "dodr",
+        "startTimeSam": 86460,
+        "endTimepoint": "wprk",
+        "endTimeSam": 89160,
+        "headwayPreviousSeconds": 420,
+        "headwayNextSeconds": 120,
+        "nextRoute": "70",
+        "direction": "DOWN",
+        "vehicleType": "a",
+        "distanceMetres": 16847,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "3594",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "3595",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "3596",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "3597",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "3598",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "3599",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "3600",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "3601",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "3602",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "3603",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "3604",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "3605",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "3606",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "fle1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "3622",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "3623",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "3624",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3625",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "pun1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2761",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2762",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "2763",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "2764",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2765",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2766",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2767",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2768",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2769",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2770",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2771",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2929",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2930",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2931",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2932",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2933",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2934",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2935",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2936",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2937",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2938",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2939",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "cwd1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2940",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2773",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2774",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2775",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2776",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2778",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2779",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2780",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2781",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2782",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2783",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2784",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2785",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2786",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2787",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2788",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2789",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2790",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2791",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2792",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "9008",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78925620,
+        "havmTripId": 35112402,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69069958,
+        "block": "sb06- 37",
+        "runSequenceNumber": 18,
+        "headboard": "94",
+        "route": "96",
+        "startTimepoint": "stkb",
+        "startTimeSam": 86460,
+        "endTimepoint": "wcct",
+        "endTimeSam": 87480,
+        "headwayPreviousSeconds": 420,
+        "headwayNextSeconds": 180,
+        "nextRoute": "96",
+        "direction": "DOWN",
+        "vehicleType": "e1",
+        "distanceMetres": 6554,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "1544",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1543",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1541",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1540",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1539",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1538",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1537",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1536",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1535",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1534",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1533",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1532",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1531",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1707",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "whc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "3357",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3356",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78926451,
+        "havmTripId": 35113401,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69067686,
+        "block": "kw05- 15",
+        "runSequenceNumber": 20,
+        "headboard": "48",
+        "route": "48",
+        "startTimepoint": "viha",
+        "startTimeSam": 86460,
+        "endTimepoint": "nbal",
+        "endTimeSam": 88680,
+        "headwayPreviousSeconds": 720,
+        "headwayNextSeconds": 120,
+        "nextRoute": "48",
+        "direction": "DOWN",
+        "vehicleType": "c1",
+        "distanceMetres": 14130,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86460,
+                "hastusStopId": "3396",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "3397",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "3398",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "3399",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "3400",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "3401",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "3403",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "3405",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "3406",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "ruc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "3408",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "3409",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "fls1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "3609",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "3610",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "3611",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "3613",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3614",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "2915",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "2917",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "2918",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "2919",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "2920",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "2921",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "2922",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "2923",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2876",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "2877",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2878",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "kwd1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2731",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2732",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2733",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2879",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2880",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2881",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2882",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2883",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2884",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2885",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2886",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2887",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2888",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2889",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2890",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2891",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2892",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2893",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2894",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2895",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "9004",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78921963,
+        "havmTripId": 35109727,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69072476,
+        "block": "pw10- 70",
+        "runSequenceNumber": 10,
+        "headboard": "89",
+        "route": "86",
+        "startTimepoint": "bund",
+        "startTimeSam": 86520,
+        "endTimepoint": "nthc",
+        "endTimeSam": 87780,
+        "headwayPreviousSeconds": 240,
+        "headwayNextSeconds": 0,
+        "nextRoute": "86",
+        "direction": "UP",
+        "vehicleType": "e1",
+        "distanceMetres": 10516,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1871",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1870",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1869",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1868",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1867",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1866",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1865",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1864",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1863",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1862",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1861",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1860",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1859",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1858",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1857",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1856",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1855",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1854",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1853",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1852",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1851",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1850",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1849",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1848",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1847",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "ptd1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "1845",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "1844",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "1843",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "1842",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "nth1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78924435,
+        "havmTripId": 35110574,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69070456,
+        "block": "es04- 61",
+        "runSequenceNumber": 27,
+        "headboard": "56",
+        "route": "57",
+        "startTimepoint": "mpnd",
+        "startTimeSam": 86520,
+        "endTimepoint": "esdp",
+        "endTimeSam": 86700,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 120,
+        "nextRoute": "57",
+        "direction": "UP",
+        "vehicleType": "z",
+        "distanceMetres": 1402,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1294",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1292",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1291",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1290",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1289",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1288",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78925852,
+        "havmTripId": 35111646,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69071813,
+        "block": "es04- 14",
+        "runSequenceNumber": 15,
+        "headboard": "58",
+        "route": "58",
+        "startTimepoint": "trak",
+        "startTimeSam": 86520,
+        "endTimepoint": "wcob",
+        "endTimeSam": 89700,
+        "headwayPreviousSeconds": 540,
+        "headwayNextSeconds": 120,
+        "nextRoute": "58",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 18208,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "tra1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1577",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1576",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1575",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1574",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1573",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1572",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1571",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1570",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1569",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1568",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1567",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1566",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1565",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1564",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "too1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1563",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1562",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1561",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1022",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "dos1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "3052",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3053",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "3054",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "3055",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "3057",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "3058",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3059",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "3060",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "3061",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "3062",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "3063",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "3064",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "3065",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "3066",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "3067",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "3068",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "3069",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "3070",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "3071",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "3072",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "3074",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "abf1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2252",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2253",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2254",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2255",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2256",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2257",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2259",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2260",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2261",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2262",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2263",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "2264",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2265",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2266",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2267",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "2268",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "2269",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "2270",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "2271",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "2272",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89640,
+                "hastusStopId": "2273",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89640,
+                "hastusStopId": "2274",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "9005",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78926840,
+        "havmTripId": 35108780,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69071936,
+        "block": "ml01- 58",
+        "runSequenceNumber": 16,
+        "headboard": "58",
+        "route": "58",
+        "startTimepoint": "wcob",
+        "startTimeSam": 86520,
+        "endTimepoint": "trak",
+        "endTimeSam": 89400,
+        "headwayPreviousSeconds": 720,
+        "headwayNextSeconds": 60,
+        "nextRoute": "58",
+        "direction": "UP",
+        "vehicleType": "d1",
+        "distanceMetres": 18248,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1275",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1274",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1273",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1272",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1271",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1270",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1269",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1268",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1267",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1266",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1265",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1264",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1263",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1262",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1261",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1260",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1259",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1258",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1256",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1255",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1254",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1253",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1252",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "abf1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "3177",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3175",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3174",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "3173",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "3171",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3170",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3169",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3168",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "3167",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "3166",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3165",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "3164",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "3163",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "3161",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "3160",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "3159",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "3178",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "3156",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "3155",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "3153",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "dos1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "3022",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2561",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2562",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2563",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "too1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2564",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2565",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2566",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2567",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2568",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2569",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2570",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2571",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2572",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2573",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "2574",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2575",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2576",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "8005",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "tra1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78927247,
+        "havmTripId": 35109687,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69073198,
+        "block": "pw10- 21",
+        "runSequenceNumber": 20,
+        "headboard": "11",
+        "route": "11",
+        "startTimepoint": "wptn",
+        "startTimeSam": 86520,
+        "endTimepoint": "viha",
+        "endTimeSam": 88680,
+        "headwayPreviousSeconds": 540,
+        "headwayNextSeconds": 120,
+        "nextRoute": "11",
+        "direction": "UP",
+        "vehicleType": "e1",
+        "distanceMetres": 13394,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86520,
+                "hastusStopId": "1387",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1385",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1384",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1383",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1382",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1381",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1380",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1379",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1378",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1377",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1376",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1010",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1374",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1373",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1372",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1371",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1370",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1369",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1368",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1367",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1366",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1365",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1364",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1363",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1362",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1361",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1360",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1359",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1358",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1357",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1356",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "1355",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "1354",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "1353",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3512",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3511",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "3510",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "3509",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "3508",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "ruc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "3506",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "3505",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "3503",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "3501",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "3500",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "3499",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "3498",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "3497",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "8018",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78347975,
+        "havmTripId": 35115483,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69098599,
+        "block": "br03-  6",
+        "runSequenceNumber": 25,
+        "headboard": "19",
+        "route": "19",
+        "startTimepoint": "flel",
+        "startTimeSam": 86580,
+        "endTimepoint": "ncob",
+        "endTimeSam": 88380,
+        "headwayPreviousSeconds": 300,
+        "headwayNextSeconds": 120,
+        "nextRoute": "19",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 10222,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "3801",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "3802",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "3803",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "loe1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "3805",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "3807",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "3809",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "3810",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "3811",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "2412",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "2413",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "2414",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "2415",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "2416",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "2417",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "2418",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "2419",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "2420",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "2421",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "2422",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "2423",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "2424",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2425",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2426",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "2427",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2428",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2429",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2430",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2431",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2432",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2433",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2434",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2436",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2437",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2438",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2439",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "9003",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78924559,
+        "havmTripId": 35113625,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69067629,
+        "block": "kw05-  7",
+        "runSequenceNumber": 18,
+        "headboard": "29",
+        "route": "48",
+        "startTimepoint": "nbal",
+        "startTimeSam": 86580,
+        "endTimepoint": "kwdp",
+        "endTimeSam": 87120,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 120,
+        "nextRoute": "48",
+        "direction": "UP",
+        "vehicleType": "a",
+        "distanceMetres": 6040,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1896",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "1895",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1894",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "1893",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1892",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1891",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "bud1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1889",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1888",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1887",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1886",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1885",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1884",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1883",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1882",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1881",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1880",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1879",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1733",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1732",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1731",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1729",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78924923,
+        "havmTripId": 35108833,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69070925,
+        "block": "ml01-  2",
+        "runSequenceNumber": 30,
+        "headboard": "5",
+        "route": "5",
+        "startTimepoint": "orda",
+        "startTimeSam": 86580,
+        "endTimepoint": "malv",
+        "endTimeSam": 87000,
+        "headwayPreviousSeconds": 300,
+        "headwayNextSeconds": 1200,
+        "nextRoute": "5",
+        "direction": "UP",
+        "vehicleType": "z",
+        "distanceMetres": 3494,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "ord1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "2110",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "2136",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "2137",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "2138",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "2139",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "2140",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "wtr1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "2141",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "2142",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "2143",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "2144",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "2145",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "2146",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "8003",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78926104,
+        "havmTripId": 35108344,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69071423,
+        "block": "ml01- 36",
+        "runSequenceNumber": 14,
+        "headboard": "16",
+        "route": "16",
+        "startTimepoint": "univ",
+        "startTimeSam": 86580,
+        "endTimepoint": "kewc",
+        "endTimeSam": 90300,
+        "headwayPreviousSeconds": 600,
+        "headwayNextSeconds": 120,
+        "nextRoute": "16",
+        "direction": "UP",
+        "vehicleType": "d1",
+        "distanceMetres": 20416,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "3001",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86580,
+                "hastusStopId": "3003",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "3004",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "3007",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "3008",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "los1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "3010",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "3011",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "3013",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "3014",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "art1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3017",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "3019",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "3020",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "2022",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "2023",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "2024",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2025",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "2026",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2027",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2029",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2030",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2441",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2442",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2538",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2539",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2540",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2541",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2543",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2444",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2445",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2446",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2071",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2072",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2073",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2074",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2075",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2076",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2077",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2078",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2079",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2080",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2081",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2082",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2083",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "1117",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "1116",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "1115",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "2452",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2453",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2454",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2455",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "2456",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "mld1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "2457",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "2458",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "2459",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89640,
+                "hastusStopId": "2460",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89640,
+                "hastusStopId": "2461",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "2462",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "2463",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "2464",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89760,
+                "hastusStopId": "2465",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89760,
+                "hastusStopId": "2466",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89820,
+                "hastusStopId": "2467",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89880,
+                "hastusStopId": "2468",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89880,
+                "hastusStopId": "2469",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89940,
+                "hastusStopId": "2470",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90000,
+                "hastusStopId": "2471",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90000,
+                "hastusStopId": "2472",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90000,
+                "hastusStopId": "2473",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90060,
+                "hastusStopId": "2474",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90120,
+                "hastusStopId": "2475",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90120,
+                "hastusStopId": "2476",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90180,
+                "hastusStopId": "2477",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90240,
+                "hastusStopId": "2478",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90240,
+                "hastusStopId": "2479",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90300,
+                "hastusStopId": "9016",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78347976,
+        "havmTripId": 35115536,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69098600,
+        "block": "br03- 10",
+        "runSequenceNumber": 25,
+        "headboard": "18",
+        "route": "19",
+        "startTimepoint": "bwck",
+        "startTimeSam": 86640,
+        "endTimepoint": "mlnd",
+        "endTimeSam": 86820,
+        "headwayPreviousSeconds": 0,
+        "headwayNextSeconds": 0,
+        "nextRoute": "19",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 306,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "2552",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "9002",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78924898,
+        "havmTripId": 35109632,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69072807,
+        "block": "pw10- 67",
+        "runSequenceNumber": 15,
+        "headboard": "89",
+        "route": "86",
+        "startTimepoint": "nthc",
+        "startTimeSam": 86640,
+        "endTimepoint": "npdp",
+        "endTimeSam": 86820,
+        "headwayPreviousSeconds": 0,
+        "headwayNextSeconds": 0,
+        "nextRoute": "86",
+        "direction": "DOWN",
+        "vehicleType": "e1",
+        "distanceMetres": 498,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86640,
+                "hastusStopId": "nth1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "npdp",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78922070,
+        "havmTripId": 35107492,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69071232,
+        "block": "ml01- 71",
+        "runSequenceNumber": 20,
+        "headboard": "71",
+        "route": "72",
+        "startTimepoint": "camb",
+        "startTimeSam": 86700,
+        "endTimepoint": "glen",
+        "endTimeSam": 87540,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 0,
+        "nextRoute": "72",
+        "direction": "DOWN",
+        "vehicleType": "d1",
+        "distanceMetres": 6882,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1670",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1669",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1668",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1667",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1666",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1665",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1664",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1663",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1661",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1660",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1659",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1658",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1657",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1656",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1655",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1654",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1653",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1652",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1671",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "gar1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1650",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1649",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1648",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1647",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1646",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1645",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1644",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1643",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78924837,
+        "havmTripId": 35112836,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69072283,
+        "block": "kw05- 72",
+        "runSequenceNumber": 33,
+        "headboard": "78",
+        "route": "78",
+        "startTimepoint": "nric",
+        "startTimeSam": 86700,
+        "endTimepoint": "pran",
+        "endTimeSam": 87960,
+        "headwayPreviousSeconds": 240,
+        "headwayNextSeconds": 120,
+        "nextRoute": "78",
+        "direction": "UP",
+        "vehicleType": "a",
+        "distanceMetres": 6810,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "4165",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "4164",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "4163",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "4162",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "4161",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "4160",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "4159",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "4158",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "4157",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "4156",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "4155",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "4154",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "4153",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "4151",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "4150",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "4149",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "4148",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "4147",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "4146",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "4145",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "4144",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "4143",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "4142",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "4141",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "4140",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "4139",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "4138",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "4137",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "8012",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78925483,
+        "havmTripId": 35112710,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69068267,
+        "block": "sb06- 17",
+        "runSequenceNumber": 10,
+        "headboard": "12",
+        "route": "12",
+        "startTimepoint": "smsk",
+        "startTimeSam": 86700,
+        "endTimepoint": "vbdg",
+        "endTimeSam": 88860,
+        "headwayPreviousSeconds": 480,
+        "headwayNextSeconds": 240,
+        "nextRoute": "12",
+        "direction": "DOWN",
+        "vehicleType": "a",
+        "distanceMetres": 11876,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1410",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86700,
+                "hastusStopId": "1409",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1408",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1407",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1406",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1405",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1404",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1403",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1402",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1401",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1400",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1399",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1398",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1397",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1180",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1396",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1395",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1394",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1393",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "whc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3357",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "3356",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "spf1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "3401",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "3403",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "3405",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3406",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "ruc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "3408",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "3409",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "3410",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "3411",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "3412",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2713",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2715",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2716",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2718",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2719",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2720",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2721",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2722",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2723",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2724",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "vbd1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78347328,
+        "havmTripId": 35115169,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69097952,
+        "block": "br03- 54",
+        "runSequenceNumber": 20,
+        "headboard": "22",
+        "route": "1",
+        "startTimepoint": "ecob",
+        "startTimeSam": 86760,
+        "endTimepoint": "moho",
+        "endTimeSam": 86940,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 0,
+        "nextRoute": "1",
+        "direction": "UP",
+        "vehicleType": "b",
+        "distanceMetres": 1566,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1201",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1202",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1203",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1204",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1205",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1206",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1555",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "moh1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78351225,
+        "havmTripId": 35113719,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69095124,
+        "block": "gh02- 21",
+        "runSequenceNumber": 23,
+        "headboard": "61",
+        "route": "64",
+        "startTimepoint": "scj1",
+        "startTimeSam": 86760,
+        "endTimepoint": "ghdp",
+        "endTimeSam": 86820,
+        "headwayPreviousSeconds": 0,
+        "headwayNextSeconds": 0,
+        "nextRoute": "64",
+        "direction": "UP",
+        "vehicleType": "b",
+        "distanceMetres": 440,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "2124",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "2052",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "2053",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78351232,
+        "havmTripId": 35114198,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69095131,
+        "block": "gh02- 50",
+        "runSequenceNumber": 18,
+        "headboard": "67",
+        "route": "67",
+        "startTimepoint": "univ",
+        "startTimeSam": 86760,
+        "endTimepoint": "carn",
+        "endTimeSam": 89580,
+        "headwayPreviousSeconds": 420,
+        "headwayNextSeconds": 120,
+        "nextRoute": "67",
+        "direction": "UP",
+        "vehicleType": "b",
+        "distanceMetres": 15626,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "3001",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "3003",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "3004",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "3007",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "3008",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "los1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "3010",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "3011",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3013",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "3014",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "art1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "3017",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3019",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "3020",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "2022",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "2023",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2024",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2025",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "2026",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2027",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2029",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2030",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2031",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2032",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2033",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2034",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2035",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2036",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2037",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2038",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2039",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2040",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2041",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "2042",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "ewc1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2043",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2044",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2045",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2046",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2047",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2048",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2049",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2050",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2051",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2052",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2053",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2054",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "2055",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "2056",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2057",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2058",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2060",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2061",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2062",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "2063",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "2064",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "2065",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "2066",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "2067",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "8010",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78351314,
+        "havmTripId": 35114014,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69095213,
+        "block": "gh02-  7",
+        "runSequenceNumber": 20,
+        "headboard": "2",
+        "route": "3",
+        "startTimepoint": "emal",
+        "startTimeSam": 86760,
+        "endTimepoint": "balj",
+        "endTimeSam": 87180,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 0,
+        "nextRoute": "3",
+        "direction": "DOWN",
+        "vehicleType": "b",
+        "distanceMetres": 3234,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1096",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1095",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1094",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1093",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1092",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1091",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1089",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1088",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1087",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1086",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1085",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1084",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1083",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78927104,
+        "havmTripId": 35110138,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69068813,
+        "block": "cw07- 26",
+        "runSequenceNumber": 19,
+        "headboard": "76",
+        "route": "70",
+        "startTimepoint": "wprk",
+        "startTimeSam": 86760,
+        "endTimepoint": "cwdp",
+        "endTimeSam": 87360,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 0,
+        "nextRoute": "70",
+        "direction": "UP",
+        "vehicleType": "a",
+        "distanceMetres": 4956,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86760,
+                "hastusStopId": "1793",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1792",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1791",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1790",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1789",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1788",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1787",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1786",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1785",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1784",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1783",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1782",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1781",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1780",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1779",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1778",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1776",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1775",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1774",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1772",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1939",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "cwd1",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78923533,
+        "havmTripId": 35108706,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69071414,
+        "block": "ml01- 40",
+        "runSequenceNumber": 9,
+        "headboard": "15",
+        "route": "16",
+        "startTimepoint": "kewc",
+        "startTimeSam": 86820,
+        "endTimepoint": "flsw",
+        "endTimeSam": 90060,
+        "headwayPreviousSeconds": 1200,
+        "headwayNextSeconds": 480,
+        "nextRoute": "16",
+        "direction": "DOWN",
+        "vehicleType": "d1",
+        "distanceMetres": 18146,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86820,
+                "hastusStopId": "1480",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1479",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1478",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1477",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1476",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1475",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1474",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1473",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1472",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "1471",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "1470",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1469",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "1468",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87300,
+                "hastusStopId": "1467",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1466",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "1465",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1464",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1463",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87420,
+                "hastusStopId": "1462",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "1461",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1460",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "1459",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1458",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "1457",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "1456",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "mld1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "1455",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87780,
+                "hastusStopId": "1454",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "1453",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87840,
+                "hastusStopId": "1452",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "1448",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2116",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "2117",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "2118",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "1082",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "1081",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "1080",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "1079",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "1078",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "1077",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "1076",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "1075",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "1074",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "1073",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "1072",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "1071",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "1070",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "1446",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "1445",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "1444",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88800,
+                "hastusStopId": "1543",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "1541",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "1540",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "1539",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "1538",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "1442",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "1441",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "1030",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "1029",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "1027",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "1026",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "1025",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "1024",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "1023",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "1022",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "3120",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89760,
+                "hastusStopId": "3119",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89880,
+                "hastusStopId": "3117",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89880,
+                "hastusStopId": "art1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89940,
+                "hastusStopId": "3114",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90060,
+                "hastusStopId": "3113",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78922430,
+        "havmTripId": 35109856,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69072611,
+        "block": "pw10- 73",
+        "runSequenceNumber": 7,
+        "headboard": "86",
+        "route": "86",
+        "startTimepoint": "dodr",
+        "startTimeSam": 86880,
+        "endTimepoint": "bund",
+        "endTimeSam": 90840,
+        "headwayPreviousSeconds": 960,
+        "headwayNextSeconds": 300,
+        "nextRoute": "86",
+        "direction": "DOWN",
+        "vehicleType": "e1",
+        "distanceMetres": 22272,
+        "isPublic": true,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "3594",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "3595",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "3596",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87120,
+                "hastusStopId": "3550",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87180,
+                "hastusStopId": "3551",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87240,
+                "hastusStopId": "3252",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87360,
+                "hastusStopId": "3301",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87480,
+                "hastusStopId": "3303",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87540,
+                "hastusStopId": "3304",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87600,
+                "hastusStopId": "3305",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87660,
+                "hastusStopId": "3306",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87720,
+                "hastusStopId": "3307",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87900,
+                "hastusStopId": "3309",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87960,
+                "hastusStopId": "3310",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88020,
+                "hastusStopId": "vin1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "exh1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88080,
+                "hastusStopId": "3312",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88140,
+                "hastusStopId": "2813",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88200,
+                "hastusStopId": "2814",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88260,
+                "hastusStopId": "2815",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88320,
+                "hastusStopId": "2817",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88380,
+                "hastusStopId": "2818",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88440,
+                "hastusStopId": "2819",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88500,
+                "hastusStopId": "2820",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88560,
+                "hastusStopId": "2821",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88620,
+                "hastusStopId": "2822",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88680,
+                "hastusStopId": "2823",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88740,
+                "hastusStopId": "2824",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88860,
+                "hastusStopId": "2825",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88920,
+                "hastusStopId": "2826",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 88980,
+                "hastusStopId": "2827",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89040,
+                "hastusStopId": "2830",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89100,
+                "hastusStopId": "2831",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2832",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89160,
+                "hastusStopId": "2833",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2834",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89220,
+                "hastusStopId": "2835",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89280,
+                "hastusStopId": "2836",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2837",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89340,
+                "hastusStopId": "2838",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2839",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89400,
+                "hastusStopId": "2840",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89460,
+                "hastusStopId": "2841",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "2842",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89520,
+                "hastusStopId": "nth1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89580,
+                "hastusStopId": "2843",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89640,
+                "hastusStopId": "2844",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "2845",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89700,
+                "hastusStopId": "ptd1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89760,
+                "hastusStopId": "2847",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89760,
+                "hastusStopId": "2848",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89820,
+                "hastusStopId": "2849",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89820,
+                "hastusStopId": "2850",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89880,
+                "hastusStopId": "2851",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 89940,
+                "hastusStopId": "typ1",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90000,
+                "hastusStopId": "2853",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90000,
+                "hastusStopId": "2854",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90060,
+                "hastusStopId": "2855",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90120,
+                "hastusStopId": "2856",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90120,
+                "hastusStopId": "2857",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90240,
+                "hastusStopId": "2858",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90240,
+                "hastusStopId": "2859",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90300,
+                "hastusStopId": "2860",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90360,
+                "hastusStopId": "2861",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90360,
+                "hastusStopId": "2862",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90420,
+                "hastusStopId": "2863",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90480,
+                "hastusStopId": "2864",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90540,
+                "hastusStopId": "2865",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90540,
+                "hastusStopId": "2866",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90600,
+                "hastusStopId": "2867",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90660,
+                "hastusStopId": "2868",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90720,
+                "hastusStopId": "2869",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90840,
+                "hastusStopId": "2870",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 90840,
+                "hastusStopId": "9012",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    },
+    {
+        "hastusTripId": 78923534,
+        "havmTripId": 35108747,
+        "havmTimetableId": 10220,
+        "hastusPermanentTripNumber": 69071482,
+        "block": "ml01- 41",
+        "runSequenceNumber": 9,
+        "headboard": "14",
+        "route": "16",
+        "startTimepoint": "kewc",
+        "startTimeSam": 86880,
+        "endTimepoint": "mldp",
+        "endTimeSam": 87720,
+        "headwayPreviousSeconds": 120,
+        "headwayNextSeconds": 0,
+        "nextRoute": "16",
+        "direction": "DOWN",
+        "vehicleType": "z",
+        "distanceMetres": 5702,
+        "isPublic": false,
+        "operationalDay": "2019-06-17T00:00:00",
+        "stops": [
+            {
+                "passingTimeSam": 86880,
+                "hastusStopId": "1480",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1479",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 86940,
+                "hastusStopId": "1478",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87000,
+                "hastusStopId": "1477",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1476",
+                "isMonitoredOPRReliability": false
+            },
+            {
+                "passingTimeSam": 87060,
+                "hastusStopId": "1475",
+                "isMonitoredOPRReliability": false
+            }
+        ]
+    }
+]
