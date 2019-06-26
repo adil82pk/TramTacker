@@ -139,7 +139,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         {
             // arrange
             const int headway = 3600; //Seconds
-            const short expectedResult = 0; //Minute //This should be 60 but, to maintain parity with HASTUS to TramTracker, we trim the hours so the result is less than 60 mins. See actual code for more info.
+            const short expectedResult = 60; //Minute
             var trip = new Models.HavmTrip
             {
                 HeadwayNextSeconds = headway //Ignoring all other properties
@@ -159,7 +159,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         {
             // arrange
             const int headway = 32768 * 60; //Seconds
-            const short expectedResult = 7; //Minute //This should be 32767 but, to maintain parity with HASTUS to TramTracker, we trim the hours so the result is less than 60 mins. See actual code for more info.
+            const short expectedResult = 32767; //Minute
             var trip = new Models.HavmTrip
             {
                 HeadwayNextSeconds = headway //Ignoring all other properties

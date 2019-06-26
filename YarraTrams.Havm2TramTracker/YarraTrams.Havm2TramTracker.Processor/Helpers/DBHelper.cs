@@ -205,7 +205,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                     DECLARE @CountOfT_Schedules int = @@ROWCOUNT
                                     
                                     INSERT dbo.T_Schedules
-                                    SELECT [TripID], [RunNo], [StopID], [RouteNo], [OPRTimePoint], [Time], [DayOfWeek], [LowFloor], [PublicTrip]
+                                    SELECT [TripID], [RunNo], [StopID], [RouteNo], [OPRTimePoint], [Time], [DayOfWeek], [LowFloor], [PublicTrip], [PredictFromSaM]
                                     FROM dbo.T_Temp_Schedules;
                                     DECLARE @CountOfT_Temp_Schedules int = @@ROWCOUNT
                                     

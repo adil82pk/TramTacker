@@ -248,6 +248,87 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
+        public void TestSetPredictFromSaMs()
+        {
+            // arrange
+            int numberOfPredictionsPerTripStop = 3;
+            int expectedPredictFromSaMOnFirst3 = 0;
+            int expectedPredictFromSaMOnLast = 1000;
+            var scheduless = new List<Models.TramTrackerSchedules>();
+
+            scheduless.Add(new Models.TramTrackerSchedules
+            {
+                TripID = 1,
+                RunNo = "Run1",
+                RouteNo = 86,
+                DayOfWeek = 0,
+                LowFloor = false,
+                PublicTrip = true,
+                OPRTimePoint = false,
+                StopID = "StopA",
+                Time = expectedPredictFromSaMOnLast,
+                UpDirection = true
+            }
+            );
+
+            scheduless.Add(new Models.TramTrackerSchedules
+            {
+                TripID = 2,
+                RunNo = "Run2",
+                RouteNo = 86,
+                DayOfWeek = 0,
+                LowFloor = false,
+                PublicTrip = true,
+                OPRTimePoint = false,
+                StopID = "StopA",
+                Time = 2000,
+                UpDirection = true
+            }
+            );
+
+            scheduless.Add(new Models.TramTrackerSchedules
+            {
+                TripID = 3,
+                RunNo = "Run3",
+                RouteNo = 86,
+                DayOfWeek = 0,
+                LowFloor = false,
+                PublicTrip = true,
+                OPRTimePoint = false,
+                StopID = "StopA",
+                Time = 3000,
+                UpDirection = true
+            }
+            );
+
+            scheduless.Add(new Models.TramTrackerSchedules
+            {
+                TripID = 4,
+                RunNo = "Run4",
+                RouteNo = 86,
+                DayOfWeek = 0,
+                LowFloor = false,
+                PublicTrip = true,
+                OPRTimePoint = false,
+                StopID = "StopA",
+                Time = 4000,
+                UpDirection = true
+            }
+            );
+
+            var schedulesService = new Processor.Services.TramTrackerSchedulesService();
+
+            // act
+            scheduless = schedulesService.SetPredictFromSaMTimeForEachTripStop(scheduless, numberOfPredictionsPerTripStop);
+
+            // assert
+            Assert.IsTrue(scheduless[0].PredictFromSaM == expectedPredictFromSaMOnFirst3, "Catch time on trip {0} should be {1} but is instead {2}.", scheduless[0].TripID, expectedPredictFromSaMOnFirst3, scheduless[0].PredictFromSaM);
+            Assert.IsTrue(scheduless[1].PredictFromSaM == expectedPredictFromSaMOnFirst3, "Catch time on trip {0} should be {1} but is instead {2}.", scheduless[1].TripID, expectedPredictFromSaMOnFirst3, scheduless[1].PredictFromSaM);
+            Assert.IsTrue(scheduless[2].PredictFromSaM == expectedPredictFromSaMOnFirst3, "Catch time on trip {0} should be {1} but is instead {2}.", scheduless[2].TripID, expectedPredictFromSaMOnFirst3, scheduless[2].PredictFromSaM);
+            Assert.IsTrue(scheduless[3].PredictFromSaM == expectedPredictFromSaMOnLast, "Catch time on trip {0} should be {1} but is instead {2}.", scheduless[3].TripID, expectedPredictFromSaMOnLast, scheduless[3].PredictFromSaM);
+        }
+
+        [TestMethod]
         public void TestTripsToSchedulesMasterWithGoodData()
         {
             // arrange

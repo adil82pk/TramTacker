@@ -13,7 +13,19 @@ namespace YarraTrams.Havm2TramTracker.Models
         public int HastusTripId { get; set; }
 
         [JsonProperty(Required = Required.Always)]
+        public int HavmTripId { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public int HavmTimetableId { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public int HastusPermanentTripNumber { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public string Block { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public int RunSequenceNumber { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public string Headboard { get; set; }
@@ -32,6 +44,9 @@ namespace YarraTrams.Havm2TramTracker.Models
 
         [JsonProperty(Required = Required.Always)]
         public int EndTimeSam { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public int HeadwayPreviousSeconds { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public int HeadwayNextSeconds { get; set; }
@@ -60,11 +75,17 @@ namespace YarraTrams.Havm2TramTracker.Models
         {
             StringBuilder output = new StringBuilder();
             output.AppendFormat("Trip HastusTripId: {0}{1}", HastusTripId, Environment.NewLine);
+            output.AppendFormat("     HavmTripId: {0}{1}", HavmTripId, Environment.NewLine);
+            output.AppendFormat("     HavmTimetableId: {0}{1}", HavmTimetableId, Environment.NewLine);
+            output.AppendFormat("     HastusPermanentTripNumber: {0}{1}", HastusPermanentTripNumber, Environment.NewLine);
             output.AppendFormat("     Day: {0}{1}", OperationalDay, Environment.NewLine);
             output.AppendFormat("     Block: {0}{1}", Block, Environment.NewLine);
+            output.AppendFormat("     RunSequenceNumber: {0}{1}", RunSequenceNumber, Environment.NewLine);
             output.AppendFormat("     Direction: {0}{1}", Direction, Environment.NewLine);
             output.AppendFormat("     Headboard: {0}{1}", Headboard, Environment.NewLine);
             output.AppendFormat("     Route: {0}{1}", Route, Environment.NewLine);
+            output.AppendFormat("     HeadwayPreviousSeconds: {0}{1}", Route, Environment.NewLine);
+            output.AppendFormat("     HeadwayNextSeconds: {0}{1}", Route, Environment.NewLine);
             output.AppendFormat("     DistanceMetres: {0:d}{1}", DistanceMetres, Environment.NewLine);
             output.AppendFormat("     NextRoute: {0}{1}", NextRoute, Environment.NewLine);
             output.AppendFormat("     StartTime (SAM): {0}{1}", StartTimeSam, Environment.NewLine);
