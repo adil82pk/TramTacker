@@ -13,21 +13,22 @@ namespace YarraTrams.Havm2TramTracker.Models
         public int HavmTripId { get; set; }
         public int HavmTimetableId { get; set; }
         public int HastusPermanentTripNumber { get; set; }
-        public string RunNo{ get; set; }
+        public string RunNo { get; set; }
         public int RunSequenceNumber { get; set; }
-        public short RouteNo{ get; set; }
-        public string FirstTP{ get; set; }
-        public int FirstTime{ get; set; }
-        public string EndTP{ get; set; }
-        public int EndTime{ get; set; }
+        public short RouteNo { get; set; }
+        public string FirstTP { get; set; }
+        public int FirstTime { get; set; }
+        public string EndTP { get; set; }
+        public int EndTime { get; set; }
         public int AtLayoverTimePrevious { get; set; }
-        public short AtLayoverTime{ get; set; }
-        public short NextRouteNo{ get; set; }
-        public bool UpDirection{ get; set; }
-        public bool LowFloor{ get; set; }
-        public decimal TripDistance{ get; set; }
-        public bool PublicTrip{ get; set; }
-        public byte DayOfWeek{ get; set; }
+        public short AtLayoverTime { get; set; }
+        public short NextRouteNo { get; set; }
+        public bool UpDirection { get; set; }
+        public bool LowFloor { get; set; }
+        public decimal TripDistance { get; set; }
+        public bool PublicTrip { get; set; }
+        public byte DayOfWeek { get; set; }
+        public DateTime OperationalDay { get; set; }
 
         /// <summary>
         /// Populate data from HavmTrip object
@@ -53,6 +54,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.TripDistance = this.GetTripDistance(havmTrip);
             this.PublicTrip = havmTrip.IsPublic;
             this.DayOfWeek = this.GetDayOfWeek(havmTrip);
+            this.OperationalDay = havmTrip.OperationalDay;
         }
 
         /// <summary>
@@ -82,6 +84,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             row.TripDistance = this.TripDistance;
             row.PublicTrip = this.PublicTrip;
             row.DayOfWeek = this.DayOfWeek;
+            row.OperationalDay = this.OperationalDay;
 
             return row;
         }
@@ -111,6 +114,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("     TripDistance: {0}{1}", TripDistance, Environment.NewLine);
             output.AppendFormat("     PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
             output.AppendFormat("     DayOfWeek: {0}{1}", DayOfWeek, Environment.NewLine);
+            output.AppendFormat("     OperationalDay: {0}{1}", OperationalDay.ToShortDateString(), Environment.NewLine);
             return output.ToString();
         }
 
