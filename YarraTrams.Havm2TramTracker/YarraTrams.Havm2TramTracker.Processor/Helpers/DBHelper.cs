@@ -187,11 +187,13 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.TramTrackerDB))
                 {
                     string query = @"
+                                
+                                UPDATE T_Preferences SET DataAvailable = 0;
+                                
                                 BEGIN TRAN
                                 
                                 -- It's all or nothing - we either insert 1 or more records into both tables or we abort completely.
                                 BEGIN TRY
-                                    UPDATE T_Preferences SET DataAvailable = 0;
                                     
                                     DELETE dbo.T_Trips;
                                     DECLARE @CountOfT_Trips int = @@ROWCOUNT
@@ -218,7 +220,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                     SELECT @CountOfT_Trips [TripsDeleted], @CountOfT_Temp_Trips [TripsAdded], @CountOfT_Schedules [SchedulesDeleted], @CountOfT_Temp_Schedules [SchedulesAdded]
                                     
                                     -- We set Trips/ScheduleLoaded to 0 here. We set them back to one when we next populate the T_Temp_Trips/Schedules tables.
-                                    UPDATE T_Preferences SET DataAvailable = 1, TripsLoaded = 0, ScheduleLoaded = 0;
+                                    UPDATE T_Preferences SET TripsLoaded = 0, ScheduleLoaded = 0;
                                     
                                     COMMIT TRAN
                                 END TRY
@@ -238,7 +240,9 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                                @ErrorSeverity, -- Severity.
                                                @ErrorState -- State.
                                                );
-                                END CATCH";
+                                END CATCH
+
+                                UPDATE T_Preferences SET DataAvailable = 1;";
 
                     conn.Open();
 
