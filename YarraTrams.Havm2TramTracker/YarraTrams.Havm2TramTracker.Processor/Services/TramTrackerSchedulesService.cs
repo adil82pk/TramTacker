@@ -141,33 +141,38 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// <returns></returns>
         public List<TramTrackerSchedules> SetPredictFromSaMTimeForEachTripStop(List<TramTrackerSchedules> scheduless, int numberOfPredictionsPerTripStop)
         {
-            short currentRouteNo = 0;
-            string currentStopId = "0";
-            bool currentUpDirection = true;
-            DateTime currentBaseDateTime;
-            Queue<DateTime> passingTimes = new Queue<DateTime>();
-
-            foreach (TramTrackerSchedules tripStop in scheduless.OrderBy(s => s.RouteNo).ThenBy(s => s.StopID).ThenBy(s => s.UpDirection).ThenBy(s => s.PassingDateTime))
+            if (scheduless.Count > 0)
             {
-                // Upon reaching a new unique combination of DayOfWeek+RouteNo+StopID+Direction we set the next X PredictFromSaMs to 0.
-                if (currentUpDirection != tripStop.UpDirection || currentStopId != tripStop.StopID || currentRouteNo != tripStop.RouteNo)
+                short currentRouteNo = 0;
+                string currentStopId = "0";
+                bool currentUpDirection = true;
+                // Set the base time to 00:00 on the day of the first trip.
+                DateTime baseDateTime = scheduless.OrderBy(s => s.PassingDateTime).First().PassingDateTime;
+                baseDateTime = baseDateTime.AddTicks(-baseDateTime.Ticks % TimeSpan.TicksPerDay);
+
+                Queue<DateTime> passingTimes = new Queue<DateTime>();
+
+                foreach (TramTrackerSchedules tripStop in scheduless.OrderBy(s => s.RouteNo).ThenBy(s => s.StopID).ThenBy(s => s.UpDirection).ThenBy(s => s.PassingDateTime))
                 {
-                    currentRouteNo = tripStop.RouteNo;
-                    currentStopId = tripStop.StopID;
-                    currentUpDirection = tripStop.UpDirection;
-                    currentBaseDateTime = tripStop.PassingDateTime.AddTicks(-tripStop.PassingDateTime.Ticks % TimeSpan.TicksPerDay); // Set the base time to 00:00 on the day of the first trip.
-
-                    passingTimes.Clear();
-                    for (int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
+                    // Upon reaching a new unique combination of DayOfWeek+RouteNo+StopID+Direction we set the next X PredictFromSaMs to 0.
+                    if (currentUpDirection != tripStop.UpDirection || currentStopId != tripStop.StopID || currentRouteNo != tripStop.RouteNo)
                     {
-                        passingTimes.Enqueue(currentBaseDateTime);
-                    }
-                }
+                        currentRouteNo = tripStop.RouteNo;
+                        currentStopId = tripStop.StopID;
+                        currentUpDirection = tripStop.UpDirection;
 
-                // Set the PredictFromSaM field on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
-                tripStop.PredictFromDateTime = passingTimes.Dequeue();
-                tripStop.PredictFromSaM = (int)(tripStop.PredictFromDateTime - tripStop.PassingDateTime.AddTicks(-tripStop.PassingDateTime.Ticks % TimeSpan.TicksPerDay)).TotalSeconds;
-                passingTimes.Enqueue(tripStop.PassingDateTime);
+                        passingTimes.Clear();
+                        for (int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
+                        {
+                            passingTimes.Enqueue(baseDateTime);
+                        }
+                    }
+
+                    // Set the PredictFromSaM field on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
+                    tripStop.PredictFromDateTime = passingTimes.Dequeue();
+                    tripStop.PredictFromSaM = (int)(tripStop.PredictFromDateTime - tripStop.PassingDateTime.AddTicks(-tripStop.PassingDateTime.Ticks % TimeSpan.TicksPerDay)).TotalSeconds;
+                    passingTimes.Enqueue(tripStop.PassingDateTime);
+                }
             }
             return scheduless;
         }
