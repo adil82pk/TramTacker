@@ -25,7 +25,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
             if (baseDate != null)
             {
-                httpClient.QueryString.Add("baseDate", string.Format("{0:yyyy-MM-dd}", baseDate));
+                uri += string.Format("?basedate={0:yyyy-MM-dd}", baseDate);
             }
 
             LogWriter.Instance.Log(EventLogCodes.PRE_CALL_TO_HAVM, String.Format("About to call HAVM2 service - {0}", uri));
