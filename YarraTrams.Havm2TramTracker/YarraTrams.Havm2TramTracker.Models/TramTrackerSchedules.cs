@@ -15,11 +15,13 @@ namespace YarraTrams.Havm2TramTracker.Models
         public short RouteNo { get; set; }
         public bool OPRTimePoint { get; set; }
         public int Time { get; set; }
+        public DateTime PassingDateTime { get; set; }
         public byte DayOfWeek { get; set; }
         public bool LowFloor { get; set; }
         public bool PublicTrip { get; set; }
         public bool UpDirection { get; set; }
         public int PredictFromSaM { get; set; }
+        public DateTime PredictFromDateTime { get; set; }
 
         /// <summary>
         /// Populate data from HavmTrip object
@@ -35,6 +37,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.OPRTimePoint = havmStop.IsMonitoredOPRReliability;
             this.StopID = this.GetStopId(havmStop, stopMapping);
             this.Time = havmStop.PassingTimeSam;
+            this.PassingDateTime = havmTrip.OperationalDay.AddSeconds(havmStop.PassingTimeSam);
             this.UpDirection = this.GetUpDirection(havmTrip);
         }
 
