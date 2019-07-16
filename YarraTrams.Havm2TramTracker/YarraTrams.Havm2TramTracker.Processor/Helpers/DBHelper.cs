@@ -113,7 +113,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                             // SQL Server may choose to rollback the transaction itself, so this code prevents the original error from being swallowed.
                              LogWriter.Instance.Log(EventLogCodes.DB_EXECUTE_ERROR, String.Format("Error encountered when rolling back transaction:\n\nMessage: {0}\n\nType:{1}", ex2.Message, ex2.GetType()));
                         }
-                        throw ex;
+                        throw;
                     }
                 }
 
