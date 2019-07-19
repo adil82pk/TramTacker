@@ -22,6 +22,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         public bool UpDirection { get; set; }
         public int PredictFromSaM { get; set; }
         public DateTime PredictFromDateTime { get; set; }
+        public DateTime OperationalDay { get; set; }
 
         /// <summary>
         /// Populate data from HavmTrip object
@@ -39,6 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.Time = havmStop.PassingTimeSam;
             this.PassingDateTime = havmTrip.OperationalDay.AddSeconds(havmStop.PassingTimeSam);
             this.UpDirection = this.GetUpDirection(havmTrip);
+            this.OperationalDay = havmTrip.OperationalDay;
         }
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             row.StopID = this.StopID;
             row.Time = this.Time;
             row.PredictFromSaM = this.PredictFromSaM;
+            row.OperationalDay = this.OperationalDay;
 
             return row;
         }
@@ -79,6 +82,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("  LowFloor: {0}{1}", LowFloor, Environment.NewLine);
             output.AppendFormat("  PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
             output.AppendFormat("  UpDirection: {0}{1}", UpDirection, Environment.NewLine);
+            output.AppendFormat("  OperationalDay: {0}{1}", OperationalDay, Environment.NewLine);
 
             return output.ToString();
         }
