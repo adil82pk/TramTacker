@@ -13,10 +13,6 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons
     {
         public override void Up()
         {
-            // Delete all data from the two schedules tables
-            //Execute.Sql(@"TRUNCATE TABLE T_Temp_Schedules");
-            //Execute.Sql(@"TRUNCATE TABLE T_Schedules");
-
             // Add operational day field to Schedules tables
             Alter.Table("T_Schedules").AddColumn("OperationalDay").AsDateTime().Nullable().SetExistingRowsTo(new DateTime(1983, 9, 26));
             Alter.Table("T_Temp_Schedules").AddColumn("OperationalDay").AsDateTime().Nullable().SetExistingRowsTo(new DateTime(1983, 9, 26));
