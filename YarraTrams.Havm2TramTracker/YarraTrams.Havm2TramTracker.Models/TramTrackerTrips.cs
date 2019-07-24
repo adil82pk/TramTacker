@@ -104,6 +104,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("Trip TripID: {0}{1}", TripID, Environment.NewLine);
             output.AppendFormat("     HavmTripId: {0}{1}", HavmTripId, Environment.NewLine);
             output.AppendFormat("     HavmTimetableId: {0}{1}", HavmTimetableId, Environment.NewLine);
+            output.AppendFormat("     HavmPartnerTimetableId: {0}{1}", HavmPartnerTimetableId, Environment.NewLine);
             output.AppendFormat("     HastusPermanentTripNumber: {0}{1}", HastusPermanentTripNumber, Environment.NewLine);
             output.AppendFormat("     RunNo: {0}{1}", RunNo, Environment.NewLine);
             output.AppendFormat("     RunSequenceNumber: {0}{1}", RunSequenceNumber, Environment.NewLine);
@@ -119,6 +120,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("     LowFloor: {0}{1}", LowFloor, Environment.NewLine);
             output.AppendFormat("     TripDistance: {0}{1}", TripDistance, Environment.NewLine);
             output.AppendFormat("     PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
+            output.AppendFormat("     RunHasDoubleUps: {0}{1}", RunHasDoubleUps, Environment.NewLine);
             output.AppendFormat("     DayOfWeek: {0}{1}", DayOfWeek, Environment.NewLine);
             output.AppendFormat("     OperationalDay: {0}{1}", OperationalDay.ToShortDateString(), Environment.NewLine);
             return output.ToString();
