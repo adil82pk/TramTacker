@@ -154,6 +154,7 @@
     <Compile Include="Helpers\SettingsExposer.cs" />
     <Compile Include="Helpers\SettingsRefresher.cs" />
     <Compile Include="Migrations\201907022047_AddOperationalDayToTrips.cs" />
+    <Compile Include="Migrations\201907241041_Add2FieldsToTrips.cs" />
     <Compile Include="Migrations\201906261630_AddAllNewFieldsToOverlapTables.cs" />
     <Compile Include="Migrations\201906162255_AddTripFieldsForNewPredictions.cs" />
     <Compile Include="Migrations\201906112101_AddPredictFromSaMToSchedules.cs" />

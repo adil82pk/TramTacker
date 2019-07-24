@@ -19,6 +19,9 @@ namespace YarraTrams.Havm2TramTracker.Models
         public int HavmTimetableId { get; set; }
 
         [JsonProperty(Required = Required.Always)]
+        public int HavmPartnerTimetableId { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
         public int HastusPermanentTripNumber { get; set; }
 
         [JsonProperty(Required = Required.Always)]
@@ -65,6 +68,9 @@ namespace YarraTrams.Havm2TramTracker.Models
 
         [JsonProperty(Required = Required.Always)]
         public bool IsPublic { get; set; }
+
+        [JsonProperty(Required = Required.Always)]
+        public bool RunHasDoubleUps { get; set; }
 
         [JsonProperty(Required = Required.Always)]
         public DateTime OperationalDay { get; set; }
