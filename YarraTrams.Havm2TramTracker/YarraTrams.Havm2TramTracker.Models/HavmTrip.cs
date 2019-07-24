@@ -83,6 +83,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("Trip HastusTripId: {0}{1}", HastusTripId, Environment.NewLine);
             output.AppendFormat("     HavmTripId: {0}{1}", HavmTripId, Environment.NewLine);
             output.AppendFormat("     HavmTimetableId: {0}{1}", HavmTimetableId, Environment.NewLine);
+            output.AppendFormat("     HavmPartnerTimetableId: {0}{1}", HavmPartnerTimetableId, Environment.NewLine);
             output.AppendFormat("     HastusPermanentTripNumber: {0}{1}", HastusPermanentTripNumber, Environment.NewLine);
             output.AppendFormat("     Day: {0}{1}", OperationalDay, Environment.NewLine);
             output.AppendFormat("     Block: {0}{1}", Block, Environment.NewLine);
@@ -99,6 +100,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("     EndTime (SAM): {0}{1}", EndTimeSam, Environment.NewLine);
             output.AppendFormat("     EndTimepoint: {0}{1}", EndTimepoint, Environment.NewLine);
             output.AppendFormat("     VehicleType: {0}{1}", VehicleType, Environment.NewLine);
+            output.AppendFormat("     RunHasDoubleUps: {0}{1}", RunHasDoubleUps, Environment.NewLine);
             if (Stops != null)
             {
                 output.AppendFormat("     Stops: {0:d}{1}", Stops.Count, Environment.NewLine);
