@@ -67,13 +67,6 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 {
                     try
                     {
-                        // Update Overlaps (if required) using yesterday's data
-                        string updOverlapsStatement = GetPreUpdateTempSql(tableName);
-                        if (!String.IsNullOrEmpty(updOverlapsStatement))
-                        {
-                            ExecuteSql(updOverlapsStatement, connection, transaction);
-                        }
-
                         // Delete existing records
                         string deleteStatement = string.Format("DELETE FROM {0};", tableName);
                         ExecuteSql(deleteStatement, connection, transaction);
@@ -121,29 +114,6 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.SAVE_TO_DATABASE_SUCCESS
                     , String.Format("{0} record{1} saved to {2} table.", tripData.Rows.Count, (tripData.Rows.Count == 1 ? "" : "s"), tableName));
-            }
-        }
-
-        /// <summary>
-        /// Returns the sql to populate the overlaps if this table is one that gets "copied to live".
-        /// A table is deemed to "copy to live" if it is called T_Temp_Trips or T_Temp_Schedules, even if they have the DbTableSuffix applied (in a test environment).
-        /// Why do we do this here and not inside CopyDataFromTempToLive? Well putting the statements here (where everything is in a transaction, thus it either fully
-        /// fails or fully completes) makes it possible to run CopyDataFromTempToLive (a heavy process that doesn't run in a transaction) over and over without
-        /// worrying about the results changing (it retains its idempotency).
-        /// </summary>
-        private static string GetPreUpdateTempSql(string tableName)
-        {
-            if (tableName == GetDbTableName("T_Temp_Trips"))
-            {
-                return "EXEC CopyOverlappingTempTrips;";
-            }
-            else if (tableName == GetDbTableName("T_Temp_Schedules"))
-            {
-                return "EXEC CopyOverlappingTempSchedules;";
-            }
-            else
-            {
-                return "";
             }
         }
 
@@ -272,14 +242,6 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     }
 
                     reader.Close();
-
-                    // Copy trips from T_Temp_Overlap_Trips to T_Trips, only if the trip doesn't already exist in T_Trips (based on DayOfWeek, RunNo, RouteNo and FirstTime).
-                    // (T_Temp_Overlap_Trips was populated by CopyOverlappingTempTrips following the bulk insert in to T_Temp_Trips.)
-                    ExecuteSqlProc("CopyOverlapTripsToTrips", conn);
-
-                    // Copy trip stops from T_Temp_Overlap_Schedules to T_Schedules, only if the trip stop doesn't already exist in T_Schedules (based on DayOfWeek, RunNo, RouteNo, Time, TripID and StopID).
-                    // (T_Temp_Overlap_Schedules was populated by CopyOverlappingTempSchedules following the bulk insert in to T_Temp_Trips.)
-                    ExecuteSqlProc("CopyOverlapScheduleToSchedule", conn);
 
                     // Populate several tables with trip and schedule data.
                     // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
