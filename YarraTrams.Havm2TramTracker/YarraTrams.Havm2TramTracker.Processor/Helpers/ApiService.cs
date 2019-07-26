@@ -12,17 +12,24 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
     public class ApiService
     {
         /// <summary>
-        /// Calls HAVM2 and returns trip and stop data for the next 7 days, starting from tomorrow.
+        /// Calls HAVM2 and returns trip and stop data for the next 8 days, starting from today.
         /// </summary>
-        /// <param name="baseDate">ONLY USED FOR TESTING. Tells HAVM2 to retrieve data based on a custom date, instead of using today's date.</param>
+        /// <param name="baseDate">Used for testing and Production support. Tells HAVM2 to retrieve data based on a custom date, instead of using today's date.</param>
         /// <param name="retryCount">Number of retries attempted - no need to pass this.</param>
         /// <returns>A JSON-formatted string.</returns>
         public static string GetDataFromHavm2(DateTime? baseDate, int retryCount = 0)
         {
+            if (baseDate == null)
+            {
+                baseDate = DateTime.Now.Date;
+            }
+            DateTime startDate = baseDate ?? DateTime.Now.Date;
+            DateTime endDate = startDate.AddDays(7);
+
             try
             {
                 var result = Task.Run(() => {
-                    return ApiHttpClient.GetDataFromHavm2(baseDate);
+                    return ApiHttpClient.GetDataFromHavm2(startDate, endDate);
                 }).Result;
 
                 LogResultAndCleanUp(result);
