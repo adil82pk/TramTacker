@@ -86,6 +86,7 @@
               <xs:element name="LowFloor" msprop:Generator_ColumnVarNameInTable="columnLowFloor" msprop:Generator_ColumnPropNameInRow="LowFloor" msprop:Generator_ColumnPropNameInTable="LowFloorColumn" msprop:Generator_UserColumnName="LowFloor" type="xs:boolean" />
               <xs:element name="PublicTrip" msprop:Generator_ColumnVarNameInTable="columnPublicTrip" msprop:Generator_ColumnPropNameInRow="PublicTrip" msprop:Generator_ColumnPropNameInTable="PublicTripColumn" msprop:Generator_UserColumnName="PublicTrip" type="xs:boolean" />
               <xs:element name="PredictFromSaM" msprop:Generator_ColumnVarNameInTable="columnPredictFromSaM" msprop:Generator_ColumnPropNameInRow="PredictFromSaM" msprop:Generator_ColumnPropNameInTable="PredictFromSaMColumn" msprop:Generator_UserColumnName="PredictFromSaM" type="xs:int" default="0" />
+              <xs:element name="OperationalDay" msprop:Generator_ColumnVarNameInTable="columnOperationalDay" msprop:Generator_ColumnPropNameInRow="OperationalDay" msprop:Generator_ColumnPropNameInTable="OperationalDayColumn" msprop:Generator_UserColumnName="OperationalDay" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -192,7 +193,7 @@
       <xs:field xpath="mstns:RunNo" />
       <xs:field xpath="mstns:RouteNo" />
       <xs:field xpath="mstns:FirstTime" />
-      <xs:field xpath="mstns:DayOfWeek" />
+      <xs:field xpath="mstns:OperationalDay" />
     </xs:unique>
     <xs:unique name="T_Temp_Schedules_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:T_Temp_Schedules" />
@@ -201,7 +202,7 @@
       <xs:field xpath="mstns:StopID" />
       <xs:field xpath="mstns:RouteNo" />
       <xs:field xpath="mstns:Time" />
-      <xs:field xpath="mstns:DayOfWeek" />
+      <xs:field xpath="mstns:OperationalDay" />
     </xs:unique>
   </xs:element>
 </xs:schema>

@@ -19,14 +19,11 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             httpClient.UseDefaultCredentials = true;
         }
 
-        public static string GetDataFromHavm2(DateTime? baseDate)
+        public static string GetDataFromHavm2(DateTime startDate, DateTime endDate)
         {
             string uri = Properties.Settings.Default.Havm2TramTrackerAPI;
 
-            if (baseDate != null)
-            {
-                uri += string.Format("?basedate={0:yyyy-MM-dd}", baseDate);
-            }
+            uri += string.Format("?basedate={0:yyyy-MM-dd}&endDate={1:yyyy-MM-dd}", startDate, endDate);
 
             LogWriter.Instance.Log(EventLogCodes.PRE_CALL_TO_HAVM, String.Format("About to call HAVM2 service - {0}", uri));
 

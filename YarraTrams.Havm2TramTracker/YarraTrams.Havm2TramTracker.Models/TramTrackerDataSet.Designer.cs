@@ -728,12 +728,12 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public T_Temp_TripsRow FindByRunNoRouteNoFirstTimeDayOfWeek(string RunNo, short RouteNo, int FirstTime, byte DayOfWeek) {
+            public T_Temp_TripsRow FindByRunNoRouteNoFirstTimeOperationalDay(string RunNo, short RouteNo, int FirstTime, System.DateTime OperationalDay) {
                 return ((T_Temp_TripsRow)(this.Rows.Find(new object[] {
                             RunNo,
                             RouteNo,
                             FirstTime,
-                            DayOfWeek})));
+                            OperationalDay})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -828,7 +828,7 @@ namespace YarraTrams.Havm2TramTracker.Models {
                                 this.columnRunNo,
                                 this.columnRouteNo,
                                 this.columnFirstTime,
-                                this.columnDayOfWeek}, true));
+                                this.columnOperationalDay}, true));
                 this.columnRunNo.AllowDBNull = false;
                 this.columnRunNo.MaxLength = 5;
                 this.columnRouteNo.AllowDBNull = false;
@@ -844,6 +844,7 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 this.columnPublicTrip.AllowDBNull = false;
                 this.columnDayOfWeek.AllowDBNull = false;
                 this.columnRunHasDoubleUps.AllowDBNull = false;
+                this.columnOperationalDay.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -999,6 +1000,8 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             private global::System.Data.DataColumn columnPredictFromSaM;
             
+            private global::System.Data.DataColumn columnOperationalDay;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public T_Temp_SchedulesDataTable() {
@@ -1122,6 +1125,14 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn OperationalDayColumn {
+                get {
+                    return this.columnOperationalDay;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1157,7 +1168,7 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public T_Temp_SchedulesRow AddT_Temp_SchedulesRow(int TripID, string RunNo, string StopID, short RouteNo, bool OPRTimePoint, int Time, byte DayOfWeek, bool LowFloor, bool PublicTrip, int PredictFromSaM) {
+            public T_Temp_SchedulesRow AddT_Temp_SchedulesRow(int TripID, string RunNo, string StopID, short RouteNo, bool OPRTimePoint, int Time, byte DayOfWeek, bool LowFloor, bool PublicTrip, int PredictFromSaM, System.DateTime OperationalDay) {
                 T_Temp_SchedulesRow rowT_Temp_SchedulesRow = ((T_Temp_SchedulesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1170,7 +1181,8 @@ namespace YarraTrams.Havm2TramTracker.Models {
                         DayOfWeek,
                         LowFloor,
                         PublicTrip,
-                        PredictFromSaM};
+                        PredictFromSaM,
+                        OperationalDay};
                 rowT_Temp_SchedulesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowT_Temp_SchedulesRow);
                 return rowT_Temp_SchedulesRow;
@@ -1178,14 +1190,14 @@ namespace YarraTrams.Havm2TramTracker.Models {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public T_Temp_SchedulesRow FindByTripIDRunNoStopIDRouteNoTimeDayOfWeek(int TripID, string RunNo, string StopID, short RouteNo, int Time, byte DayOfWeek) {
+            public T_Temp_SchedulesRow FindByTripIDRunNoStopIDRouteNoTimeOperationalDay(int TripID, string RunNo, string StopID, short RouteNo, int Time, System.DateTime OperationalDay) {
                 return ((T_Temp_SchedulesRow)(this.Rows.Find(new object[] {
                             TripID,
                             RunNo,
                             StopID,
                             RouteNo,
                             Time,
-                            DayOfWeek})));
+                            OperationalDay})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1216,6 +1228,7 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 this.columnLowFloor = base.Columns["LowFloor"];
                 this.columnPublicTrip = base.Columns["PublicTrip"];
                 this.columnPredictFromSaM = base.Columns["PredictFromSaM"];
+                this.columnOperationalDay = base.Columns["OperationalDay"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1243,13 +1256,15 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 base.Columns.Add(this.columnPublicTrip);
                 this.columnPredictFromSaM = new global::System.Data.DataColumn("PredictFromSaM", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPredictFromSaM);
+                this.columnOperationalDay = new global::System.Data.DataColumn("OperationalDay", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOperationalDay);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnTripID,
                                 this.columnRunNo,
                                 this.columnStopID,
                                 this.columnRouteNo,
                                 this.columnTime,
-                                this.columnDayOfWeek}, true));
+                                this.columnOperationalDay}, true));
                 this.columnScheduleID.AutoIncrement = true;
                 this.columnScheduleID.AutoIncrementSeed = -1;
                 this.columnScheduleID.AutoIncrementStep = -1;
@@ -1268,6 +1283,7 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 this.columnPublicTrip.AllowDBNull = false;
                 this.columnPredictFromSaM.AllowDBNull = false;
                 this.columnPredictFromSaM.DefaultValue = ((int)(0));
+                this.columnOperationalDay.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2308,12 +2324,7 @@ namespace YarraTrams.Havm2TramTracker.Models {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public System.DateTime OperationalDay {
                 get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableT_Temp_Trips.OperationalDayColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'OperationalDay\' in table \'T_Temp_Trips\' is DBNull.", e);
-                    }
+                    return ((global::System.DateTime)(this[this.tableT_Temp_Trips.OperationalDayColumn]));
                 }
                 set {
                     this[this.tableT_Temp_Trips.OperationalDayColumn] = value;
@@ -2600,6 +2611,17 @@ namespace YarraTrams.Havm2TramTracker.Models {
                 }
                 set {
                     this[this.tableT_Temp_Schedules.PredictFromSaMColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public System.DateTime OperationalDay {
+                get {
+                    return ((global::System.DateTime)(this[this.tableT_Temp_Schedules.OperationalDayColumn]));
+                }
+                set {
+                    this[this.tableT_Temp_Schedules.OperationalDayColumn] = value;
                 }
             }
         }
