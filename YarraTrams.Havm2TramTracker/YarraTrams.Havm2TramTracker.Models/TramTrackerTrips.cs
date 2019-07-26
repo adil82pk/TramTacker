@@ -12,6 +12,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         public int TripID { get; set; }
         public int HavmTripId { get; set; }
         public int HavmTimetableId { get; set; }
+        public int HavmPartnerTimetableId { get; set; }
         public int HastusPermanentTripNumber { get; set; }
         public string RunNo { get; set; }
         public int RunSequenceNumber { get; set; }
@@ -27,6 +28,7 @@ namespace YarraTrams.Havm2TramTracker.Models
         public bool LowFloor { get; set; }
         public decimal TripDistance { get; set; }
         public bool PublicTrip { get; set; }
+        public bool RunHasDoubleUps { get; set; }
         public byte DayOfWeek { get; set; }
         public DateTime OperationalDay { get; set; }
 
@@ -38,6 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.TripID = havmTrip.HastusTripId;
             this.HavmTripId = havmTrip.HavmTripId;
             this.HavmTimetableId = havmTrip.HavmTimetableId;
+            this.HavmPartnerTimetableId = havmTrip.HavmPartnerTimetableId;
             this.HastusPermanentTripNumber = havmTrip.HastusPermanentTripNumber;
             this.RunNo = this.GetRunNumberShortForm(havmTrip);
             this.RunSequenceNumber = havmTrip.RunSequenceNumber;
@@ -53,6 +56,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             this.LowFloor = this.GetLowFloor(havmTrip);
             this.TripDistance = this.GetTripDistance(havmTrip);
             this.PublicTrip = havmTrip.IsPublic;
+            this.RunHasDoubleUps = havmTrip.RunHasDoubleUps;
             this.DayOfWeek = this.GetDayOfWeek(havmTrip);
             this.OperationalDay = havmTrip.OperationalDay;
         }
@@ -68,6 +72,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             row.TripID = this.TripID;
             row.HavmTripId = this.HavmTripId;
             row.HavmTimetableId = this.HavmTimetableId;
+            row.HavmPartnerTimetableId = this.HavmPartnerTimetableId;
             row.HastusPermanentTripNumber = this.HastusPermanentTripNumber;
             row.RunNo = this.RunNo;
             row.RunSequenceNumber = this.RunSequenceNumber;
@@ -83,6 +88,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             row.LowFloor = this.LowFloor;
             row.TripDistance = this.TripDistance;
             row.PublicTrip = this.PublicTrip;
+            row.RunHasDoubleUps = this.RunHasDoubleUps;
             row.DayOfWeek = this.DayOfWeek;
             row.OperationalDay = this.OperationalDay;
 
@@ -98,6 +104,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("Trip TripID: {0}{1}", TripID, Environment.NewLine);
             output.AppendFormat("     HavmTripId: {0}{1}", HavmTripId, Environment.NewLine);
             output.AppendFormat("     HavmTimetableId: {0}{1}", HavmTimetableId, Environment.NewLine);
+            output.AppendFormat("     HavmPartnerTimetableId: {0}{1}", HavmPartnerTimetableId, Environment.NewLine);
             output.AppendFormat("     HastusPermanentTripNumber: {0}{1}", HastusPermanentTripNumber, Environment.NewLine);
             output.AppendFormat("     RunNo: {0}{1}", RunNo, Environment.NewLine);
             output.AppendFormat("     RunSequenceNumber: {0}{1}", RunSequenceNumber, Environment.NewLine);
@@ -113,6 +120,7 @@ namespace YarraTrams.Havm2TramTracker.Models
             output.AppendFormat("     LowFloor: {0}{1}", LowFloor, Environment.NewLine);
             output.AppendFormat("     TripDistance: {0}{1}", TripDistance, Environment.NewLine);
             output.AppendFormat("     PublicTrip: {0}{1}", PublicTrip, Environment.NewLine);
+            output.AppendFormat("     RunHasDoubleUps: {0}{1}", RunHasDoubleUps, Environment.NewLine);
             output.AppendFormat("     DayOfWeek: {0}{1}", DayOfWeek, Environment.NewLine);
             output.AppendFormat("     OperationalDay: {0}{1}", OperationalDay.ToShortDateString(), Environment.NewLine);
             return output.ToString();
