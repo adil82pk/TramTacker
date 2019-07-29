@@ -14,7 +14,7 @@
   <xs:element name="TramTrackerDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TramTrackerDataSet" msprop:Generator_UserDSName="TramTrackerDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="T_Temp_Trips" msprop:Generator_TableClassName="T_Temp_TripsDataTable" msprop:Generator_TableVarName="tableT_Temp_Trips" msprop:Generator_RowChangedName="T_Temp_TripsRowChanged" msprop:Generator_TablePropName="T_Temp_Trips" msprop:Generator_RowDeletingName="T_Temp_TripsRowDeleting" msprop:Generator_RowChangingName="T_Temp_TripsRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_TripsRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_TripsRowDeleted" msprop:Generator_RowClassName="T_Temp_TripsRow" msprop:Generator_UserTableName="T_Temp_Trips" msprop:Generator_RowEvArgName="T_Temp_TripsRowChangeEvent">
+        <xs:element name="T_Temp_Trips" msprop:Generator_TableClassName="T_Temp_TripsDataTable" msprop:Generator_TableVarName="tableT_Temp_Trips" msprop:Generator_TablePropName="T_Temp_Trips" msprop:Generator_RowDeletingName="T_Temp_TripsRowDeleting" msprop:Generator_RowChangingName="T_Temp_TripsRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_TripsRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_TripsRowDeleted" msprop:Generator_UserTableName="T_Temp_Trips" msprop:Generator_RowChangedName="T_Temp_TripsRowChanged" msprop:Generator_RowEvArgName="T_Temp_TripsRowChangeEvent" msprop:Generator_RowClassName="T_Temp_TripsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TripID" msprop:Generator_ColumnVarNameInTable="columnTripID" msprop:Generator_ColumnPropNameInRow="TripID" msprop:Generator_ColumnPropNameInTable="TripIDColumn" msprop:Generator_UserColumnName="TripID" type="xs:int" minOccurs="0" />
@@ -55,10 +55,12 @@
               <xs:element name="RunSequenceNumber" msprop:Generator_ColumnVarNameInTable="columnRunSequenceNumber" msprop:Generator_ColumnPropNameInRow="RunSequenceNumber" msprop:Generator_ColumnPropNameInTable="RunSequenceNumberColumn" msprop:Generator_UserColumnName="RunSequenceNumber" type="xs:int" minOccurs="0" />
               <xs:element name="AtLayoverTimePrevious" msprop:Generator_ColumnVarNameInTable="columnAtLayoverTimePrevious" msprop:Generator_ColumnPropNameInRow="AtLayoverTimePrevious" msprop:Generator_ColumnPropNameInTable="AtLayoverTimePreviousColumn" msprop:Generator_UserColumnName="AtLayoverTimePrevious" type="xs:int" minOccurs="0" />
               <xs:element name="OperationalDay" msprop:Generator_ColumnVarNameInTable="columnOperationalDay" msprop:Generator_ColumnPropNameInRow="OperationalDay" msprop:Generator_ColumnPropNameInTable="OperationalDayColumn" msprop:Generator_UserColumnName="OperationalDay" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="HavmPartnerTimetableId" msprop:Generator_ColumnVarNameInTable="columnHavmPartnerTimetableId" msprop:Generator_ColumnPropNameInRow="HavmPartnerTimetableId" msprop:Generator_ColumnPropNameInTable="HavmPartnerTimetableIdColumn" msprop:Generator_UserColumnName="HavmPartnerTimetableId" type="xs:int" minOccurs="0" />
+              <xs:element name="RunHasDoubleUps" msprop:Generator_ColumnVarNameInTable="columnRunHasDoubleUps" msprop:Generator_ColumnPropNameInRow="RunHasDoubleUps" msprop:Generator_ColumnPropNameInTable="RunHasDoubleUpsColumn" msprop:Generator_UserColumnName="RunHasDoubleUps" type="xs:boolean" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="T_Temp_Schedules" msprop:Generator_TableClassName="T_Temp_SchedulesDataTable" msprop:Generator_TableVarName="tableT_Temp_Schedules" msprop:Generator_RowChangedName="T_Temp_SchedulesRowChanged" msprop:Generator_TablePropName="T_Temp_Schedules" msprop:Generator_RowDeletingName="T_Temp_SchedulesRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesRowDeleted" msprop:Generator_RowClassName="T_Temp_SchedulesRow" msprop:Generator_UserTableName="T_Temp_Schedules" msprop:Generator_RowEvArgName="T_Temp_SchedulesRowChangeEvent">
+        <xs:element name="T_Temp_Schedules" msprop:Generator_TableClassName="T_Temp_SchedulesDataTable" msprop:Generator_TableVarName="tableT_Temp_Schedules" msprop:Generator_TablePropName="T_Temp_Schedules" msprop:Generator_RowDeletingName="T_Temp_SchedulesRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesRowDeleted" msprop:Generator_UserTableName="T_Temp_Schedules" msprop:Generator_RowChangedName="T_Temp_SchedulesRowChanged" msprop:Generator_RowEvArgName="T_Temp_SchedulesRowChangeEvent" msprop:Generator_RowClassName="T_Temp_SchedulesRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ScheduleID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnScheduleID" msprop:Generator_ColumnPropNameInRow="ScheduleID" msprop:Generator_ColumnPropNameInTable="ScheduleIDColumn" msprop:Generator_UserColumnName="ScheduleID" type="xs:int" />
@@ -84,10 +86,11 @@
               <xs:element name="LowFloor" msprop:Generator_ColumnVarNameInTable="columnLowFloor" msprop:Generator_ColumnPropNameInRow="LowFloor" msprop:Generator_ColumnPropNameInTable="LowFloorColumn" msprop:Generator_UserColumnName="LowFloor" type="xs:boolean" />
               <xs:element name="PublicTrip" msprop:Generator_ColumnVarNameInTable="columnPublicTrip" msprop:Generator_ColumnPropNameInRow="PublicTrip" msprop:Generator_ColumnPropNameInTable="PublicTripColumn" msprop:Generator_UserColumnName="PublicTrip" type="xs:boolean" />
               <xs:element name="PredictFromSaM" msprop:Generator_ColumnVarNameInTable="columnPredictFromSaM" msprop:Generator_ColumnPropNameInRow="PredictFromSaM" msprop:Generator_ColumnPropNameInTable="PredictFromSaMColumn" msprop:Generator_UserColumnName="PredictFromSaM" type="xs:int" default="0" />
+              <xs:element name="OperationalDay" msprop:Generator_ColumnVarNameInTable="columnOperationalDay" msprop:Generator_ColumnPropNameInRow="OperationalDay" msprop:Generator_ColumnPropNameInTable="OperationalDayColumn" msprop:Generator_UserColumnName="OperationalDay" type="xs:dateTime" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="T_Temp_SchedulesMaster" msprop:Generator_TableClassName="T_Temp_SchedulesMasterDataTable" msprop:Generator_TableVarName="tableT_Temp_SchedulesMaster" msprop:Generator_RowChangedName="T_Temp_SchedulesMasterRowChanged" msprop:Generator_TablePropName="T_Temp_SchedulesMaster" msprop:Generator_RowDeletingName="T_Temp_SchedulesMasterRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesMasterRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesMasterRowDeleted" msprop:Generator_RowClassName="T_Temp_SchedulesMasterRow" msprop:Generator_UserTableName="T_Temp_SchedulesMaster" msprop:Generator_RowEvArgName="T_Temp_SchedulesMasterRowChangeEvent">
+        <xs:element name="T_Temp_SchedulesMaster" msprop:Generator_TableClassName="T_Temp_SchedulesMasterDataTable" msprop:Generator_TableVarName="tableT_Temp_SchedulesMaster" msprop:Generator_TablePropName="T_Temp_SchedulesMaster" msprop:Generator_RowDeletingName="T_Temp_SchedulesMasterRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesMasterRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesMasterRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesMasterRowDeleted" msprop:Generator_UserTableName="T_Temp_SchedulesMaster" msprop:Generator_RowChangedName="T_Temp_SchedulesMasterRowChanged" msprop:Generator_RowEvArgName="T_Temp_SchedulesMasterRowChangeEvent" msprop:Generator_RowClassName="T_Temp_SchedulesMasterRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="TramClass" msprop:Generator_ColumnVarNameInTable="columnTramClass" msprop:Generator_ColumnPropNameInRow="TramClass" msprop:Generator_ColumnPropNameInTable="TramClassColumn" msprop:Generator_UserColumnName="TramClass" minOccurs="0">
@@ -142,7 +145,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="T_Temp_SchedulesDetails" msprop:Generator_TableClassName="T_Temp_SchedulesDetailsDataTable" msprop:Generator_TableVarName="tableT_Temp_SchedulesDetails" msprop:Generator_RowChangedName="T_Temp_SchedulesDetailsRowChanged" msprop:Generator_TablePropName="T_Temp_SchedulesDetails" msprop:Generator_RowDeletingName="T_Temp_SchedulesDetailsRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesDetailsRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesDetailsRowDeleted" msprop:Generator_RowClassName="T_Temp_SchedulesDetailsRow" msprop:Generator_UserTableName="T_Temp_SchedulesDetails" msprop:Generator_RowEvArgName="T_Temp_SchedulesDetailsRowChangeEvent">
+        <xs:element name="T_Temp_SchedulesDetails" msprop:Generator_TableClassName="T_Temp_SchedulesDetailsDataTable" msprop:Generator_TableVarName="tableT_Temp_SchedulesDetails" msprop:Generator_TablePropName="T_Temp_SchedulesDetails" msprop:Generator_RowDeletingName="T_Temp_SchedulesDetailsRowDeleting" msprop:Generator_RowChangingName="T_Temp_SchedulesDetailsRowChanging" msprop:Generator_RowEvHandlerName="T_Temp_SchedulesDetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="T_Temp_SchedulesDetailsRowDeleted" msprop:Generator_UserTableName="T_Temp_SchedulesDetails" msprop:Generator_RowChangedName="T_Temp_SchedulesDetailsRowChanged" msprop:Generator_RowEvArgName="T_Temp_SchedulesDetailsRowChangeEvent" msprop:Generator_RowClassName="T_Temp_SchedulesDetailsRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ArrivalTime" msprop:Generator_ColumnVarNameInTable="columnArrivalTime" msprop:Generator_ColumnPropNameInRow="ArrivalTime" msprop:Generator_ColumnPropNameInTable="ArrivalTimeColumn" msprop:Generator_UserColumnName="ArrivalTime" minOccurs="0">
@@ -190,7 +193,7 @@
       <xs:field xpath="mstns:RunNo" />
       <xs:field xpath="mstns:RouteNo" />
       <xs:field xpath="mstns:FirstTime" />
-      <xs:field xpath="mstns:DayOfWeek" />
+      <xs:field xpath="mstns:OperationalDay" />
     </xs:unique>
     <xs:unique name="T_Temp_Schedules_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:T_Temp_Schedules" />
@@ -199,7 +202,7 @@
       <xs:field xpath="mstns:StopID" />
       <xs:field xpath="mstns:RouteNo" />
       <xs:field xpath="mstns:Time" />
-      <xs:field xpath="mstns:DayOfWeek" />
+      <xs:field xpath="mstns:OperationalDay" />
     </xs:unique>
   </xs:element>
 </xs:schema>
