@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Processor;
 using System.ServiceProcess;
 using System.Linq.Expressions;
+using System.Globalization;
 using System.Collections.Specialized;
 using YarraTrams.Havm2TramTracker.Processor.Helpers;
 
@@ -80,6 +81,49 @@ namespace YarraTrams.Havm2TramTracker.Tests
         }
 
         [TestMethod]
+        public void TestTriggerTimesAreValidWhenDaylightSavingsStartDayTomorrow()
+        {
+            // arrange
+            // daylight savings start time is 06/10/2019, lets emulate the night before at 11:00
+            DateTime currentTime = new DateTime(2019, 10, 5, 23, 0, 0);
+
+            // calculating time difference to 2:59am the next day, but that actually occurs in only
+            // 2 hours and 59 minutes time hours time (not 3 hours and 59 minutes), as there is no 2am on 
+            // DST end day (goes from 1:59:59 to 3am).
+            TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
+
+            var service = new Havm2TramTrackerService();
+
+            // act
+            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int expectedMilliseconds = (int)(new TimeSpan(2, 59, 00).TotalMilliseconds);
+
+            // assert
+            Assert.IsTrue(triggerMilliseconds == expectedMilliseconds, "Daylight savings start trigger should be adjusted correctly");
+        }
+
+        [TestMethod]
+        public void TestTriggerTimesAreValidWhenDaylightSavingsEndDayTomorrow()
+        {
+            // arrange
+            // daylight savings end time is 05/04/2020, lets emulate the night before at 11:00
+            DateTime currentTime = new DateTime(2020, 04, 04, 23, 0, 0);
+
+            // calculating time difference to 2:59am the next day, but that actually occurs twice on DST end days,
+            // and we want to target the second one n 4 hours and 59 minutes
+            TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
+
+            var service = new Havm2TramTrackerService();
+
+            // act
+            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int expectedMilliseconds = (int)(new TimeSpan(4, 59, 00).TotalMilliseconds);
+
+            // assert
+            Assert.IsTrue(triggerMilliseconds == expectedMilliseconds, "Daylight savings end trigger should be adjusted correctly");
+        }
+
+        [TestMethod]
         public void TestTriggerTimesAreValidWhenTimeGreaterThan24Hours()
         {
             // arrange
@@ -131,7 +175,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestDetermineNextTriggerWhenPassedAllTodaysTriggerTimes()
         {
             // arrange
-            TimeSpan currentTime = new TimeSpan(23, 59, 59);
+            DateTime currentTime = new DateTime(2019, 8, 1, 23, 59, 59);
             TimeSpan refreshTempDueTime = new TimeSpan(23, 0, 0);
             TimeSpan copyToLiveDueTime = new TimeSpan(3, 0, 0);
             TimeSpan dueTime;
@@ -154,7 +198,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestDetermineNextTriggerWhenEarlierThanAllTodaysTriggerTimes()
         {
             // arrange
-            TimeSpan currentTime = new TimeSpan(0, 0, 0);
+            DateTime currentTime = new DateTime(2019, 8, 1, 0, 0, 0);
             TimeSpan refreshTempDueTime = new TimeSpan(23, 00, 00);
             TimeSpan copyToLiveDueTime = new TimeSpan(3, 0, 0);
             TimeSpan dueTime;
@@ -177,7 +221,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestDetermineNextTriggerWhenBetweenTriggers()
         {
             // arrange
-            TimeSpan currentTime = new TimeSpan(12, 0, 0);
+            DateTime currentTime = new DateTime(2019, 8, 1, 23, 0, 0);
             TimeSpan refreshTempDueTime = new TimeSpan(23, 00, 00);
             TimeSpan copyToLiveDueTime = new TimeSpan(3, 0, 0);
             TimeSpan dueTime;
@@ -200,14 +244,14 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestConvertDueTimeToMillisecondsWhenDueTimeIsToday()
         {
             // arrange
-            TimeSpan currentTime = new TimeSpan(0, 0, 0);
+            DateTime currentTime = new DateTime(2019, 8, 1, 0, 0, 0);
             TimeSpan dueTime = new TimeSpan(23, 59, 59);
             int expectedMilliseconds = 86399000;
 
             var service = new Havm2TramTrackerService();
 
             // act
-            int milliseconds = service.ConvertDueTimeToMilliseconds(currentTime, dueTime);
+            int milliseconds = service.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, dueTime);
 
             // assert
             Assert.AreEqual(expectedMilliseconds, milliseconds, "Returned milliseconds value ({0}) doesn't match the expected value ({1}).", milliseconds, expectedMilliseconds);
@@ -217,14 +261,14 @@ namespace YarraTrams.Havm2TramTracker.Tests
         public void TestConvertDueTimeToMillisecondsWhenDueTimeIsTomorrow()
         {
             // arrange
-            TimeSpan currentTime = new TimeSpan(23, 59, 59);
+            DateTime currentTime = new DateTime(2019, 8, 1, 23, 59, 59);
             TimeSpan dueTime = new TimeSpan(0, 0, 0);
             int expectedMilliseconds = 1000;
 
             var service = new Havm2TramTrackerService();
 
             // act
-            int milliseconds = service.ConvertDueTimeToMilliseconds(currentTime, dueTime);
+            int milliseconds = service.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, dueTime);
 
             // assert
             Assert.AreEqual(expectedMilliseconds, milliseconds, "Returned milliseconds value ({0}) doesn't match the expected value ({1}).", milliseconds, expectedMilliseconds);

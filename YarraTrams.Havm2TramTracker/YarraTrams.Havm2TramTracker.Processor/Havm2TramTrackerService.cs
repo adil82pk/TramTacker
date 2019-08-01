@@ -10,6 +10,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Globalization;
 using YarraTrams.Havm2TramTracker.Logger;
 using YarraTrams.Havm2TramTracker.Processor.Helpers;
 
@@ -102,13 +103,13 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// </summary>
         public void RunTimer()
         {
-            TimeSpan currentTime = DateTime.Now.TimeOfDay;
-            TimeSpan triggerTime;
+            DateTime currentTime = DateTime.Now;
+            TimeSpan triggerTimeSpan;
             Enums.Processes triggerProcess;
 
-            DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempWithTomorrowsDataDueTime, Properties.Settings.Default.CopyTodaysDataToLiveDueTime, out triggerTime, out triggerProcess);
+            DetermineNextTrigger(currentTime, Properties.Settings.Default.RefreshTempWithTomorrowsDataDueTime, Properties.Settings.Default.CopyTodaysDataToLiveDueTime, out triggerTimeSpan, out triggerProcess);
 
-            int dueTimeMilliseconds = ConvertDueTimeToMilliseconds(currentTime, triggerTime);
+            int dueTimeMilliseconds = this.GetTriggerTime(currentTime, triggerTimeSpan);
 
             stateObj = new TimerState();
             stateObj.TimerCanceled = false;
@@ -131,6 +132,38 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
             // Save a reference for Dispose.
             stateObj.TimerReference = processingTimer;
+        }
+
+        /// <summary>
+        /// Gets trigger time in miliseconds, taking into account daylight savings start & ends
+        /// </summary>
+        /// <param name="currentTime">The current time of day</param>
+        /// <param name="triggerTime">The time of the next trigger event, not adjusted for Daylight savings</param>
+        /// <returns></returns>
+        public int GetTriggerTime(DateTime currentTime, TimeSpan triggerTime)
+        {
+            int triggerInMilliseconds = this.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, triggerTime);
+
+            // if the trigger is happening tomorrow (over the calendar day
+            if(currentTime.Date != currentTime.AddMilliseconds(triggerInMilliseconds).Date)
+            {
+                TimeZone localTimezone = TimeZone.CurrentTimeZone;
+                TimeSpan currentOffset = localTimezone.GetUtcOffset(currentTime);
+                DateTime tommorow = currentTime.AddDays(1);
+                TimeSpan tomorrowsOffet = localTimezone.GetUtcOffset(tommorow);
+
+                // if tomorrows UTC offset is different from todays...
+                if(currentOffset != tomorrowsOffet)
+                {
+                    // get difference in miliseconds (e.g. -1 hour in ms for DST start, +1 hour in ms for DST end)
+                    int offsetDifferenceMilliseconds = (int)(currentOffset - tomorrowsOffet).TotalMilliseconds;
+
+                    // add difference to the total to correctly realign the trigger time
+                    triggerInMilliseconds += offsetDifferenceMilliseconds;
+                }
+            }
+
+            return triggerInMilliseconds;
         }
 
         public void StopTimer()
@@ -162,11 +195,11 @@ namespace YarraTrams.Havm2TramTracker.Processor
         ///  - the next trigger time; and
         ///  - the next triggered operation
         /// </summary>
-        public void DetermineNextTrigger(TimeSpan currentTime,TimeSpan refreshTempWithTomorrowsDataDueTime, TimeSpan copyTodaysDataToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
+        public void DetermineNextTrigger(DateTime currentTime,TimeSpan refreshTempWithTomorrowsDataDueTime, TimeSpan copyTodaysDataToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
         {
             // This logic depends on the validation inside the TriggerTimesAreValid method.
             // If the current time is either prior to the two triggers or subsequent to the two triggers...
-            if ((currentTime < copyTodaysDataToLiveDueTime) || (currentTime > refreshTempWithTomorrowsDataDueTime))
+            if ((currentTime.TimeOfDay < copyTodaysDataToLiveDueTime) || (currentTime.TimeOfDay > refreshTempWithTomorrowsDataDueTime))
             {
                 // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
                 triggerTime = copyTodaysDataToLiveDueTime;
