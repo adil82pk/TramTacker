@@ -135,27 +135,27 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// Gets trigger time in miliseconds, taking into account daylight savings start & ends
+        /// Gets trigger time in milliseconds, taking into account daylight savings start & ends
         /// </summary>
-        /// <param name="currentTime">The current time of day</param>
+        /// <param name="currentDateTime">The current date + time of day</param>
         /// <param name="triggerTime">The time of the next trigger event, not adjusted for Daylight savings</param>
         /// <returns></returns>
-        public int GetTriggerTime(DateTime currentTime, TimeSpan triggerTime)
+        public int GetTriggerTime(DateTime currentDateTime, TimeSpan triggerTime)
         {
-            int triggerInMilliseconds = this.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, triggerTime);
+            int triggerInMilliseconds = this.ConvertDueTimeToMilliseconds(currentDateTime.TimeOfDay, triggerTime);
 
-            // if the trigger is happening tomorrow (over the calendar day
-            if(currentTime.Date != currentTime.AddMilliseconds(triggerInMilliseconds).Date)
+            // if the trigger is happening tomorrow
+            if(currentDateTime.Date != currentDateTime.AddMilliseconds(triggerInMilliseconds).Date)
             {
                 TimeZone localTimezone = TimeZone.CurrentTimeZone;
-                TimeSpan currentOffset = localTimezone.GetUtcOffset(currentTime);
-                DateTime tommorow = currentTime.AddDays(1);
+                TimeSpan currentOffset = localTimezone.GetUtcOffset(currentDateTime);
+                DateTime tommorow = currentDateTime.AddDays(1);
                 TimeSpan tomorrowsOffet = localTimezone.GetUtcOffset(tommorow);
 
                 // if tomorrows UTC offset is different from todays...
                 if(currentOffset != tomorrowsOffet)
                 {
-                    // get difference in miliseconds (e.g. -1 hour in ms for DST start, +1 hour in ms for DST end)
+                    // get difference in milliseconds (e.g. -1 hour in ms for DST start, +1 hour in ms for DST end)
                     int offsetDifferenceMilliseconds = (int)(currentOffset - tomorrowsOffet).TotalMilliseconds;
 
                     // add difference to the total to correctly realign the trigger time
@@ -195,11 +195,11 @@ namespace YarraTrams.Havm2TramTracker.Processor
         ///  - the next trigger time; and
         ///  - the next triggered operation
         /// </summary>
-        public void DetermineNextTrigger(DateTime currentTime,TimeSpan refreshTempWithTomorrowsDataDueTime, TimeSpan copyTodaysDataToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
+        public void DetermineNextTrigger(DateTime currentDateTime,TimeSpan refreshTempWithTomorrowsDataDueTime, TimeSpan copyTodaysDataToLiveDueTime, out TimeSpan triggerTime, out Enums.Processes process)
         {
             // This logic depends on the validation inside the TriggerTimesAreValid method.
             // If the current time is either prior to the two triggers or subsequent to the two triggers...
-            if ((currentTime.TimeOfDay < copyTodaysDataToLiveDueTime) || (currentTime.TimeOfDay > refreshTempWithTomorrowsDataDueTime))
+            if ((currentDateTime.TimeOfDay < copyTodaysDataToLiveDueTime) || (currentDateTime.TimeOfDay > refreshTempWithTomorrowsDataDueTime))
             {
                 // ...then the next trigger time is the earlier of the two triggers, which is always CopyToLive.
                 triggerTime = copyTodaysDataToLiveDueTime;

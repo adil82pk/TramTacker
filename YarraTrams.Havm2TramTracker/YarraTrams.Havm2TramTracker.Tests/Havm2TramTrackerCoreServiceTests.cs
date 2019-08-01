@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Processor;
 using System.ServiceProcess;
 using System.Linq.Expressions;
-using System.Globalization;
 using System.Collections.Specialized;
 using YarraTrams.Havm2TramTracker.Processor.Helpers;
 
