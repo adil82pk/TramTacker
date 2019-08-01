@@ -24,7 +24,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 baseDate = DateTime.Now.Date;
             }
             DateTime startDate = baseDate ?? DateTime.Now.Date;
-            DateTime endDate = startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(6);
 
             try
             {
