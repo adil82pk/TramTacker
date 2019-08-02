@@ -143,15 +143,14 @@ namespace YarraTrams.Havm2TramTracker.Processor
         public int GetTriggerTime(DateTime currentDateTime, TimeSpan triggerTime)
         {
             int triggerInMilliseconds = this.ConvertDueTimeToMilliseconds(currentDateTime.TimeOfDay, triggerTime);
+            TimeZone localTimezone = TimeZone.CurrentTimeZone;
+            TimeSpan currentOffset = localTimezone.GetUtcOffset(currentDateTime);
+            DateTime triggerDateTime = currentDateTime.AddMilliseconds(triggerInMilliseconds);
+            TimeSpan tomorrowsOffet = localTimezone.GetUtcOffset(currentDateTime.AddDays(1));
 
             // if the trigger is happening tomorrow
-            if(currentDateTime.Date != currentDateTime.AddMilliseconds(triggerInMilliseconds).Date)
+            if (currentDateTime.Date != triggerDateTime.Date)
             {
-                TimeZone localTimezone = TimeZone.CurrentTimeZone;
-                TimeSpan currentOffset = localTimezone.GetUtcOffset(currentDateTime);
-                DateTime tommorow = currentDateTime.AddDays(1);
-                TimeSpan tomorrowsOffet = localTimezone.GetUtcOffset(tommorow);
-
                 // if tomorrows UTC offset is different from todays...
                 if(currentOffset != tomorrowsOffet)
                 {
@@ -160,6 +159,35 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
                     // add difference to the total to correctly realign the trigger time
                     triggerInMilliseconds += offsetDifferenceMilliseconds;
+                }
+            }
+            else
+            {
+                // if the trigger is happening today
+                DaylightTime daylightSavingsInfo = TimeZone.CurrentTimeZone.GetDaylightChanges(currentDateTime.Year);
+
+                // if today is a DST change over day
+                if (currentDateTime.Date == daylightSavingsInfo.Start.Date || currentDateTime.Date == daylightSavingsInfo.End.Date)
+                {
+                    // and current time is > 12 and < 2am
+                    if (currentDateTime.Hour >= 0 && currentDateTime.Hour <= 1)
+                    {
+                        TimeSpan yesterdayOffset = localTimezone.GetUtcOffset(currentDateTime.AddDays(-1));
+
+                        // get difference in milliseconds from yesterday to tommorow
+                        int offsetDifferenceMilliseconds = (int)(yesterdayOffset - tomorrowsOffet).TotalMilliseconds;
+
+                        // add difference to the total to correctly realign the trigger time
+                        // making sure the trigger later today adds or removes the hour correctly
+                        triggerInMilliseconds += offsetDifferenceMilliseconds;
+                    }
+                    else if (currentDateTime.Hour >= 2 && currentDateTime.Hour <= 3)
+                    {
+                        // this is within daylight savings switch over time which is not supported (where there could be weirdness)
+                        // log an event, and do no adjustment
+                        LogWriter.Instance.Log(EventLogCodes.DST_TRIGGER_IN_ADJUSTMENT_TIME_NOT_SUPPORTED, 
+                            String.Format("We do not support adjustments for a timer when inside the DST changeover period, triggering in {0}", TimeSpan.FromMilliseconds(triggerInMilliseconds)));
+                    }
                 }
             }
 
