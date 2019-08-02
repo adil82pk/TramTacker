@@ -12,7 +12,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
     public class ApiService
     {
         /// <summary>
-        /// Calls HAVM2 and returns trip and stop data for the next 8 days, starting from today.
+        /// Calls HAVM2 and returns trip and stop data for the next 8 (configurable) days, starting from today.
         /// </summary>
         /// <param name="baseDate">Used for testing and Production support. Tells HAVM2 to retrieve data based on a custom date, instead of using today's date.</param>
         /// <param name="retryCount">Number of retries attempted - no need to pass this.</param>
@@ -24,7 +24,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 baseDate = DateTime.Now.Date;
             }
             DateTime startDate = baseDate ?? DateTime.Now.Date;
-            DateTime endDate = startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(Properties.Settings.Default.NumberDailyTimetablesToRetrieve-1);
 
             try
             {
