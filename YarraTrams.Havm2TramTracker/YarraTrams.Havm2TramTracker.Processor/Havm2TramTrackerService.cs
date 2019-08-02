@@ -181,8 +181,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         // making sure the trigger later today adds or removes the hour correctly
                         triggerInMilliseconds += offsetDifferenceMilliseconds;
                     }
-                    // else if its in the DST "window", we don't support this currently
-                    else if (currentDateTime.Hour >= 2 && currentDateTime.Hour <= 3)
+                    // else if its in the DST "window", we don't support this currently (between 2 and 3)
+                    else if (currentDateTime.Hour >= 2 && currentDateTime.Hour < 3)
                     {
                         // this is within daylight savings switch over time which is not supported (where there could be weirdness)
                         // log an event, and do no adjustment
