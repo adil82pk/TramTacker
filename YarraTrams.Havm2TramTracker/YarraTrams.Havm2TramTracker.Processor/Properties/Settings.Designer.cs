@@ -174,5 +174,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((int)(this["NumberOfPredictionsPerTripStop"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int NumberDailyTimetablesToRetrieve {
+            get {
+                return ((int)(this["NumberDailyTimetablesToRetrieve"]));
+            }
+        }
     }
 }

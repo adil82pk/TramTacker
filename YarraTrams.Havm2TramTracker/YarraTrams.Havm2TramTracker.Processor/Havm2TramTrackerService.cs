@@ -275,7 +275,17 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 {
                     if (TriggerTimesAreValid(Properties.Settings.Default.RefreshTempWithTomorrowsDataDueTime, Properties.Settings.Default.CopyTodaysDataToLiveDueTime))
                     {
-                        return true;
+                        if (Properties.Settings.Default.NumberDailyTimetablesToRetrieve >= 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            LogWriter.Instance.Log(
+                                EventLogCodes.INVALID_CONFIGURATION,
+                                "Fatal error - NumberDailyTimetablesToRetrieve must be set to a number exceeding zero.");
+                            return false;
+                        }
                     }
                     else
                     {
