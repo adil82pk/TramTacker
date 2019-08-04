@@ -39,7 +39,11 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             catch (Exception ex)
             {
                 LogWriter.Instance.Log(EventLogCodes.HAVM2_API_ERROR
-                            , ex.Message + ((retryCount > 0) ? string.Format("\nRetry count = {0}", retryCount) : ""));
+                            , "More information on this error may be available in the HAVM2 logs."
+                                + string.Format("\n\nStartDate = {0:yyyy-MM-dd HH:mm:ss}\nEndDate = {1:yyyy-MM-dd HH:mm:ss}", startDate, endDate)
+                                + string.Format("\n\nRetry {0} of {1}\n\n", retryCount, Properties.Settings.Default.MaxGetDataFromHavm2RetryCount)
+                                + ex.Message
+                            );
 
                 // We retry a certain amount of times
                 if (retryCount < Properties.Settings.Default.MaxGetDataFromHavm2RetryCount)
