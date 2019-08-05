@@ -255,13 +255,14 @@ namespace YarraTrams.Havm2TramTracker.Tests
             DateTime baseDate = new DateTime(1989, 11, 9, 0, 0, 0);
             var scheduless = new List<Models.TramTrackerSchedules>();
 
-            // Firstly 3 late trips, in sequence, on day 1. It's unrealistic but these are the first trips on this route for the day.
+            // Firstly 3 late trips, in sequence, on day 1. It's unrealistic but these are the first trips on this route for the day, in fact they are the first trips on the whole set of timetables that we've loaded.
             scheduless.Add(new Models.TramTrackerSchedules
             {
                 TripID = 8,
                 RunNo = "Run97",
                 RouteNo = 86,
                 DayOfWeek = 0,
+                OperationalDay = baseDate,
                 LowFloor = false,
                 PublicTrip = true,
                 OPRTimePoint = false,
@@ -278,6 +279,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 RunNo = "Run98",
                 RouteNo = 86,
                 DayOfWeek = 0,
+                OperationalDay = baseDate,
                 LowFloor = false,
                 PublicTrip = true,
                 OPRTimePoint = false,
@@ -294,6 +296,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 RunNo = "Run99",
                 RouteNo = 86,
                 DayOfWeek = 0,
+                OperationalDay = baseDate,
                 LowFloor = false,
                 PublicTrip = true,
                 OPRTimePoint = false,
@@ -304,13 +307,14 @@ namespace YarraTrams.Havm2TramTracker.Tests
             }
             );
 
-            // Then 3 trips, in sequence, to start day 2.
+            // Then 4 trips, in sequence, to start day 2.
             scheduless.Add(new Models.TramTrackerSchedules
             {
                 TripID = 100,
                 RunNo = "Run1",
                 RouteNo = 86,
                 DayOfWeek = 0,
+                OperationalDay = baseDate.AddDays(1),
                 LowFloor = false,
                 PublicTrip = true,
                 OPRTimePoint = false,
@@ -327,6 +331,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 RunNo = "Run2",
                 RouteNo = 86,
                 DayOfWeek = 0,
+                OperationalDay = baseDate.AddDays(1),
                 LowFloor = false,
                 PublicTrip = true,
                 OPRTimePoint = false,
@@ -343,12 +348,30 @@ namespace YarraTrams.Havm2TramTracker.Tests
                 RunNo = "Run3",
                 RouteNo = 86,
                 DayOfWeek = 0,
+                OperationalDay = baseDate.AddDays(1),
                 LowFloor = false,
                 PublicTrip = true,
                 OPRTimePoint = false,
                 StopID = "StopA",
-                Time = 10980, //3:02
+                Time = 10980, //3:03
                 PassingDateTime = baseDate.AddDays(1).AddSeconds(10980),
+                UpDirection = true
+            }
+            );
+
+            scheduless.Add(new Models.TramTrackerSchedules
+            {
+                TripID = 103,
+                RunNo = "Run4",
+                RouteNo = 86,
+                DayOfWeek = 0,
+                OperationalDay = baseDate.AddDays(1),
+                LowFloor = false,
+                PublicTrip = true,
+                OPRTimePoint = false,
+                StopID = "StopA",
+                Time = 11040, //3:04
+                PassingDateTime = baseDate.AddDays(1).AddSeconds(11040),
                 UpDirection = true
             }
             );
@@ -362,9 +385,10 @@ namespace YarraTrams.Havm2TramTracker.Tests
             Assert.IsTrue(scheduless[0].PredictFromSaM == 0, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[0].TripID, 0, scheduless[0].PredictFromSaM, scheduless[0].PredictFromDateTime);
             Assert.IsTrue(scheduless[1].PredictFromSaM == 0, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[1].TripID, 0, scheduless[1].PredictFromSaM, scheduless[1].PredictFromDateTime);
             Assert.IsTrue(scheduless[2].PredictFromSaM == 0, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[2].TripID, 0, scheduless[2].PredictFromSaM, scheduless[2].PredictFromDateTime);
-            Assert.IsTrue(scheduless[3].PredictFromSaM == -180, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[3].TripID, -180, scheduless[3].PredictFromSaM, scheduless[3].PredictFromDateTime);
-            Assert.IsTrue(scheduless[4].PredictFromSaM == -120, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[4].TripID, -120, scheduless[4].PredictFromSaM, scheduless[4].PredictFromDateTime);
-            Assert.IsTrue(scheduless[5].PredictFromSaM == -60, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[5].TripID, -60, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
+            Assert.IsTrue(scheduless[3].PredictFromSaM == -86400, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[3].TripID, -180, scheduless[3].PredictFromSaM, scheduless[3].PredictFromDateTime);
+            Assert.IsTrue(scheduless[4].PredictFromSaM == -86400, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[4].TripID, -120, scheduless[4].PredictFromSaM, scheduless[4].PredictFromDateTime);
+            Assert.IsTrue(scheduless[5].PredictFromSaM == -86400, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[5].TripID, -60, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
+            Assert.IsTrue(scheduless[6].PredictFromSaM == 10860, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[5].TripID, 10860, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
         }
 
         [TestMethod]
@@ -499,6 +523,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                         ""hastusTripId"":76245555,
                                         ""havmTripId"": 35113718,
                                         ""havmTimetableId"": 10220,
+                                        ""havmPartnerTimetableId"": 0,
+                                        ""runHasDoubleUps"": false,
                                         ""hastusPermanentTripNumber"": 69095059,
                                         ""block"":""kw05-  1"",
                                         ""runSequenceNumber"": 22,
@@ -639,6 +665,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                         ""hastusTripId"":76245555,
                                         ""havmTripId"": 35113718,
                                         ""havmTimetableId"": 10220,
+                                        ""havmPartnerTimetableId"": 0,
+                                        ""runHasDoubleUps"": false,
                                         ""hastusPermanentTripNumber"": 69095059,
                                         ""block"":""kw05-  1"",
                                         ""runSequenceNumber"": 22,

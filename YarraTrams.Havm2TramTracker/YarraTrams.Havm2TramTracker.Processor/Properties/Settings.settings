@@ -53,5 +53,8 @@
     <Setting Name="NumberOfPredictionsPerTripStop" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="NumberDailyTimetablesToRetrieve" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

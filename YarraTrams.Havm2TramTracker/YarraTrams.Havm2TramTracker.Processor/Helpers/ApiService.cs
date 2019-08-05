@@ -12,7 +12,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
     public class ApiService
     {
         /// <summary>
-        /// Calls HAVM2 and returns trip and stop data for the next 8 days, starting from today.
+        /// Calls HAVM2 and returns trip and stop data for the next 8 (configurable) days, starting from today.
         /// </summary>
         /// <param name="baseDate">Used for testing and Production support. Tells HAVM2 to retrieve data based on a custom date, instead of using today's date.</param>
         /// <param name="retryCount">Number of retries attempted - no need to pass this.</param>
@@ -24,7 +24,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                 baseDate = DateTime.Now.Date;
             }
             DateTime startDate = baseDate ?? DateTime.Now.Date;
-            DateTime endDate = startDate.AddDays(7);
+            DateTime endDate = startDate.AddDays(Properties.Settings.Default.NumberDailyTimetablesToRetrieve-1);
 
             try
             {
@@ -39,7 +39,11 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             catch (Exception ex)
             {
                 LogWriter.Instance.Log(EventLogCodes.HAVM2_API_ERROR
-                            , ex.Message + ((retryCount > 0) ? string.Format("\nRetry count = {0}", retryCount) : ""));
+                            , "More information on this error may be available in the HAVM2 logs."
+                                + string.Format("\n\nStartDate = {0:yyyy-MM-dd HH:mm:ss}\nEndDate = {1:yyyy-MM-dd HH:mm:ss}", startDate, endDate)
+                                + string.Format("\n\nRetry {0} of {1}\n\n", retryCount, Properties.Settings.Default.MaxGetDataFromHavm2RetryCount)
+                                + ex.Message
+                            );
 
                 // We retry a certain amount of times
                 if (retryCount < Properties.Settings.Default.MaxGetDataFromHavm2RetryCount)
