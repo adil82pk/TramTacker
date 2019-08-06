@@ -18,6 +18,8 @@ namespace YarraTrams.Havm2TramTracker.TestComparisons
             Alter.Table("T_Temp_Schedules").AddColumn("OperationalDay").AsDateTime().Nullable().SetExistingRowsTo(new DateTime(1983, 9, 26));
 
             // Populate OperationalDay with dummy data that ensures the uniqueness of each record
+            Execute.Sql(@"UPDATE T_Temp_Trips SET OperationalDay = DATEADD(day,[DayOfWeek],OperationalDay);");
+            Execute.Sql(@"UPDATE T_Trips SET OperationalDay = DATEADD(day,[DayOfWeek],OperationalDay);");
             Execute.Sql(@"UPDATE T_Temp_Schedules SET OperationalDay = DATEADD(day,[DayOfWeek],OperationalDay);");
             Execute.Sql(@"UPDATE T_Schedules SET OperationalDay = DATEADD(day,[DayOfWeek],OperationalDay);");
 
