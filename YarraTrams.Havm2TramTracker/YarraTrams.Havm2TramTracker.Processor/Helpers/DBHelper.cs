@@ -36,7 +36,16 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             cmd.Transaction = transaction;
             cmd.CommandType = CommandType.Text;
             cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
-            cmd.ExecuteNonQuery();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                DBHelper.logSqlError(ex, sql);
+                throw;
+            }
         }
 
         /// <summary>
@@ -47,7 +56,16 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             SqlCommand cmd = new SqlCommand(procName, connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
-            cmd.ExecuteNonQuery();
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                DBHelper.logSqlError(ex, procName);
+                throw;
+            }
         }
 
         /// <summary>
@@ -273,6 +291,21 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                                                     , retryCount, Properties.Settings.Default.GapBetweenCopyToLiveRetriesInSecs), ex);
                 }
             }
+        }
+
+        /// <summary>
+        /// Logs SQL exception data, including the actual sql statement(s).
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <param name="sql"></param>
+        private static void logSqlError(SqlException ex, string sql)
+        {
+            string logFileName = LogfileWriter.GetFilePathAndName("SqlExceptions");
+            string message = string.Format("Message: {0}\n\nStacktrace:{1}\n\nSQL:\n{2}", ExceptionHelper.GetExceptionMessagesRecursive(ex), ex.StackTrace, sql);
+
+            LogWriter.Instance.Log(EventLogCodes.SQL_LOGGED_FOLLOWING_DB_ERROR, string.Format("Database execution error\n\nAlso logged to {0}\n\n{1}", logFileName, message));
+
+            LogfileWriter.writeToFile(logFileName, message.ToLogString("SQL Exception"));
         }
     }
 }

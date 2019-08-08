@@ -8,7 +8,7 @@ using YarraTrams.Havm2TramTracker.Logger;
 
 namespace YarraTrams.Havm2TramTracker.Processor.Helpers
 {
-    class LogfileWriter
+    public static class LogfileWriter
     {
         /// <summary>
         /// Writes string data to a file, pre-pending the filename with the date.
@@ -61,6 +61,27 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         }
 
         /// <summary>
+        /// Get/generate the file name and path for a log file.
+        /// </summary>
+        /// <param name="namePrefixFragment"></param>
+        /// <returns></returns>
+        public static string GetFilePathAndName(string namePrefixFragment)
+        {
+            return GetFilePathAndName(Properties.Settings.Default.LogFilePath, namePrefixFragment);
+        }
+
+        /// <summary>
+        /// Get/generate the file name and path for a log file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="namePrefixFragment"></param>
+        /// <returns></returns>
+        public static string GetFilePathAndName(string path, string namePrefixFragment)
+        {
+            return Path.Combine(path, string.Format("{0}_{1}.log", namePrefixFragment, DateTime.Now.ToString("yyyy_MM_dd_HH_mm")));
+        }
+
+        /// <summary>
         /// Returns the total directory size, in bytes.
         /// </summary>
         /// <param name="d"></param>
@@ -86,6 +107,28 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             }
 
             return size;
+        }
+
+        /// <summary>
+        /// Formats the string with a header and footer.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public static string ToLogString(this string str, string description)
+        {
+            return DateTime.Now.ToString("yyyy-MM-ddThHH:mm:ss.fff ") + description + "\n" + str + "\n" + LogfileWriter.GetLogFooter();
+        }
+
+        /// <summary>
+        /// Get the text to write between two log entries.
+        /// </summary>
+        private static string GetLogFooter()
+        {
+            const char chr = '#';
+            const Int16 length = 120;
+
+            return "\n" + new String(chr, length) + "\n" + new String(chr, length) + "\n" + new String(chr, length) + "\n\n\n";
         }
     }
 }
