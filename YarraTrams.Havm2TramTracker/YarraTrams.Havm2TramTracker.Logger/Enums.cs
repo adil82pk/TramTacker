@@ -54,6 +54,8 @@ namespace YarraTrams.Havm2TramTracker.Logger
 
         #region warning
         public const int SERVICE_CONFIG_CHANGED = 2001;
+        public const int LOG_FOLDER_APPROACHING_CAPACITY = 2002;
+        public const int LOG_FOLDER_REACHED_CAPACITY = 2003;
         #endregion
 
         #region error

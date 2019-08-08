@@ -18,7 +18,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         /// <param name="path">The directory of the file</param>
         public static void writeToFile(string postFix, string data, string path)
         {
-            string logFilename = String.Format("{0}-{1}.txt", DateTime.Now.ToString("yyyy-MM-dd"), postFix);
+            string logFilename = String.Format("{0}-{1}.txt", DateTime.Now.ToString("yyyy_MM_dd_HH_mm"), postFix);
             writeToFile(path + @"\" + logFilename, data);
         }
 
@@ -31,6 +31,24 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         {
             try
             {
+                // Check that our log folder is not at capacity
+                long logDirSize = LogfileWriter.DirSize(new DirectoryInfo(Properties.Settings.Default.LogFilePath));
+
+                if (logDirSize >= Properties.Settings.Default.LogFilePathMaxSizeInBytes)
+                {
+                    LogWriter.Instance.Log(
+                        EventLogCodes.LOG_FOLDER_REACHED_CAPACITY,
+                        String.Format("Log folder ({0}) reached capacity of {1} bytes.", Properties.Settings.Default.LogFilePath, Properties.Settings.Default.LogFilePathMaxSizeInBytes));
+
+                    return;
+                }
+                else if (logDirSize >= Properties.Settings.Default.LogFilePathWarnSizeInBytesExceedsInBytes)
+                {
+                    LogWriter.Instance.Log(
+                        EventLogCodes.LOG_FOLDER_APPROACHING_CAPACITY,
+                        String.Format("Log folder ({0}) approaching capacity of {1} bytes.", Properties.Settings.Default.LogFilePath, Properties.Settings.Default.LogFilePathMaxSizeInBytes));
+                }
+
                 using (StreamWriter fileWriter = new StreamWriter(logfileNameAndPath, true))
                 {
                     fileWriter.Write(data);
@@ -40,6 +58,34 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
             {
                 LogWriter.Instance.LogWithoutDelay(EventLogCodes.LOG_FILE_WRITE_ERROR, String.Format("Open file writer failed\n\nMessage: {0}\n\nStacktrace:{1}", e.Message, e.StackTrace));
             }
+        }
+
+        /// <summary>
+        /// Returns the total directory size, in bytes.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
+        public static long DirSize(DirectoryInfo d)
+        {
+            long size = 0;
+
+            // Add file sizes.
+            FileInfo[] fis = d.GetFiles();
+
+            foreach (FileInfo fi in fis)
+            {
+                size += fi.Length;
+            }
+
+            // Add subdirectory sizes.
+            DirectoryInfo[] dis = d.GetDirectories();
+
+            foreach (DirectoryInfo di in dis)
+            {
+                size += DirSize(di);
+            }
+
+            return size;
         }
     }
 }
