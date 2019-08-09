@@ -170,68 +170,68 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         /// </summary>
         public static void CopyDataFromTempToLive(int retryCount = 0)
         {
+            string query = @"
+                                
+                        UPDATE T_Preferences SET DataAvailable = 0;
+                                
+                        BEGIN TRAN
+                                
+                        -- It's all or nothing - we either insert 1 or more records into both tables or we abort completely.
+                        BEGIN TRY
+                                    
+                            DELETE dbo.T_Trips;
+                            DECLARE @CountOfT_Trips int = @@ROWCOUNT
+                                    
+                            INSERT dbo.T_Trips
+                            SELECT *
+                            FROM dbo.T_Temp_Trips;
+                            DECLARE @CountOfT_Temp_Trips int = @@ROWCOUNT
+                                    
+                            DELETE dbo.T_Schedules;
+                            DECLARE @CountOfT_Schedules int = @@ROWCOUNT
+                                    
+                            INSERT dbo.T_Schedules
+                            SELECT [TripID], [RunNo], [StopID], [RouteNo], [OPRTimePoint], [Time], [DayOfWeek], [LowFloor], [PublicTrip], [PredictFromSaM], [OperationalDay]
+                            FROM dbo.T_Temp_Schedules;
+                            DECLARE @CountOfT_Temp_Schedules int = @@ROWCOUNT
+                                    
+                            IF @CountOfT_Temp_Trips = 0
+                                RAISERROR('No trips to insert',16,1)
+                                    
+                            IF @CountOfT_Temp_Schedules = 0
+                                RAISERROR('No schedules to insert',16,1)
+                                    
+                            SELECT @CountOfT_Trips [TripsDeleted], @CountOfT_Temp_Trips [TripsAdded], @CountOfT_Schedules [SchedulesDeleted], @CountOfT_Temp_Schedules [SchedulesAdded]
+                                    
+                            -- We set Trips/ScheduleLoaded to 0 here. We set them back to one when we next populate the T_Temp_Trips/Schedules tables.
+                            UPDATE T_Preferences SET TripsLoaded = 0, ScheduleLoaded = 0;
+                                    
+                            COMMIT TRAN
+                        END TRY
+                        BEGIN CATCH
+                            ROLLBACK TRAN
+                                    
+                            DECLARE @ErrorMessage NVARCHAR(4000);  
+                            DECLARE @ErrorSeverity INT;  
+                            DECLARE @ErrorState INT;  
+                                    
+                            SELECT
+                                @ErrorMessage = 'Line:' + CAST(ISNULL(ERROR_LINE(),0) as varchar(max)) + ' ' + ERROR_MESSAGE(), 
+                                @ErrorSeverity = ERROR_SEVERITY(),  
+                                @ErrorState = ERROR_STATE();  
+                                    
+                            RAISERROR (@ErrorMessage, -- Message text.
+                                        @ErrorSeverity, -- Severity.
+                                        @ErrorState -- State.
+                                        );
+                        END CATCH
+
+                        UPDATE T_Preferences SET DataAvailable = 1;";
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.TramTrackerDB))
                 {
-                    string query = @"
-                                
-                                UPDATE T_Preferences SET DataAvailable = 0;
-                                
-                                BEGIN TRAN
-                                
-                                -- It's all or nothing - we either insert 1 or more records into both tables or we abort completely.
-                                BEGIN TRY
-                                    
-                                    DELETE dbo.T_Trips;
-                                    DECLARE @CountOfT_Trips int = @@ROWCOUNT
-                                    
-                                    INSERT dbo.T_Trips
-                                    SELECT *
-                                    FROM dbo.T_Temp_Trips;
-                                    DECLARE @CountOfT_Temp_Trips int = @@ROWCOUNT
-                                    
-                                    DELETE dbo.T_Schedules;
-                                    DECLARE @CountOfT_Schedules int = @@ROWCOUNT
-                                    
-                                    INSERT dbo.T_Schedules
-                                    SELECT [TripID], [RunNo], [StopID], [RouteNo], [OPRTimePoint], [Time], [DayOfWeek], [LowFloor], [PublicTrip], [PredictFromSaM], [OperationalDay]
-                                    FROM dbo.T_Temp_Schedules;
-                                    DECLARE @CountOfT_Temp_Schedules int = @@ROWCOUNT
-                                    
-                                    IF @CountOfT_Temp_Trips = 0
-                                       RAISERROR('No trips to insert',16,1)
-                                    
-                                    IF @CountOfT_Temp_Schedules = 0
-                                       RAISERROR('No schedules to insert',16,1)
-                                    
-                                    SELECT @CountOfT_Trips [TripsDeleted], @CountOfT_Temp_Trips [TripsAdded], @CountOfT_Schedules [SchedulesDeleted], @CountOfT_Temp_Schedules [SchedulesAdded]
-                                    
-                                    -- We set Trips/ScheduleLoaded to 0 here. We set them back to one when we next populate the T_Temp_Trips/Schedules tables.
-                                    UPDATE T_Preferences SET TripsLoaded = 0, ScheduleLoaded = 0;
-                                    
-                                    COMMIT TRAN
-                                END TRY
-                                BEGIN CATCH
-                                    ROLLBACK TRAN
-                                    
-                                    DECLARE @ErrorMessage NVARCHAR(4000);  
-                                    DECLARE @ErrorSeverity INT;  
-                                    DECLARE @ErrorState INT;  
-                                    
-                                    SELECT
-                                        @ErrorMessage = 'Line:' + CAST(ISNULL(ERROR_LINE(),0) as varchar(max)) + ' ' + ERROR_MESSAGE(), 
-                                        @ErrorSeverity = ERROR_SEVERITY(),  
-                                        @ErrorState = ERROR_STATE();  
-                                    
-                                    RAISERROR (@ErrorMessage, -- Message text.
-                                               @ErrorSeverity, -- Severity.
-                                               @ErrorState -- State.
-                                               );
-                                END CATCH
-
-                                UPDATE T_Preferences SET DataAvailable = 1;";
-
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -264,13 +264,18 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     // Populate several tables with trip and schedule data.
                     // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
                     ExecuteSqlProc("[CreateDailyData2.5]", conn);
-                    
+
                     // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
                     ExecuteSqlProc("SetDayOfWeek", conn);
 
                     LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
                             , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                 }
+            }
+            catch (SqlException ex)
+            {
+                DBHelper.logSqlError(ex, query);
+                throw;
             }
             catch (Exception ex)
             {
