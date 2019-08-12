@@ -262,22 +262,22 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                         }
 
                         reader.Close();
-
-                        // Populate several tables with trip and schedule data.
-                        // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
-                        ExecuteSqlProc("[CreateDailyData2.5]", conn);
-
-                        // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
-                        ExecuteSqlProc("SetDayOfWeek", conn);
-
-                        LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
-                                , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                     }
                     catch (SqlException ex)
                     {
                         DBHelper.logSqlError(ex, query);
                         throw;
                     }
+
+                    // Populate several tables with trip and schedule data.
+                    // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
+                    ExecuteSqlProc("[CreateDailyData2.5]", conn);
+
+                    // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
+                    ExecuteSqlProc("SetDayOfWeek", conn);
+
+                    LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
+                            , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                 }
             }
             catch (Exception ex)
