@@ -238,44 +238,47 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandTimeout = Properties.Settings.Default.DBCommandTimeoutSeconds;
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows)
+                    try
                     {
-                        reader.Read();
-                        int TripsDeleted = (int)reader["TripsDeleted"];
-                        int TripsAdded = (int)reader["TripsAdded"];
-                        int SchedulesDeleted = (int)reader["SchedulesDeleted"];
-                        int SchedulesAdded = (int)reader["SchedulesAdded"];
+                        SqlDataReader reader = cmd.ExecuteReader();
 
-                        string result = string.Format("{0} trips deleted and {1} trips added. ", TripsDeleted, TripsAdded) +
-                                        string.Format("{0} schedules deleted and {1} schedules added.", SchedulesDeleted, SchedulesAdded);
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            int TripsDeleted = (int)reader["TripsDeleted"];
+                            int TripsAdded = (int)reader["TripsAdded"];
+                            int SchedulesDeleted = (int)reader["SchedulesDeleted"];
+                            int SchedulesAdded = (int)reader["SchedulesAdded"];
 
-                        LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUCCESS
-                            , string.Format("Successfully copied Temp data to Live. {0}", result));
+                            string result = string.Format("{0} trips deleted and {1} trips added. ", TripsDeleted, TripsAdded) +
+                                            string.Format("{0} schedules deleted and {1} schedules added.", SchedulesDeleted, SchedulesAdded);
+
+                            LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUCCESS
+                                , string.Format("Successfully copied Temp data to Live. {0}", result));
+                        }
+                        else
+                        {
+                            throw new Exception("No results returned from operation to copy temp data to live.");
+                        }
+
+                        reader.Close();
+
+                        // Populate several tables with trip and schedule data.
+                        // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
+                        ExecuteSqlProc("[CreateDailyData2.5]", conn);
+
+                        // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
+                        ExecuteSqlProc("SetDayOfWeek", conn);
+
+                        LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
+                                , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                     }
-                    else
+                    catch (SqlException ex)
                     {
-                        throw new Exception("No results returned from operation to copy temp data to live.");
+                        DBHelper.logSqlError(ex, query);
+                        throw;
                     }
-
-                    reader.Close();
-
-                    // Populate several tables with trip and schedule data.
-                    // See documentation for more detail (Maybe https://inoutput.atlassian.net/wiki/spaces/YKB/pages/753926436/1.2.1.+tramTRACKER+Daily+Timetable+Import).
-                    ExecuteSqlProc("[CreateDailyData2.5]", conn);
-
-                    // Sets the current day of the week, a number between 0 (Sunday) and 6 (Saturday), in the DayOfWeekSetting table. DayOfWeekSetting has one field and only ever one record.
-                    ExecuteSqlProc("SetDayOfWeek", conn);
-
-                    LogWriter.Instance.Log(EventLogCodes.COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS
-                            , "Successfully called all procs that run subsequent to copying the Temp data to Live.");
                 }
-            }
-            catch (SqlException ex)
-            {
-                DBHelper.logSqlError(ex, query);
-                throw;
             }
             catch (Exception ex)
             {
