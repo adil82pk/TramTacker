@@ -56,5 +56,11 @@
     <Setting Name="NumberDailyTimetablesToRetrieve" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">7</Value>
     </Setting>
+    <Setting Name="LogFilePathMaxSizeInBytes" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">10000000000</Value>
+    </Setting>
+    <Setting Name="LogFilePathWarnSizeInBytesExceedsInBytes" Type="System.Int64" Scope="Application">
+      <Value Profile="(Default)">9000000000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
