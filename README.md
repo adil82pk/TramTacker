@@ -124,6 +124,7 @@ The Windows services has the following config settings available:
          *  T_Routes_Stops
          *  T_Stops
          *  T_Trams
+      5. Finish  
 
 ### Comparison Testing
 Havm2TramTracker has a TestComparison feature that compares tables populated by two different pieces of code.
