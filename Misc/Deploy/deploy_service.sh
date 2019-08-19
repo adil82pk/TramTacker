@@ -32,7 +32,7 @@ cmd "/c build_console.bat"
 
 echo "Running TramTracker database migrations..."
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker/YarraTrams.Havm2TramTracker/YarraTrams.Havm2TramTracker.Processor/Migrations
-cmd "/c TTBU_migrations_up.bat <database name here> TramTracker true "
+cmd "/c TTBU_migrations_up.bat <database server name here> TramTracker true "
 
 cd /c/havm2tramtracker
 echo "Removing all configs that the build copied across"
