@@ -100,7 +100,7 @@ The Windows services has the following config settings available:
 1. Create (empty) TramTracker database
 2. Create (base) tables - run `database/BaseTables.sql`
 3. Create (base) store proc _stubs - run `database/BaseProcs.sql`
-4. Run the FluentMigrator migrations - run `database/local_migrations_up.bat`
+4. Run the HAVM2TT FluentMigrator migrations - run `database/local_migrations_up.bat`
 5. Pull down standing (stop, vehicle ,etc) data from a TramTracker database on the Yarra Trams network:
    1. Connect to the Yarra Trams VPN
    2. Locate a server hosting a TramTracker database with up-to-date standing data
