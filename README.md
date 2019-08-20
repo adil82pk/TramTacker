@@ -3,7 +3,7 @@ havm2tramtracker
 
 ## Overview
 
-havm2tramtracker is 1 of 3 components in the tramTRACKER Uplift Project (TTBU).
+havm2tramtracker is one of three components in the tramTRACKER Uplift Project (TTBU).
 It is responsible for collectecting near schedule/timetable data from HAVM2, and inserting it into relrevant tramTRACKER database tables (that are later used for predictions).
 
 ---
@@ -11,7 +11,7 @@ It is responsible for collectecting near schedule/timetable data from HAVM2, and
 ## Technology
 
 * Backend language: MS .Net / C# 5.0
-* Backend framework: [.Net v4.6.1](The devloper pack is required on each host server - https://www.microsoft.com/en-au/download/details.aspx?id=49978)
+* Backend framework: [.Net v4.6.1](The developer pack is required on each host server - https://www.microsoft.com/en-au/download/details.aspx?id=49978)
 * Database: [MS SQL Server](https://www.microsoft.com/en-au/sql-server/sql-server-downloads)
   * [FluentMigrator](https://fluentmigrator.github.io/)
 * JSON: [Newtonsoft.JSON v12.0.2](https://github.com/JamesNK/Newtonsoft.Json)
