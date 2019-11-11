@@ -134,38 +134,59 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// <summary>
         /// Adds a PredictFromSaM value to every schedule record.
         /// The PredictFromSaM field tells the prediction calculations when we should start making predictions for each trip stop.
+        /// The PredictFromSam field could be negative. This is necessary for routes that only run on certain days. e.g. 3a only runs on weekends, thus the first 3 Saturday trips become a prediction on the previous Sunday!
         /// </summary>
         /// <param name="scheduless">A list of schedules without their PredictFromSaM set</param>
         /// <param name="numberOfPredictionsPerTripStop">Number of predictions we want to make for each Stop/Route/Direction combination</param>
         /// <returns></returns>
         public List<TramTrackerSchedules> SetPredictFromSaMTimeForEachTripStop(List<TramTrackerSchedules> scheduless, int numberOfPredictionsPerTripStop)
         {
-            byte currentDayOfWeek = 255; // DayOfWeek is stored in the TramTracker DB as a TinyInt (a byte - 3 bits would, in fact, be enough to store 0,1,2,3,4,5 or 6!). We set the working variable to 255 so as the first trip is recognised as a "new" trip in the loop.
-            short currentRouteNo = 0;
-            string currentStopId = "0";
-            bool currentUpDirection = true;
-            Queue<int> passingTimes = new Queue<int>();
-
-            foreach (TramTrackerSchedules tripStop in scheduless.OrderBy(s => s.DayOfWeek).ThenBy(s => s.RouteNo).ThenBy(s => s.StopID).ThenBy(s => s.UpDirection).ThenBy(s => s.Time))
+            if (scheduless.Count > 0)
             {
-                // Upon reaching a new unique combination of DayOfWeek+RouteNo+StopID+Direction we set the next X PredictFromSaMs to 0.
-                if (currentUpDirection != tripStop.UpDirection || currentStopId != tripStop.StopID || currentRouteNo != tripStop.RouteNo || currentDayOfWeek != tripStop.DayOfWeek)
+                short currentRouteNo = 0;
+                string currentStopId = "0";
+                bool currentUpDirection = true;
+                DateTime currentOperationalDay = DateTime.MinValue;
+                // Set the base time to 00:00 on the day of the first trip.
+                DateTime baseDateTime = scheduless.OrderBy(s => s.PassingDateTime).First().PassingDateTime;
+                baseDateTime = baseDateTime.AddTicks(-baseDateTime.Ticks % TimeSpan.TicksPerDay);
+
+                Queue<DateTime> passingTimes = new Queue<DateTime>();
+
+                foreach (TramTrackerSchedules tripStop in scheduless.OrderBy(s => s.RouteNo).ThenBy(s => s.StopID).ThenBy(s => s.UpDirection).ThenBy(s => s.PassingDateTime))
                 {
-                    currentDayOfWeek = tripStop.DayOfWeek;
-                    currentRouteNo = tripStop.RouteNo;
-                    currentStopId = tripStop.StopID;
-                    currentUpDirection = tripStop.UpDirection;
-
-                    passingTimes.Clear();
-                    for (int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
+                    // Upon reaching a new unique combination of Direction+StopID+RouteNo we set the next X PredictFromSaMs to 0.
+                    if (currentUpDirection != tripStop.UpDirection || currentStopId != tripStop.StopID || currentRouteNo != tripStop.RouteNo)
                     {
-                        passingTimes.Enqueue(0);
-                    }
-                }
+                        currentRouteNo = tripStop.RouteNo;
+                        currentStopId = tripStop.StopID;
+                        currentUpDirection = tripStop.UpDirection;
+                        currentOperationalDay = tripStop.OperationalDay;
 
-                // Set the PredictFromSaM field on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
-                tripStop.PredictFromSaM = passingTimes.Dequeue();
-                passingTimes.Enqueue(tripStop.Time);
+                        passingTimes.Clear();
+                        for (int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
+                        {
+                            passingTimes.Enqueue(baseDateTime);
+                        }
+                    }
+
+                    // Upon reaching a new day we set the next x PredictFromSaMs to midnight of the day prior. This means, for instance, that the first 3 for Tues are predicted from start of Mon, but these predictions probably won't make the "top" 3 until late Mon.
+                    if (currentOperationalDay != tripStop.OperationalDay)
+                    {
+                        passingTimes.Clear();
+                        for (int ii = 0; ii < numberOfPredictionsPerTripStop; ii++)
+                        {
+                            passingTimes.Enqueue(currentOperationalDay);
+                        }
+
+                        currentOperationalDay = tripStop.OperationalDay;
+                    }
+
+                    // Set the PredictFromSaM field on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
+                    tripStop.PredictFromDateTime = passingTimes.Dequeue();
+                    tripStop.PredictFromSaM = (int)(tripStop.PredictFromDateTime - tripStop.PassingDateTime.AddTicks(-tripStop.PassingDateTime.Ticks % TimeSpan.TicksPerDay)).TotalSeconds;
+                    passingTimes.Enqueue(tripStop.PassingDateTime);
+                }
             }
             return scheduless;
         }

@@ -30,11 +30,6 @@ cmd "/c build_service.bat"
 echo "Building Havm2TramTracker Console..."
 cmd "/c build_console.bat"
 
-echo "Running TramTracker database migrations..."
-cd /c/havm2tramtracker_source_deploy/havm2tramtracker/YarraTrams.Havm2TramTracker/YarraTrams.Havm2TramTracker.Processor/Migrations
-# If the below database server name is actually an instance (with a backslash) then try this \"server\\instance\"
-cmd "/c TTBU_migrations_up.bat <database server name here> TramTracker true "
-
 cd /c/havm2tramtracker
 echo "Removing all configs that the build copied across"
 rm ./bin/*.config

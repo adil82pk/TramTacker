@@ -174,5 +174,32 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((int)(this["NumberOfPredictionsPerTripStop"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int NumberDailyTimetablesToRetrieve {
+            get {
+                return ((int)(this["NumberDailyTimetablesToRetrieve"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000000000")]
+        public long LogFilePathMaxSizeInBytes {
+            get {
+                return ((long)(this["LogFilePathMaxSizeInBytes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9000000000")]
+        public long LogFilePathWarnSizeInBytesExceedsInBytes {
+            get {
+                return ((long)(this["LogFilePathWarnSizeInBytesExceedsInBytes"]));
+            }
+        }
     }
 }
