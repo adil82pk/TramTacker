@@ -25,7 +25,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Persist Security Info=False;Asynchronous Process" +
+            "ing=true;max pool size=500;User ID=avmis;Password=avmis;database=TramTracker;")]
         public string TramTrackerDB {
             get {
                 return ((string)(this["TramTrackerDB"]));
@@ -34,7 +35,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("qqq")]
         public string Havm2TramTrackerAPI {
             get {
                 return ((string)(this["Havm2TramTrackerAPI"]));
@@ -97,9 +98,9 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.TimeSpan CopyToLiveDueTime {
+        public global::System.TimeSpan CopyTodaysDataToLiveDueTime {
             get {
-                return ((global::System.TimeSpan)(this["CopyToLiveDueTime"]));
+                return ((global::System.TimeSpan)(this["CopyTodaysDataToLiveDueTime"]));
             }
         }
         
@@ -141,9 +142,9 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.TimeSpan RefreshTempDueTime {
+        public global::System.TimeSpan RefreshTempWithTomorrowsDataDueTime {
             get {
-                return ((global::System.TimeSpan)(this["RefreshTempDueTime"]));
+                return ((global::System.TimeSpan)(this["RefreshTempWithTomorrowsDataDueTime"]));
             }
         }
         
@@ -162,6 +163,42 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         public int GapBetweenGetDataFromHavm2RetriesInSecs {
             get {
                 return ((int)(this["GapBetweenGetDataFromHavm2RetriesInSecs"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public int NumberOfPredictionsPerTripStop {
+            get {
+                return ((int)(this["NumberOfPredictionsPerTripStop"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int NumberDailyTimetablesToRetrieve {
+            get {
+                return ((int)(this["NumberDailyTimetablesToRetrieve"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000000000")]
+        public long LogFilePathMaxSizeInBytes {
+            get {
+                return ((long)(this["LogFilePathMaxSizeInBytes"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9000000000")]
+        public long LogFilePathWarnSizeInBytesExceedsInBytes {
+            get {
+                return ((long)(this["LogFilePathWarnSizeInBytesExceedsInBytes"]));
             }
         }
     }

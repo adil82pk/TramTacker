@@ -16,7 +16,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 ProdSupportMenu = new CommandMenu(MainMenu);
                 ProdSupportMenu.Title = "Production Support Menu";
                 ProdSupportMenu.AddCommand("Copy to live tables", () => CallCopyToLive());
-                ProdSupportMenu.AddCommand("Call HAVM2 API and save to all tables", () => CallHavm2ApiAndSaveToAllTables());
+                ProdSupportMenu.AddCommand("Call HAVM2 API and save to all staging/temp tables", () => CallHavm2ApiAndSaveToAllTables());
             }
 
             ProdSupportMenu.Show();
@@ -40,7 +40,7 @@ namespace YarraTrams.Havm2TramTracker.Console
 
         private static void CallHavm2ApiAndSaveToAllTables()
         {
-            DateTime? baseDate = GetDateFromUser("Enter a date (data will start from the day following), blank for default:");
+            DateTime? baseDate = GetDateFromUser("Enter a date (yyyy-mm-dd format, timetable data will start from the day entered), blank for default:");
 
             string message = "";
             var clock = new Stopwatch();

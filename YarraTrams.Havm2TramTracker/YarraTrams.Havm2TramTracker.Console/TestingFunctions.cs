@@ -16,6 +16,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 TestingMenu.Title = "Testing Menu";
                 TestingMenu.AddCommand("Upload JSON file to memory and print to console", () => UploadJsonFileToMemoryAndPrintToConsole());
                 TestingMenu.AddCommand("Upload JSON file to T_Temp_Trips database table", () => UploadJsonFileToMemoryAndSaveToT_Temp_Trips());
+                TestingMenu.AddCommand("Upload JSON file to T_Temp_Schedules database table", () => UploadJsonFileToMemoryAndSaveToT_Temp_Schedules());
                 TestingMenu.AddCommand("Call HAVM2 API and print to console", () => CallHavm2ApiAndPrintToConsole());
                 TestingMenu.AddCommand("Call HAVM2 API and save to T_Temp_Trips database table", () => CallHavm2ApiAndSaveToT_Temp_Trips());
                 TestingMenu.AddCommand("Call HAVM2 API and save to T_Temp_Schedules database table", () => CallHavm2ApiAndSaveToT_Temp_Schedules());
@@ -45,7 +46,19 @@ namespace YarraTrams.Havm2TramTracker.Console
             if (UploadJsonFileToMemory(out trips))
             {
                 Processor.Processor.SaveToTrips(trips);
-                
+
+                System.Console.WriteLine("Complete, press <enter> to continue.");
+                System.Console.ReadLine();
+            }
+        }
+
+        private static void UploadJsonFileToMemoryAndSaveToT_Temp_Schedules()
+        {
+            List<HavmTrip> trips;
+            if (UploadJsonFileToMemory(out trips))
+            {
+                Processor.Processor.SaveToSchedules(trips);
+
                 System.Console.WriteLine("Complete, press <enter> to continue.");
                 System.Console.ReadLine();
             }

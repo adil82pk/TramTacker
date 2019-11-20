@@ -54,6 +54,9 @@ namespace YarraTrams.Havm2TramTracker.Logger
 
         #region warning
         public const int SERVICE_CONFIG_CHANGED = 2001;
+        public const int LOG_FOLDER_APPROACHING_CAPACITY = 2002;
+        public const int LOG_FOLDER_REACHED_CAPACITY = 2003;
+        public const int SQL_LOGGED_FOLLOWING_DB_ERROR = 2004;
         #endregion
 
         #region error
@@ -68,6 +71,8 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int COPY_TO_LIVE_FAILED = 1008;
         public const int INVALID_CONFIGURATION = 1009;
         public const int HAVM2_API_ERROR = 1010;
+        public const int CONFIGURATION_UPDATED_WHILST_INPROCESS = 1011;
+        public const int DST_TRIGGER_IN_ADJUSTMENT_TIME_NOT_SUPPORTED = 1012;
 
         public const int SIDE_BY_SIDE_ERROR = 1100;
         #endregion
