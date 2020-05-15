@@ -35,7 +35,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("qqq")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/tramtracker/")]
         public string Havm2TramTrackerAPI {
             get {
                 return ((string)(this["Havm2TramTrackerAPI"]));
@@ -106,7 +106,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("_TTBU")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DbTableSuffix {
             get {
                 return ((string)(this["DbTableSuffix"]));
@@ -168,7 +168,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        [global::System.Configuration.DefaultSettingValueAttribute("6")]
         public int NumberOfPredictionsPerTripStop {
             get {
                 return ((int)(this["NumberOfPredictionsPerTripStop"]));
