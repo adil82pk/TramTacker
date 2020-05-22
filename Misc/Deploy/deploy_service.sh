@@ -18,6 +18,7 @@ fi
 
 echo "Getting the latest from dev branch"
 cd /c/havm2tramtracker_source_deploy/havm2tramtracker
+git fetch
 git checkout dev
 git pull origin dev
 
