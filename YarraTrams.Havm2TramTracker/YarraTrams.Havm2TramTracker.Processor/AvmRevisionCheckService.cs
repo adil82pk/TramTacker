@@ -23,6 +23,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Called on service start
+        /// </summary>
         protected override void OnStart(string[] args)
         {
             LogWriter.Instance.Log(EventLogCodes.SERVICE_STARTED, "AvmRevisionCheckService has been started");
@@ -50,6 +53,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
             }
         }
 
+        /// <summary>
+        /// Called on service stop
+        /// </summary>
         protected override void OnStop()
         {
             LogWriter.Instance.Log(EventLogCodes.SERVICE_STOPPED, "AvmRevisionCheckService has been stopped");
@@ -81,6 +87,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
             this.RunTimer();
         }
 
+        /// <summary>
+        /// Cancels the thread timer.
+        /// </summary>
         public void StopTimer()
         {
             if (stateObj != null)
@@ -90,6 +99,9 @@ namespace YarraTrams.Havm2TramTracker.Processor
 
         }
 
+        /// <summary>
+        /// The method that is triggered when the timer elapses.
+        /// </summary>
         private void TimerTask(object StateObj)
         {
             TimerState State = (TimerState)StateObj;
