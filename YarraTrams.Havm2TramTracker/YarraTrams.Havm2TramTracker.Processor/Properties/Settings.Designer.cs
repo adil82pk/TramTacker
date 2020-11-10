@@ -201,5 +201,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((long)(this["LogFilePathWarnSizeInBytesExceedsInBytes"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("19:55:00")]
+        public global::System.TimeSpan CheckTomorrowsAvmTimetableRevisionDueTime {
+            get {
+                return ((global::System.TimeSpan)(this["CheckTomorrowsAvmTimetableRevisionDueTime"]));
+            }
+        }
     }
 }

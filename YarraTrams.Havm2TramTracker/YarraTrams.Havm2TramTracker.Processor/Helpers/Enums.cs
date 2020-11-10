@@ -19,7 +19,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
         public enum Processes
         {
             CopyToLive,
-            RefreshTemp
+            RefreshTemp,
+            CheckAvmTimetableRevision
         }
     }
 }

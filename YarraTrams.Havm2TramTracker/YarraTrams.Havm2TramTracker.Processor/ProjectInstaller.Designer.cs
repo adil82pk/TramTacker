@@ -46,6 +46,8 @@
             // 
             // serviceInstaller2
             // 
+            this.serviceInstaller2.Description = "YarraTrams.Havm2TramTracker.AvmRevisionCheckService";
+            this.serviceInstaller2.DisplayName = "YarraTrams.Havm2TramTracker.AvmRevisionCheckService";
             this.serviceInstaller2.ServiceName = "YarraTrams.Havm2TramTracker.AvmRevisionCheckService";
             // 
             // ProjectInstaller
