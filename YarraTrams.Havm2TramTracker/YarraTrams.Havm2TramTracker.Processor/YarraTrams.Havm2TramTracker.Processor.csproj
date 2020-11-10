@@ -90,6 +90,7 @@
     </Compile>
     <Compile Include="Helpers\ApiService.cs" />
     <Compile Include="Helpers\ApiHttpClient.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />

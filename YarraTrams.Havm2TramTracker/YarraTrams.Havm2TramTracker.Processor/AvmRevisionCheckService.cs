@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.ServiceProcess;
@@ -111,13 +110,12 @@ namespace YarraTrams.Havm2TramTracker.Processor
         /// </summary>
         public void RunTimer()
         {
-            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            DateTime currentTime = DateTime.Now;
             TimeSpan triggerTime = Properties.Settings.Default.CheckTomorrowsAvmTimetableRevisionDueTime;
             const Enums.Processes triggerProcess = Enums.Processes.CheckAvmTimetableRevision;
             int dayInMilliseconds = (60 * 60 * 24) * 1000; //get seconds in the day then convert to ms
 
-            int baseTimeDiff = (int)triggerTime.Subtract(currentTime).TotalMilliseconds;
-            int dueTimeMilliseconds = (currentTime >= triggerTime) ? ((24 * 60 * 60 * 1000) - baseTimeDiff) : baseTimeDiff; // TODO: allow for DST
+            int dueTimeMilliseconds = DateHelper.GetTriggerTime(currentTime, triggerTime);
 
             stateObj = new TimerState();
             stateObj.TimerCanceled = false;
