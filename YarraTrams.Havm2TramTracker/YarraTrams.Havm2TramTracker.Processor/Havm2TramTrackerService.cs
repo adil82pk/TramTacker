@@ -51,7 +51,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 }
                 catch (Exception ex)
                 {
-                    LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                    LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An Havm2TramTracker error has occured and wasn't caught by the core Processor\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
                 }
             }
             else
@@ -87,13 +87,13 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         Processor.RefreshTemp();
                         break;
                     default:
-                        throw new NotImplementedException(string.Format("Process {0} not implemented.", process.ToString()));
+                        throw new NotImplementedException(string.Format("Process {0} not implemented in Havm2TramTracker.", process.ToString()));
                 }
                         
             }
             catch (Exception ex)
             {
-                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("A Fatal Error has Occured\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("A Fatal Error has occured in Havm2TramTracker\n\nMessage: {0}\n\nStacktrace:{1}", ex.Message, ex.StackTrace));
             }
             this.RunTimer();
         }
@@ -187,7 +187,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                         // this is within daylight savings switch over time which is not supported (where there could be weirdness)
                         // log an event, and do no adjustment
                         LogWriter.Instance.Log(EventLogCodes.DST_TRIGGER_IN_ADJUSTMENT_TIME_NOT_SUPPORTED, 
-                            String.Format("We do not support adjustments for a timer when inside the DST changeover period, triggering in {0}", TimeSpan.FromMilliseconds(triggerInMilliseconds)));
+                            String.Format("We do not support adjustments for a Havm2TramTracker timer when inside the DST changeover period, triggering in {0}", TimeSpan.FromMilliseconds(triggerInMilliseconds)));
                     }
                 }
             }
@@ -311,12 +311,12 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 // If config updated whilst a process is executing then weird stuff might happen. We raise an alert but leave the current processing alone.
                 if (stateObj != null && stateObj.TimerCanceled)
                 {
-                    LogWriter.Instance.Log(EventLogCodes.CONFIGURATION_UPDATED_WHILST_INPROCESS, "Configuration updated whilst process being actively executed. This can cause unusual behaviour.");
+                    LogWriter.Instance.Log(EventLogCodes.CONFIGURATION_UPDATED_WHILST_INPROCESS, "Configuration updated whilst Havm2TramTracker process being actively executed. This can cause unusual behaviour.");
                 }
                 else
                 {
                     // Stop currently running timer then trigger new timer.
-                    LogWriter.Instance.Log(EventLogCodes.TIMER_SET, "Resetting the timer");
+                    LogWriter.Instance.Log(EventLogCodes.TIMER_SET, "Resetting the Havm2TramTracker timer");
                     this.StopTimer();
                     this.RunTimer();
                 }
@@ -393,7 +393,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 {
                     configNotSet.ForEach(conf => LogWriter.Instance.Log(
                         EventLogCodes.INVALID_CONFIGURATION,
-                        String.Format("Fatal error - Please set Config property: {0}", conf)));
+                        String.Format("Fatal Havm2TramTracker error - Please set Config property: {0}", conf)));
 
                     return false;
                 }
@@ -404,7 +404,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
             {
                 LogWriter.Instance.Log(
                         EventLogCodes.INVALID_CONFIGURATION,
-                        String.Format("Fatal error: {0}", ex.Message));
+                        String.Format("Fatal Havm2TramTracker error: {0}", ex.Message));
 
                 return false;
             }
