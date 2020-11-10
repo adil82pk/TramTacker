@@ -60,7 +60,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Helpers
                         // this is within daylight savings switch over time which is not supported (where there could be weirdness)
                         // log an event, and do no adjustment
                         LogWriter.Instance.Log(EventLogCodes.DST_TRIGGER_IN_ADJUSTMENT_TIME_NOT_SUPPORTED,
-                            String.Format("We do not support adjustments for a Havm2TramTracker timer when inside the DST changeover period, triggering in {0}", TimeSpan.FromMilliseconds(triggerInMilliseconds)));
+                            String.Format("We do not support adjustments for a timer when inside the DST changeover period, triggering in {0}", TimeSpan.FromMilliseconds(triggerInMilliseconds)));
                     }
                 }
             }
