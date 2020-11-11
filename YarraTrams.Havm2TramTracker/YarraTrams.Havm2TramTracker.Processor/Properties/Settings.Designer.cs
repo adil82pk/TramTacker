@@ -258,10 +258,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iop\\Downloads\\temp\\HAVM2TTLogs")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iop\\Downloads\\temp\\HAVM2TTLogs\\AvmFiles")]
         public string AvmLogFileArchivePath {
             get {
                 return ((string)(this["AvmLogFileArchivePath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public int AvmLogFileArchiveRetentionPeriodInDays {
+            get {
+                return ((int)(this["AvmLogFileArchiveRetentionPeriodInDays"]));
             }
         }
     }
