@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Command.cs" />
     <Compile Include="CommandMenu.cs" />
+    <Compile Include="AvmRevisionCheckFunctions.cs" />
     <Compile Include="ProdSupportFunctions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
