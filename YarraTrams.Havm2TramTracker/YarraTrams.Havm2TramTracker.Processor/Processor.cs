@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YarraTrams.Havm2TramTracker.Models;
 using YarraTrams.Havm2TramTracker.Processor.Services;
-using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
 using System.Data;
 using YarraTrams.Havm2TramTracker.Logger;
-using System.IO;
 using YarraTrams.Havm2TramTracker.Processor.Helpers;
 using Newtonsoft.Json;
 
@@ -113,7 +108,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
         }
 
         /// <summary>
-        /// ves HAVM2 trip information to the T_Temp_SchedulesDetails table in the TramTracker database
+        /// Saves HAVM2 trip information to the T_Temp_SchedulesDetails table in the TramTracker database
         /// </summary>
         public static void SaveToSchedulesDetails(List<HavmTrip> havmTrips)
         {
@@ -130,8 +125,22 @@ namespace YarraTrams.Havm2TramTracker.Processor
         {
             try
             {
-                AvmTimetableService service = new AvmTimetableService();
-                int avmTimetableTimestamp = service.GetTomorrowsAvmTimetableRevision();
+                AvmTimetableService avmService = new AvmTimetableService();
+                int avmTimetableTimestamp = avmService.GetTomorrowsAvmTimetableRevision();
+
+                Havm2TimetableService havm2Service = new Havm2TimetableService();
+                int havm2TimetableTimestamp = havm2Service.GetTomorrowsLatestHavm2TimetableRevision();
+                
+                if (avmTimetableTimestamp == havm2TimetableTimestamp)
+                {
+                    LogWriter.Instance.Log(EventLogCodes.AVM_REVISION_CHECK_SUCCESS
+                                   , string.Format("Successfully checked that AVM will run the correct timetable revision ({0}) tomorrow.", avmTimetableTimestamp));
+                }
+                else
+                {
+                    LogWriter.Instance.Log(EventLogCodes.INCORRECT_TIMETABLE_REVISION_DETECTED_IN_AVM
+                                   , string.Format("AVM apppears to have an incorrect timetable revision loaded for tomorrow '{0}' instead of '{1}'.", avmTimetableTimestamp, havm2TimetableTimestamp));
+                }
             }
             catch (Exception ex)
             {
