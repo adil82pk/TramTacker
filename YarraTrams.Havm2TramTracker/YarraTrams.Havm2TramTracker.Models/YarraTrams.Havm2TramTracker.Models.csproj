@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvmRevisionCheck\HavmTimetable.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\SettingsExposer.cs" />
     <Compile Include="TramTrackerBase.cs" />
@@ -98,5 +99,6 @@
       <Name>YarraTrams.Havm2TramTracker.Logger</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
