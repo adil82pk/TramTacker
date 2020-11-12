@@ -17,6 +17,16 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         public readonly string AvmLogFileFtpDirectoryPath;
         public readonly string AvmLogFileName;
         public readonly string AvmLogFileArchivePath;
+        public readonly int AvmLogFileArchiveRetentionPeriodInDays;
+
+        private readonly int[] ValidLineLengths = { 2, 8, 9 }; // The file has variable line lengths - 9 for the currently loaded timetable, 2 when a future day has no timetable and 8 when it does.
+        private const int LineContainingTomorrowsTimetable = 3; // Tomorrow's timetable is on line 3.
+        private const int FieldIndexOfExportTimestamp = 5; // The export timestamp is the 6th field along (5 when zero-based).
+
+        private const string EmptyFileErrorMessage = "AVM file is empty.";
+        private const string TruncatedFileErrorMessage = "AVM file appears to be truncated.";
+        private const string TomorrowTimestampErrorMessage = "Expecting the second field on the third line of the file to be a timestamp";
+        private const string GeneralFileContentErrorMessage = "Unexpected format inside AVM file.";
 
         public AvmTimetableService()
         {
@@ -26,6 +36,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             AvmLogFileFtpDirectoryPath = Properties.Settings.Default.AvmLogFileFtpDirectoryPath;
             AvmLogFileName = Properties.Settings.Default.AvmLogFileName;
             AvmLogFileArchivePath = Properties.Settings.Default.AvmLogFileArchivePath;
+            AvmLogFileArchiveRetentionPeriodInDays = Properties.Settings.Default.AvmLogFileArchiveRetentionPeriodInDays;
         }
 
         /// <summary>
@@ -34,6 +45,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// <returns>The export timestamp of the revision, as an integer.</returns>
         public int GetTomorrowsAvmTimetableRevision()
         {
+            CleanupOldArchives();
+
             string localFilePath = Path.Combine(AvmLogFileArchivePath, $"AvmLogFile{DateTime.Now.ToString("yyyyMMddHHmmss")}.txt");
 
             DownloadFile(localFilePath);
@@ -74,7 +87,69 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
         public int ExtractTomorrowsAvmTimetableRevisionFromFileContent(string content)
         {
-            return 0;
+            // If the file is empty we throw an exception.
+            if (String.IsNullOrEmpty(content))
+            {
+                throw new FormatException(EmptyFileErrorMessage);
+            }
+
+            int timestamp = -1;
+            using (StringReader sr = new StringReader(content))
+            {
+                string line;
+
+                int lineNumber = 1;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] lineData = line.Split(new char[] { ',' });
+
+                    // If the file appears to be truncated then we create an event but we continue (it's likely we have enough data to read tomorrow's timestamp).
+                    if (!ValidLineLengths.Contains(lineData.Length))
+                    {
+                        LogWriter.Instance.Log(EventLogCodes.TRUNCATED_FILE_ON_AVM_ENDPOINT, $"{TruncatedFileErrorMessage}\nLine {lineNumber}:{line}");
+                    }
+
+                    // The timstamp for tomorrow's file is on line 3.
+                    if (lineNumber == LineContainingTomorrowsTimetable)
+                    {
+                        // If the timestamp is not an integer then we create a specific event and abort (throw an exception).
+                        if (!int.TryParse(lineData[FieldIndexOfExportTimestamp], out timestamp))
+                        {
+                            LogWriter.Instance.Log(EventLogCodes.UNEXPECTED_FORMAT_INSIDE_AVM_FILE, TomorrowTimestampErrorMessage);
+                            throw new FormatException(TomorrowTimestampErrorMessage);
+                        }
+                    }
+
+                    lineNumber++;
+                }
+            }
+
+            // If the timestamp never got set then we log a specific error then abort (throw an exception).
+            if (timestamp < 0)
+            {
+                LogWriter.Instance.Log(EventLogCodes.UNEXPECTED_FORMAT_INSIDE_AVM_FILE, GeneralFileContentErrorMessage);
+                throw new FormatException(GeneralFileContentErrorMessage);
+            }
+
+            return timestamp;
+        }
+
+        /// <summary>
+        /// Deletes all files in the archive that were created prior to the configured retention time.
+        /// </summary>
+        public void CleanupOldArchives()
+        {
+            string[] files = Directory.GetFiles(AvmLogFileArchivePath);
+
+            foreach (string file in files)
+            {
+                FileInfo fi = new FileInfo(file);
+                if (fi.CreationTime < DateTime.Now.AddMilliseconds(-AvmLogFileArchiveRetentionPeriodInDays))
+                {
+                    fi.Delete();
+                }
+            }
         }
     }
 }

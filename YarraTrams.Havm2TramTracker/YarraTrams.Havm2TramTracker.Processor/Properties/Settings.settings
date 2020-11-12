@@ -81,7 +81,10 @@
       <Value Profile="(Default)">MyFile.zip</Value>
     </Setting>
     <Setting Name="AvmLogFileArchivePath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Users\iop\Downloads\temp\HAVM2TTLogs</Value>
+      <Value Profile="(Default)">C:\Users\iop\Downloads\temp\HAVM2TTLogs\AvmFiles</Value>
+    </Setting>
+    <Setting Name="AvmLogFileArchiveRetentionPeriodInDays" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">400</Value>
     </Setting>
   </Settings>
 </SettingsFile>
