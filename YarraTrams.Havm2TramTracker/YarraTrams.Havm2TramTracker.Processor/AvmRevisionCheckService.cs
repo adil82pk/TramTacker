@@ -73,7 +73,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 switch (process)
                 {
                     case Enums.Processes.CheckAvmTimetableRevision:
-                        // do something
+                        Processor.CheckAvmTimetableRevision();
                         break;
                     default:
                         throw new NotImplementedException(string.Format("Process {0} not implemented inside Havm2TramTracker.AvmRevisionCheckService.", process.ToString()));

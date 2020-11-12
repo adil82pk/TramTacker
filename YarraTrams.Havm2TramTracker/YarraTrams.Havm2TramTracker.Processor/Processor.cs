@@ -123,6 +123,22 @@ namespace YarraTrams.Havm2TramTracker.Processor
             DBHelper.TruncateThenSaveTripDataToDatabase(DBHelper.GetDbTableName(Enums.TableNames.TempSchedulesDetails), dataTable);
         }
 
+        /// <summary>
+        /// Checks that the revision of the timetable loaded into AVM for tomorrow matches the last one exported from HAVM2.
+        /// </summary>
+        public static void CheckAvmTimetableRevision()
+        {
+            try
+            {
+                AvmTimetableService service = new AvmTimetableService();
+                int avmTimetableTimestamp = service.GetTomorrowsAvmTimetableRevision();
+            }
+            catch (Exception ex)
+            {
+                LogWriter.Instance.Log(EventLogCodes.FATAL_ERROR, String.Format("An error has occured when checking the AVM timetable revision.\n\nMessage: {0}\n\nStacktrace:{1}", Helpers.ExceptionHelper.GetExceptionMessagesRecursive(ex), ex.StackTrace));
+            }
+        }
+
         #endregion
     }
 }
