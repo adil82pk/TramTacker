@@ -19,6 +19,10 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         public readonly string AvmLogFileArchivePath;
         public readonly int AvmLogFileArchiveRetentionPeriodInDays;
 
+        private readonly int[] ValidLineLengths = { 2, 8, 9 }; // The file has variable line lengths - 9 for the currently loaded timetable, 2 when a future day has no timetable and 8 when it does.
+        private const int LineContainingTomorrowsTimetable = 3; // Tomorrow's timetable is on line 3.
+        private const int FieldIndexOfExportTimestamp = 5; // The export timestamp is the 6th field along (5 when zero-based).
+
         private const string EmptyFileErrorMessage = "AVM file is empty.";
         private const string TruncatedFileErrorMessage = "AVM file appears to be truncated.";
         private const string TomorrowTimestampErrorMessage = "Expecting the second field on the third line of the file to be a timestamp";
@@ -101,16 +105,16 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                     string[] lineData = line.Split(new char[] { ',' });
 
                     // If the file appears to be truncated then we create an event but we continue (it's likely we have enough data to read tomorrow's timestamp).
-                    if ((lineData.Length != 2 && lineData.Length != 8 && lineData.Length != 9) || (lineData.Length == 2 && lineData[1] != "NA"))
+                    if (!ValidLineLengths.Contains(lineData.Length))
                     {
                         LogWriter.Instance.Log(EventLogCodes.TRUNCATED_FILE_ON_AVM_ENDPOINT, $"{TruncatedFileErrorMessage}\nLine {lineNumber}:{line}");
                     }
 
                     // The timstamp for tomorrow's file is on line 3.
-                    if (lineNumber == 3)
+                    if (lineNumber == LineContainingTomorrowsTimetable)
                     {
                         // If the timestamp is not an integer then we create a specific event and abort (throw an exception).
-                        if (!int.TryParse(lineData[5], out timestamp))
+                        if (!int.TryParse(lineData[FieldIndexOfExportTimestamp], out timestamp))
                         {
                             LogWriter.Instance.Log(EventLogCodes.UNEXPECTED_FORMAT_INSIDE_AVM_FILE, TomorrowTimestampErrorMessage);
                             throw new FormatException(TomorrowTimestampErrorMessage);
