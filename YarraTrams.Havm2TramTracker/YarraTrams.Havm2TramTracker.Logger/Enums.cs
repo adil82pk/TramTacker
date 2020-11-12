@@ -74,6 +74,14 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int CONFIGURATION_UPDATED_WHILST_INPROCESS = 1011;
         public const int DST_TRIGGER_IN_ADJUSTMENT_TIME_NOT_SUPPORTED = 1012;
 
+        public const int INCORRECT_TIMETABLE_REVISION_DETECTED_IN_AVM = 1020;
+        public const int CANNOT_CONNECT_TO_AVM_FTP = 1021;
+        public const int CANNOT_FIND_FILE_ON_AVM_ENDPOINT = 1022;
+        public const int TRUNCATED_FILE_ON_AVM_ENDPOINT = 1023;
+        public const int UNEXPECTED_FORMAT_INSIDE_AVM_FILE = 1024;
+        public const int ERROR_WHEN_CONNECTING_TO_HAVM2 = 1025;
+        public const int NO_TOMORROW_TIMETABLE_FOUND_IN_HAVM2 = 1026;
+
         public const int SIDE_BY_SIDE_ERROR = 1100;
         #endregion
     }
@@ -81,7 +89,7 @@ namespace YarraTrams.Havm2TramTracker.Logger
     public static class SystemConstants
     {
         public static int VersionMajor = 1;
-        public static int VersionMinor = 0;
+        public static int VersionMinor = 2;
         public static int VersionPatch = 0;
 
         public static string SystemVersion

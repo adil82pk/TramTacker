@@ -30,6 +30,7 @@
         {
             this.serviceProcessInstaller1 = new System.ServiceProcess.ServiceProcessInstaller();
             this.serviceInstaller1 = new System.ServiceProcess.ServiceInstaller();
+            this.serviceInstaller2 = new System.ServiceProcess.ServiceInstaller();
             // 
             // serviceProcessInstaller1
             // 
@@ -43,11 +44,18 @@
             this.serviceInstaller1.DisplayName = "YarraTrams.Havm2TramTracker";
             this.serviceInstaller1.ServiceName = "YarraTrams.Havm2TramTracker";
             // 
+            // serviceInstaller2
+            // 
+            this.serviceInstaller2.Description = "YarraTrams.Havm2TramTracker.AvmRevisionCheckService";
+            this.serviceInstaller2.DisplayName = "YarraTrams.Havm2TramTracker.AvmRevisionCheckService";
+            this.serviceInstaller2.ServiceName = "YarraTrams.Havm2TramTracker.AvmRevisionCheckService";
+            // 
             // ProjectInstaller
             // 
             this.Installers.AddRange(new System.Configuration.Install.Installer[] {
             this.serviceProcessInstaller1,
-            this.serviceInstaller1});
+            this.serviceInstaller1,
+            this.serviceInstaller2});
 
         }
 
@@ -55,5 +63,6 @@
 
         private System.ServiceProcess.ServiceProcessInstaller serviceProcessInstaller1;
         private System.ServiceProcess.ServiceInstaller serviceInstaller1;
+        private System.ServiceProcess.ServiceInstaller serviceInstaller2;
     }
 }

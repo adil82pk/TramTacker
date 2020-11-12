@@ -91,10 +91,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // DST end day (goes from 1:59:59 to 3am).
             TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int triggerMilliseconds = DateHelper.GetTriggerTime(currentTime, copyToLiveDueTime);
             int expectedMilliseconds = (int)(new TimeSpan(2, 59, 00).TotalMilliseconds);
 
             // assert
@@ -111,10 +109,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // and trigger time is at 2:59, but need to take into account the time will jump from 1:59:59 to 3:00:00
             TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int triggerMilliseconds = DateHelper.GetTriggerTime(currentTime, copyToLiveDueTime);
             //  we expect it to only be 1:54 difference between 12:05 and 2:59
             int expectedMilliseconds = (int)(new TimeSpan(1, 54, 00).TotalMilliseconds);
 
@@ -133,10 +129,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // and we want to target the second one n 4 hours and 59 minutes
             TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int triggerMilliseconds = DateHelper.GetTriggerTime(currentTime, copyToLiveDueTime);
             int expectedMilliseconds = (int)(new TimeSpan(4, 59, 00).TotalMilliseconds);
 
             // assert
@@ -153,10 +147,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // and trigger time is at 2:59, but need to take into account there are 2 of these (we want the second one)
             TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int triggerMilliseconds = DateHelper.GetTriggerTime(currentTime, copyToLiveDueTime);
             //  we expect it to actually be 3:54 difference between 12:05 and the second 2:59
             int expectedMilliseconds = (int)(new TimeSpan(3, 54, 00).TotalMilliseconds);
 
@@ -176,10 +168,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // and trigger time is at 2:59
             TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int triggerMilliseconds = DateHelper.GetTriggerTime(currentTime, copyToLiveDueTime);
             //  we expect it to not take DST time in account, as this is unsupported currently 
             int expectedMilliseconds = (int)(new TimeSpan(0, 54, 00).TotalMilliseconds);
 
@@ -199,10 +189,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             // and trigger time is at 2:59
             TimeSpan copyToLiveDueTime = new TimeSpan(2, 59, 00);
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int triggerMilliseconds = service.GetTriggerTime(currentTime, copyToLiveDueTime);
+            int triggerMilliseconds = DateHelper.GetTriggerTime(currentTime, copyToLiveDueTime);
             //  we expect it to not take DST time in account, as this is unsupported currently 
             int expectedMilliseconds = (int)(new TimeSpan(0, 54, 00).TotalMilliseconds);
 
@@ -335,10 +323,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             TimeSpan dueTime = new TimeSpan(23, 59, 59);
             int expectedMilliseconds = 86399000;
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int milliseconds = service.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, dueTime);
+            int milliseconds = DateHelper.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, dueTime);
 
             // assert
             Assert.AreEqual(expectedMilliseconds, milliseconds, "Returned milliseconds value ({0}) doesn't match the expected value ({1}).", milliseconds, expectedMilliseconds);
@@ -352,10 +338,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             TimeSpan dueTime = new TimeSpan(0, 0, 0);
             int expectedMilliseconds = 1000;
 
-            var service = new Havm2TramTrackerService();
-
             // act
-            int milliseconds = service.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, dueTime);
+            int milliseconds = DateHelper.ConvertDueTimeToMilliseconds(currentTime.TimeOfDay, dueTime);
 
             // assert
             Assert.AreEqual(expectedMilliseconds, milliseconds, "Returned milliseconds value ({0}) doesn't match the expected value ({1}).", milliseconds, expectedMilliseconds);
