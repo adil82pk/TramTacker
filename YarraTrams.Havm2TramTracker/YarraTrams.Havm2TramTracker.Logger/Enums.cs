@@ -33,7 +33,6 @@ namespace YarraTrams.Havm2TramTracker.Logger
 
     public static class EventLogCodes
     {
-        //Todo: Configure Escalations in Settings
         #region info
         public const int SERVICE_STARTED = 3001;
         public const int SERVICE_STOPPED = 3002;
@@ -48,6 +47,8 @@ namespace YarraTrams.Havm2TramTracker.Logger
         public const int COPY_TO_LIVE_SUCCESS = 3011;
         public const int COPY_TO_LIVE_SUBSEQUENT_PROC_SUCCESS = 3012;
         public const int SAVE_TO_DATABASE_SUCCESS = 3013;
+
+        public const int AVM_REVISION_CHECK_SUCCESS = 3020;
 
         public const int SIDE_BY_SIDE_INFO = 3100;
         #endregion

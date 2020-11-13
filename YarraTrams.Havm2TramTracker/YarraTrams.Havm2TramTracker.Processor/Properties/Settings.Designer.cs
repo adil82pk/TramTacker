@@ -273,5 +273,14 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((int)(this["AvmLogFileArchiveRetentionPeriodInDays"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/daily-timetables/")]
+        public string Havm2TimetableAPI {
+            get {
+                return ((string)(this["Havm2TimetableAPI"]));
+            }
+        }
     }
 }

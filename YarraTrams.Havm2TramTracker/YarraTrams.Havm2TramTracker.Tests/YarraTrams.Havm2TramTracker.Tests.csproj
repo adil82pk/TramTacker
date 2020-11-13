@@ -54,6 +54,7 @@
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Havm2TramTrackerHavm2TimetableServiceTests.cs" />
     <Compile Include="Havm2TramTrackerCoreServiceTests.cs" />
     <Compile Include="Havm2TramTrackerAvmTimetableServiceTests.cs" />
     <Compile Include="Havm2TramTrackerTransformationTests.cs" />
