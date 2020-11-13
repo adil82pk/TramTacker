@@ -15,6 +15,7 @@ namespace YarraTrams.Havm2TramTracker.Console
         static CommandMenu MainMenu = null;
         static CommandMenu ProdSupportMenu = null;
         static CommandMenu TestingMenu = null;
+        static CommandMenu AvmRevisionMenu = null;
 
         static void Main(string[] args)
         {
@@ -57,6 +58,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 MainMenu.Title = "Main Menu";
                 MainMenu.AddCommand("Production Support menu", () => ShowProdSupportMenu());
                 MainMenu.AddCommand("Testing menu", () => ShowTestingMenu());
+                MainMenu.AddCommand("AVM Revision Check menu", () => ShowAvmRevisionCheckMenu());
                 MainMenu.AddCommand("Exit", () => Exit());
             }
             //Todo: Reorder these options to they make sense.
