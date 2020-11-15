@@ -47,7 +47,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         {
             CleanupOldArchives();
 
-            string localFilePath = Path.Combine(AvmLogFileArchivePath, $"AvmLogFile{DateTime.Now.ToString("yyyyMMddHHmmss")}.txt");
+            string localFilePath = Path.Combine(AvmLogFileArchivePath, String.Format("AvmLogFile{0}.txt", DateTime.Now.ToString("yyyyMMddHHmmss")));
 
             DownloadFile(localFilePath);
 
@@ -107,7 +107,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                     // If the file appears to be truncated then we create an event but we continue (it's likely we have enough data to read tomorrow's timestamp).
                     if (!ValidLineLengths.Contains(lineData.Length))
                     {
-                        LogWriter.Instance.Log(EventLogCodes.TRUNCATED_FILE_ON_AVM_ENDPOINT, $"{TruncatedFileErrorMessage}\nLine {lineNumber}:{line}");
+                        LogWriter.Instance.Log(EventLogCodes.TRUNCATED_FILE_ON_AVM_ENDPOINT, String.Format("{0}\nLine {1}:{2}", TruncatedFileErrorMessage, lineNumber, line));
                     }
 
                     // The timstamp for tomorrow's file is on line 3.

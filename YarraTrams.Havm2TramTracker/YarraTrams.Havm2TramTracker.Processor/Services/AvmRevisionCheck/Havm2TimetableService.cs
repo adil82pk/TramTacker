@@ -67,7 +67,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
             }
             else
             {
-                throw new ArgumentException($"Expecting HAVM2 to return 1 timetable but found {timetables.Count}.");
+                throw new ArgumentException(String.Format("Expecting HAVM2 to return 1 timetable but found {0}.", timetables.Count));
             }
         }
     }

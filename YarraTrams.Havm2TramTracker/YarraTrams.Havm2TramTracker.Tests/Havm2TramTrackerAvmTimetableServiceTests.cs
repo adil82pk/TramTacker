@@ -34,7 +34,7 @@ avmsch20.322,1604922875,3.14,'Tuesday',wt322220.322,1604453725,5.22,11813";
             int result = service.ExtractTomorrowsAvmTimetableRevisionFromFileContent(fileContent);
 
             // assert
-            Assert.IsTrue(result == expected, $"Expecting a timestamp of {expected} but got {result}.");
+            Assert.IsTrue(result == expected, String.Format("Expecting a timestamp of {0} but got {1}.", expected, result));
         }
 
         [TestMethod]
@@ -80,14 +80,14 @@ avmsch20.218,1596193821,3.14,'Wednesday',wt218320.218,1";
             int result = service.ExtractTomorrowsAvmTimetableRevisionFromFileContent(fileContent);
 
             // assert
-            Assert.IsTrue(result == expected, $"Expecting a timestamp of {expected} but got {result}.");
+            Assert.IsTrue(result == expected, String.Format("Expecting a timestamp of {0} but got {1}.", expected, result));
 
             EventLog eventLog = new EventLog();
             eventLog.Log = LogWriter.Instance.EventLogName;
 
             IEnumerable<EventLogEntry> logEntries = eventLog.Entries.Cast<EventLogEntry>();
             int totalTruncatdFileEntries = logEntries.Count(l => l.InstanceId == EventLogCodes.TRUNCATED_FILE_ON_AVM_ENDPOINT && (DateTime.Now - l.TimeWritten).TotalMilliseconds < delayInMs);
-            Assert.AreEqual(1, totalTruncatdFileEntries, $"Expected a single TRUNCATED_FILE_ON_AVM_ENDPOINT event log entry but found {totalTruncatdFileEntries} entries.");
+            Assert.AreEqual(1, totalTruncatdFileEntries, String.Format("Expected a single TRUNCATED_FILE_ON_AVM_ENDPOINT event log entry but found {0} entries.", totalTruncatdFileEntries));
         }
     }
 }

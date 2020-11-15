@@ -68,8 +68,8 @@ namespace YarraTrams.Havm2TramTracker.Tests
             List<HavmTimetable> timetables = service.CopyJsonToTimetables(json);
 
             // assert
-            Assert.IsTrue(timetables.Count == expectedTimetableCount, $"Expecting {expectedTimetableCount} timetables but got {timetables.Count}.");
-            Assert.IsTrue(timetables.First().Date == expectedTimestamp, $"Expecting date on first timetable to be {expectedTimestamp:yyyy-MM-dd} timetables but got {timetables.First().Date:yyyy-MM-dd}.");
+            Assert.IsTrue(timetables.Count == expectedTimetableCount, String.Format("Expecting {0} timetables but got {1}.", expectedTimetableCount, timetables.Count));
+            Assert.IsTrue(timetables.First().Date == expectedTimestamp, String.Format("Expecting date on first timetable to be {0:yyyy-MM-dd} timetables but got {1:yyyy-MM-dd}.", expectedTimestamp, timetables.First().Date));
         }
 
         [TestMethod]
@@ -87,7 +87,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             int timestamp = service.GetTimestampFromTimetables(timetables);
 
             // assert
-            Assert.IsTrue(timestamp == expectedTimestamp, $"Expecting timestamp {expectedTimestamp} timetables but got {timestamp}."); ;
+            Assert.IsTrue(timestamp == expectedTimestamp, String.Format("Expecting timestamp {0} timetables but got {1}.", expectedTimestamp, timestamp));
         }
 
         [TestMethod]

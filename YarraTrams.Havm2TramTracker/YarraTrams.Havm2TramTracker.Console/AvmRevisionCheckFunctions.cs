@@ -30,7 +30,7 @@ namespace YarraTrams.Havm2TramTracker.Console
         {
             string message = "";
             AvmTimetableService service = new AvmTimetableService();
-            string localFilePath = Path.Combine(service.AvmLogFileArchivePath, $"AvmLogFile{DateTime.Now.ToString("yyyyMMddHHmmss")}_FromConsole.txt");
+            string localFilePath = Path.Combine(service.AvmLogFileArchivePath, String.Format("AvmLogFile{0}_FromConsole.txt", DateTime.Now.ToString("yyyyMMddHHmmss")));
 
             var clock = new Stopwatch();
 
@@ -42,7 +42,7 @@ namespace YarraTrams.Havm2TramTracker.Console
             message = message + string.Format("Pulling the file down took {0}.", clock.Elapsed);
 
             System.Console.WriteLine(message);
-            System.Console.WriteLine($"File can be found at {localFilePath}");
+            System.Console.WriteLine(String.Format("File can be found at {0}", localFilePath));
 
             System.Console.Write("Do you want to print the file contents here? (Y/N)");
             string input = System.Console.ReadLine();
