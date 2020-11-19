@@ -62,5 +62,32 @@
     <Setting Name="LogFilePathWarnSizeInBytesExceedsInBytes" Type="System.Int64" Scope="Application">
       <Value Profile="(Default)">9000000000</Value>
     </Setting>
+    <Setting Name="CheckTomorrowsAvmTimetableRevisionDueTime" Type="System.TimeSpan" Scope="Application">
+      <Value Profile="(Default)">19:55:00</Value>
+    </Setting>
+    <Setting Name="AvmLogFileFtpServerAddress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ftp://speedtest.tele2.net/</Value>
+    </Setting>
+    <Setting Name="AvmLogFileFtpServerUsername" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">anonymous</Value>
+    </Setting>
+    <Setting Name="AvmLogFileFtpServerPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">anonymous</Value>
+    </Setting>
+    <Setting Name="AvmLogFileFtpDirectoryPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AvmLogFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">MyFile.zip</Value>
+    </Setting>
+    <Setting Name="AvmLogFileArchivePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\iop\Downloads\temp\HAVM2TTLogs\AvmFiles</Value>
+    </Setting>
+    <Setting Name="AvmLogFileArchiveRetentionPeriodInDays" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="Havm2TimetableAPI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:49467/daily-timetables/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

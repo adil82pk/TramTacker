@@ -17,7 +17,8 @@ namespace YarraTrams.Havm2TramTracker.Processor
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Havm2TramTrackerService()
+                new Havm2TramTrackerService(),
+                new AvmRevisionCheckService()
             };
             ServiceBase.Run(ServicesToRun);
         }

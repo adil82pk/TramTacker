@@ -267,7 +267,7 @@ namespace YarraTrams.Havm2TramTracker.Console
                 System.Console.WriteLine(trip.ToString());
 
                 tripCounter++;
-                if (tripCounter >= maxTripsToPrint)
+                if (tripCounter > maxTripsToPrint && trips.Count > maxTripsToPrint)
                 {
                     System.Console.WriteLine("## Only printed the first {0} of {1} trips. ##",maxTripsToPrint,trips.Count);
                     break;

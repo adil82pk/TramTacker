@@ -201,5 +201,86 @@ namespace YarraTrams.Havm2TramTracker.Processor.Properties {
                 return ((long)(this["LogFilePathWarnSizeInBytesExceedsInBytes"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("19:55:00")]
+        public global::System.TimeSpan CheckTomorrowsAvmTimetableRevisionDueTime {
+            get {
+                return ((global::System.TimeSpan)(this["CheckTomorrowsAvmTimetableRevisionDueTime"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ftp://speedtest.tele2.net/")]
+        public string AvmLogFileFtpServerAddress {
+            get {
+                return ((string)(this["AvmLogFileFtpServerAddress"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("anonymous")]
+        public string AvmLogFileFtpServerUsername {
+            get {
+                return ((string)(this["AvmLogFileFtpServerUsername"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("anonymous")]
+        public string AvmLogFileFtpServerPassword {
+            get {
+                return ((string)(this["AvmLogFileFtpServerPassword"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AvmLogFileFtpDirectoryPath {
+            get {
+                return ((string)(this["AvmLogFileFtpDirectoryPath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MyFile.zip")]
+        public string AvmLogFileName {
+            get {
+                return ((string)(this["AvmLogFileName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\iop\\Downloads\\temp\\HAVM2TTLogs\\AvmFiles")]
+        public string AvmLogFileArchivePath {
+            get {
+                return ((string)(this["AvmLogFileArchivePath"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public int AvmLogFileArchiveRetentionPeriodInDays {
+            get {
+                return ((int)(this["AvmLogFileArchiveRetentionPeriodInDays"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49467/daily-timetables/")]
+        public string Havm2TimetableAPI {
+            get {
+                return ((string)(this["Havm2TimetableAPI"]));
+            }
+        }
     }
 }

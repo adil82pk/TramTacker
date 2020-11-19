@@ -54,7 +54,9 @@
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Havm2TramTrackerHavm2TimetableServiceTests.cs" />
     <Compile Include="Havm2TramTrackerCoreServiceTests.cs" />
+    <Compile Include="Havm2TramTrackerAvmTimetableServiceTests.cs" />
     <Compile Include="Havm2TramTrackerTransformationTests.cs" />
     <Compile Include="Havm2TramTrackerParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +65,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Logger\YarraTrams.Havm2TramTracker.Logger.csproj">
+      <Project>{87010305-28A2-44E4-8675-7B02FD5862E7}</Project>
+      <Name>YarraTrams.Havm2TramTracker.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\YarraTrams.Havm2TramTracker.Models\YarraTrams.Havm2TramTracker.Models.csproj">
       <Project>{fe22fa30-b89f-4bd1-84c6-9b4f60f99b8e}</Project>
       <Name>YarraTrams.Havm2TramTracker.Models</Name>

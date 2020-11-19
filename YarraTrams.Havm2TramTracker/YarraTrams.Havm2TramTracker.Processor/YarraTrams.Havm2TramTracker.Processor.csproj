@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentFTP, Version=33.0.2.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.33.0.2\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
     <Reference Include="FluentMigrator, Version=1.6.2.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentMigrator.1.6.2\lib\40\FluentMigrator.dll</HintPath>
     </Reference>
@@ -73,6 +76,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.4.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,8 +86,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvmRevisionCheckService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AvmRevisionCheckService.Designer.cs">
+      <DependentUpon>AvmRevisionCheckService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\ApiService.cs" />
     <Compile Include="Helpers\ApiHttpClient.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\DBHelper.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\ExceptionHelper.cs" />
@@ -119,6 +130,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AvmRevisionCheck\Havm2TimetableService.cs" />
+    <Compile Include="Services\AvmRevisionCheck\AvmTimetableService.cs" />
     <Compile Include="Services\TramTrackerSchedulesService.cs" />
     <Compile Include="Services\TramTrackerSchedulesDetailsService .cs" />
     <Compile Include="Services\TramTrackerTripsService.cs" />
