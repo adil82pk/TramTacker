@@ -54,6 +54,43 @@ avmsch20.322,1604922875,3.14,'Tuesday',wt322220.322,1604453725,5.22,11813";
         }
 
         [TestMethod]
+        public void TestExtractTomorrowsAvmTimetableRevisionFromFileContentWhenNoTimetableLoadedForTomorrow()
+        {
+            // arrange
+            // When there is no timetable loaded for a particular date in AVM it will show NA for that date.
+            // And when tomorrow has an NA the system must recognise that no timetable is loaded.
+            string fileContent = @"avmxxx.sch,1606220147,3.14,'Monday',wt335120.335,1604610395,5.22,11824
+avmsch20.335,1606220147,3.14,'Monday',wt335120.335,1604610395,5.22,11824
+avmsch20.336,NA
+avmsch20.337,NA
+avmsch20.338,NA
+avmsch20.339,NA
+avmsch20.340,NA
+avmsch20.341,NA";
+
+            //We expect a timestamp of zero to be returned.
+            int expected = 0;
+
+            // We give this test 5 seconds of clear air to ensure nothing else is writing to the event log.
+            int delayInMs = 5000;
+            Thread.Sleep(delayInMs);
+
+            // act
+            AvmTimetableService service = new AvmTimetableService();
+            int result = service.ExtractTomorrowsAvmTimetableRevisionFromFileContent(fileContent);
+
+            // assert
+            Assert.IsTrue(result == expected, String.Format("Expecting a timestamp of {0} but got {1}.", expected, result));
+
+            EventLog eventLog = new EventLog();
+            eventLog.Log = LogWriter.Instance.EventLogName;
+
+            IEnumerable<EventLogEntry> logEntries = eventLog.Entries.Cast<EventLogEntry>();
+            int totalEntries = logEntries.Count(l => (DateTime.Now - l.TimeWritten).TotalMilliseconds < delayInMs);
+            Assert.AreEqual(0, totalEntries, String.Format("Expected zero event log entries but found {0} entries.", totalEntries));
+        }
+
+        [TestMethod]
         public void TestExtractTomorrowsAvmTimetableRevisionFromFileContentWithTruncatedContent()
         {
             // arrange

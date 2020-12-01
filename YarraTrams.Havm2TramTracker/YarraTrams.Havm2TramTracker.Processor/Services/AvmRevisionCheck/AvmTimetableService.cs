@@ -21,6 +21,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
         private readonly int[] ValidLineLengths = { 2, 8, 9 }; // The file has variable line lengths - 9 for the currently loaded timetable, 2 when a future day has no timetable and 8 when it does.
         private const int LineContainingTomorrowsTimetable = 3; // Tomorrow's timetable is on line 3.
+        private const int FieldIndexOfNa = 1; // When there is no timetable loaded the 2nd field along (1 when zero-based) will contain the text NA.
         private const int FieldIndexOfExportTimestamp = 5; // The export timestamp is the 6th field along (5 when zero-based).
 
         private const string EmptyFileErrorMessage = "AVM file is empty.";
@@ -113,11 +114,19 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                     // The timstamp for tomorrow's file is on line 3.
                     if (lineNumber == LineContainingTomorrowsTimetable)
                     {
-                        // If the timestamp is not an integer then we create a specific event and abort (throw an exception).
-                        if (!int.TryParse(lineData[FieldIndexOfExportTimestamp], out timestamp))
+                        // If there is no timetable loaded for tomorrow then we set the timestamp to 0.
+                        if (lineData[FieldIndexOfNa] == "NA")
                         {
-                            LogWriter.Instance.Log(EventLogCodes.UNEXPECTED_FORMAT_INSIDE_AVM_FILE, TomorrowTimestampErrorMessage);
-                            throw new FormatException(TomorrowTimestampErrorMessage);
+                            timestamp = 0;
+                        }
+                        else
+                        {
+                            // If the timestamp is not an integer then we create a specific event and abort (throw an exception).
+                            if (!int.TryParse(lineData[FieldIndexOfExportTimestamp], out timestamp))
+                            {
+                                LogWriter.Instance.Log(EventLogCodes.UNEXPECTED_FORMAT_INSIDE_AVM_FILE, TomorrowTimestampErrorMessage);
+                                throw new FormatException(TomorrowTimestampErrorMessage);
+                            }
                         }
                     }
 
