@@ -139,7 +139,7 @@ namespace YarraTrams.Havm2TramTracker.Processor
                 else
                 {
                     LogWriter.Instance.Log(EventLogCodes.INCORRECT_TIMETABLE_REVISION_DETECTED_IN_AVM
-                                   , string.Format("AVM apppears to have an incorrect timetable revision loaded for tomorrow '{0}' instead of '{1}'.", avmTimetableTimestamp, havm2TimetableTimestamp));
+                                   , string.Format("AVM appears to have an incorrect timetable revision loaded for tomorrow '{0}' instead of '{1}'.", avmTimetableTimestamp, havm2TimetableTimestamp));
                 }
             }
             catch (Exception ex)
