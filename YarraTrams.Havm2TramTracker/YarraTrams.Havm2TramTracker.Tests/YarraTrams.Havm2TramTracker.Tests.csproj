@@ -59,6 +59,7 @@
     <Compile Include="Havm2TramTrackerAvmTimetableServiceTests.cs" />
     <Compile Include="Havm2TramTrackerTransformationTests.cs" />
     <Compile Include="Havm2TramTrackerParserTests.cs" />
+    <Compile Include="Helpers\ObjectCreationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
