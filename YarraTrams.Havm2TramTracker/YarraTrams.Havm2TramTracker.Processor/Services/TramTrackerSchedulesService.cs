@@ -123,7 +123,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
 
             TramTrackerDataSet.T_Temp_SchedulesDataTable masterTable = new TramTrackerDataSet.T_Temp_SchedulesDataTable();
 
-            foreach(TramTrackerSchedules schedulesDetails in schedulesDetailss)
+            foreach (TramTrackerSchedules schedulesDetails in schedulesDetailss)
             {
                 masterTable.Rows.Add(schedulesDetails.ToDataRow().ItemArray);
             }
@@ -134,7 +134,8 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
         /// <summary>
         /// Adds a PredictFromSaM value to every schedule record.
         /// The PredictFromSaM field tells the prediction calculations when we should start making predictions for each trip stop.
-        /// The PredictFromSam field could be negative. This is necessary for routes that only run on certain days. e.g. 3a only runs on weekends, thus the first 3 Saturday trips become a prediction on the previous Sunday!
+        /// The PredictFromSam field could be negative. This is necessary for routes that only run on certain days. e.g. 
+        /// 3a only runs on weekends, thus the first 3 Saturday trips become a prediction on the previous Sunday!
         /// </summary>
         /// <param name="scheduless">A list of schedules without their PredictFromSaM set</param>
         /// <param name="numberOfPredictionsPerTripStop">Number of predictions we want to make for each Stop/Route/Direction combination</param>
@@ -182,8 +183,13 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                         currentOperationalDay = tripStop.OperationalDay;
                     }
 
-                    // Set the PredictFromSaM field on this trip stop to the earliest passing time in the queue, then put the current passing time on to the queue.
+                    // Set the PredictFromSaM field on this trip stop to the earliest passing time in the queue,
+                    // then put the current passing time on to the queue.
                     tripStop.PredictFromDateTime = passingTimes.Dequeue();
+
+                    // A single tick represents one hundred nanoseconds or one ten-millionth of a second. There are 10 million ticks in a second.
+                    // tripStop.PassingDateTime.Ticks % TimeSpan.TicksPerDay remainder gives number of ticks passed in that day. For instance if tripStop.PassingDateTime is 9/11/1989 11:57 then the ticks are 627622558200000000
+                    // and TimeSpan.TicksPerDay are 864000000000 so percentage of  627622558200000000 % 864000000000 = 862200000000. So if we subtract ticks will give us start of the day i.e 9/11/1989 12:00 am.
                     tripStop.PredictFromSaM = (int)(tripStop.PredictFromDateTime - tripStop.PassingDateTime.AddTicks(-tripStop.PassingDateTime.Ticks % TimeSpan.TicksPerDay)).TotalSeconds;
                     passingTimes.Enqueue(tripStop.PassingDateTime);
                 }

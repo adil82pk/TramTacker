@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using YarraTrams.Havm2TramTracker.Models;
 using System.Linq;
-using System.Linq.Expressions;
+using YarraTrams.Havm2TramTracker.Tests.Helpers;
 
 namespace YarraTrams.Havm2TramTracker.Tests
 {
@@ -247,134 +247,28 @@ namespace YarraTrams.Havm2TramTracker.Tests
             Assert.IsTrue(schedules.Count == 2, "Number of records in schedules ({0:d}) should be two for this trip because one of the three provided stops is invalid.", schedules.Count);
         }
 
+        /// <summary>
+        /// Test Three prediction from SAM.
+        /// </summary>
         [TestMethod]
-        public void TestSetPredictFromSaMs()
+        public void TestThreePredictFromSaMs()
         {
             // arrange
             int numberOfPredictionsPerTripStop = 3;
             DateTime baseDate = new DateTime(1989, 11, 9, 0, 0, 0);
             var scheduless = new List<Models.TramTrackerSchedules>();
 
-            // Firstly 3 late trips, in sequence, on day 1. It's unrealistic but these are the first trips on this route for the day, in fact they are the first trips on the whole set of timetables that we've loaded.
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 8,
-                RunNo = "Run97",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate,
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 86220, //23:57
-                PassingDateTime = baseDate.AddSeconds(86220),
-                UpDirection = true
-            }
-            );
-
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 9,
-                RunNo = "Run98",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate,
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 86280, //23:58
-                PassingDateTime = baseDate.AddSeconds(86280),
-                UpDirection = true
-            }
-            );
-
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 10,
-                RunNo = "Run99",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate,
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 86340, // 23:59
-                PassingDateTime = baseDate.AddSeconds(86340),
-                UpDirection = true
-            }
-            );
+            // Firstly 3 late trips, in sequence, on day 1. It's unrealistic but these are the first trips on this route for the day,
+            // in fact they are the first trips on the whole set of timetables that we've loaded.
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 8, runNo: "Run97", operationalDay: baseDate, time: 86220, passingDateTime: baseDate.AddSeconds(86220)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 9, runNo: "Run98", operationalDay: baseDate, time: 86280, passingDateTime: baseDate.AddSeconds(86280)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 10, runNo: "Run99", operationalDay: baseDate, time: 86340, passingDateTime: baseDate.AddSeconds(86340)));
 
             // Then 4 trips, in sequence, to start day 2.
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 100,
-                RunNo = "Run1",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate.AddDays(1),
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 10860, //3:01
-                PassingDateTime = baseDate.AddDays(1).AddSeconds(10860),
-                UpDirection = true
-            }
-            );
-
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 101,
-                RunNo = "Run2",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate.AddDays(1),
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 10920, //3:02
-                PassingDateTime = baseDate.AddDays(1).AddSeconds(10920),
-                UpDirection = true
-            }
-            );
-
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 102,
-                RunNo = "Run3",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate.AddDays(1),
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 10980, //3:03
-                PassingDateTime = baseDate.AddDays(1).AddSeconds(10980),
-                UpDirection = true
-            }
-            );
-
-            scheduless.Add(new Models.TramTrackerSchedules
-            {
-                TripID = 103,
-                RunNo = "Run4",
-                RouteNo = 86,
-                DayOfWeek = 0,
-                OperationalDay = baseDate.AddDays(1),
-                LowFloor = false,
-                PublicTrip = true,
-                OPRTimePoint = false,
-                StopID = "StopA",
-                Time = 11040, //3:04
-                PassingDateTime = baseDate.AddDays(1).AddSeconds(11040),
-                UpDirection = true
-            }
-            );
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 100, runNo: "Run1", operationalDay: baseDate.AddDays(1), time: 10860, passingDateTime: baseDate.AddDays(1).AddSeconds(10860)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 101, runNo: "Run2", operationalDay: baseDate.AddDays(1), time: 10920, passingDateTime: baseDate.AddDays(1).AddSeconds(10920)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 102, runNo: "Run3", operationalDay: baseDate.AddDays(1), time: 10980, passingDateTime: baseDate.AddDays(1).AddSeconds(10980)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 103, runNo: "Run4", operationalDay: baseDate.AddDays(1), time: 11040, passingDateTime: baseDate.AddDays(1).AddSeconds(11040)));
 
             var schedulesService = new Processor.Services.TramTrackerSchedulesService();
 
@@ -382,13 +276,61 @@ namespace YarraTrams.Havm2TramTracker.Tests
             scheduless = schedulesService.SetPredictFromSaMTimeForEachTripStop(scheduless, numberOfPredictionsPerTripStop);
 
             // assert
-            Assert.IsTrue(scheduless[0].PredictFromSaM == 0, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[0].TripID, 0, scheduless[0].PredictFromSaM, scheduless[0].PredictFromDateTime);
-            Assert.IsTrue(scheduless[1].PredictFromSaM == 0, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[1].TripID, 0, scheduless[1].PredictFromSaM, scheduless[1].PredictFromDateTime);
-            Assert.IsTrue(scheduless[2].PredictFromSaM == 0, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[2].TripID, 0, scheduless[2].PredictFromSaM, scheduless[2].PredictFromDateTime);
-            Assert.IsTrue(scheduless[3].PredictFromSaM == -86400, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[3].TripID, -180, scheduless[3].PredictFromSaM, scheduless[3].PredictFromDateTime);
-            Assert.IsTrue(scheduless[4].PredictFromSaM == -86400, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[4].TripID, -120, scheduless[4].PredictFromSaM, scheduless[4].PredictFromDateTime);
-            Assert.IsTrue(scheduless[5].PredictFromSaM == -86400, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[5].TripID, -60, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
-            Assert.IsTrue(scheduless[6].PredictFromSaM == 10860, "Catch time on trip {0} should be {1} but is instead {2} ({3}).", scheduless[5].TripID, 10860, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
+            Assert.IsTrue(scheduless[0].PredictFromSaM == 0, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[0].TripID, 0, scheduless[0].PredictFromSaM, scheduless[0].PredictFromDateTime);
+            Assert.IsTrue(scheduless[1].PredictFromSaM == 0, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[1].TripID, 0, scheduless[1].PredictFromSaM, scheduless[1].PredictFromDateTime);
+            Assert.IsTrue(scheduless[2].PredictFromSaM == 0, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[2].TripID, 0, scheduless[2].PredictFromSaM, scheduless[2].PredictFromDateTime);
+            Assert.IsTrue(scheduless[3].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[3].TripID, -86400, scheduless[3].PredictFromSaM, scheduless[3].PredictFromDateTime);
+            Assert.IsTrue(scheduless[4].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[4].TripID, -86400, scheduless[4].PredictFromSaM, scheduless[4].PredictFromDateTime);
+            Assert.IsTrue(scheduless[5].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[5].TripID, -86400, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
+            Assert.IsTrue(scheduless[6].PredictFromSaM == 10860, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[6].TripID, 10860, scheduless[6].PredictFromSaM, scheduless[5].PredictFromDateTime);
+        }
+
+        /// <summary>
+        /// Test Twelve prediction from SAM.
+        /// </summary>
+        [TestMethod]
+        public void TestTwelvePredictFromSaMs()
+        {
+            // arrange
+            int numberOfPredictionsPerTripStop = 12;
+            DateTime baseDate = new DateTime(1989, 11, 9, 0, 0, 0);
+            var scheduless = new List<Models.TramTrackerSchedules>();
+
+            // Firstly 3 late trips, in sequence, on day 1. It's unrealistic but these are the first trips on this route for the day,
+            // in fact they are the first trips on the whole set of timetables that we've loaded.
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 8, runNo: "Run97", operationalDay: baseDate, time: 86220, passingDateTime: baseDate.AddSeconds(86220)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 9, runNo: "Run98", operationalDay: baseDate, time: 86280, passingDateTime: baseDate.AddSeconds(86280)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 10, runNo: "Run99", operationalDay: baseDate, time: 86340, passingDateTime: baseDate.AddSeconds(86340)));
+
+            // Then 9 trips, in sequence, to start day 2.
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 100, runNo: "Run1", operationalDay: baseDate.AddDays(1), time: 10860, passingDateTime: baseDate.AddDays(1).AddSeconds(10860)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 101, runNo: "Run2", operationalDay: baseDate.AddDays(1), time: 10920, passingDateTime: baseDate.AddDays(1).AddSeconds(10920)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 102, runNo: "Run3", operationalDay: baseDate.AddDays(1), time: 10980, passingDateTime: baseDate.AddDays(1).AddSeconds(10980)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 103, runNo: "Run4", operationalDay: baseDate.AddDays(1), time: 11040, passingDateTime: baseDate.AddDays(1).AddSeconds(11040)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 104, runNo: "Run5", operationalDay: baseDate.AddDays(1), time: 11100, passingDateTime: baseDate.AddDays(1).AddSeconds(11100)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 105, runNo: "Run6", operationalDay: baseDate.AddDays(1), time: 11160, passingDateTime: baseDate.AddDays(1).AddSeconds(11160)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 106, runNo: "Run7", operationalDay: baseDate.AddDays(1), time: 11220, passingDateTime: baseDate.AddDays(1).AddSeconds(11220)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 107, runNo: "Run8", operationalDay: baseDate.AddDays(1), time: 11280, passingDateTime: baseDate.AddDays(1).AddSeconds(11280)));
+            scheduless.Add(ObjectCreationHelper.CreateTramTrackerScheduleWithDefaults(tripId: 108, runNo: "Run9", operationalDay: baseDate.AddDays(1), time: 11340, passingDateTime: baseDate.AddDays(1).AddSeconds(11340)));
+
+            var schedulesService = new Processor.Services.TramTrackerSchedulesService();
+
+            // act
+            scheduless = schedulesService.SetPredictFromSaMTimeForEachTripStop(scheduless, numberOfPredictionsPerTripStop);
+
+            // assert
+            Assert.IsTrue(scheduless[0].PredictFromSaM == 0, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[0].TripID, 0, scheduless[0].PredictFromSaM, scheduless[0].PredictFromDateTime);
+            Assert.IsTrue(scheduless[1].PredictFromSaM == 0, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[1].TripID, 0, scheduless[1].PredictFromSaM, scheduless[1].PredictFromDateTime);
+            Assert.IsTrue(scheduless[2].PredictFromSaM == 0, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[2].TripID, 0, scheduless[2].PredictFromSaM, scheduless[2].PredictFromDateTime);
+            Assert.IsTrue(scheduless[3].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[3].TripID, -86400, scheduless[3].PredictFromSaM, scheduless[3].PredictFromDateTime);
+            Assert.IsTrue(scheduless[4].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[4].TripID, -86400, scheduless[4].PredictFromSaM, scheduless[4].PredictFromDateTime);
+            Assert.IsTrue(scheduless[5].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[5].TripID, -86400, scheduless[5].PredictFromSaM, scheduless[5].PredictFromDateTime);
+            Assert.IsTrue(scheduless[6].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[6].TripID, -86400, scheduless[6].PredictFromSaM, scheduless[6].PredictFromDateTime);
+            Assert.IsTrue(scheduless[7].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[7].TripID, -86400, scheduless[7].PredictFromSaM, scheduless[7].PredictFromDateTime);
+            Assert.IsTrue(scheduless[8].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[8].TripID, -86400, scheduless[8].PredictFromSaM, scheduless[8].PredictFromDateTime);
+            Assert.IsTrue(scheduless[9].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[9].TripID, -86400, scheduless[9].PredictFromSaM, scheduless[9].PredictFromDateTime);
+            Assert.IsTrue(scheduless[10].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[10].TripID, -86400, scheduless[10].PredictFromSaM, scheduless[10].PredictFromDateTime);
+            Assert.IsTrue(scheduless[11].PredictFromSaM == -86400, "Both expected ({1}) and actual ({2}) PredictFromSaM values are same at {3} for the trip ({0}).", scheduless[11].TripID, -86400, scheduless[11].PredictFromSaM, scheduless[11].PredictFromDateTime);
         }
 
         [TestMethod]
@@ -434,7 +376,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             List<Models.TramTrackerSchedulesMaster> schedulesMasters;
 
             // act
-            schedulesMasters = schedulesMasterService.FromHavmTrips(trips,false);
+            schedulesMasters = schedulesMasterService.FromHavmTrips(trips, false);
 
             // assert
             Assert.IsTrue(trips.Count == schedulesMasters.Count, "Number of records in {0} ({2:d}) doesn't match number of total trips in Trip class list ({1:d}).", schedulesMasters.GetType().Name, trips.Count, schedulesMasters.Count);
@@ -607,7 +549,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
                                         }
                                     ]";
             #endregion
-            
+
             // act
             var trips = Processor.Processor.CopyJsonToTrips(jsonString);
 
@@ -652,7 +594,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             string vehicleType = "c1";
             int distanceMetres = 14122;
             bool isPublic = true;
-            DateTime operationalDay = new DateTime(2019,3,10);
+            DateTime operationalDay = new DateTime(2019, 3, 10);
             int stopCount = 12;
             int firstStopPassingTimeSam = 25920;
             bool secondIsMonitoredOPRReliability = true;
@@ -751,7 +693,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             #endregion
             // act
             var trips = Processor.Processor.CopyJsonToTrips(jsonString);
-            
+
             // assert
             Assert.IsTrue(trips.Count == 1, "Number of records in Trip class list ({1:d}) doesn't match number of records in the JSON ({0:d}).", 1, trips.Count);
             Assert.IsTrue(trips[0].HastusTripId == hastusTripID, "Expecting HastusTripId value of '{0}' but got '{1}'.", hastusTripID, trips[0].HastusTripId);
@@ -769,7 +711,7 @@ namespace YarraTrams.Havm2TramTracker.Tests
             Assert.IsTrue(trips[0].DistanceMetres == distanceMetres, "Expecting DistanceMetres value of '{0}' but got '{1}'.", distanceMetres, trips[0].DistanceMetres);
             Assert.IsTrue(trips[0].IsPublic == isPublic, "Expecting IsPublic value of '{0}' but got '{1}'.", isPublic, trips[0].IsPublic);
             Assert.IsTrue(trips[0].OperationalDay == operationalDay, "Expecting OperationalDay value of '{0}' but got '{1}'.", operationalDay, trips[0].OperationalDay);
-            Assert.IsTrue(trips[0].Stops.Count == stopCount,"Expecting {0} stops but found {1}.", stopCount, trips[0].Stops.Count);
+            Assert.IsTrue(trips[0].Stops.Count == stopCount, "Expecting {0} stops but found {1}.", stopCount, trips[0].Stops.Count);
             Assert.IsTrue(trips[0].Stops[0].PassingTimeSam == firstStopPassingTimeSam, "We expected the PassingTime on the first stop of the first trip to be '{0}' but it appears to be '{1}' instead.", firstStopPassingTimeSam, trips[0].Stops[0].PassingTimeSam);
             Assert.IsTrue(trips[0].Stops[1].IsMonitoredOPRReliability == secondIsMonitoredOPRReliability, "We expected the isMonitoredOPRReliability on the second stop of the first trip to be '{0}' but it appears to be '{1}' instead.", secondIsMonitoredOPRReliability, trips[0].Stops[1].IsMonitoredOPRReliability);
             Assert.IsTrue(trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId == lastStopId, "We expected the HastusStopId on the final stop of the first trip to be '{0}' but it appears to be '{1}' instead.", lastStopId, trips[0].Stops[trips[0].Stops.Count - 1].HastusStopId);
