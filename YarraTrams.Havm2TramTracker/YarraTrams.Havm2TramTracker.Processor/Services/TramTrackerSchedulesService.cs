@@ -171,7 +171,7 @@ namespace YarraTrams.Havm2TramTracker.Processor.Services
                         }
                     }
 
-                    // Upon reaching a new day we set the next x PredictFromSaMs to midnight of the day prior. This means, for instance, that the first 3 for Tues are predicted from start of Mon, but these predictions probably won't make the "top" 3 until late Mon.
+                    // Upon reaching a new day we set the next x PredictFromSaMs to midnight of the day prior. This means, for instance, that the first three for Tues are predicted from start of Mon, but these predictions probably won't make the "top" 3 until late Mon.
                     if (currentOperationalDay != tripStop.OperationalDay)
                     {
                         passingTimes.Clear();
